@@ -52,7 +52,11 @@ func spawn_danger_sign_at_random_location():
 func get_random_position() -> Vector2:
 	# Get the window size
 	#var window_dimensions: Vector2 = get_viewport_rect().size
-	# Keep position well-within bound
+	
+	# Create a random x and y for the danger sign
+	# randi_range gets random integer within the range of tiles within the walls
+	# x and y are scaled up, and add adjustment to align danger sign 
+	# b/c danger sign position x,y is at its center, not its top left corner
 	var random_x = randi_range(1, HOR_TILES - 2) * TILE_WIDTH + TILE_WIDTH/2
 	var random_y = randi_range(1, VER_TILES - 2) * TILE_WIDTH + TILE_WIDTH/2
 	
