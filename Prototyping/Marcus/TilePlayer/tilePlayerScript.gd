@@ -9,7 +9,7 @@ const PLAYER_SIZE: int = 32
 const WIDTH: int = 640
 const HEIGHT: int = 480
 
-var tileType: int = 2
+var tileType: int = 0
 var cells_to_reset = []
 var beatNum: int = 0
 
@@ -56,11 +56,12 @@ func colorTile() -> void:
 	if (tileType == 0):
 		tileMap.set_cell(cellPos, 2, Vector2(tileType,0), 0)
 		cells_to_reset.append(cellPos)
+		
 	# If tileType is set to Black (1), set the cell as a black one
-	# and add it to the list of cells to be removed
-	if (tileType == 2):
-		tileMap.set_cell(cellPos, 2, Vector2(tileType,0), 0)
-		cells_to_reset.append(cellPos)
+	# Uncomment this code to be able to color over blue tiles as well
+	#if (tileType == 2):
+		#tileMap.set_cell(cellPos, 2, Vector2(tileType,0), 0)
+		#cells_to_reset.append(cellPos)
 
 
 # Called every beat based on the Conductor
@@ -69,9 +70,9 @@ func _on_quarter_beat(_beat_num: int):
 	if (beatNum >= maxBeats):
 		
 		# Comment out this code to never reset tiles
-		#for cellPos in cells_to_reset:
-			#tileMap.set_cell(cellPos, 2, Vector2(0, 0), 0)
-		#cells_to_reset.clear()
+		for cellPos in cells_to_reset:
+			tileMap.set_cell(cellPos, 2, Vector2(2, 0), 0)
+		cells_to_reset.clear()
 		# 
 		
 		beatNum = 0
