@@ -1,10 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfyrm5h67hyim"]
+[gd_scene load_steps=2 format=3 uid="uid://dfyrm5h67hyim"]
 
-[ext_resource type="Script" path="res://Globals/conductor.gd" id="1_rmy7d"]
 [ext_resource type="AudioStream" uid="uid://sbjhffev387r" path="res://Assets/SFX/mode_countdown.wav" id="3_2m1g7"]
 
 [node name="Conductor" type="Node2D"]
-script = ExtResource("1_rmy7d")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 

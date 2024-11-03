@@ -1,0 +1,263 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4j45rlqwd7ny"]
+
+[ext_resource type="Script" path="res://Prototyping/Andrew_Mainella/Scripts/MainS.gd" id="1_aphng"]
+[ext_resource type="PackedScene" uid="uid://bncedhrsfxtu" path="res://Prototyping/Andrew_Mainella/Tile.tscn" id="1_wqg81"]
+[ext_resource type="PackedScene" uid="uid://bcxhqjua7yaea" path="res://Prototyping/Andrew_Mainella/Character.tscn" id="2_pex27"]
+[ext_resource type="AudioStream" uid="uid://citwv6e7y27sc" path="res://Prototyping/Andrew_Mainella/Endor - Pump It Up (official video).mp3" id="4_lisw5"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_aphng")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -72.0
+offset_top = -112.0
+offset_right = 715.0
+offset_bottom = 590.0
+color = Color(0, 0, 0, 1)
+
+[node name="Tile_1_1" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(115, 35)
+metadata/Row = 1
+
+[node name="Tile_1_2" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(175, 35)
+metadata/Row = 1
+metadata/Column = 2
+
+[node name="Tile_1_3" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(235, 35)
+metadata/Row = 1
+metadata/Column = 3
+
+[node name="Tile_1_4" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(295, 35)
+metadata/Row = 1
+metadata/Column = 4
+
+[node name="Tile_1_5" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(355, 35)
+metadata/Row = 1
+metadata/Column = 5
+
+[node name="Tile_1_6" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(415, 35)
+metadata/Row = 1
+metadata/Column = 6
+
+[node name="Tile_1_7" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(475, 35)
+metadata/Row = 1
+metadata/Column = 7
+
+[node name="Tile_2_1" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(115, 95)
+metadata/Row = 2
+
+[node name="Tile_2_2" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(175, 95)
+metadata/Row = 2
+metadata/Column = 2
+
+[node name="Tile_2_3" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(235, 95)
+metadata/Row = 2
+metadata/Column = 3
+
+[node name="Tile_2_4" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(295, 95)
+metadata/Row = 2
+metadata/Column = 4
+
+[node name="Tile_2_5" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(355, 95)
+metadata/Row = 2
+metadata/Column = 5
+
+[node name="Tile_2_6" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(415, 95)
+metadata/Row = 2
+metadata/Column = 6
+
+[node name="Tile_2_7" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(475, 95)
+metadata/Row = 2
+metadata/Column = 7
+
+[node name="Tile_3_1" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(115, 155)
+metadata/Row = 3
+
+[node name="Tile_3_2" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(175, 155)
+metadata/Row = 3
+metadata/Column = 2
+
+[node name="Tile_3_3" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(235, 155)
+metadata/Row = 3
+metadata/Column = 3
+
+[node name="Tile_3_4" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(295, 155)
+metadata/Row = 3
+metadata/Column = 4
+
+[node name="Tile_3_5" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(355, 155)
+metadata/Row = 3
+metadata/Column = 5
+
+[node name="Tile_3_6" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(415, 155)
+metadata/Row = 3
+metadata/Column = 6
+
+[node name="Tile_3_7" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(475, 155)
+metadata/Row = 3
+metadata/Column = 7
+
+[node name="Tile_4_1" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(115, 215)
+metadata/Row = 4
+
+[node name="Tile_4_2" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(175, 215)
+metadata/Row = 4
+metadata/Column = 2
+
+[node name="Tile_4_3" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(235, 215)
+metadata/Row = 4
+metadata/Column = 3
+
+[node name="Tile_4_4" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(295, 215)
+metadata/Row = 4
+metadata/Column = 4
+
+[node name="Tile_4_5" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(355, 215)
+metadata/Row = 4
+metadata/Column = 5
+
+[node name="Tile_4_6" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(415, 215)
+metadata/Row = 4
+metadata/Column = 6
+
+[node name="Tile_4_7" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(475, 215)
+metadata/Row = 4
+metadata/Column = 7
+
+[node name="Tile_5_1" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(115, 275)
+metadata/Row = 5
+
+[node name="Tile_5_2" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(175, 275)
+metadata/Row = 5
+metadata/Column = 2
+
+[node name="Tile_5_3" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(235, 275)
+metadata/Row = 5
+metadata/Column = 3
+
+[node name="Tile_5_4" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(295, 275)
+metadata/Row = 5
+metadata/Column = 4
+
+[node name="Tile_5_5" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(355, 275)
+metadata/Row = 5
+metadata/Column = 5
+
+[node name="Tile_5_6" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(415, 275)
+metadata/Row = 5
+metadata/Column = 6
+
+[node name="Tile_5_7" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(475, 275)
+metadata/Row = 5
+metadata/Column = 7
+
+[node name="Tile_6_1" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(115, 335)
+metadata/Row = 6
+
+[node name="Tile_6_2" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(175, 335)
+metadata/Row = 6
+metadata/Column = 2
+
+[node name="Tile_6_3" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(235, 335)
+metadata/Row = 6
+metadata/Column = 3
+
+[node name="Tile_6_4" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(295, 335)
+metadata/Row = 6
+metadata/Column = 4
+
+[node name="Tile_6_5" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(355, 335)
+metadata/Row = 6
+metadata/Column = 5
+
+[node name="Tile_6_6" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(415, 335)
+metadata/Row = 6
+metadata/Column = 6
+
+[node name="Tile_6_7" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(475, 335)
+metadata/Row = 6
+metadata/Column = 7
+
+[node name="Tile_7_1" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(115, 395)
+metadata/Row = 7
+
+[node name="Tile_7_2" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(175, 395)
+metadata/Row = 7
+metadata/Column = 2
+
+[node name="Tile_7_3" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(235, 395)
+metadata/Row = 7
+metadata/Column = 3
+
+[node name="Tile_7_4" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(295, 395)
+metadata/Row = 7
+metadata/Column = 4
+
+[node name="Tile_7_5" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(355, 395)
+metadata/Row = 7
+metadata/Column = 5
+
+[node name="Tile_7_6" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(415, 395)
+metadata/Row = 7
+metadata/Column = 6
+
+[node name="Tile_7_7" parent="." instance=ExtResource("1_wqg81")]
+position = Vector2(475, 395)
+metadata/Row = 7
+metadata/Column = 7
+
+[node name="Character" parent="." instance=ExtResource("2_pex27")]
+position = Vector2(115, 35)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(475, 395)
+stream = ExtResource("4_lisw5")
+volume_db = 24.0
+autoplay = true

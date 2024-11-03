@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends MainS
 
 
 const SPEED = 300.0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://citwv6e7y27sc"
+path="res://.godot/imported/Endor - Pump It Up (official video).mp3-2a65a55778f2761b703a4ec6ca1bf49e.mp3str"
+
+[deps]
+
+source_file="res://Prototyping/Andrew_Mainella/Endor - Pump It Up (official video).mp3"
+dest_files=["res://.godot/imported/Endor - Pump It Up (official video).mp3-2a65a55778f2761b703a4ec6ca1bf49e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
