@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://biebmn8gok3n0" path="res://Prototyping/Andrew_Mainella/Resources/Button.res" id="1_mfq3s"]
 [ext_resource type="Script" path="res://Prototyping/Andrew_Mainella/Scripts/GameOverButtonS.gd" id="1_offcr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rc01y"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wcmwk"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
@@ -16,7 +16,7 @@ corner_radius_bottom_left = 25
 corner_detail = 5
 
 [sub_resource type="Theme" id="Theme_l8nhh"]
-Panel/styles/panel = SubResource("StyleBoxFlat_rc01y")
+Panel/styles/panel = SubResource("StyleBoxFlat_wcmwk")
 
 [node name="GameOver" type="Node2D"]
 z_index = 20
@@ -29,13 +29,14 @@ offset_bottom = 390.0
 theme = ExtResource("1_mfq3s")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 169.0
+offset_left = 120.0
 offset_top = 144.0
-offset_right = 472.0
+offset_right = 520.0
 offset_bottom = 255.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 51
-text = "GAME OVER"
+bbcode_enabled = true
+text = "[center]GAME OVER"
 
 [node name="ButtonPanel" type="Panel" parent="."]
 offset_left = 170.0
@@ -52,12 +53,13 @@ offset_right = 470.0
 offset_bottom = 376.0
 script = ExtResource("1_offcr")
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 298.0
+[node name="HomeLabel" type="RichTextLabel" parent="."]
+offset_left = 171.0
 offset_top = 338.0
-offset_right = 399.0
-offset_bottom = 371.0
+offset_right = 470.0
+offset_bottom = 361.0
 mouse_filter = 2
-text = "Home"
+bbcode_enabled = true
+text = "[center]Home"
 
 [connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]

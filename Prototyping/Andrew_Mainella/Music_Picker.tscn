@@ -1,0 +1,156 @@
+[gd_scene load_steps=13 format=3 uid="uid://mrjostbajli7"]
+
+[ext_resource type="FontFile" uid="uid://bg6oi685ty5tl" path="res://Prototyping/Andrew_Mainella/Assets/Itim-Regular.ttf" id="2_s53wy"]
+[ext_resource type="Script" path="res://Prototyping/Andrew_Mainella/Scripts/GameOverButtonS.gd" id="2_yyooc"]
+[ext_resource type="Script" path="res://addons/song_block/song_block.gd" id="4_mol3w"]
+[ext_resource type="Texture2D" uid="uid://dpnhd7wij6sox" path="res://Prototyping/Andrew_Mainella/Assets/Dancing_Queen.jpg" id="5_c7x8c"]
+[ext_resource type="Texture2D" uid="uid://bi6qkrond0ul6" path="res://Prototyping/Andrew_Mainella/Assets/Seven_Nation_Army.jpeg" id="5_gsqyb"]
+[ext_resource type="Texture2D" uid="uid://cemerukfcmkp8" path="res://Prototyping/Andrew_Mainella/Assets/Pump_It_Up.jpg" id="5_jnavf"]
+[ext_resource type="Texture2D" uid="uid://ue6rvyf6l7lf" path="res://Prototyping/Andrew_Mainella/Assets/Do_It_Right.jpg" id="8_jiv0g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ayex"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.972549, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_7q8l2"]
+Panel/styles/panel = SubResource("StyleBoxFlat_0ayex")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rc01y"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_08gp2"]
+Panel/styles/panel = SubResource("StyleBoxFlat_rc01y")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ka8d1"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="MusicPicker" type="Node2D"]
+z_index = 100
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 120.0
+offset_top = 90.0
+offset_right = 520.0
+offset_bottom = 390.0
+theme = SubResource("Theme_7q8l2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 120.0
+offset_top = 101.0
+offset_right = 519.0
+offset_bottom = 137.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_s53wy")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Select Song"
+
+[node name="ButtonPanel" type="Panel" parent="."]
+offset_left = 170.0
+offset_top = 325.0
+offset_right = 470.0
+offset_bottom = 375.0
+theme = SubResource("Theme_08gp2")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 172.0
+offset_top = 133.0
+offset_right = 470.0
+offset_bottom = 322.0
+size_flags_vertical = 3
+scroll_horizontal_custom_step = 10.0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 240)
+layout_mode = 2
+localize_numeral_system = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_ka8d1")
+
+[node name="Seven Nation Army" type="Node2D" parent="ScrollContainer/VBoxContainer"]
+z_index = 100
+position = Vector2(5, 0)
+scale = Vector2(0.466667, 0.466667)
+script = ExtResource("4_mol3w")
+width = 280.0
+height = 58.3333
+texture = ExtResource("5_gsqyb")
+
+[node name="Pump It Up" type="Node2D" parent="ScrollContainer/VBoxContainer"]
+position = Vector2(5, 60)
+scale = Vector2(0.466667, 0.466667)
+script = ExtResource("4_mol3w")
+width = 280.0
+height = 58.3333
+title = "Pump It Up"
+author = "Endor"
+difficulty = "Medium"
+time = "2 min"
+texture = ExtResource("5_jnavf")
+
+[node name="Dancing Queen" type="Node2D" parent="ScrollContainer/VBoxContainer"]
+position = Vector2(5, 120)
+scale = Vector2(0.466667, 0.466667)
+script = ExtResource("4_mol3w")
+width = 280.0
+height = 58.3333
+title = "Dancing Queen"
+author = "Abba"
+difficulty = "Easy"
+time = "4 min"
+texture = ExtResource("5_c7x8c")
+
+[node name="Do It Right" type="Node2D" parent="ScrollContainer/VBoxContainer"]
+position = Vector2(5, 180)
+scale = Vector2(0.466667, 0.466667)
+script = ExtResource("4_mol3w")
+width = 280.0
+height = 58.3333
+title = "Do It Right"
+author = "Martin Solveig"
+texture = ExtResource("8_jiv0g")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+z_index = 3
+offset_left = 170.0
+offset_top = 325.0
+offset_right = 470.0
+offset_bottom = 376.0
+script = ExtResource("2_yyooc")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 298.0
+offset_top = 338.0
+offset_right = 399.0
+offset_bottom = 371.0
+mouse_filter = 2
+text = "Close"
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
