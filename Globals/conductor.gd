@@ -61,7 +61,7 @@ func set_music(name: String) -> void:
 	music.stop()
 	num_beats_passed = 0.0
 	# Quarter notes only, for now.
-	signal_step_interval = QUARTER_NOTE
+	signal_step_interval = 1
 	
 	# Attempt to retrieve song
 	if !songs.has(name):

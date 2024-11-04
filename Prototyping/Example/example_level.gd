@@ -34,10 +34,19 @@ func spawn_danger_sign_at_random_location():
 	var danger_sign = load("res://Prototyping/Example/DangerSign.tscn")
 	# Then, instantiate it
 	var danger_sign_instance = danger_sign.instantiate()
+	var danger_sign_instance2 = danger_sign.instantiate()
 	# Set whatever parameters you need to
-	danger_sign_instance.position = get_random_position()
+	var position1 = get_random_position()
+	var position2 = get_random_position()
+	
+	while position1 == position2:
+		position2 = get_random_position()
+		
+	danger_sign_instance.position = position1
+	danger_sign_instance2.position = position2
 	# You must add it to the scene tree as well (in this case, a child of ExampleLevel)
 	add_child(danger_sign_instance)
+	add_child(danger_sign_instance2)
 
 
 func get_random_position() -> Vector2:
