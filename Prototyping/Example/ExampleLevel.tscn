@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=4 uid="uid://dyeu7gxqi14gh"]
+[gd_scene load_steps=9 format=4 uid="uid://dyeu7gxqi14gh"]
 
 [ext_resource type="Script" path="res://Prototyping/Example/example_level.gd" id="1_g0uvc"]
 [ext_resource type="TileSet" uid="uid://yhbff53f4kv8" path="res://Assets/Background/example_tileset.tres" id="2_rnxdf"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="3_x5bpu"]
+[ext_resource type="PackedScene" uid="uid://dl8luu2lndx30" path="res://Prototyping/joshua/coin.tscn" id="4_3lnpy"]
+[ext_resource type="PackedScene" uid="uid://be4nq636v4rn0" path="res://Prototyping/joshua/PowerUp.tscn" id="5_nacso"]
+[ext_resource type="PackedScene" uid="uid://dl8luu2lndx30" path="res://Prototyping/joshua/Coin.tscn" id="5_u1oi1"]
+[ext_resource type="PackedScene" uid="uid://w6d4qdnqowy0" path="res://Prototyping/joshua/Key.tscn" id="7_fs00r"]
+[ext_resource type="PackedScene" uid="uid://s6tgmwo4asxm" path="res://Prototyping/joshua/Chest.tscn" id="8_46pcy"]
 
 [node name="ExampleLevel" type="Node2D"]
 script = ExtResource("1_g0uvc")
@@ -16,5 +21,39 @@ tile_map_data = PackedByteArray("AAAAAAAAAgABAAAAAAAAAAEAAgABAAAAAAAAAAIAAgABAAA
 tile_set = ExtResource("2_rnxdf")
 
 [node name="Player" parent="." instance=ExtResource("3_x5bpu")]
-position = Vector2(317, 371)
+position = Vector2(316, 371)
 collision_mask = 128
+
+[node name="Coin1" parent="." instance=ExtResource("4_3lnpy")]
+position = Vector2(176, 337)
+scale = Vector2(1.00248, 1)
+
+[node name="Coin2" parent="." instance=ExtResource("4_3lnpy")]
+position = Vector2(271, 209)
+
+[node name="Coin3" parent="." instance=ExtResource("4_3lnpy")]
+position = Vector2(400, 240)
+
+[node name="PowerUp" parent="." instance=ExtResource("5_nacso")]
+position = Vector2(496, 304)
+
+[node name="Coin" parent="." instance=ExtResource("5_u1oi1")]
+position = Vector2(496, 400)
+
+[node name="Coin4" parent="." instance=ExtResource("5_u1oi1")]
+position = Vector2(497, 112)
+
+[node name="Coin5" parent="." instance=ExtResource("5_u1oi1")]
+position = Vector2(80, 400)
+
+[node name="Coin6" parent="." instance=ExtResource("5_u1oi1")]
+position = Vector2(176, 112)
+
+[node name="Coin7" parent="." instance=ExtResource("5_u1oi1")]
+position = Vector2(80, 208)
+
+[node name="Area2D" parent="." instance=ExtResource("7_fs00r")]
+position = Vector2(305, 432)
+
+[node name="Chest" parent="." instance=ExtResource("8_46pcy")]
+position = Vector2(48, 48)
