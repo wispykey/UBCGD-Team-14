@@ -4,8 +4,10 @@ var last_event = 0
 const TILE_LENGTH = 60
 var gameOver = false
 
+@onready var root = get_tree().root.get_node("MainScreen")
+
 func _ready() -> void:
-	self.get_tree().root.get_node("Main").connect("gameOver", update_gameOver)
+	root.get_node("Main").connect("gameOver", update_gameOver)
 
 func update_gameOver(val: bool):
 	gameOver = val
@@ -15,11 +17,11 @@ var player_y = 1
 
 func setPlayer_x(num: int) -> void:
 	player_x = num;
-	self.get_tree().root.get_node("Main").player_x.emit(num)
+	root.player_x.emit(num)
 	
 func setPlayer_y(num: int) -> void:
 	player_y = num;
-	self.get_tree().root.get_node("Main").player_y.emit(num)
+	root.player_y.emit(num)
 
 func _process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.

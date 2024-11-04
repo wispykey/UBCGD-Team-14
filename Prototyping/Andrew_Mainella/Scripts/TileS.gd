@@ -13,14 +13,16 @@ var player_x = 1
 var player_y = 1
 var gameOver = false
 
+@onready var root = self.get_tree().root.get_node("MainScreen")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.color = color_def_instance.getColor(current_number)
 	row = self.get_parent().get_meta("Row")
 	column = self.get_parent().get_meta("Column")
-	self.get_tree().root.get_node("Main").connect("player_x", update_x)
-	self.get_tree().root.get_node("Main").connect("player_y", update_y)
-	self.get_tree().root.get_node("Main").connect("gameOver", update_gameOver)
+	root.get_node("Main").connect("player_x", update_x)
+	root.get_node("Main").connect("player_y", update_y)
+	root.get_node("Main").connect("gameOver", update_gameOver)
 	if row == null || column == null:
 		# This is not good something very wrong.
 		print("Something wrong")
@@ -45,12 +47,11 @@ func _process(delta: float) -> void:
 	if current_number == 0 && row == self.player_y && column == self.player_x && self.gameOver == false:
 		# The tile is red with player on it
 		print("Row " + str(row) + "\nColumn " + str(column) + "\ncurrent_number " + str(current_number) + "\nPlayer X: " + str(self.player_x) + "\nPlayer Y: " + str(self.player_y))
-		var game = get_tree().get_root().get_node("Main")
 		var game_over_resource = load("res://Prototyping/Andrew_Mainella/GameOver.tscn")
 		var game_over = game_over_resource.instantiate()
-		game.add_child(game_over)
+		root.get_node("Main").add_child(game_over)
 		self.gameOver = true
-		self.get_tree().root.get_node("Main").gameOver.emit(true)
+		root.gameOver.emit(true)
 		return
 	
 	var time = Time.get_ticks_msec()

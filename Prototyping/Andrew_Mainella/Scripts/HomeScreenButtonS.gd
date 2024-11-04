@@ -1,6 +1,8 @@
 extends Node
 
-func _on_pressed() -> void:
-	var root = get_tree().change_scene_to_file("res://Prototyping/Andrew_Mainella/Game_Scene.tscn")
+@onready var main =  get_tree().root.get_node("MainScreen")
 
-	pass # Replace with function body.
+func _on_pressed() -> void:
+	var new_scene = load("res://Prototyping/Andrew_Mainella/Game_Scene.tscn")
+	main.get_node("HomeScreen").queue_free()
+	main.add_child(new_scene.instantiate())

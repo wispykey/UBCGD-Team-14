@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://mrjostbajli7"]
 
 [ext_resource type="FontFile" uid="uid://bg6oi685ty5tl" path="res://Prototyping/Andrew_Mainella/Assets/Itim-Regular.ttf" id="2_s53wy"]
-[ext_resource type="Script" path="res://Prototyping/Andrew_Mainella/Scripts/GameOverButtonS.gd" id="2_yyooc"]
 [ext_resource type="Script" path="res://addons/song_block/song_block.gd" id="4_mol3w"]
 [ext_resource type="Texture2D" uid="uid://dpnhd7wij6sox" path="res://Prototyping/Andrew_Mainella/Assets/Dancing_Queen.jpg" id="5_c7x8c"]
 [ext_resource type="Texture2D" uid="uid://bi6qkrond0ul6" path="res://Prototyping/Andrew_Mainella/Assets/Seven_Nation_Army.jpeg" id="5_gsqyb"]
 [ext_resource type="Texture2D" uid="uid://cemerukfcmkp8" path="res://Prototyping/Andrew_Mainella/Assets/Pump_It_Up.jpg" id="5_jnavf"]
+[ext_resource type="Script" path="res://Prototyping/Andrew_Mainella/Scripts/CloseMusicScene.gd" id="7_yoluq"]
 [ext_resource type="Texture2D" uid="uid://ue6rvyf6l7lf" path="res://Prototyping/Andrew_Mainella/Assets/Do_It_Right.jpg" id="8_jiv0g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ayex"]
@@ -97,7 +97,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ka8d1")
 [node name="Seven Nation Army" type="Node2D" parent="ScrollContainer/VBoxContainer"]
 z_index = 100
 position = Vector2(5, 0)
-scale = Vector2(0.466667, 0.466667)
+scale = Vector2(0.466666, 0.466666)
 script = ExtResource("4_mol3w")
 width = 280.0
 height = 58.3333
@@ -105,7 +105,7 @@ texture = ExtResource("5_gsqyb")
 
 [node name="Pump It Up" type="Node2D" parent="ScrollContainer/VBoxContainer"]
 position = Vector2(5, 60)
-scale = Vector2(0.466667, 0.466667)
+scale = Vector2(0.466666, 0.466666)
 script = ExtResource("4_mol3w")
 width = 280.0
 height = 58.3333
@@ -117,7 +117,7 @@ texture = ExtResource("5_jnavf")
 
 [node name="Dancing Queen" type="Node2D" parent="ScrollContainer/VBoxContainer"]
 position = Vector2(5, 120)
-scale = Vector2(0.466667, 0.466667)
+scale = Vector2(0.466666, 0.466666)
 script = ExtResource("4_mol3w")
 width = 280.0
 height = 58.3333
@@ -129,7 +129,7 @@ texture = ExtResource("5_c7x8c")
 
 [node name="Do It Right" type="Node2D" parent="ScrollContainer/VBoxContainer"]
 position = Vector2(5, 180)
-scale = Vector2(0.466667, 0.466667)
+scale = Vector2(0.466666, 0.466666)
 script = ExtResource("4_mol3w")
 width = 280.0
 height = 58.3333
@@ -143,7 +143,7 @@ offset_left = 170.0
 offset_top = 325.0
 offset_right = 470.0
 offset_bottom = 376.0
-script = ExtResource("2_yyooc")
+script = ExtResource("7_yoluq")
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
 offset_left = 298.0
@@ -153,4 +153,12 @@ offset_bottom = 371.0
 mouse_filter = 2
 text = "Close"
 
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Seven Nation Army/SongBlockArea2D" to="ScrollContainer/VBoxContainer/Seven Nation Army/SongBlockArea2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Seven Nation Army/SongBlockArea2D" to="ScrollContainer/VBoxContainer/Seven Nation Army/SongBlockArea2D" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Pump It Up/SongBlockArea2D" to="ScrollContainer/VBoxContainer/Pump It Up/SongBlockArea2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Pump It Up/SongBlockArea2D" to="ScrollContainer/VBoxContainer/Pump It Up/SongBlockArea2D" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Dancing Queen/SongBlockArea2D" to="ScrollContainer/VBoxContainer/Dancing Queen/SongBlockArea2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Dancing Queen/SongBlockArea2D" to="ScrollContainer/VBoxContainer/Dancing Queen/SongBlockArea2D" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Do It Right/SongBlockArea2D" to="ScrollContainer/VBoxContainer/Do It Right/SongBlockArea2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Do It Right/SongBlockArea2D" to="ScrollContainer/VBoxContainer/Do It Right/SongBlockArea2D" method="_on_mouse_exited"]
 [connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
