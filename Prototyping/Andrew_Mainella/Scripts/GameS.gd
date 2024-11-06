@@ -1,5 +1,8 @@
 extends Node
 
+signal player_x(new_value)
+signal player_y(new_value)
+signal gameOver(new_value)
 
 @onready var main = self.get_tree().root.get_node("MainScreen")
 

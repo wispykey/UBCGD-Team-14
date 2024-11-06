@@ -17,11 +17,11 @@ var player_y = 1
 
 func setPlayer_x(num: int) -> void:
 	player_x = num;
-	root.player_x.emit(num)
+	root.get_node("Main").player_x.emit(num)
 	
 func setPlayer_y(num: int) -> void:
 	player_y = num;
-	root.player_y.emit(num)
+	root.get_node("Main").player_y.emit(num)
 
 func _process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.

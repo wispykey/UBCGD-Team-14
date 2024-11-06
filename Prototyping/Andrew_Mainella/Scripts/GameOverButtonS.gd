@@ -1,8 +1,9 @@
 extends Node
 
 @onready var main =  get_tree().root.get_node("MainScreen")
+@onready var homeScreen = preload("res://Prototyping/Andrew_Mainella/Home_Screen.tscn")
 
 func _on_pressed() -> void:
-	var new_scene = load("res://Prototyping/Andrew_Mainella/Home_Screen.tscn")
-	main.get_node("Main").queue_free()
-	main.add_child(new_scene.instantiate())
+	#home screen
+	main.get_node("Main").queue_free() # remove game
+	main.add_child(homeScreen.instantiate()) # add homescreen
