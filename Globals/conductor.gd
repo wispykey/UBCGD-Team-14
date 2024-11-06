@@ -3,6 +3,7 @@ extends Node
 
 # Emitted on every quarter beat
 signal quarter_beat(beat_num: int)
+signal eighth_note_duration_ready(duration: float)
 
 # Type-inferred references for IntelliSense.
 @onready var music := $Music
@@ -22,6 +23,8 @@ var songs: Dictionary = {
 
 # Duration of a quarter note, in seconds.
 var seconds_per_quarter_note: float
+# Duration of a sixteenth note, in seconds
+var seconds_per_eighth_note: float
 # How often to send signals.
 var signal_step_interval: float 
 # 1-indexed. A value of +1.0 means one quarter note has passed.
@@ -61,7 +64,7 @@ func set_music(name: String) -> void:
 	music.stop()
 	num_beats_passed = 0.0
 	# Quarter notes only, for now.
-	signal_step_interval = 1
+	signal_step_interval = QUARTER_NOTE
 	
 	# Attempt to retrieve song
 	if !songs.has(name):
@@ -72,7 +75,10 @@ func set_music(name: String) -> void:
 	var file_path: String = "res://Assets/Music/" + song_to_play.file_name
 	music.stream = load(file_path)
 	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
+	seconds_per_eighth_note = seconds_per_quarter_note / 2.0
 	music.play()
+	emit_signal("eighth_note_duration_ready", seconds_per_eighth_note)
+	print("Seconds per eighth note: ", seconds_per_eighth_note)
 	print("Playing song: \"", name, "\"\n")
 
 	
