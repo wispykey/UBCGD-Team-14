@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://15jtpmqne06e"]
+
+[ext_resource type="Texture2D" uid="uid://bwke0uchycnoa" path="res://Assets/Objects/orange_circle.png" id="2_pi6bb"]
+
+[sub_resource type="GDScript" id="GDScript_sq0mn"]
+script/source = "extends CharacterBody2D
+
+@export var SPEED = 100
+
+var spawnPoint : Vector2
+var spawnRot : float
+
+	
+func _physics_process(delta):
+	velocity = Vector2(0, SPEED)
+	move_and_slide()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8o4l"]
+radius = 9.6
+
+[node name="Projectile" type="CharacterBody2D"]
+script = SubResource("GDScript_sq0mn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9.53674e-07, 0)
+scale = Vector2(0.3125, 0.3125)
+shape = SubResource("CircleShape2D_v8o4l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, 2.38419e-07)
+scale = Vector2(0.1875, 0.1875)
+texture = ExtResource("2_pi6bb")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-5.68434e-14, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.3125, 0.3125)
+shape = SubResource("CircleShape2D_v8o4l")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0s10uktux6yf"]
+
+[ext_resource type="Texture2D" uid="uid://bj1opts1hno8w" path="res://Assets/icon.svg" id="1_ojp27"]
+[ext_resource type="Script" path="res://Prototyping/Amelie/Scripts/player.gd" id="1_ywvvk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88kuo"]
+size = Vector2(16, 15.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hlgxp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ojp27")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 5
+script = ExtResource("1_ywvvk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8.25)
+shape = SubResource("RectangleShape2D_88kuo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.484375)
+sprite_frames = SubResource("SpriteFrames_hlgxp")

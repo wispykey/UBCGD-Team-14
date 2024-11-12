@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Prototyping/Amelie1/level.gd" id="1_hxi6d"]
 [ext_resource type="TileSet" uid="uid://yhbff53f4kv8" path="res://Assets/Background/example_tileset.tres" id="2_pimyj"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="3_vixwt"]
-[ext_resource type="PackedScene" uid="uid://domu1ia3jeip5" path="res://Prototyping/Amelie1/projectile.tscn" id="4_h27b2"]
+[ext_resource type="PackedScene" uid="uid://domu1ia3jeip5" path="res://Prototyping/Amelie/Scenes/projectile.tscn" id="4_h27b2"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_hxi6d")
@@ -21,3 +21,4 @@ position = Vector2(317, 371)
 collision_mask = 128
 
 [node name="Projectile" parent="." instance=ExtResource("4_h27b2")]
+rotation = 0.0010943
