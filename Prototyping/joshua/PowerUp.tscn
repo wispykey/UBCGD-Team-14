@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://be4nq636v4rn0"]
 
-[ext_resource type="Texture2D" uid="uid://b6p2yqwrh4dlv" path="res://Prototyping/joshua/potion.png" id="1_0q8x1"]
+[ext_resource type="Texture2D" uid="uid://b6p2yqwrh4dlv" path="res://Prototyping/joshua/assets/images/potion.png" id="1_0q8x1"]
 [ext_resource type="Script" path="res://Prototyping/joshua/scripts/power_up.gd" id="1_q4832"]
-[ext_resource type="AudioStream" uid="uid://cg5sutoij17x2" path="res://Prototyping/joshua/powerUpSound.mp3" id="3_w2njx"]
+[ext_resource type="AudioStream" uid="uid://cg5sutoij17x2" path="res://Prototyping/joshua/assets/sounds/powerUpSound.mp3" id="3_w2njx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_502xc"]
 size = Vector2(32, 32)
