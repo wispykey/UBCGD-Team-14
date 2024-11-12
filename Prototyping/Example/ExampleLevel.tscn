@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://dyeu7gxqi14gh"]
+[gd_scene load_steps=8 format=4 uid="uid://dyeu7gxqi14gh"]
 
 [ext_resource type="Script" path="res://Prototyping/Example/example_level.gd" id="1_g0uvc"]
 [ext_resource type="TileSet" uid="uid://yhbff53f4kv8" path="res://Assets/Background/example_tileset.tres" id="2_rnxdf"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="3_x5bpu"]
-[ext_resource type="PackedScene" uid="uid://dl8luu2lndx30" path="res://Prototyping/joshua/coin.tscn" id="4_3lnpy"]
 [ext_resource type="PackedScene" uid="uid://be4nq636v4rn0" path="res://Prototyping/joshua/PowerUp.tscn" id="5_nacso"]
 [ext_resource type="PackedScene" uid="uid://dl8luu2lndx30" path="res://Prototyping/joshua/Coin.tscn" id="5_u1oi1"]
 [ext_resource type="PackedScene" uid="uid://w6d4qdnqowy0" path="res://Prototyping/joshua/Key.tscn" id="7_fs00r"]
@@ -24,14 +23,14 @@ tile_set = ExtResource("2_rnxdf")
 position = Vector2(316, 371)
 collision_mask = 128
 
-[node name="Coin1" parent="." instance=ExtResource("4_3lnpy")]
+[node name="Coin1" parent="." instance=ExtResource("5_u1oi1")]
 position = Vector2(176, 337)
 scale = Vector2(1.00248, 1)
 
-[node name="Coin2" parent="." instance=ExtResource("4_3lnpy")]
+[node name="Coin2" parent="." instance=ExtResource("5_u1oi1")]
 position = Vector2(271, 209)
 
-[node name="Coin3" parent="." instance=ExtResource("4_3lnpy")]
+[node name="Coin3" parent="." instance=ExtResource("5_u1oi1")]
 position = Vector2(400, 240)
 
 [node name="PowerUp" parent="." instance=ExtResource("5_nacso")]
