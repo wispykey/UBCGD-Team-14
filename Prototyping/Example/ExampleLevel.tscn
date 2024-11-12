@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dyeu7gxqi14gh"]
+[gd_scene load_steps=8 format=4 uid="uid://dyeu7gxqi14gh"]
 
 [ext_resource type="Script" path="res://Prototyping/Example/example_level.gd" id="1_g0uvc"]
 [ext_resource type="TileSet" uid="uid://yhbff53f4kv8" path="res://Assets/Background/example_tileset.tres" id="2_rnxdf"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dl8luu2lndx30" path="res://Prototyping/joshua/Coin.tscn" id="5_u1oi1"]
 [ext_resource type="PackedScene" uid="uid://w6d4qdnqowy0" path="res://Prototyping/joshua/Key.tscn" id="7_fs00r"]
 [ext_resource type="PackedScene" uid="uid://nng40t6b1gdh" path="res://Prototyping/joshua/TreasureChest.tscn" id="8_5mk58"]
-[ext_resource type="PackedScene" uid="uid://s6tgmwo4asxm" path="res://Prototyping/joshua/Chest.tscn" id="8_46pcy"]
-[ext_resource type="Script" path="res://Prototyping/joshua/treasureChest.gd" id="9_8k0h3"]
 
 [node name="ExampleLevel" type="Node2D"]
 script = ExtResource("1_g0uvc")
@@ -56,9 +54,5 @@ position = Vector2(80, 208)
 [node name="Area2D" parent="." instance=ExtResource("7_fs00r")]
 position = Vector2(305, 432)
 
-[node name="Chest" parent="." instance=ExtResource("8_46pcy")]
-position = Vector2(48, 48)
-
 [node name="TreasureChest" parent="." instance=ExtResource("8_5mk58")]
 position = Vector2(304, 147)
-script = ExtResource("9_8k0h3")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://nng40t6b1gdh"]
+[gd_scene load_steps=13 format=3 uid="uid://nng40t6b1gdh"]
 
 [ext_resource type="Texture2D" uid="uid://bmrf4ht6puvnu" path="res://Prototyping/joshua/treasure-chest.png" id="1_2kr7v"]
 [ext_resource type="Texture2D" uid="uid://cppc644x4ng63" path="res://Prototyping/joshua/assets/images/coin.png" id="2_45np6"]
+[ext_resource type="Script" path="res://Prototyping/joshua/treasureChest.gd" id="3_cahmh"]
 [ext_resource type="AudioStream" uid="uid://cbebs07iqh4v3" path="res://Prototyping/joshua/assets/sounds/chest_open.mp3" id="3_ccork"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xu4ck"]
@@ -189,10 +190,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ijr24"]
-size = Vector2(30, 18)
+size = Vector2(30, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1dq2r"]
-size = Vector2(34, 11)
+size = Vector2(34, 31)
 
 [node name="TreasureChest" type="Node2D"]
 
@@ -227,13 +228,16 @@ autoplay = "closed"
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 2)
+position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_ijr24")
 
 [node name="Area2D" type="Area2D" parent="."]
 monitorable = false
+script = ExtResource("3_cahmh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 7.5)
+position = Vector2(0, 17.5)
 shape = SubResource("RectangleShape2D_1dq2r")
 debug_color = Color(0.894707, 0.192131, 0.635759, 0.42)
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
