@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://cle42bc8pe0m2"]
+[gd_scene load_steps=3 format=3 uid="uid://cle42bc8pe0m2"]
+
+[ext_resource type="Script" path="res://addons/song_block/song_block.gd" id="1_rhh53"]
+[ext_resource type="Texture2D" uid="uid://cemerukfcmkp8" path="res://Prototyping/Andrew_Mainella/Assets/Pump_It_Up.jpg" id="2_06jmh"]
 
 [node name="GameS" type="Node2D"]
+
+[node name="Song Block" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_rhh53")
+width = 300.0
+height = 62.5
+title = "Hello!"
+author = "Author"
+difficulty = "Medium"
+texture = ExtResource("2_06jmh")
+
+[connection signal="mouse_entered" from="Song Block/SongBlockArea2D" to="Song Block/SongBlockArea2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Song Block/SongBlockArea2D" to="Song Block/SongBlockArea2D" method="_on_mouse_exited"]

@@ -1,4 +1,4 @@
-extends Node
+extends CharacterBody2D
 
 var last_event = 0
 const TILE_LENGTH = 60
@@ -23,6 +23,14 @@ func setPlayer_y(num: int) -> void:
 	player_y = num;
 	root.get_node("Main").player_y.emit(num)
 
+func setPlayerXPosition(newPos: int, y: int) -> void:
+	var tween = create_tween()
+	tween.tween_property(self, 'position', Vector2(newPos, y), 0.1)
+	
+func setPlayerYPosition(newPos: int, x: int) -> void:
+	var tween = create_tween()
+	tween.tween_property(self, 'position', Vector2(x, newPos), 0.1)
+
 func _process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -42,17 +50,17 @@ func _process(delta: float) -> void:
 
 	if x_movement > 0 && ((player_x - 1) * TILE_LENGTH) < (6 * TILE_LENGTH):
 		last_event = Time.get_ticks_msec()
-		self.position.x = self.position.x + TILE_LENGTH
+		setPlayerXPosition(self.position.x + TILE_LENGTH, self.position.y)
 		setPlayer_x(player_x + 1)
 	elif x_movement < 0 && ((player_x - 1) * TILE_LENGTH) > 0:
 		last_event = Time.get_ticks_msec()
-		self.position.x = + self.position.x - TILE_LENGTH
+		setPlayerXPosition(self.position.x - TILE_LENGTH, self.position.y)
 		setPlayer_x(player_x - 1)
 	elif y_movement > 0 && ((player_y - 1) * TILE_LENGTH) < (6 * TILE_LENGTH):
 		last_event = Time.get_ticks_msec()
-		self.position.y = self.position.y + TILE_LENGTH
+		setPlayerYPosition(self.position.y + TILE_LENGTH, self.position.x)
 		setPlayer_y(player_y + 1)
 	elif y_movement < 0 && ((player_y - 1) * TILE_LENGTH) > 0:
 		last_event = Time.get_ticks_msec()
-		self.position.y = self.position.y - TILE_LENGTH
+		setPlayerYPosition(self.position.y - TILE_LENGTH, self.position.x)
 		setPlayer_y(player_y - 1)

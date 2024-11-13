@@ -1,7 +1,8 @@
-[gd_scene load_steps=50 format=3 uid="uid://bcxhqjua7yaea"]
+[gd_scene load_steps=54 format=3 uid="uid://bcxhqjua7yaea"]
 
 [ext_resource type="Texture2D" uid="uid://57bmlxp81jc3" path="res://Prototyping/Andrew_Mainella/kenney_toon-characters-1/Male adventurer/Tilesheet/character_maleAdventurer_sheet.png" id="1_36b11"]
 [ext_resource type="Script" path="res://Prototyping/Andrew_Mainella/Scripts/Character.gd" id="1_57dcj"]
+[ext_resource type="Texture2D" uid="uid://oun4xuf1k1if" path="res://Prototyping/Andrew_Mainella/kenney_toon-characters-1/Male adventurer/Tilesheet/character_maleAdventurer_sheetHD.png" id="3_mj8q6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a85bm"]
 atlas = ExtResource("1_36b11")
@@ -183,6 +184,18 @@ region = Rect2(672, 512, 96, 128)
 atlas = ExtResource("1_36b11")
 region = Rect2(768, 512, 96, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykc1x"]
+atlas = ExtResource("3_mj8q6")
+region = Rect2(1152, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b66nj"]
+atlas = ExtResource("3_mj8q6")
+region = Rect2(1344, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on18x"]
+atlas = ExtResource("3_mj8q6")
+region = Rect2(1536, 512, 192, 256)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_4cg5h"]
 animations = [{
 "frames": [{
@@ -324,6 +337,30 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykc1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b66nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on18x")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0300"]
@@ -337,8 +374,10 @@ script = ExtResource("1_57dcj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 z_index = 1
 position = Vector2(25, 25)
-scale = Vector2(0.39, 0.39)
+scale = Vector2(0.195, 0.195)
 sprite_frames = SubResource("SpriteFrames_4cg5h")
+animation = &"walk_left"
+autoplay = "walk_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(25, 25)
