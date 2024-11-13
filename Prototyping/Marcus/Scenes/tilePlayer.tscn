@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://din3ddqunskxh"]
 
-[ext_resource type="Script" path="res://Prototyping/Marcus/TilePlayer/tilePlayerScript.gd" id="1_rq6md"]
+[ext_resource type="Script" path="res://Prototyping/Marcus/Scripts/tilePlayerScript.gd" id="1_rq6md"]
 [ext_resource type="Texture2D" uid="uid://bj1opts1hno8w" path="res://Assets/icon.svg" id="2_0fvqg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hcu4"]
