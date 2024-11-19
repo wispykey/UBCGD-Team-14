@@ -74,7 +74,7 @@ func can_move(direction: Vector2):
 	var next_cell = Vector2(position.x / TILE_SIZE, position.y / TILE_SIZE) + direction
 	var next_cell_type = tile_map.get_cell_atlas_coords(next_cell)
 	
-	if next_cell_type == WALL_TILE or next_cell_type == BLUE_TILE:
+	if next_cell_type == WALL_TILE:
 		return false
 		
 	var new_pos = position + direction * TILE_SIZE

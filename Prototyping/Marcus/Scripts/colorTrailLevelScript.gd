@@ -28,7 +28,7 @@ func _on_quarter_beat(_beat_num: int):
 	# move_one_tile_right()
 	
 func _on_eighth_beat(_beat_num: int):
-	spawn_danger_sign_at_random_location();
+	spawn_danger_sign_at_random_location()
 
 # Moves right by the width of one tile
 #func move_one_tile_right():
@@ -38,7 +38,7 @@ func _on_eighth_beat(_beat_num: int):
 # You can add scenes dynamically via GDScript code
 func spawn_danger_sign_at_random_location():
 	# First, load the asset
-	var danger_sign = load("res://Prototyping/Marcus/DangerSign.tscn")
+	var danger_sign = load("res://Prototyping/Marcus/Scenes/DangerSign.tscn")
 	# Then, instantiate it
 	var danger_sign_instance = danger_sign.instantiate()
 
@@ -46,7 +46,7 @@ func spawn_danger_sign_at_random_location():
 	danger_sign_instance.position = get_random_position()
 
 	# You must add it to the scene tree as well (in this case, a child of ExampleLevel)
-	add_child(danger_sign_instance)
+	#add_child(danger_sign_instance)
 
 
 func get_random_position() -> Vector2:
