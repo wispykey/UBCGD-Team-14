@@ -10,5 +10,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+
 func update_score(score):
 	$ScoreLabel.text = str(score)
+
+func update_life(life):
+	$LifeLabel.text = str(life)

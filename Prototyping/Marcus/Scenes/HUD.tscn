@@ -12,11 +12,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jrng0")
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="LifeLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 403.0
 offset_right = 643.0
+offset_bottom = 477.0
+theme_override_font_sizes/font_size = 45
+text = "0"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 403.0
+offset_right = 301.0
 offset_bottom = 477.0
 theme_override_font_sizes/font_size = 45
 text = "0"
