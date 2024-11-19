@@ -59,7 +59,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_beat_info()
-	print(current_time_in_secs)
 	
 # Updates number of beats 
 func update_beat_info() -> void:
