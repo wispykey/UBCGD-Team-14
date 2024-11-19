@@ -15,9 +15,29 @@ signal quarter_beat(beat_num: int)
 const QUARTER_NOTE: float = 1.0
 const EIGHTH_NOTE: float = 0.5 
 
+# Dictionary of music assets we are using in the game.
 # Could be dynamically loaded from files - but maybe not worth the effort.
 var songs: Dictionary = {
-	"Test": {"bpm": 88, "file_name": "harmonic_hustle_overworld.wav"}, 
+	"Test": {
+		"bpm": 88, 
+		"file_name": "harmonic_hustle_overworld.wav"
+	},
+	"Fantasy1": {
+		"bpm": 180, 
+		"file_name": "fantasy_1.mp3",
+	},
+	"Fantasy2": {
+		"bpm": 180,
+		"file_name": "fantasy_2.mp3",
+	},
+	"Supernatural1": {
+		"bpm": 140,
+		"file_name": "supernatural_1.wav"
+	},
+	"Supernatural2": {
+		"bpm": 104,
+		"file_name": "supernatural_2.wav"
+	}  
 }
 
 # Duration of a quarter note, in seconds.
@@ -29,19 +49,24 @@ var num_beats_passed: float
 # 1-indexed. In a measure of 4/4, cycles between 1-2-3-4.
 var beat_number: int
 
-# TODO: Variables for interpolation
+# TODO: Improve step consistency for interpolation
+var current_time_in_secs: float
 
 func _ready() -> void:
 	set_music("Test")
+	current_time_in_secs = 0.0
 
 
 func _process(delta: float) -> void:
 	update_beat_info()
 	
-	
 # Updates number of beats 
 func update_beat_info() -> void:
 	var playback_time_in_secs = compute_playback_time()
+	# Update variable to be used for interpolation
+	current_time_in_secs = playback_time_in_secs
+	
+	# Check if one beat's worth of time has passed
 	var beats_passed_in_secs: float = num_beats_passed * seconds_per_quarter_note
 	if playback_time_in_secs > beats_passed_in_secs:
 		num_beats_passed += signal_step_interval
