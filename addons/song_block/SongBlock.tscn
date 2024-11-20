@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlinesaafew8v"]
+
+[ext_resource type="StyleBox" uid="uid://cvbgbkx7ad02" path="res://addons/song_block/SongStyleBox.tres" id="1_5c83y"]
+[ext_resource type="Script" path="res://addons/song_block/AreaScript.gd" id="1_ec656"]
+[ext_resource type="FontFile" uid="uid://bg6oi685ty5tl" path="res://Prototyping/Andrew_Mainella/Assets/Itim-Regular.ttf" id="2_s2io3"]
+[ext_resource type="Texture2D" uid="uid://bi6qkrond0ul6" path="res://Prototyping/Andrew_Mainella/Assets/Seven_Nation_Army.jpeg" id="3_ig15i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lp51"]
+size = Vector2(602, 129)
+
+[node name="SongBlockArea2D" type="Area2D"]
+script = ExtResource("1_ec656")
+
+[node name="Panel" type="Panel" parent="."]
+layout_direction = 2
+offset_right = 600.0
+offset_bottom = 125.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = ExtResource("1_5c83y")
+
+[node name="DifficultyLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0183333
+anchor_top = 0.008
+anchor_right = 233.598
+anchor_bottom = 0.008
+offset_left = 251.0
+offset_top = 69.0
+offset_right = 351.0
+offset_bottom = 109.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_s2io3")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Hard"
+metadata/_edit_use_anchors_ = true
+
+[node name="TimeLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00666667
+anchor_top = 0.016
+anchor_right = 0.155
+anchor_bottom = 0.016
+offset_left = 126.0
+offset_top = 69.0
+offset_right = 226.0
+offset_bottom = 119.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_s2io3")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "3 min"
+metadata/_edit_use_anchors_ = true
+
+[node name="AuthorLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0283333
+anchor_top = 0.04
+anchor_right = 0.0283333
+anchor_bottom = 0.096
+offset_left = 347.0
+offset_top = 65.0
+offset_right = 747.0
+offset_bottom = 99.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_s2io3")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "The White Stripes"
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00833337
+anchor_top = -0.032
+anchor_right = 0.108333
+anchor_bottom = -0.032
+offset_left = 119.0
+offset_top = 11.0
+offset_right = 579.0
+offset_bottom = 81.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_s2io3")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "Seven Nation Army"
+metadata/_edit_use_anchors_ = true
+
+[node name="Image" type="Sprite2D" parent="Panel"]
+position = Vector2(65, 62.5)
+texture = ExtResource("3_ig15i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 10
+position = Vector2(302, 62.5)
+shape = SubResource("RectangleShape2D_1lp51")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

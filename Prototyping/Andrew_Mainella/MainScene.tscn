@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv0kokdckcmbp"]
+
+[ext_resource type="Script" path="res://Prototyping/Andrew_Mainella/Scripts/MainS.gd" id="1_cmvoq"]
+[ext_resource type="PackedScene" uid="uid://geg3kktverul" path="res://Prototyping/Andrew_Mainella/Home_Screen.tscn" id="1_r8id6"]
+
+[node name="MainScreen" type="Node2D"]
+script = ExtResource("1_cmvoq")
+
+[node name="HomeScreen" parent="." instance=ExtResource("1_r8id6")]
