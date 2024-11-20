@@ -49,7 +49,6 @@ var cells_to_reset = []
 
 var double_tap = false
 var double_move = false
-var double_press_speed: int = 1000*0.25
 
 # runs once on startup, set position close to center 
 # and run _on_quarter_beat every quarter_beat emitted from the Conductor
@@ -88,10 +87,12 @@ func handle_movement() -> void:
 			if directions[action].dbl:
 				while can_move(directions[action].dir) and directions[action].dbl:
 					color_tile(current_cell)
+					spawn_afterimage(current_cell)
 					position += directions[action].dir * TILE_SIZE
 					current_cell = Vector2(position.x / TILE_SIZE, position.y / TILE_SIZE)
 			else:
 				color_tile(current_cell)
+				spawn_afterimage(current_cell)
 				position += directions[action].dir * TILE_SIZE
 			
 			life += 1
@@ -103,6 +104,16 @@ func handle_movement() -> void:
 			directions[action].dbl = true
 			if $Timer.is_stopped():
 				$Timer.start()
+
+
+func spawn_afterimage(cell_pos):
+	var player_sprite = load("res://Prototyping/Marcus/Scenes/Afterimage.tscn")
+	
+	var afterimage = player_sprite.instantiate()
+	afterimage.position = cell_pos * TILE_SIZE
+	
+	get_parent().add_child(afterimage)
+	
 
 
 # check if the player can move a tile in a given direction
@@ -228,3 +239,4 @@ func _on_quarter_beat(_beat_num: int):
 func _on_timer_timeout() -> void:
 	for action in directions:
 		directions[action].dbl = false
+ # Replace with function body.

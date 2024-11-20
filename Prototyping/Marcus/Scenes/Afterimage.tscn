@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://hx3luyky8sa8"]
+
+[ext_resource type="Script" path="res://Prototyping/Marcus/Scripts/afterimage.gd" id="1_ad0ax"]
+[ext_resource type="Texture2D" uid="uid://bj1opts1hno8w" path="res://Assets/icon.svg" id="2_38irg"]
+
+[node name="Afterimage" type="Node2D"]
+script = ExtResource("1_ad0ax")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.308)
+texture = ExtResource("2_38irg")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true

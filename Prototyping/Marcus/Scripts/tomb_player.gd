@@ -17,7 +17,7 @@ const BLACK_TILE = Vector2i(2,0)
 const L_SHAPE = [Vector2i(0, 0), 
 				 Vector2i(0, 1), Vector2i(1, 0), Vector2i(2, 0)]
 
-var player_pos: Vector2i = Vector2i(8, 7);
+var player_pos: Vector2i = Vector2i(2, 14);
 var tileType = BLUE_TILE
 var cells_to_reset = []
 var beatNum: int = 0
@@ -54,6 +54,7 @@ func _physics_process(_delta: float) -> void:
 # Colors tile player was previously on and Updates nearby tiles
 func handle_movement() -> void:
 	var current_cell = Vector2(position.x / TILE_SIZE, position.y / TILE_SIZE)
+	
 	var directions = {
 		"move_right": Vector2(1, 0),
 		"move_left": Vector2(-1, 0),
@@ -62,11 +63,14 @@ func handle_movement() -> void:
 	}
 	
 	for action in directions:
-		if Input.is_action_just_pressed(action) and can_move(directions[action]):
-			color_tile(current_cell)
-			update_nearby_cells(current_cell)
-			position += directions[action] * TILE_SIZE
-			break #move one direction per frame
+		if Input.is_action_just_pressed(action):
+			while can_move(directions[action]):
+				color_tile(current_cell)
+				update_nearby_cells(current_cell)
+				position += directions[action] * TILE_SIZE
+				current_cell = Vector2(position.x / TILE_SIZE, position.y / TILE_SIZE)
+			
+			break #move one direction per frame|
 
 
 # check if the player can move a tile in a given direction
