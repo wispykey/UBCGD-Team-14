@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm8uykdybf3rw"]
+
+[ext_resource type="Script" path="res://Prototyping/Amanda/area_2d.gd" id="1_ol60q"]
+[ext_resource type="Script" path="res://Prototyping/Amanda/collision_polygon_2d.gd" id="2_u48t6"]
+
+[node name="DetectPushable" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_ol60q")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(193.82, 16.9014)
+scale = Vector2(0.0672395, 0.0672395)
+polygon = PackedVector2Array(358, 327, 814, 327, 806, 763, 350, 755)
+script = ExtResource("2_u48t6")
+
+[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
+position = Vector2(190.438, 12.2261)
+scale = Vector2(0.0736776, 0.0736776)
+polygon = PackedVector2Array(358, 337, 812, 337, 806, 755, 352, 757)
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
