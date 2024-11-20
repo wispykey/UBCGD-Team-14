@@ -1,4 +1,4 @@
-extends Node
+extends ColorRect
 # Andrew Mainella
 # 31 October 2024
 # This script is to be attached to the ColorRect of the Tile component
@@ -31,7 +31,11 @@ func _ready() -> void:
 	if row == 1 && column == 1 && current_number == 0:
 		#The top left tile the play spawns on is red remove it
 		current_number = rng.randi_range(0, 6)
-		self.color = color_def_instance.getColor(current_number)
+	var current_color: Color = color_def_instance.getColor(current_number)
+	var newShader = ShaderMaterial.new()
+	newShader.set_shader_parameter("in_color", Vector3(current_color.r, current_color.g, current_color.b))
+	newShader.shader = load("res://Prototyping/Andrew_Mainella/Tile.gdshader")
+	self.material = newShader
 
 func update_x(num: int) -> void:
 	player_x = num
@@ -44,7 +48,11 @@ func update_gameOver(val: bool) -> void:
 
 func on_tick() -> void:
 	current_number = color_def_instance.getNextColor(current_number)
-	self.color = color_def_instance.getColor(current_number)
+	var current_color: Color = color_def_instance.getColor(current_number)
+	var newShader = ShaderMaterial.new()
+	newShader.set_shader_parameter("in_color", Vector3(current_color.r, current_color.g, current_color.b))
+	newShader.shader = load("res://Prototyping/Andrew_Mainella/Tile.gdshader")
+	self.material = newShader
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -59,7 +67,9 @@ func _process(delta: float) -> void:
 	var time = Time.get_ticks_msec()
 
 	if (last_call - time) < 1 && not gameOver:
-		last_call = time + 500
-		on_tick()
+		last_call = time + 250
+		var randomNumber = rng.randi_range(0, 2)
+		if randomNumber < 1:
+			on_tick()
 		return
 	return

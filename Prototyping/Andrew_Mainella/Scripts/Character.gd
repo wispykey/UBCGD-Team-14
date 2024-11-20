@@ -11,6 +11,9 @@ func _ready() -> void:
 
 func update_gameOver(val: bool):
 	gameOver = val
+	if val == true:
+		var character: AnimatedSprite2D = self.get_node("AnimatedSprite2D")
+		character.animation = "dead"
 
 var player_x = 1
 var player_y = 1
@@ -24,12 +27,24 @@ func setPlayer_y(num: int) -> void:
 	root.get_node("Main").player_y.emit(num)
 
 func setPlayerXPosition(newPos: int, y: int) -> void:
+	var character: AnimatedSprite2D = self.get_node("AnimatedSprite2D")
+	character.animation = "walk_left"
+	await get_tree().create_timer(0.05).timeout
 	var tween = create_tween()
 	tween.tween_property(self, 'position', Vector2(newPos, y), 0.1)
+	await get_tree().create_timer(0.2).timeout
+	if self.gameOver == false:
+		character.animation = "dance"
 	
-func setPlayerYPosition(newPos: int, x: int) -> void:
+func setPlayerYPosition(newPos: int, x: int) -> void:	
+	var character: AnimatedSprite2D = self.get_node("AnimatedSprite2D")
+	character.animation = "walk_left"
+	await get_tree().create_timer(0.05).timeout
 	var tween = create_tween()
 	tween.tween_property(self, 'position', Vector2(x, newPos), 0.1)
+	await get_tree().create_timer(0.2).timeout
+	if self.gameOver == false:
+		character.animation = "dance"
 
 func _process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
