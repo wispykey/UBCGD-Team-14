@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt13r3rwfblfh"]
+
+[ext_resource type="Texture2D" uid="uid://bbcm5bx4ogbxf" path="res://Assets/Objects/green_circle.png" id="1_w0frh"]
+[ext_resource type="Script" path="res://Prototyping/Amanda/wall_breaker.gd" id="1_wqw0x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_khhyx"]
+radius = 14.0357
+
+[node name="WallBreaker" type="Node2D"]
+script = ExtResource("1_wqw0x")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+linear_damp = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(1.5, 1.5)
+scale = Vector2(1.09375, 1.09375)
+texture = ExtResource("1_w0frh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_khhyx")

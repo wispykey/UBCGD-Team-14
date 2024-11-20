@@ -1,16 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://crn8kyap6gw6s"]
+[gd_scene load_steps=9 format=3 uid="uid://crn8kyap6gw6s"]
 
+[ext_resource type="PackedScene" uid="uid://dyh076kucccsr" path="res://Prototyping/Amanda/background.tscn" id="1_m0vc7"]
 [ext_resource type="PackedScene" uid="uid://8m5s3ljeiqj4" path="res://Prototyping/Amanda/PushObject.tscn" id="1_se7kf"]
+[ext_resource type="PackedScene" uid="uid://mesonwwt8214" path="res://Prototyping/Amanda/walls.tscn" id="2_0jhy7"]
 [ext_resource type="PackedScene" uid="uid://dvoike71nfwno" path="res://Prototyping/Amanda/TestPlayer/player.tscn" id="2_5sfvr"]
 [ext_resource type="PackedScene" uid="uid://cm8uykdybf3rw" path="res://Prototyping/Amanda/DetectPushable.tscn" id="3_uyf4s"]
+[ext_resource type="PackedScene" uid="uid://cfjhuglx400vi" path="res://Prototyping/Amanda/DissapearingWall.tscn" id="3_xdmdj"]
+[ext_resource type="PackedScene" uid="uid://dt13r3rwfblfh" path="res://Prototyping/Amanda/WallBreaker.tscn" id="6_spgo6"]
+[ext_resource type="PackedScene" uid="uid://bvenf7xetmrbo" path="res://Prototyping/Amanda/BreakableWall.tscn" id="8_t6s8u"]
 
 [node name="PushObjectMap" type="Node2D"]
 
+[node name="Background" parent="." instance=ExtResource("1_m0vc7")]
+
+[node name="Walls" parent="." instance=ExtResource("2_0jhy7")]
+
+[node name="DissapearingWall" parent="." groups=["PressurePlate"] instance=ExtResource("3_xdmdj")]
+
 [node name="DetectPushable" parent="." instance=ExtResource("3_uyf4s")]
-position = Vector2(32, 197)
+position = Vector2(39, 188)
 
 [node name="PushObject" parent="." instance=ExtResource("1_se7kf")]
-position = Vector2(184, 173)
+position = Vector2(191, 190)
+
+[node name="PushObject2" parent="." instance=ExtResource("1_se7kf")]
+position = Vector2(287, 190)
+
+[node name="WallBreaker" parent="." instance=ExtResource("6_spgo6")]
+position = Vector2(141, 109)
 
 [node name="Player" parent="." instance=ExtResource("2_5sfvr")]
-position = Vector2(120, 158)
+position = Vector2(114, 175)
+
+[node name="BreakableWall" parent="." instance=ExtResource("8_t6s8u")]
+position = Vector2(32, -63)
+
+[node name="BreakableWall2" parent="." instance=ExtResource("8_t6s8u")]
+position = Vector2(0, -63)
+
+[node name="BreakableWall3" parent="." instance=ExtResource("8_t6s8u")]
+position = Vector2(-31, -63)
+
+[node name="BreakableWall4" parent="." instance=ExtResource("8_t6s8u")]
+position = Vector2(-31, -31)
+
+[node name="BreakableWall5" parent="." instance=ExtResource("8_t6s8u")]
+position = Vector2(64, -63)

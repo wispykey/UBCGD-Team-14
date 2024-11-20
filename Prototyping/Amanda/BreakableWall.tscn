@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvenf7xetmrbo"]
+
+[ext_resource type="TileSet" uid="uid://b5ghtthpdukjp" path="res://Prototyping/Amanda/TestBackground/example_tileset.tres" id="1_44pnm"]
+[ext_resource type="Script" path="res://Prototyping/Amanda/breakable_wall.gd" id="1_lfaoo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yev8u"]
+size = Vector2(38, 38)
+
+[node name="BreakableWall" type="Node2D"]
+script = ExtResource("1_lfaoo")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray(0, 0, 16, 0, 14, 0, 2, 0, 2, 0, 0, 0, 0, 0)
+tile_set = ExtResource("1_44pnm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(528, 464)
+shape = SubResource("RectangleShape2D_yev8u")

@@ -1,5 +1,6 @@
-extends Area2D
+extends Node2D
 
+@onready var tile = $TileMapLayer
 @onready var polygon2d = $Polygon2D
 
 # Called when the node enters the scene tree for the first time.
@@ -11,14 +12,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func break_wall() -> void:
+		visible = false
+		tile.collision_enabled = false
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is RigidBody2D:
-		polygon2d.set_color(Color(0,0,0,1))
-		get_tree().call_group("PressurePlate", "turn_off")
-
-
-func _on_body_exited(body: Node2D) -> void:
-	if body is RigidBody2D:
-		polygon2d.set_color(Color(255,255,255,1))
-		get_tree().call_group("PressurePlate", "turn_on")
+	if body.name.match("WallBreaker"):
+		break_wall()
