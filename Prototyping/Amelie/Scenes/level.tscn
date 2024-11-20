@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d0s10uktux6yf" path="res://Prototyping/Amelie/Scenes/player.tscn" id="1_chltl"]
 [ext_resource type="Texture2D" uid="uid://bnhf86g2j3plf" path="res://Prototyping/Amelie/Modern tiles_Free/Interiors_free/16x16/Room_Builder_free_16x16.png" id="1_rfuba"]
 [ext_resource type="Script" path="res://Prototyping/Amelie/Scripts/level.gd" id="1_why6k"]
-[ext_resource type="PackedScene" uid="uid://domu1ia3jeip5" path="res://Prototyping/Amelie/Scenes/projectile.tscn" id="3_d8rm1"]
+[ext_resource type="PackedScene" uid="uid://bomiqmq23yxw5" path="res://Prototyping/Amelie/Scenes/projectile_spawner.tscn" id="4_ofhlr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xw030"]
 texture = ExtResource("1_rfuba")
@@ -269,6 +269,8 @@ sources/0 = SubResource("TileSetAtlasSource_xw030")
 [node name="Level" type="Node2D"]
 script = ExtResource("1_why6k")
 
+[node name="ProjectileSpawner" parent="." instance=ExtResource("4_ofhlr")]
+
 [node name="Player" parent="." instance=ExtResource("1_chltl")]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -282,6 +284,3 @@ layer_1/tile_data = PackedInt32Array(-458762, 983040, 3, -393226, 983040, 3, -32
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -8)
 zoom = Vector2(2, 2)
-
-[node name="Projectile" parent="." instance=ExtResource("3_d8rm1")]
-position = Vector2(-290, 8)
