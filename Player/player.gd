@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+var SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+@onready var player_sprite = $AnimatedSprite2D
+
+var hasKey = false
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -21,3 +24,13 @@ func _physics_process(delta: float) -> void:
 		velocity.y = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func powerUp():
+	print("power")
+	SPEED = 600
+	
+func pickUpKey():
+	print("key acquired")
+	hasKey = true;
+	
+	

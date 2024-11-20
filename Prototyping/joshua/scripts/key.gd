@@ -1,0 +1,11 @@
+extends Area2D
+
+@onready var pickupSound = $AudioStreamPlayer2D
+var isCollected = false
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.name == "Player" and not isCollected:  # Check if the touching object is the player
+		body.pickUpKey()  # Play the touch sound
+		isCollected = true
+		pickupSound.play()
+		hide()  # Remove the coin from the scene

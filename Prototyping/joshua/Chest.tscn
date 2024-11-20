@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://s6tgmwo4asxm"]
+
+[ext_resource type="Texture2D" uid="uid://b5o0o73x4jyiy" path="res://Prototyping/joshua/assets/images/chest.png" id="1_8v771"]
+[ext_resource type="Script" path="res://Prototyping/joshua/scripts/chest.gd" id="1_p7xbo"]
+[ext_resource type="AudioStream" uid="uid://cbebs07iqh4v3" path="res://Prototyping/joshua/assets/sounds/chest_open.mp3" id="3_k5gkg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_022o0"]
+size = Vector2(26, 50)
+
+[node name="Chest" type="Area2D"]
+script = ExtResource("1_p7xbo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8v771")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_022o0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_k5gkg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
