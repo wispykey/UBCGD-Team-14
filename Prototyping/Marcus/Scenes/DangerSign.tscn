@@ -29,7 +29,3 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_envn0")
 animation = &"new_animation"
 script = ExtResource("2_lauhp")
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-autostart = true

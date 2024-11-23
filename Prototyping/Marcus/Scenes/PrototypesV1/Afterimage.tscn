@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://hx3luyky8sa8"]
 
-[ext_resource type="Script" path="res://Prototyping/Marcus/Scripts/afterimage.gd" id="1_ad0ax"]
+[ext_resource type="Script" path="res://Prototyping/Marcus/Scripts/PrototypesV1/afterimage.gd" id="1_ad0ax"]
 [ext_resource type="Texture2D" uid="uid://bj1opts1hno8w" path="res://Assets/icon.svg" id="2_38irg"]
 
 [node name="Afterimage" type="Node2D"]

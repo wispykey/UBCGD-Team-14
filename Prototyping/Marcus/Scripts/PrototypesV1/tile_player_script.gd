@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # When the game is ready, get a reference to the tileMap "Background"
 @onready
-var tile_map = get_node("../Background")
+var tile_map = get_node("../Floor")
 @onready
 var hud = get_node("../HUD")
 
@@ -44,7 +44,7 @@ var loop: int = 0
 var beatNum: int = 0
 # Change this value to be able to color more/less tiles before resets
 var max_beats: int = 4
-var enable_beat_reset: bool = false
+var enable_beat_reset: bool = true
 var cells_to_reset = []
 
 var double_tap = false
@@ -69,8 +69,8 @@ func _physics_process(_delta: float) -> void:
 	else:
 		tileType = BLUE_TILE	
 	
-	hud.update_score(score)
-	hud.update_life(life)
+	#hud.update_score(score)
+	#hud.update_life(life)
 	
 	handle_movement()
 	align_position_to_grid()
@@ -107,7 +107,7 @@ func handle_movement() -> void:
 
 
 func spawn_afterimage(cell_pos):
-	var player_sprite = load("res://Prototyping/Marcus/Scenes/Afterimage.tscn")
+	var player_sprite = load("res://Prototyping/Marcus/Scenes/PrototypesV1/Afterimage.tscn")
 	
 	var afterimage = player_sprite.instantiate()
 	afterimage.position = cell_pos * TILE_SIZE

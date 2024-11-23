@@ -16,3 +16,8 @@ func update_score(score):
 
 func update_life(life):
 	$LifeLabel.text = str(life)
+
+
+func _on_boss_fight_prototype_update_hud(score: int, life: int) -> void:
+	update_score(score)
+	update_life(life)
