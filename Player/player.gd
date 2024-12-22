@@ -1,9 +1,26 @@
 extends CharacterBody2D
 
+"""
+Player movement-related functionality should exist here.
+"""
+
+# TODO: Signal to tell the TileManager which tile(s) to light up
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+# Symbol '%' means "Get a reference to the unique node with this name"
+@onready var hud = %HUD
+@onready var tile_manager = %TileManager
+
+# To check for valid movement. 
+@onready var walls = %TileManager.walls
+
+# TODO: Implement grid-based movement (and delete 'normal' movement)
+
+# TODO: Emit a signal to light up tiles
+
+# TODO: Implement double-tap dash
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.

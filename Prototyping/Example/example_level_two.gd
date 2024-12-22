@@ -2,15 +2,23 @@ extends Node2D
 
 @onready var player := $Player
 @onready var hud := $HUD
+
+# TODO: Remove this reference
 @onready var floor := $Floor
+
+# TODO: Represent hazards as node (e.g. AlertSign) instead of a TileMapLayer
+# Why? For better animations later on
 @onready var hazards := $Hazards
+
+# TODO: Represent ghosts as their own nodes (i.e. Ghost) instead of a TileMapLayer
+# Why? For AI behaviours
 @onready var ghost_map := $Ghost
 
 signal update_HUD(score: int, life: int)
 
-var window_dimensions: Vector2 = get_viewport_rect().size
+var window_dimensions: Vector2
 const WIDTH: int = 640
-const HEIGHT: int = 480
+const HEIGHT: int = 448
 const TILE_SIZE: int = 32
 const HOR_TILES: int = WIDTH / TILE_SIZE
 const VER_TILES: int = HEIGHT / TILE_SIZE
@@ -37,6 +45,8 @@ var ghost = {
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
+	Conductor.quarter_beat.connect(_on_quarter_beat)
+	window_dimensions =  get_viewport_rect().size
 	pass
 
 
@@ -47,7 +57,11 @@ func _process(_delta: float) -> void:
 
 # Function to be called whenever quarter_beat signal is emitted
 func _on_quarter_beat(_beat_num: int):
-	pass
+	score += 1
+	update_HUD.emit(score, life)
+	
+	# TODO: Uncomment this after refactoring
+	# update_boss()
 
 
 func _on_eighth_beat(_beat_num: int):
@@ -76,6 +90,7 @@ func spawn_danger_sign_on_player():
 	ghost.position = player.position / TILE_SIZE
 	ghost.active = true
 
+# 
 
 func get_random_position() -> Vector2:
 	
@@ -89,12 +104,7 @@ func get_random_position() -> Vector2:
 	return Vector2(random_x, random_y)
 
 
-func _on_custom_conductor_quarter_beat(beat_num: int) -> void:
-	score += 1
-	update_HUD.emit(score, life)
-	update_boss()
-
-
+# TODO: Define a dictionary of steps to represent timeline
 func update_boss():
 	if to_reset_hazards:
 		reset_hazards()
@@ -119,6 +129,8 @@ func update_boss():
 		place_ghost(ghost.position)
 		ghost.active = false
 	
+
+# TODO: Refactor the helpers below to overlay nodes instead of setting cells
 
 func set_floor_tile(cell_pos: Vector2, tile: Dictionary):
 	floor.set_cell(cell_pos, tile.src, tile.atlas, tile.alt)

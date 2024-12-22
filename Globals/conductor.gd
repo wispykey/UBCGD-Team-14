@@ -9,7 +9,8 @@ signal quarter_beat(beat_num: int)
 @onready var sfx_test := $SFXTest
 
 # Drum stick sound on each quarter-note, for debug.
-@export var metronome: bool = true
+@export var debug_mode: bool = false
+
 
 # Enums cannot be floats, so define individually.
 const QUARTER_NOTE: float = 1.0
@@ -53,7 +54,7 @@ var beat_number: int
 var current_time_in_secs: float
 
 func _ready() -> void:
-	set_music("Test")
+	set_music("Supernatural1")
 	current_time_in_secs = 0.0
 
 
@@ -74,11 +75,12 @@ func update_beat_info() -> void:
 		# Emit signal for game events that happen on the quarter-note pulse
 		quarter_beat.emit(beat_number)
 		# Quarter note pulse, for debug
-		if metronome: sfx_test.play()
+		if debug_mode: 
+			sfx_test.play()
 		# Debug output.
-		var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
-		print("Beat ", beat_number)
-		print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
+			var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
+			print("Beat ", beat_number)
+			print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
 		
 
 # Sets the current music to a song with name, if available
