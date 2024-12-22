@@ -14,6 +14,8 @@ extends Node2D
 # Why? For AI behaviours
 @onready var ghost_map := $Ghost
 
+@export var half_room_cleave: PackedScene
+
 signal update_HUD(score: int, life: int)
 
 var window_dimensions: Vector2
@@ -56,9 +58,14 @@ func _process(_delta: float) -> void:
 	
 
 # Function to be called whenever quarter_beat signal is emitted
-func _on_quarter_beat(_beat_num: int):
+func _on_quarter_beat(beat_num: int):
 	score += 1
 	update_HUD.emit(score, life)
+	
+	if int(Conductor.num_beats_passed) % 8 == 4:
+		var cleave = half_room_cleave.instantiate()
+		add_child(cleave)
+		
 	
 	# TODO: Uncomment this after refactoring
 	# update_boss()
@@ -131,6 +138,7 @@ func update_boss():
 	
 
 # TODO: Refactor the helpers below to overlay nodes instead of setting cells
+
 
 func set_floor_tile(cell_pos: Vector2, tile: Dictionary):
 	floor.set_cell(cell_pos, tile.src, tile.atlas, tile.alt)
