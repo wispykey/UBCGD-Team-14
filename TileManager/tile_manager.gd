@@ -20,16 +20,13 @@ const BLUE_TILE = Vector2i(0,0) # Can change this
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Connect to signals that may request tile-specific functionality
-	# TODO: Connect to a signal from Player for lighting up tiles
-	pass
+	player.light_up_tile.connect(_on_player_light_up_tile)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-# TODO: Implement light-up tiles
-
-
+# IDEA: Light-up tiles can make the tiles increase in brightness
 func _on_player_light_up_tile(cell_pos: Vector2) -> void:
 	floor.set_cell(cell_pos, 2, BLUE_TILE, 0)
