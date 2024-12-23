@@ -9,36 +9,15 @@ signal quarter_beat(beat_num: int)
 @onready var sfx_test := $SFXTest
 
 # Drum stick sound on each quarter-note, for debug.
-@export var debug_mode: bool = false
-
+@export var metronome: bool = true
 
 # Enums cannot be floats, so define individually.
 const QUARTER_NOTE: float = 1.0
 const EIGHTH_NOTE: float = 0.5 
 
-# Dictionary of music assets we are using in the game.
 # Could be dynamically loaded from files - but maybe not worth the effort.
 var songs: Dictionary = {
-	"Test": {
-		"bpm": 88, 
-		"file_name": "harmonic_hustle_overworld.wav"
-	},
-	"Fantasy1": {
-		"bpm": 180, 
-		"file_name": "fantasy_1.mp3",
-	},
-	"Fantasy2": {
-		"bpm": 180,
-		"file_name": "fantasy_2.mp3",
-	},
-	"Supernatural1": {
-		"bpm": 140,
-		"file_name": "supernatural_1.wav"
-	},
-	"Supernatural2": {
-		"bpm": 104,
-		"file_name": "supernatural_2.wav"
-	}  
+	"Test": {"bpm": 88, "file_name": "harmonic_hustle_overworld.wav"}, 
 }
 
 # Duration of a quarter note, in seconds.
@@ -50,24 +29,19 @@ var num_beats_passed: float
 # 1-indexed. In a measure of 4/4, cycles between 1-2-3-4.
 var beat_number: int
 
-# TODO: Improve step consistency for interpolation
-var current_time_in_secs: float
+# TODO: Variables for interpolation
 
 func _ready() -> void:
-	set_music("Supernatural1")
-	current_time_in_secs = 0.0
+	set_music("Test")
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_beat_info()
+	
 	
 # Updates number of beats 
 func update_beat_info() -> void:
 	var playback_time_in_secs = compute_playback_time()
-	# Update variable to be used for interpolation
-	current_time_in_secs = playback_time_in_secs
-	
-	# Check if one beat's worth of time has passed
 	var beats_passed_in_secs: float = num_beats_passed * seconds_per_quarter_note
 	if playback_time_in_secs > beats_passed_in_secs:
 		num_beats_passed += signal_step_interval
@@ -75,12 +49,11 @@ func update_beat_info() -> void:
 		# Emit signal for game events that happen on the quarter-note pulse
 		quarter_beat.emit(beat_number)
 		# Quarter note pulse, for debug
-		if debug_mode: 
-			sfx_test.play()
+		if metronome: sfx_test.play()
 		# Debug output.
-			var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
-			print("Beat ", beat_number)
-			print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
+		var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
+		#print("Beat ", beat_number)
+		#print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
 		
 
 # Sets the current music to a song with name, if available
@@ -96,9 +69,11 @@ func set_music(name: String) -> void:
 		return
 	
 	var song_to_play = songs[name]
-	var file_path: String = "res://Assets/Music/" + song_to_play.file_name
+	#var file_path: String = "res://Assets/Music/" + song_to_play.file_name
+	var file_path: String = "res://Prototyping/Marcus/Music/Darkness_Trimmed.mp3"
 	music.stream = load(file_path)
-	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
+	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(104)
+	#music.volume_db = -80 # muted music for debug
 	music.play()
 	print("Playing song: \"", name, "\"\n")
 

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
+config/name="Freeze Frame"
 run/main_scene="res://Player/player.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/icon.svg"
@@ -18,6 +18,8 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 Conductor="*res://Globals/Conductor.tscn"
+GameEvents="*res://Globals/game_events.gd"
+GameState="*res://Globals/game_state.gd"
 
 [display]
 
