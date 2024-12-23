@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://l5lf3cg0mvsl"]
+[gd_scene load_steps=7 format=3 uid="uid://l5lf3cg0mvsl"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_mdkiw"]
+[ext_resource type="Texture2D" uid="uid://b1h8nftvjwlm1" path="res://Prototyping/joshua/assets/images/wizard_character.png" id="2_apsg8"]
 [ext_resource type="Texture2D" uid="uid://bj1opts1hno8w" path="res://Assets/icon.svg" id="2_crfiu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hcu4"]
@@ -11,6 +12,9 @@ size = Vector2(29, 30)
 [sub_resource type="SpriteFrames" id="SpriteFrames_dhpnv"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_apsg8")
+}, {
 "duration": 1.0,
 "texture": ExtResource("2_crfiu")
 }],

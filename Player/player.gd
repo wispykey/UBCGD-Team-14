@@ -26,6 +26,9 @@ var last_tap_time = 0
 var double_tap_window = 0.25
 var can_light_up = false
 
+@onready var player_sprite = $AnimatedSprite2D
+
+var hasKey = false
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -42,6 +45,7 @@ func _physics_process(delta: float) -> void:
 	
 	handle_movement(delta)
 	align_position_to_grid()
+
 
 # Aligns player position to the grid
 func align_position_to_grid() -> void:
@@ -96,3 +100,11 @@ func _light_up_tile():
 	var cell_pos = Vector2(position.x / TILE_SIZE, position.y / TILE_SIZE)
 	if can_light_up:
 		light_up_tile.emit(cell_pos)
+
+func powerUp():
+	print("power")
+	SPEED = 600
+	
+func pickUpKey():
+	print("key acquired")
+	hasKey = true;

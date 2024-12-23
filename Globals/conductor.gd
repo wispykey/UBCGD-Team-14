@@ -95,12 +95,12 @@ func set_music(name: String) -> void:
 		print("Error loading music. Could not find song called \'", name, "\'")
 		return
 	
-	var song_to_play = songs[name]
-	var file_path: String = "res://Assets/Music/" + song_to_play.file_name
-	music.stream = load(file_path)
-	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
-	music.play()
-	print("Playing song: \"", name, "\"\n")
+	#var song_to_play = songs[name]
+	#var file_path: String = "res://Assets/Music/" + song_to_play.file_name
+	#music.stream = load(file_path)
+	#seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
+	#music.play()
+	#print("Playing song: \"", name, "\"\n")
 
 	
 # Returns how long audio has played for, in seconds.
