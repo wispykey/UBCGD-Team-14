@@ -64,7 +64,7 @@ func _on_quarter_beat(beat_num: int):
 	
 	if int(Conductor.num_beats_passed) % 8 == 4:
 		var cleave = half_room_cleave.instantiate()
-		add_child(cleave)
+		$EnemyAttacks.add_child(cleave)
 		
 	
 	# TODO: Uncomment this after refactoring

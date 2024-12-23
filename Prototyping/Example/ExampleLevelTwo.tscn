@@ -34,16 +34,20 @@ unique_name_in_owner = true
 z_index = 99
 metadata/_edit_use_anchors_ = true
 
-[node name="TestGhost" parent="." instance=ExtResource("6_a860j")]
+[node name="EnemyAttacks" type="Node2D" parent="."]
+
+[node name="TestObjects" type="Node2D" parent="."]
+
+[node name="TestGhost" parent="TestObjects" instance=ExtResource("6_a860j")]
 position = Vector2(232, 233)
 
-[node name="GiantAlertSign" parent="." instance=ExtResource("7_yyobu")]
+[node name="GiantAlertSign" parent="TestObjects" instance=ExtResource("7_yyobu")]
 position = Vector2(480, 183)
 scale = Vector2(5, 5)
 
-[node name="AlertSign" parent="." instance=ExtResource("7_yyobu")]
+[node name="AlertSign" parent="TestObjects" instance=ExtResource("7_yyobu")]
 position = Vector2(536, 369)
 
-[node name="BiggerAlertSign" parent="." instance=ExtResource("7_yyobu")]
+[node name="BiggerAlertSign" parent="TestObjects" instance=ExtResource("7_yyobu")]
 position = Vector2(435, 320)
 scale = Vector2(3, 3)
