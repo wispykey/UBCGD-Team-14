@@ -12,6 +12,11 @@ This class will listen for signals requesting tile-specific operations.
 # A single Player should always exist
 @onready var player = %Player
 
+
+const BLUE_TILE = Vector2i(0,0) # Can change this
+# IDEA: In the _light_up_tile function, we could increment a number that represents
+#       the tile alternative on the tile set so it could be changing color or brightness
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Connect to signals that may request tile-specific functionality
@@ -24,3 +29,7 @@ func _process(delta: float) -> void:
 	pass
 
 # TODO: Implement light-up tiles
+
+
+func _on_player_light_up_tile(cell_pos: Vector2) -> void:
+	floor.set_cell(cell_pos, 2, BLUE_TILE, 0)
