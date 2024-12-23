@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=4 uid="uid://cfjhuglx400vi"]
+
+[ext_resource type="Script" path="res://Prototyping/Amanda/dissapearing_wall.gd" id="1_hbasf"]
+[ext_resource type="TileSet" uid="uid://b5ghtthpdukjp" path="res://Prototyping/Amanda/TestBackground/example_tileset.tres" id="2_uqwba"]
+
+[node name="DissapearingWall" type="Node2D"]
+script = ExtResource("1_hbasf")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAoAAgABAAAAAAABAAoAAgABAAAAAAACAAoAAgABAAAAAAADAAoAAgABAAAAAAAEAAoAAgABAAAAAAAFAAoAAgABAAAAAAAGAAoAAgABAAAAAAAHAAoAAgABAAAAAAAIAAoAAgABAAAAAAAJAAoAAgABAAAAAAAKAAoAAgABAAAAAAALAAoAAgABAAAAAAAMAAoAAgABAAAAAAANAAoAAgABAAAAAAAOAAoAAgABAAAAAAAPAAoAAgABAAAAAAAQAAoAAgABAAAAAAARAAoAAgABAAAAAAASAAoAAgABAAAAAAATAAoAAgABAAAAAAA=")
+tile_set = ExtResource("2_uqwba")

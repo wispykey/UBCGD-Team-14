@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://8m5s3ljeiqj4"]
+
+[ext_resource type="Texture2D" uid="uid://bwke0uchycnoa" path="res://Assets/Objects/orange_circle.png" id="1_4svad"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p0gno"]
+radius = 13.0384
+
+[node name="PushObject" type="Node2D"]
+position = Vector2(499, 389)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+linear_damp = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(-15, -15)
+scale = Vector2(0.937501, 0.937501)
+texture = ExtResource("1_4svad")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-15, -15)
+shape = SubResource("CircleShape2D_p0gno")
