@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://dl8luu2lndx30"]
 
-[ext_resource type="Script" path="res://Prototyping/joshua/scripts/coin.gd" id="1_a0rj4"]
-[ext_resource type="Texture2D" uid="uid://cppc644x4ng63" path="res://Prototyping/joshua/assets/images/coin.png" id="2_54ccb"]
-[ext_resource type="AudioStream" uid="uid://c8n12ve3lwwkv" path="res://Prototyping/joshua/assets/sounds/coinbag_sound.mp3" id="3_s6wa8"]
+[ext_resource type="Script" path="res://Interactables/Coin/coin.gd" id="1_52ks0"]
+[ext_resource type="Texture2D" uid="uid://cppc644x4ng63" path="res://Assets/Objects/coin.png" id="2_54ccb"]
+[ext_resource type="AudioStream" uid="uid://c8n12ve3lwwkv" path="res://Assets/SFX/coinbag_sound.mp3" id="3_s6wa8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n2jcg"]
 atlas = ExtResource("2_54ccb")
@@ -101,7 +101,8 @@ radius = 14.0
 
 [node name="Coin" type="Area2D"]
 collision_layer = 0
-script = ExtResource("1_a0rj4")
+monitorable = false
+script = ExtResource("1_52ks0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
@@ -114,5 +115,3 @@ shape = SubResource("CircleShape2D_q45nd")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_s6wa8")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

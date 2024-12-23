@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://nng40t6b1gdh"]
 
-[ext_resource type="Texture2D" uid="uid://bmrf4ht6puvnu" path="res://Prototyping/joshua/treasure-chest.png" id="1_2kr7v"]
-[ext_resource type="Texture2D" uid="uid://cppc644x4ng63" path="res://Prototyping/joshua/assets/images/coin.png" id="2_45np6"]
-[ext_resource type="Script" path="res://Prototyping/joshua/treasureChest.gd" id="3_cahmh"]
-[ext_resource type="AudioStream" uid="uid://cbebs07iqh4v3" path="res://Prototyping/joshua/assets/sounds/chest_open.mp3" id="3_ccork"]
+[ext_resource type="Texture2D" uid="uid://bmrf4ht6puvnu" path="res://Assets/Objects/treasure_chest.png" id="1_2kr7v"]
+[ext_resource type="Texture2D" uid="uid://cppc644x4ng63" path="res://Assets/Objects/coin.png" id="2_45np6"]
+[ext_resource type="Script" path="res://Interactables/TreasureChest/treasureChest.gd" id="3_cahmh"]
+[ext_resource type="AudioStream" uid="uid://cbebs07iqh4v3" path="res://Assets/SFX/chest_open.mp3" id="3_ccork"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xu4ck"]
 atlas = ExtResource("2_45np6")
