@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcxhqjua7yaea"]
+
+[ext_resource type="Script" path="res://Prototyping/Andrew_Mainella/Scripts/Character.gd" id="1_57dcj"]
+[ext_resource type="Texture2D" uid="uid://oun4xuf1k1if" path="res://Prototyping/Andrew_Mainella/kenney_toon-characters-1/Male adventurer/Tilesheet/character_maleAdventurer_sheetHD.png" id="3_mj8q6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lqce"]
+atlas = ExtResource("3_mj8q6")
+region = Rect2(0, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mba62"]
+atlas = ExtResource("3_mj8q6")
+region = Rect2(1536, 1024, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykc1x"]
+atlas = ExtResource("3_mj8q6")
+region = Rect2(1152, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b66nj"]
+atlas = ExtResource("3_mj8q6")
+region = Rect2(1344, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on18x"]
+atlas = ExtResource("3_mj8q6")
+region = Rect2(1536, 512, 192, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4cg5h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lqce")
+}],
+"loop": true,
+"name": &"dance",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mba62")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykc1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b66nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on18x")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykc1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b66nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on18x")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0300"]
+size = Vector2(50, 50)
+
+[node name="Character" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_57dcj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+z_index = 1
+position = Vector2(25, 25)
+scale = Vector2(0.195, 0.195)
+sprite_frames = SubResource("SpriteFrames_4cg5h")
+animation = &"dead"
+autoplay = "dance"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(25, 25)
+shape = SubResource("RectangleShape2D_j0300")
