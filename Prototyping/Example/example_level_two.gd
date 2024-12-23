@@ -59,8 +59,8 @@ func _process(_delta: float) -> void:
 
 # Function to be called whenever quarter_beat signal is emitted
 func _on_quarter_beat(beat_num: int):
-	score += 1
-	update_HUD.emit(score, life)
+	GameState.score += 1
+	GameEvents.score_changed.emit()
 	
 	if int(Conductor.num_beats_passed) % 8 == 4:
 		var cleave = half_room_cleave.instantiate()

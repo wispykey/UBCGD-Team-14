@@ -49,5 +49,6 @@ scale = Vector2(5, 5)
 position = Vector2(536, 369)
 
 [node name="BiggerAlertSign" parent="TestObjects" instance=ExtResource("7_yyobu")]
+visible = true
 position = Vector2(435, 320)
 scale = Vector2(3, 3)

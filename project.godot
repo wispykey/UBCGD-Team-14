@@ -18,6 +18,8 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 Conductor="*res://Globals/Conductor.tscn"
+GameEvents="*res://Globals/game_events.gd"
+GameState="*res://Globals/game_state.gd"
 
 [display]
 

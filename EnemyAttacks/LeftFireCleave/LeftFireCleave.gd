@@ -19,19 +19,14 @@ func _ready() -> void:
 	# TODO: Compute parameters dynamically. Currently it is always West half
 	# Compute the dimensions of the cleave zone, in tiles
 	# Find the center point of the zone, in pixels
-	# Scale and place the collision area at a location, in pixels
+	# Scale and center the collision area
 	
 	for i in dimensions.x:
 		for j in dimensions.y:
 			var telegraph = telegraph_image.instantiate()
-			
 			telegraph.position.x = position.x + i * TILE_SIZE + TILE_SIZE/2
 			telegraph.position.y = position.y + j * TILE_SIZE + TILE_SIZE/2
 			$Telegraph.add_child(telegraph)
-
-
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_telegraph_timer_timeout():

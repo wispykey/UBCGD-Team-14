@@ -9,13 +9,6 @@ Player movement-related functionality should exist here.
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-# Symbol '%' means "Get a reference to the unique node with this name"
-@onready var hud = %HUD
-@onready var tile_manager = %TileManager
-
-# To check for valid movement. 
-@onready var walls = %TileManager.walls
-
 # TODO: Implement grid-based movement (and delete 'normal' movement)
 
 # TODO: Emit a signal to light up tiles
