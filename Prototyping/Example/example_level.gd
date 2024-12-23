@@ -18,10 +18,11 @@ func _process(delta: float) -> void:
 # Function to be called whenever quarter_beat signal is emitted
 func _on_quarter_beat(beat_num: int):
 	# Do something on each beat here!
-	spawn_danger_sign_at_random_location()
+	# spawn_danger_sign_at_random_location()
 	
 	# Uncomment the call below to simulate the grid-based movement we will have
 	# move_one_tile_right()
+	pass
 
 # Moves right by the width of one tile
 func move_one_tile_right():
