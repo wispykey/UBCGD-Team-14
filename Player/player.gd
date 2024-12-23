@@ -28,7 +28,7 @@ var can_light_up = false
 
 @onready var player_sprite = $AnimatedSprite2D
 
-var hasKey = false
+var has_key = false
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -101,10 +101,10 @@ func _light_up_tile():
 	if can_light_up:
 		light_up_tile.emit(cell_pos)
 
-func powerUp():
+func power_up():
 	print("power")
-	SPEED = 600
+	# SPEED = 600
 	
-func pickUpKey():
+func pick_up_key():
 	print("key acquired")
-	hasKey = true;
+	has_key = true;
