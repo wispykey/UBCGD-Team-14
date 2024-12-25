@@ -25,6 +25,7 @@ func _ready() -> void:
 	$HitZone.position = dimensions * TILE_SIZE / 2
 	# Disable collisions until telegraph ends
 	$HitZone.monitorable = false
+	$HitZone.monitoring = false
 	
 	# Add alert sign telegraph for every tile covered
 	for i in dimensions.x:
@@ -37,6 +38,7 @@ func _ready() -> void:
 
 func _on_telegraph_timer_timeout():
 	# Enable collision area
+	$HitZone.monitoring = true
 	$HitZone.monitorable = true
 
 	# Could be optimized to avoid adding more children

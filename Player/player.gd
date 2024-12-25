@@ -114,8 +114,10 @@ func pick_up_key():
 	has_key = true;
 
 func _on_hitbox_area_entered(area: Area2D):
+	# Prevent unintentional multihits
 	print("Player took ", area.damage, " damage")
 	GameState.update_life(-area.damage)
+	
 
 func _on_player_died():
 	print("Player died (currently does nothing)")
