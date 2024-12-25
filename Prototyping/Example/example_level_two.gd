@@ -4,8 +4,7 @@ extends Node2D
 @onready var hud := $HUD
 
 @export var half_room_cleave: PackedScene
-@export var ghost: PackedScene
-@export var alert_sign: PackedScene
+@export var spawn_ghost: PackedScene
 
 var window_dimensions: Vector2
 const WIDTH: int = 640
@@ -96,30 +95,6 @@ func cleave_left():
 
 
 func spawn_ghost_on_player():
-	var telegraph = alert_sign.instantiate()
-	telegraph.position = %Player.position
-	add_child(telegraph)
-	
-	var spawn_timer = Timer.new()
-	spawn_timer.wait_time = 4 * Conductor.seconds_per_quarter_note
-	# Call the function with player's position at the time of creating timer
-	spawn_timer.timeout.connect(_on_ghost_spawn_timeout.bind(%Player.position, telegraph))
-	spawn_timer.one_shot = true
-	telegraph.add_child(spawn_timer)
-	spawn_timer.start()
-
-
-func _on_ghost_spawn_timeout(position: Vector2, telegraph):
-	var enemy = ghost.instantiate()
-	enemy.position = position
-	add_child(enemy)
-	
-	# Have the ghost automatically despawn after a while
-	var despawn_timer = Timer.new()
-	despawn_timer.one_shot = true
-	despawn_timer.wait_time = 5 * Conductor.seconds_per_quarter_note
-	despawn_timer.timeout.connect(enemy.queue_free)
-	enemy.add_child(despawn_timer)
-	despawn_timer.start()
-	
-	telegraph.queue_free()
+	var ghost = spawn_ghost.instantiate()
+	ghost.position = %Player.position
+	add_child(ghost)
