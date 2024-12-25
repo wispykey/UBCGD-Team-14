@@ -99,22 +99,25 @@ func _move_one_cell(direction: Vector2):
 		_light_up_tile()
 		position += direction * TILE_SIZE
 
+
 # Lights up a tile on Floor at current position
 func _light_up_tile():
 	var cell_pos = Vector2(position.x / TILE_SIZE, position.y / TILE_SIZE)
 	if can_light_up:
 		light_up_tile.emit(cell_pos)
 
+
 func power_up():
 	print("power")
 	# SPEED = 600
+	
 	
 func pick_up_key():
 	print("key acquired")
 	has_key = true;
 
+
 func _on_hitbox_area_entered(area: Area2D):
-	# Prevent unintentional multihits
 	print("Player took ", area.damage, " damage")
 	GameState.update_life(-area.damage)
 	

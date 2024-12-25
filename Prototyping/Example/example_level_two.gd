@@ -22,14 +22,6 @@ const VER_TILES: int = HEIGHT / TILE_SIZE
 #}
 #const DEFAULT_FLOOR = TILES.FLOOR_DARK
 
-var to_reset_hazards: bool = false
-var to_reset_ghosts: bool = false
-
-#var ghost = {
-	#"position": Vector2(0,0),
-	#"active": false,
-#}
-
 # A queue of scheduled function calls.
 # 	'time' is measured in beats; must be strictly non-decreasing
 #   'function' is the name of a function in this script; must be in quotation marks
@@ -43,7 +35,6 @@ var timeline = [
 	{"time": 25, "function": "spawn_ghost_on_player"},
 	{"time": 30, "function": "spawn_ghost_on_player"},
 ]
-# Index into the timeline
 var next_event: int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -51,7 +42,6 @@ func _ready() -> void:
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	window_dimensions =  get_viewport_rect().size
-	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -89,6 +79,7 @@ func get_random_position() -> Vector2:
 	return Vector2(random_x, random_y)
 
 
+# Attack functions are wrappers for instantiating standalone nodes
 func cleave_left():
 	var cleave = half_room_cleave.instantiate()
 	add_child(cleave)
