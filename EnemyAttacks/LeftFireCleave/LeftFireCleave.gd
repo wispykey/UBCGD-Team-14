@@ -16,11 +16,18 @@ func _ready() -> void:
 	$TelegraphTimer.start()
 	$DespawnTimer.timeout.connect(_on_despawn_timer_timeout)
 
-	# TODO: Compute parameters dynamically. Currently it is always West half
-	# Compute the dimensions of the cleave zone, in tiles
-	# Find the center point of the zone, in pixels
-	# Scale and center the collision area
+	# Create collision area + shape, based on dimensions
+	var collision_shape = CollisionShape2D.new()
+	var rect_shape = RectangleShape2D.new()
+	rect_shape.size = dimensions * TILE_SIZE
+	collision_shape.set_shape(rect_shape)
+	$HitZone.add_child(collision_shape)
+	$HitZone.position = dimensions * TILE_SIZE / 2
+	# Disable collisions until telegraph ends
+	$HitZone.monitorable = false
+	$HitZone.monitoring = false
 	
+	# Add alert sign telegraph for every tile covered
 	for i in dimensions.x:
 		for j in dimensions.y:
 			var telegraph = telegraph_image.instantiate()
@@ -30,7 +37,9 @@ func _ready() -> void:
 
 
 func _on_telegraph_timer_timeout():
-	# TODO: Enable collision area(s)
+	# Enable collision area
+	$HitZone.monitoring = true
+	$HitZone.monitorable = true
 
 	# Could be optimized to avoid adding more children
 	$Telegraph.visible = false
@@ -45,3 +54,5 @@ func _on_telegraph_timer_timeout():
 			
 func _on_despawn_timer_timeout():
 	call_deferred("queue_free")
+	
+	

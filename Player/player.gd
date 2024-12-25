@@ -30,6 +30,10 @@ var can_light_up = false
 
 var has_key = false
 
+func _ready() -> void:
+	$Hitbox.area_entered.connect(_on_hitbox_area_entered)
+	GameEvents.player_died.connect(_on_player_died)
+
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -95,16 +99,29 @@ func _move_one_cell(direction: Vector2):
 		_light_up_tile()
 		position += direction * TILE_SIZE
 
+
 # Lights up a tile on Floor at current position
 func _light_up_tile():
 	var cell_pos = Vector2(position.x / TILE_SIZE, position.y / TILE_SIZE)
 	if can_light_up:
 		light_up_tile.emit(cell_pos)
 
+
 func power_up():
 	print("power")
 	# SPEED = 600
 	
+	
 func pick_up_key():
 	print("key acquired")
 	has_key = true;
+
+
+func _on_hitbox_area_entered(area: Area2D):
+	print("Player took ", area.damage, " damage")
+	GameState.update_life(-area.damage)
+	
+
+func _on_player_died():
+	print("Player died (currently does nothing)")
+	# queue_free()
