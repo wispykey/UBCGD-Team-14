@@ -11,3 +11,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func update_life(amount: int):
+	life += amount
+	GameEvents.life_changed.emit()
+	if life <= 0:
+		GameEvents.player_died.emit()

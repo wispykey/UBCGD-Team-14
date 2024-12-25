@@ -122,5 +122,4 @@ func _on_ghost_spawn_timeout(position: Vector2, telegraph):
 	enemy.add_child(despawn_timer)
 	despawn_timer.start()
 	
-	print(telegraph)
 	telegraph.queue_free()

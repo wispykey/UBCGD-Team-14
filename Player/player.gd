@@ -30,6 +30,10 @@ var can_light_up = false
 
 var has_key = false
 
+func _ready() -> void:
+	$Hitbox.area_entered.connect(_on_hitbox_area_entered)
+	GameEvents.player_died.connect(_on_player_died)
+
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -108,3 +112,11 @@ func power_up():
 func pick_up_key():
 	print("key acquired")
 	has_key = true;
+
+func _on_hitbox_area_entered(area: Area2D):
+	print("Player took ", area.damage, " damage")
+	GameState.update_life(-area.damage)
+
+func _on_player_died():
+	print("Player died (currently does nothing)")
+	# queue_free()

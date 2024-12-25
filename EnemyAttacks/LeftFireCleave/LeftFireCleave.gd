@@ -8,8 +8,6 @@ extends Node2D
 
 const TILE_SIZE = 32
 
-var damage: int = 5
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$TelegraphTimer.wait_time = telegraph_duration * Conductor.seconds_per_quarter_note
@@ -17,7 +15,6 @@ func _ready() -> void:
 	# Start manually instead of auto-start to change wait_time above
 	$TelegraphTimer.start()
 	$DespawnTimer.timeout.connect(_on_despawn_timer_timeout)
-	$HitZone.body_entered.connect(_on_hitzone_body_entered)
 
 	# Create collision area + shape, based on dimensions
 	var collision_shape = CollisionShape2D.new()
@@ -27,7 +24,7 @@ func _ready() -> void:
 	$HitZone.add_child(collision_shape)
 	$HitZone.position = dimensions * TILE_SIZE / 2
 	# Disable collisions until telegraph ends
-	$HitZone.monitoring = false
+	$HitZone.monitorable = false
 	
 	# Add alert sign telegraph for every tile covered
 	for i in dimensions.x:
@@ -40,7 +37,7 @@ func _ready() -> void:
 
 func _on_telegraph_timer_timeout():
 	# Enable collision area
-	$HitZone.monitoring = true
+	$HitZone.monitorable = true
 
 	# Could be optimized to avoid adding more children
 	$Telegraph.visible = false
@@ -55,10 +52,5 @@ func _on_telegraph_timer_timeout():
 			
 func _on_despawn_timer_timeout():
 	call_deferred("queue_free")
-
-
-func _on_hitzone_body_entered(body: Node2D):
-	GameState.life -= damage
-	print("Damage taken")
 	
 	
