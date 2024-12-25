@@ -8,6 +8,8 @@ extends Node2D
 
 const TILE_SIZE = 32
 
+var damage: int = 5
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$TelegraphTimer.wait_time = telegraph_duration * Conductor.seconds_per_quarter_note
@@ -56,7 +58,7 @@ func _on_despawn_timer_timeout():
 
 
 func _on_hitzone_body_entered(body: Node2D):
-	GameState.life -= 2
+	GameState.life -= damage
 	print("Damage taken")
 	
 	
