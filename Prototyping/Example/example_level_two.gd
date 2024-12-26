@@ -3,7 +3,8 @@ extends Node2D
 @onready var player := $Player
 @onready var hud := $HUD
 
-@export var half_room_cleave: PackedScene
+@export var left_fire_cleave: PackedScene
+@export var right_fire_cleave: PackedScene
 @export var spawn_ghost: PackedScene
 
 var window_dimensions: Vector2
@@ -26,12 +27,11 @@ const VER_TILES: int = HEIGHT / TILE_SIZE
 # 	'time' is measured in beats; must be strictly non-decreasing
 #   'function' is the name of a function in this script; must be in quotation marks
 var timeline = [
-	{"time": 1, "function": "spawn_ghost_on_player"},
-	{"time": 4, "function": "spawn_ghost_on_player"},
-	{"time": 8, "function": "cleave_left_half_of_arena"},
+	{"time": 4, "function": "cleave_right"},
+	{"time": 8, "function": "cleave_left"},
 	{"time": 14, "function": "spawn_ghost_on_player"},
 	{"time": 20, "function": "spawn_ghost_on_player"},
-	{"time": 24, "function": "cleave_left_half_of_arena"},
+	{"time": 24, "function": "cleave_left"},
 	{"time": 25, "function": "spawn_ghost_on_player"},
 	{"time": 30, "function": "spawn_ghost_on_player"},
 ]
@@ -80,11 +80,13 @@ func get_random_position() -> Vector2:
 
 
 # Attack functions are wrappers for instantiating standalone nodes
-func cleave_left_half_of_arena():
-	var cleave = half_room_cleave.instantiate()
-	# Cleave is currently attached to player for showcasing dynamic location
-	# TODO: Attach to a moving enemy instead
-	cleave.position = player.position
+func cleave_left():
+	var cleave = left_fire_cleave.instantiate()
+	add_child(cleave)
+	
+	
+func cleave_right():
+	var cleave = right_fire_cleave.instantiate()
 	add_child(cleave)
 
 
