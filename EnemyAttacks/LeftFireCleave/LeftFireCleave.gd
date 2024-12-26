@@ -26,8 +26,6 @@ func _ready() -> void:
 	# Dynamically compute dimensions based on origin position
 	dimensions.x = position.x / TILE_SIZE
 	dimensions.y = get_viewport_rect().size.y / TILE_SIZE
-	
-	print(position)
 
 	# Create collision area + shape, based on dimensions
 	var collision_shape = CollisionShape2D.new()
@@ -35,7 +33,7 @@ func _ready() -> void:
 	rect_shape.size = dimensions * TILE_SIZE
 	collision_shape.set_shape(rect_shape)
 	$HitZone.add_child(collision_shape)
-	$HitZone.position.x -= position.x / 2.0
+	$HitZone.position.x -= position.x / 2
 	# Disable collisions until telegraph ends
 	$HitZone.monitorable = false
 	$HitZone.monitoring = false

@@ -82,6 +82,8 @@ func get_random_position() -> Vector2:
 # Attack functions are wrappers for instantiating standalone nodes
 func cleave_left_half_of_arena():
 	var cleave = half_room_cleave.instantiate()
+	# Cleave is currently attached to player for showcasing dynamic location
+	# TODO: Attach to a moving enemy instead
 	cleave.position = player.position
 	add_child(cleave)
 
