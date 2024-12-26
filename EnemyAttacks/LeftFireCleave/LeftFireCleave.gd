@@ -17,9 +17,15 @@ func _ready() -> void:
 	$TelegraphTimer.start()
 	$DespawnTimer.timeout.connect(_on_despawn_timer_timeout)
 	
+	
+	# Originate from center of arena, if no position is inherited
+	if position == Vector2.ZERO:
+		position.x = get_viewport_rect().get_center().x
+	position.y = get_viewport_rect().get_center().y
+	
 	# Dynamically compute dimensions based on origin position
 	dimensions.x = position.x / TILE_SIZE
-	dimensions.y = position.y / TILE_SIZE * 2
+	dimensions.y = get_viewport_rect().size.y / TILE_SIZE
 
 	# Create collision area + shape, based on dimensions
 	var collision_shape = CollisionShape2D.new()

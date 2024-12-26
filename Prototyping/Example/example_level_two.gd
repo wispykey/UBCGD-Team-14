@@ -82,7 +82,7 @@ func get_random_position() -> Vector2:
 # Attack functions are wrappers for instantiating standalone nodes
 func cleave_left_half_of_arena():
 	var cleave = half_room_cleave.instantiate()
-	cleave.position = get_viewport_rect().get_center()
+	cleave.position = player.position
 	add_child(cleave)
 
 
