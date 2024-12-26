@@ -28,10 +28,10 @@ const VER_TILES: int = HEIGHT / TILE_SIZE
 var timeline = [
 	{"time": 1, "function": "spawn_ghost_on_player"},
 	{"time": 4, "function": "spawn_ghost_on_player"},
-	{"time": 8, "function": "cleave_left"},
+	{"time": 8, "function": "cleave_left_half_of_arena"},
 	{"time": 14, "function": "spawn_ghost_on_player"},
 	{"time": 20, "function": "spawn_ghost_on_player"},
-	{"time": 24, "function": "cleave_left"},
+	{"time": 24, "function": "cleave_left_half_of_arena"},
 	{"time": 25, "function": "spawn_ghost_on_player"},
 	{"time": 30, "function": "spawn_ghost_on_player"},
 ]
@@ -80,8 +80,9 @@ func get_random_position() -> Vector2:
 
 
 # Attack functions are wrappers for instantiating standalone nodes
-func cleave_left():
+func cleave_left_half_of_arena():
 	var cleave = half_room_cleave.instantiate()
+	cleave.position = get_viewport_rect().get_center()
 	add_child(cleave)
 
 
