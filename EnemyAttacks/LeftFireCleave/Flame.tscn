@@ -40,6 +40,7 @@ _data = {
 }
 
 [node name="Flame" type="Sprite2D"]
+z_index = 1
 position = Vector2(3.8147e-06, -4.76837e-07)
 texture = ExtResource("1_2acba")
 script = ExtResource("2_pcilr")

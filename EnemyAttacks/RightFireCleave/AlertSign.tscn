@@ -19,7 +19,7 @@ animations = [{
 }]
 
 [node name="AlertSign" type="AnimatedSprite2D"]
-z_index = 3
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_0h3fw")
 animation = &"flash"
 autoplay = "flash"
