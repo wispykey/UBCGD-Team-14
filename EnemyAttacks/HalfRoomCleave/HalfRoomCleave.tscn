@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://clu4w56s8h1yo"]
+
+[ext_resource type="Script" path="res://EnemyAttacks/LeftFireCleave/LeftFireCleave.gd" id="1_lw1t5"]
+[ext_resource type="PackedScene" uid="uid://c37st0le18efm" path="res://EnemyAttacks/LeftFireCleave/AlertSign.tscn" id="2_oxcjy"]
+[ext_resource type="PackedScene" uid="uid://ceqhna2t88e55" path="res://EnemyAttacks/HalfRoomCleave/Flame.tscn" id="3_0ea2r"]
+[ext_resource type="Script" path="res://EnemyAttacks/LeftFireCleave/hit_zone.gd" id="4_qijar"]
+
+[node name="HalfRoomCleave" type="Node2D"]
+script = ExtResource("1_lw1t5")
+telegraph_image = ExtResource("2_oxcjy")
+attack_image = ExtResource("3_0ea2r")
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 16
+script = ExtResource("4_qijar")
+
+[node name="Telegraph" type="Node2D" parent="."]
+
+[node name="DespawnTimer" type="Timer" parent="."]
+one_shot = true

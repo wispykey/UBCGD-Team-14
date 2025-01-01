@@ -3,8 +3,7 @@ extends Node2D
 @onready var player := $Player
 @onready var hud := $HUD
 
-@export var left_fire_cleave: PackedScene
-@export var right_fire_cleave: PackedScene
+@export var half_room_cleave: PackedScene
 @export var spawn_ghost: PackedScene
 
 var window_dimensions: Vector2
@@ -29,9 +28,10 @@ const VER_TILES: int = HEIGHT / TILE_SIZE
 var timeline = [
 	{"time": 4, "function": "cleave_right"},
 	{"time": 8, "function": "cleave_left"},
-	{"time": 14, "function": "spawn_ghost_on_player"},
+	{"time": 12, "function": "cleave_north"},
+	{"time": 16, "function": "cleave_south"},
 	{"time": 20, "function": "spawn_ghost_on_player"},
-	{"time": 24, "function": "cleave_left"},
+	{"time": 24, "function": "spawn_ghost_on_player"},
 	{"time": 25, "function": "spawn_ghost_on_player"},
 	{"time": 30, "function": "spawn_ghost_on_player"},
 ]
@@ -81,13 +81,31 @@ func get_random_position() -> Vector2:
 
 # Attack functions are wrappers for instantiating standalone nodes
 func cleave_left():
-	var cleave = left_fire_cleave.instantiate()
+	var cleave = half_room_cleave.instantiate()
 	add_child(cleave)
+	cleave.set_direction("WEST")
+	cleave.start()
 	
 	
 func cleave_right():
-	var cleave = right_fire_cleave.instantiate()
+	var cleave = half_room_cleave.instantiate()
 	add_child(cleave)
+	cleave.set_direction("EAST")
+	cleave.start()
+
+
+func cleave_north():
+	var cleave = half_room_cleave.instantiate()
+	add_child(cleave)
+	cleave.set_direction("NORTH")
+	cleave.start()
+	
+	
+func cleave_south():
+	var cleave = half_room_cleave.instantiate()
+	add_child(cleave)
+	cleave.set_direction("SOUTH")
+	cleave.start()
 
 
 func spawn_ghost_on_player():

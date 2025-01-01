@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c37st0le18efm"]
+[gd_scene load_steps=5 format=3 uid="uid://233scfblkwon"]
 
-[ext_resource type="Texture2D" uid="uid://d3xo3eh5tmrh8" path="res://Assets/Objects/triangle_flashing.png" id="1_s2dkx"]
-[ext_resource type="Script" path="res://EnemyAttacks/LeftFireCleave/alert_sign.gd" id="2_niqyw"]
+[ext_resource type="Texture2D" uid="uid://d3xo3eh5tmrh8" path="res://Assets/Objects/triangle_flashing.png" id="1_i4sag"]
+[ext_resource type="Script" path="res://EnemyAttacks/LeftFireCleave/alert_sign.gd" id="2_my50g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wquxr"]
-atlas = ExtResource("1_s2dkx")
+atlas = ExtResource("1_i4sag")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0h3fw"]
@@ -23,4 +23,4 @@ z_index = 1
 sprite_frames = SubResource("SpriteFrames_0h3fw")
 animation = &"flash"
 autoplay = "flash"
-script = ExtResource("2_niqyw")
+script = ExtResource("2_my50g")

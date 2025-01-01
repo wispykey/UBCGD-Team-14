@@ -1,18 +1,16 @@
-[gd_scene load_steps=9 format=4 uid="uid://dv1leo3g56ib3"]
+[gd_scene load_steps=8 format=4 uid="uid://dv1leo3g56ib3"]
 
 [ext_resource type="Script" path="res://Prototyping/Example/example_level_two.gd" id="1_2s8ci"]
 [ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Prototyping/Marcus/Assets/marcus_tileset.tres" id="2_grxjp"]
-[ext_resource type="PackedScene" uid="uid://c6mdqbk4mcpp5" path="res://EnemyAttacks/LeftFireCleave/LeftFireCleave.tscn" id="2_r3eia"]
+[ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_tt2uv"]
 [ext_resource type="PackedScene" uid="uid://dwhhs4cspt0f" path="res://EnemyAttacks/SpawnGhost/SpawnGhost.tscn" id="3_1wyjw"]
-[ext_resource type="PackedScene" uid="uid://7vp8e0we5exc" path="res://EnemyAttacks/RightFireCleave/RightFireCleave.tscn" id="3_ke5wq"]
 [ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://TileManager/TileManager.tscn" id="4_0k0m3"]
 [ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="4_snpa6"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="5_e3tsv"]
 
 [node name="ExampleLevelTwo" type="Node2D"]
 script = ExtResource("1_2s8ci")
-left_fire_cleave = ExtResource("2_r3eia")
-right_fire_cleave = ExtResource("3_ke5wq")
+half_room_cleave = ExtResource("2_tt2uv")
 spawn_ghost = ExtResource("3_1wyjw")
 
 [node name="TileManager" parent="." instance=ExtResource("4_0k0m3")]
