@@ -5,6 +5,7 @@ extends Node2D
 
 @export var half_room_cleave: PackedScene
 @export var spawn_ghost: PackedScene
+@export var debug_random_test: bool = false
 
 var window_dimensions: Vector2
 const WIDTH: int = 640
@@ -12,6 +13,9 @@ const HEIGHT: int = 448
 const TILE_SIZE: int = 32
 const HOR_TILES: int = WIDTH / TILE_SIZE
 const VER_TILES: int = HEIGHT / TILE_SIZE
+
+
+
 #const TILES = {
 	#"RED": {"src": 2, "atlas": Vector2(0,0), "alt": 3},
 	#"DANGER": {"src": 3, "atlas": Vector2(0, 0), "alt": 0},
@@ -26,8 +30,8 @@ const VER_TILES: int = HEIGHT / TILE_SIZE
 # 	'time' is measured in beats; must be strictly non-decreasing
 #   'function' is the name of a function in this script; must be in quotation marks
 var timeline = [
-	{"time": 4, "function": "cleave_right"},
-	{"time": 8, "function": "cleave_left"},
+	{"time": 4, "function": "cleave_east"},
+	{"time": 8, "function": "cleave_west"},
 	{"time": 12, "function": "cleave_north"},
 	{"time": 16, "function": "cleave_south"},
 	{"time": 20, "function": "spawn_ghost_on_player"},
@@ -80,16 +84,22 @@ func get_random_position() -> Vector2:
 
 
 # Attack functions are wrappers for instantiating standalone nodes
-func cleave_left():
+func cleave_west():
 	var cleave = half_room_cleave.instantiate()
 	add_child(cleave)
+	cleave.position = get_viewport_rect().get_center()
+	if debug_random_test:
+		cleave.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
 	cleave.set_direction("WEST")
 	cleave.start()
 	
 	
-func cleave_right():
+func cleave_east():
 	var cleave = half_room_cleave.instantiate()
 	add_child(cleave)
+	cleave.position = get_viewport_rect().get_center()
+	if debug_random_test:
+		cleave.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
 	cleave.set_direction("EAST")
 	cleave.start()
 
@@ -97,6 +107,9 @@ func cleave_right():
 func cleave_north():
 	var cleave = half_room_cleave.instantiate()
 	add_child(cleave)
+	cleave.position = get_viewport_rect().get_center()
+	if debug_random_test:
+		cleave.position += randi_range(-3,3) * Vector2(TILE_SIZE, TILE_SIZE)
 	cleave.set_direction("NORTH")
 	cleave.start()
 	
@@ -104,6 +117,9 @@ func cleave_north():
 func cleave_south():
 	var cleave = half_room_cleave.instantiate()
 	add_child(cleave)
+	cleave.position = get_viewport_rect().get_center()
+	if debug_random_test:
+		cleave.position += randi_range(-3,3) * Vector2(TILE_SIZE, TILE_SIZE)
 	cleave.set_direction("SOUTH")
 	cleave.start()
 

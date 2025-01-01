@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://clu4w56s8h1yo"]
+[gd_scene load_steps=10 format=3 uid="uid://clu4w56s8h1yo"]
 
 [ext_resource type="Texture2D" uid="uid://d3xo3eh5tmrh8" path="res://Assets/Objects/triangle_flashing.png" id="1_crh5r"]
 [ext_resource type="PackedScene" uid="uid://ceqhna2t88e55" path="res://EnemyAttacks/HalfRoomCleave/Flame.tscn" id="3_0ea2r"]
+[ext_resource type="Texture2D" uid="uid://cok6ft5dn25st" path="res://Assets/Objects/star.png" id="3_sb7lo"]
 
 [sub_resource type="GDScript" id="GDScript_wayfl"]
 script/source = "extends Node2D
@@ -14,97 +15,144 @@ const TILE_SIZE = 32
 
 var telegraph_duration: int  = 4 # Measured in beats
 # Width x Height of the attack, measured in tiles
-var dimensions: Vector2
-var direction: String = \"WEST\"
+var direction: String = \"\"
+var dimensions: Vector2 # Measured in tiles
+var coords: Vector2 # Measured in tiles
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$TelegraphTimer.wait_time = telegraph_duration * Conductor.seconds_per_quarter_note
 	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
 	$DespawnTimer.timeout.connect(_on_despawn_timer_timeout)
+	# Disable collisions during telegraph
+	$HitZone.monitorable = false
+	$HitZone.monitoring = false
 
 
 func start():
+	# Default to West 
+	if direction == \"\":
+		set_direction(\"WEST\")
+		
 	$TelegraphTimer.start()
-	
-	# Create collision area + shape, based on dimensions
-	var collision_shape = CollisionShape2D.new()
-	var rect_shape = RectangleShape2D.new()
-	rect_shape.size = dimensions * TILE_SIZE
-	collision_shape.set_shape(rect_shape)
-	$HitZone.add_child(collision_shape)
-	match direction:
-		\"WEST\":
-			$HitZone.position.x -= position.x / 2
-		\"EAST\":
-			$HitZone.position.x += position.x / 2
-		\"NORTH\":
-			$HitZone.position.y -= (position.y - TILE_SIZE) / 2
-		\"SOUTH\":
-			$HitZone.position.y += (position.y - TILE_SIZE) / 2
-	# Disable collisions until telegraph ends
-	$HitZone.monitorable = false
-	$HitZone.monitoring = false
-	
 	add_scene_on_every_tile($Telegraph, telegraph_image)
 	
 	
-func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
-	var invert: int = 1
-	var x_offset: float = 0
-	var y_offset: float = 0
-	
-	match direction:
-		\"WEST\":
-			invert = -1
-			x_offset = 0.5
-			y_offset = -floor(dimensions.y/2)
-		\"EAST\":
-			invert = 1
-			x_offset = 0.5
-			y_offset = -floor(dimensions.y/2)
-		\"NORTH\":
-			invert = -1
-			x_offset = -floor(dimensions.x/2) + 0.5
-			y_offset = 0
-		\"SOUTH\":
-			invert = 1
-			x_offset = -floor(dimensions.x/2) + 0.5
-			y_offset = 0
-			
-	for i in dimensions.x:
-		for j in dimensions.y:
-			var telegraph = scene.instantiate()
-			telegraph.position.x = invert * TILE_SIZE*(i + x_offset)
-			telegraph.position.y = invert * TILE_SIZE*(j + y_offset)
-			parent.add_child(telegraph)	
-
-
-# Sets values for computation
+# Allows parent nodes to set orientation of attack
 func set_direction(cardinal: String):
 	# Default to West on invalid input
 	if cardinal not in DIRECTIONS:
 		direction = \"WEST\"
 	else:
 		direction = cardinal
-	set_dimensions()
-			
-			
-			
-func set_dimensions():
-	var viewport = get_viewport_rect()
-	# Originate from center of arena, if no position is inherited
-	if position == Vector2.ZERO:
-		position.x = viewport.get_center().x
-	position.y = viewport.get_center().y
-	
-	if direction == \"WEST\" or direction == \"EAST\":
-		dimensions.x = position.x / TILE_SIZE
-		dimensions.y = viewport.size.y / TILE_SIZE
-	else:
-		dimensions.x = viewport.size.x / TILE_SIZE
-		dimensions.y = position.y / TILE_SIZE
+		
+	normalize_position()
+	compute_dimensions()
+	generate_collision_area()
 
+
+func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
+	var x_offset: float = 0
+	var y_offset: float = 0
+	var x_invert: int = 1
+	var y_invert: int = 1
+	
+	match direction:
+		\"WEST\":
+			x_invert = -1
+			x_offset = 0
+			y_offset = -floor(dimensions.y/2)
+		\"EAST\":
+			x_offset = 0
+			y_offset = -floor(dimensions.y/2)
+		\"NORTH\":
+			y_invert = -1
+			x_offset = -floor(dimensions.x/2)
+			y_offset = 0
+		\"SOUTH\":
+			x_offset = -floor(dimensions.x/2)
+			y_offset = 0
+		
+	for i in dimensions.x:
+		for j in dimensions.y:
+			var telegraph = scene.instantiate()
+			telegraph.position.x = x_invert * TILE_SIZE*(i + x_offset)
+			telegraph.position.y = y_invert * TILE_SIZE*(j + y_offset)
+			parent.add_child(telegraph)	
+
+
+func normalize_position():
+	var viewport = get_viewport_rect()
+	var center = viewport.get_center()
+	
+	# Originate from center of arena by default
+	if position == Vector2.ZERO:
+		position.x = center.x
+		position.y = center.y
+		
+	# Center along an axis where appropriate
+	match direction:
+		\"WEST\", \"EAST\":
+			position.y = center.y
+		\"NORTH\", \"SOUTH\":
+			position.x = center.x
+	
+	# Get the position of top-left corner of the bounding tile
+	var x = int(position.x) - int(position.x) % TILE_SIZE
+	var y = int(position.y) - int(position.y) % TILE_SIZE
+	
+	# Set position to be the middle of tile, so that images appear centered
+	position.x = x + TILE_SIZE / 2
+	position.y = y + TILE_SIZE / 2
+	
+	# Store grid-based coordinates
+	coords.x = x / TILE_SIZE
+	coords.y = y / TILE_SIZE
+			
+			
+func compute_dimensions():
+	var viewport = get_viewport_rect()
+	var max_x = viewport.size.x / TILE_SIZE
+	var max_y = viewport.size.y / TILE_SIZE
+	
+	# Include the column/row that the attacker is standing on
+	match direction:
+		\"WEST\":
+			dimensions.x = coords.x + 1
+			dimensions.y = max_y
+		\"EAST\":
+			dimensions.x = max_x - coords.x
+			dimensions.y = max_y
+		\"NORTH\":
+			dimensions.x = max_x
+			dimensions.y = coords.y + 1
+		\"SOUTH\":
+			dimensions.x = max_x
+			dimensions.y = max_y - coords.y
+			
+	print(\"Cleaving \", direction, \" from tile \", coords,
+		  \", in a \", dimensions.x, \"x\", dimensions.y, \" area\")
+
+
+# HitZone is intentionally missing CollisionShape. Added here.
+func generate_collision_area():
+	var collision_shape = CollisionShape2D.new()
+	var rect_shape = RectangleShape2D.new()
+	rect_shape.size = dimensions * TILE_SIZE
+	collision_shape.set_shape(rect_shape)
+	$HitZone.add_child(collision_shape)
+	match direction:
+		\"EAST\":
+			$HitZone.position.x = (dimensions.x - 1) * TILE_SIZE / 2.0
+		\"WEST\":
+			$HitZone.position.x = -(dimensions.x - 1) * TILE_SIZE / 2.0
+		\"NORTH\":
+			$HitZone.position.y = -(dimensions.y - 1) * TILE_SIZE / 2.0
+			$HitZone.position.x -= TILE_SIZE / 2.0
+		\"SOUTH\":
+			$HitZone.position.y = (dimensions.y - 1)* TILE_SIZE / 2.0
+			$HitZone.position.x -= TILE_SIZE / 2.0
+	
 
 func _on_telegraph_timer_timeout():
 	# Enable collision area
@@ -191,3 +239,6 @@ script = SubResource("GDScript_wcys5")
 
 [node name="DespawnTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_sb7lo")
