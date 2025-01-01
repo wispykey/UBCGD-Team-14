@@ -1,13 +1,183 @@
-[gd_scene load_steps=5 format=3 uid="uid://clu4w56s8h1yo"]
+[gd_scene load_steps=9 format=3 uid="uid://clu4w56s8h1yo"]
 
-[ext_resource type="Script" path="res://EnemyAttacks/LeftFireCleave/LeftFireCleave.gd" id="1_lw1t5"]
-[ext_resource type="PackedScene" uid="uid://c37st0le18efm" path="res://EnemyAttacks/LeftFireCleave/AlertSign.tscn" id="2_oxcjy"]
+[ext_resource type="Texture2D" uid="uid://d3xo3eh5tmrh8" path="res://Assets/Objects/triangle_flashing.png" id="1_crh5r"]
 [ext_resource type="PackedScene" uid="uid://ceqhna2t88e55" path="res://EnemyAttacks/HalfRoomCleave/Flame.tscn" id="3_0ea2r"]
-[ext_resource type="Script" path="res://EnemyAttacks/LeftFireCleave/hit_zone.gd" id="4_qijar"]
+
+[sub_resource type="GDScript" id="GDScript_wayfl"]
+script/source = "extends Node2D
+
+@export var telegraph_image: PackedScene
+@export var attack_image: PackedScene
+
+const DIRECTIONS = [\"WEST\", \"EAST\", \"NORTH\", \"SOUTH\"]
+const TILE_SIZE = 32
+
+var telegraph_duration: int  = 4 # Measured in beats
+# Width x Height of the attack, measured in tiles
+var dimensions: Vector2
+var direction: String = \"WEST\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$TelegraphTimer.wait_time = telegraph_duration * Conductor.seconds_per_quarter_note
+	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
+	$DespawnTimer.timeout.connect(_on_despawn_timer_timeout)
+
+
+func start():
+	$TelegraphTimer.start()
+	
+	# Create collision area + shape, based on dimensions
+	var collision_shape = CollisionShape2D.new()
+	var rect_shape = RectangleShape2D.new()
+	rect_shape.size = dimensions * TILE_SIZE
+	collision_shape.set_shape(rect_shape)
+	$HitZone.add_child(collision_shape)
+	match direction:
+		\"WEST\":
+			$HitZone.position.x -= position.x / 2
+		\"EAST\":
+			$HitZone.position.x += position.x / 2
+		\"NORTH\":
+			$HitZone.position.y -= (position.y - TILE_SIZE) / 2
+		\"SOUTH\":
+			$HitZone.position.y += (position.y - TILE_SIZE) / 2
+	# Disable collisions until telegraph ends
+	$HitZone.monitorable = false
+	$HitZone.monitoring = false
+	
+	add_scene_on_every_tile($Telegraph, telegraph_image)
+	
+	
+func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
+	var invert: int = 1
+	var x_offset: float = 0
+	var y_offset: float = 0
+	
+	match direction:
+		\"WEST\":
+			invert = -1
+			x_offset = 0.5
+			y_offset = -floor(dimensions.y/2)
+		\"EAST\":
+			invert = 1
+			x_offset = 0.5
+			y_offset = -floor(dimensions.y/2)
+		\"NORTH\":
+			invert = -1
+			x_offset = -floor(dimensions.x/2) + 0.5
+			y_offset = 0
+		\"SOUTH\":
+			invert = 1
+			x_offset = -floor(dimensions.x/2) + 0.5
+			y_offset = 0
+			
+	for i in dimensions.x:
+		for j in dimensions.y:
+			var telegraph = scene.instantiate()
+			telegraph.position.x = invert * TILE_SIZE*(i + x_offset)
+			telegraph.position.y = invert * TILE_SIZE*(j + y_offset)
+			parent.add_child(telegraph)	
+
+
+# Sets values for computation
+func set_direction(cardinal: String):
+	# Default to West on invalid input
+	if cardinal not in DIRECTIONS:
+		direction = \"WEST\"
+	else:
+		direction = cardinal
+	set_dimensions()
+			
+			
+			
+func set_dimensions():
+	var viewport = get_viewport_rect()
+	# Originate from center of arena, if no position is inherited
+	if position == Vector2.ZERO:
+		position.x = viewport.get_center().x
+	position.y = viewport.get_center().y
+	
+	if direction == \"WEST\" or direction == \"EAST\":
+		dimensions.x = position.x / TILE_SIZE
+		dimensions.y = viewport.size.y / TILE_SIZE
+	else:
+		dimensions.x = viewport.size.x / TILE_SIZE
+		dimensions.y = position.y / TILE_SIZE
+
+
+func _on_telegraph_timer_timeout():
+	# Enable collision area
+	$HitZone.monitoring = true
+	$HitZone.monitorable = true
+
+	# Could be optimized to avoid adding more children
+	$Telegraph.visible = false
+	add_scene_on_every_tile(self, attack_image)
+	$DespawnTimer.start()
+			
+			
+func _on_despawn_timer_timeout():
+	call_deferred(\"queue_free\")
+	
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wquxr"]
+atlas = ExtResource("1_crh5r")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0h3fw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wquxr")
+}],
+"loop": true,
+"name": &"flash",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_yr2tp"]
+script/source = "extends AnimatedSprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	Conductor.quarter_beat.connect(_on_quarter_beat)
+
+func _on_quarter_beat(_beat_num: int):
+	visible = !visible
+"
+
+[sub_resource type="PackedScene" id="PackedScene_nsa5n"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("AlertSign", "AnimatedSprite2D", "z_index", "sprite_frames", "animation", "autoplay", "script"),
+"node_count": 1,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 5, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 0),
+"variants": [1, SubResource("SpriteFrames_0h3fw"), &"flash", "flash", SubResource("GDScript_yr2tp")],
+"version": 3
+}
+
+[sub_resource type="GDScript" id="GDScript_wcys5"]
+script/source = "extends Area2D
+
+var damage: int = 5
+
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+	
+func _on_body_entered(body: Node2D):
+	print(\"LeftFireCleave: Detected player\")
+	call_deferred(\"set_monitorable\", false)
+"
 
 [node name="HalfRoomCleave" type="Node2D"]
-script = ExtResource("1_lw1t5")
-telegraph_image = ExtResource("2_oxcjy")
+script = SubResource("GDScript_wayfl")
+telegraph_image = SubResource("PackedScene_nsa5n")
 attack_image = ExtResource("3_0ea2r")
 
 [node name="TelegraphTimer" type="Timer" parent="."]
@@ -15,7 +185,7 @@ one_shot = true
 
 [node name="HitZone" type="Area2D" parent="."]
 collision_layer = 16
-script = ExtResource("4_qijar")
+script = SubResource("GDScript_wcys5")
 
 [node name="Telegraph" type="Node2D" parent="."]
 
