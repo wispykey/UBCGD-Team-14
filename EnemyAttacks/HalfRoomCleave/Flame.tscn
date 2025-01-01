@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2icr33a7s070"]
+[gd_scene load_steps=6 format=3 uid="uid://ceqhna2t88e55"]
 
-[ext_resource type="Texture2D" uid="uid://bwke0uchycnoa" path="res://Assets/Objects/orange_circle.png" id="1_2acba"]
-[ext_resource type="Script" path="res://EnemyAttacks/LeftFireCleave/flame.gd" id="2_pcilr"]
+[ext_resource type="Texture2D" uid="uid://bwke0uchycnoa" path="res://Assets/Objects/orange_circle.png" id="1_xsnen"]
+[ext_resource type="Script" path="res://EnemyAttacks/HalfRoomCleave/flame.gd" id="2_8vwat"]
 
 [sub_resource type="Animation" id="Animation_o04ps"]
 length = 0.001
@@ -40,9 +40,10 @@ _data = {
 }
 
 [node name="Flame" type="Sprite2D"]
+z_index = 1
 position = Vector2(3.8147e-06, -4.76837e-07)
-texture = ExtResource("1_2acba")
-script = ExtResource("2_pcilr")
+texture = ExtResource("1_xsnen")
+script = ExtResource("2_8vwat")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

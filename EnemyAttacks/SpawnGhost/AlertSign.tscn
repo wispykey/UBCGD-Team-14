@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp5vgjqyxx18f"]
+
+[ext_resource type="Texture2D" uid="uid://d3xo3eh5tmrh8" path="res://Assets/Objects/triangle_flashing.png" id="1_7gvmh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wquxr"]
+atlas = ExtResource("1_7gvmh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0h3fw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wquxr")
+}],
+"loop": true,
+"name": &"flash",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_yr2tp"]
+script/source = "extends AnimatedSprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	Conductor.quarter_beat.connect(_on_quarter_beat)
+
+func _on_quarter_beat(_beat_num: int):
+	visible = !visible
+"
+
+[node name="AlertSign" type="AnimatedSprite2D"]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_0h3fw")
+animation = &"flash"
+autoplay = "flash"
+script = SubResource("GDScript_yr2tp")
