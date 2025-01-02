@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 			print("Lighting up tiles")
 	
 	handle_movement(delta)
-	align_position_to_grid()
+	# align_position_to_grid()
 
 
 # Aligns player position to the grid

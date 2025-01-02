@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d3xo3eh5tmrh8" path="res://Assets/Objects/triangle_flashing.png" id="1_crh5r"]
 [ext_resource type="PackedScene" uid="uid://ceqhna2t88e55" path="res://EnemyAttacks/HalfRoomCleave/Flame.tscn" id="3_0ea2r"]
-[ext_resource type="Texture2D" uid="uid://cok6ft5dn25st" path="res://Assets/Objects/star.png" id="3_sb7lo"]
+[ext_resource type="Texture2D" uid="uid://b0woyq8qpxcj1" path="res://Assets/Objects/powered_up.svg" id="3_e54y0"]
 
 [sub_resource type="GDScript" id="GDScript_wayfl"]
 script/source = "extends Node2D
@@ -58,18 +58,14 @@ func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
 	match direction:
 		\"WEST\":
 			x_invert = -1
-			x_offset = 0
 			y_offset = -floor(dimensions.y/2)
 		\"EAST\":
-			x_offset = 0
 			y_offset = -floor(dimensions.y/2)
 		\"NORTH\":
 			y_invert = -1
 			x_offset = -floor(dimensions.x/2)
-			y_offset = 0
 		\"SOUTH\":
 			x_offset = -floor(dimensions.x/2)
-			y_offset = 0
 		
 	for i in dimensions.x:
 		for j in dimensions.y:
@@ -99,9 +95,9 @@ func normalize_position():
 	var x = int(position.x) - int(position.x) % TILE_SIZE
 	var y = int(position.y) - int(position.y) % TILE_SIZE
 	
-	# Set position to be the middle of tile, so that images appear centered
-	position.x = x + TILE_SIZE / 2
-	position.y = y + TILE_SIZE / 2
+	## Set position to be the middle of tile, so that images appear centered
+	#position.x = x + TILE_SIZE / 2
+	#position.y = y + TILE_SIZE / 2
 	
 	# Store grid-based coordinates
 	coords.x = x / TILE_SIZE
@@ -116,14 +112,14 @@ func compute_dimensions():
 	# Include the column/row that the attacker is standing on
 	match direction:
 		\"WEST\":
-			dimensions.x = coords.x + 1
+			dimensions.x = coords.x+1
 			dimensions.y = max_y
 		\"EAST\":
 			dimensions.x = max_x - coords.x
 			dimensions.y = max_y
 		\"NORTH\":
 			dimensions.x = max_x
-			dimensions.y = coords.y + 1
+			dimensions.y = coords.y+1
 		\"SOUTH\":
 			dimensions.x = max_x
 			dimensions.y = max_y - coords.y
@@ -141,15 +137,13 @@ func generate_collision_area():
 	$HitZone.add_child(collision_shape)
 	match direction:
 		\"EAST\":
-			$HitZone.position.x = (dimensions.x - 1) * TILE_SIZE / 2.0
+			$HitZone.position.x = (dimensions.x) * TILE_SIZE/2.0
 		\"WEST\":
-			$HitZone.position.x = -(dimensions.x - 1) * TILE_SIZE / 2.0
+			$HitZone.position.x = -(dimensions.x) * TILE_SIZE/2.0
 		\"NORTH\":
-			$HitZone.position.y = -(dimensions.y - 1) * TILE_SIZE / 2.0
-			$HitZone.position.x -= TILE_SIZE / 2.0
+			$HitZone.position.y = -(dimensions.y) * TILE_SIZE/2.0
 		\"SOUTH\":
-			$HitZone.position.y = (dimensions.y - 1)* TILE_SIZE / 2.0
-			$HitZone.position.x -= TILE_SIZE / 2.0
+			$HitZone.position.y = (dimensions.y)* TILE_SIZE/2.0
 	
 
 func _on_telegraph_timer_timeout():
@@ -239,4 +233,5 @@ script = SubResource("GDScript_wcys5")
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_sb7lo")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_e54y0")
