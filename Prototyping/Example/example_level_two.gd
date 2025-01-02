@@ -45,7 +45,8 @@ func _ready() -> void:
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	window_dimensions =  get_viewport_rect().size
-
+	
+	%Player.position = get_viewport_rect().get_center()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
