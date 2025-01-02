@@ -116,14 +116,14 @@ func compute_dimensions():
 	# Include the column/row that the attacker is standing on
 	match direction:
 		\"WEST\":
-			dimensions.x = coords.x + 1
+			dimensions.x = coords.x+1
 			dimensions.y = max_y
 		\"EAST\":
-			dimensions.x = max_x - coords.x
+			dimensions.x = max_x - (coords.x-1)
 			dimensions.y = max_y
 		\"NORTH\":
 			dimensions.x = max_x
-			dimensions.y = coords.y + 1
+			dimensions.y = coords.y+1
 		\"SOUTH\":
 			dimensions.x = max_x
 			dimensions.y = max_y - coords.y
@@ -141,15 +141,15 @@ func generate_collision_area():
 	$HitZone.add_child(collision_shape)
 	match direction:
 		\"EAST\":
-			$HitZone.position.x = (dimensions.x - 1) * TILE_SIZE / 2.0
+			$HitZone.position.x = (dimensions.x-1) * TILE_SIZE/2.0
 		\"WEST\":
-			$HitZone.position.x = -(dimensions.x - 1) * TILE_SIZE / 2.0
+			$HitZone.position.x = -(dimensions.x-1) * TILE_SIZE/2.0
 		\"NORTH\":
-			$HitZone.position.y = -(dimensions.y - 1) * TILE_SIZE / 2.0
-			$HitZone.position.x -= TILE_SIZE / 2.0
+			$HitZone.position.y = -(dimensions.y-1) * TILE_SIZE/2.0
+			$HitZone.position.x -= TILE_SIZE/2.0
 		\"SOUTH\":
-			$HitZone.position.y = (dimensions.y - 1)* TILE_SIZE / 2.0
-			$HitZone.position.x -= TILE_SIZE / 2.0
+			$HitZone.position.y = (dimensions.y-1)* TILE_SIZE/2.0
+			$HitZone.position.x -= TILE_SIZE/2.0
 	
 
 func _on_telegraph_timer_timeout():
