@@ -119,7 +119,7 @@ func compute_dimensions():
 			dimensions.x = coords.x+1
 			dimensions.y = max_y
 		\"EAST\":
-			dimensions.x = max_x - (coords.x-1)
+			dimensions.x = max_x - coords.x
 			dimensions.y = max_y
 		\"NORTH\":
 			dimensions.x = max_x
@@ -146,10 +146,8 @@ func generate_collision_area():
 			$HitZone.position.x = -(dimensions.x-1) * TILE_SIZE/2.0
 		\"NORTH\":
 			$HitZone.position.y = -(dimensions.y-1) * TILE_SIZE/2.0
-			$HitZone.position.x -= TILE_SIZE/2.0
 		\"SOUTH\":
 			$HitZone.position.y = (dimensions.y-1)* TILE_SIZE/2.0
-			$HitZone.position.x -= TILE_SIZE/2.0
 	
 
 func _on_telegraph_timer_timeout():

@@ -86,8 +86,8 @@ func cleave(args: Dictionary):
 	var cleave = half_room_cleave.instantiate()
 	var direction = args.direction if args.has("direction") else ""
 	add_child(cleave)
-	cleave.position = get_viewport_rect().get_center()
 	if debug_random_test:
+		cleave.position = get_viewport_rect().get_center()
 		cleave.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
 	# start() depends on being added to tree beforehand
 	cleave.start(direction)
