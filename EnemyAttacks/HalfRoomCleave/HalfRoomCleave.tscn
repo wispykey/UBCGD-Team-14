@@ -29,11 +29,13 @@ func _ready() -> void:
 	$HitZone.monitoring = false
 
 
-func start():
-	# Default to West 
-	if direction == \"\":
-		set_direction(\"WEST\")
-		
+func start(direction: String):
+	set_direction(direction)
+	
+	normalize_position()
+	compute_dimensions()
+	generate_collision_area()
+	
 	$TelegraphTimer.start()
 	add_scene_on_every_tile($Telegraph, telegraph_image)
 	
@@ -45,10 +47,6 @@ func set_direction(cardinal: String):
 		direction = \"WEST\"
 	else:
 		direction = cardinal
-		
-	normalize_position()
-	compute_dimensions()
-	generate_collision_area()
 
 
 func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
