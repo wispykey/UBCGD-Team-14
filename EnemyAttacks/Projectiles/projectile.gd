@@ -1,4 +1,5 @@
 extends Area2D
+class_name Projectile
 
 @onready var path_2d: Path2D = $Path2D
 @onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
@@ -14,6 +15,8 @@ var distance: float = 0.0
 
 var speed = 100
 var direction = Vector2.ZERO
+
+var damage: int = 5
 
 func _ready():
 	if follow_type == 1:
@@ -47,8 +50,4 @@ func _physics_process(delta):
 	
 	elif follow_type == 2:
 		position += direction * speed * delta
-
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
-		body._kill()
-		queue_free()
+		

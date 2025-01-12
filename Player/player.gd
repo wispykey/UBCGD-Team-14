@@ -117,8 +117,11 @@ func pick_up_key():
 
 
 func _on_hitbox_area_entered(area: Area2D):
-	print("Player took ", area.damage, " damage")
+	print("Player took ", area.damage, " damage from ", area.name)
 	GameState.update_life(-area.damage)
+	
+	if area is Projectile:
+		area.queue_free()
 	
 
 func _on_player_died():

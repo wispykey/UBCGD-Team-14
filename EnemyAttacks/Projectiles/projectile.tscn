@@ -14,6 +14,9 @@ _data = {
 point_count = 10
 
 [node name="Projectile" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
 script = ExtResource("1_lr4rj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -31,5 +34,3 @@ position = Vector2(-0.717581, -0.696476)
 rotation = 0.770474
 scale = Vector2(0.28125, 0.273438)
 texture = ExtResource("2_ufddj")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
