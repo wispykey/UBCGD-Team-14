@@ -50,7 +50,6 @@ func _physics_process(delta: float) -> void:
 	handle_movement(delta)
 	align_position_to_grid()
 
-
 # Aligns player position to the grid
 func align_position_to_grid() -> void:
 	var half_size = floor(TILE_SIZE / 2)
@@ -125,3 +124,6 @@ func _on_hitbox_area_entered(area: Area2D):
 func _on_player_died():
 	print("Player died (currently does nothing)")
 	# queue_free()
+
+func _kill():
+	queue_free()
