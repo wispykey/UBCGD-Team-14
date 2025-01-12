@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d0s10uktux6yf" path="res://Prototyping/Amelie/Scenes/player.tscn" id="1_chltl"]
 [ext_resource type="Texture2D" uid="uid://bnhf86g2j3plf" path="res://Prototyping/Amelie/Modern tiles_Free/Interiors_free/16x16/Room_Builder_free_16x16.png" id="1_rfuba"]
 [ext_resource type="Script" path="res://Prototyping/Amelie/Scripts/level.gd" id="1_why6k"]
-[ext_resource type="PackedScene" uid="uid://bomiqmq23yxw5" path="res://Prototyping/Amelie/Scenes/projectile_spawner.tscn" id="4_ofhlr"]
+[ext_resource type="PackedScene" uid="uid://bomiqmq23yxw5" path="res://EnemyAttacks/Projectiles/projectile_spawner.tscn" id="4_ofhlr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xw030"]
 texture = ExtResource("1_rfuba")

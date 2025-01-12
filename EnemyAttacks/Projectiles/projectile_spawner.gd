@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var player: CharacterBody2D = $"../Player"
 
-var projectile_scene = preload("res://Prototyping/Amelie/Scenes/projectile.tscn")
+var projectile_scene = preload("res://EnemyAttacks/Projectiles/projectile.tscn")
 var screen_size: Vector2
 var spawn_timer: Timer
 
@@ -17,7 +17,11 @@ func start_spawning():
 	spawn_timer.wait_time = 2.0 # can adjust to change spawn rate
 	spawn_timer.autostart = true
 	spawn_timer.one_shot = false
-	spawn_timer.connect("timeout", Callable(self, "_spawn_projectile"))
+	
+	# NOTE: Temporarily spawning only circles until 'path' and 'straight' are fixed
+	spawn_timer.timeout.connect(_spawn_circle_projectile)
+	#spawn_timer.connect("timeout", Callable(self, "_spawn_projectile"))
+	
 	add_child(spawn_timer)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,11 +39,13 @@ func _spawn_projectile():
 	elif random_choice == 2:
 		_spawn_circle_projectile()
 
+
 func _spawn_circle_projectile():
 	var projectile_count = 8  # Number of projectiles to spawn
 	var radius_increment = 1  # Adjust this value to control how far apart the projectiles spawn
 	var angle_step = 2 * PI / projectile_count  # 2 * PI (360°) divided by the number of projectiles
-	var center_position = Vector2(0, 0)  # Center of the spiral
+	# NOTE: Changed center_position from Vector2(0,0) to the center of our game window
+	var center_position = get_viewport_rect().get_center()  # Center of the spiral
 	var start_angle = randf_range(0, 2 * PI)  # Random starting angle to vary the spiral
 	
 	# Spawn all projectiles at the center position
@@ -56,8 +62,6 @@ func _spawn_circle_projectile():
 		get_parent().add_child(projectile)
 		print("Spawning projectile at: ", projectile.position)
 
-		get_parent().add_child(projectile)
-		print("Spawning projectile at: ", position)
 
 func _spawn_path_projectile():
 	var projectile = projectile_scene.instantiate()
@@ -66,6 +70,7 @@ func _spawn_path_projectile():
 	print("Path projectile created at ", projectile.position)
 	get_parent().add_child(projectile)
 	
+
 func _spawn_straight_projectile():
 	var projectile = projectile_scene.instantiate()
 	projectile.follow_type = 0

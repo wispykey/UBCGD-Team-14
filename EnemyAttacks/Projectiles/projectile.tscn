@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bpoc745abffae"]
 
-[ext_resource type="Script" path="res://Prototyping/Amelie/Scripts/projectile.gd" id="1_lr4rj"]
+[ext_resource type="Script" path="res://EnemyAttacks/Projectiles/projectile.gd" id="1_lr4rj"]
 [ext_resource type="Texture2D" uid="uid://bwke0uchycnoa" path="res://Assets/Objects/orange_circle.png" id="2_ufddj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_51kr5"]
