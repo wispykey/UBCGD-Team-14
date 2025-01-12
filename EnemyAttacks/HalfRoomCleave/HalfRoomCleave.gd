@@ -1,51 +1,143 @@
 extends Node2D
 
-@export var telegraph_duration: int # Measured in beats
 @export var telegraph_image: PackedScene
 @export var attack_image: PackedScene
 
+const DIRECTIONS = ["WEST", "EAST", "NORTH", "SOUTH"]
 const TILE_SIZE = 32
 
+var telegraph_duration: int  = 4 # Measured in beats
 # Width x Height of the attack, measured in tiles
-var dimensions: Vector2
+var direction: String = ""
+var dimensions: Vector2 # Measured in tiles
+var coords: Vector2 # Measured in tiles
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$TelegraphTimer.wait_time = telegraph_duration * Conductor.seconds_per_quarter_note
 	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
-	# Start manually instead of auto-start to change wait_time above
-	$TelegraphTimer.start()
 	$DespawnTimer.timeout.connect(_on_despawn_timer_timeout)
-	
-	
-	# Originate from center of arena, if no position is inherited
-	if position == Vector2.ZERO:
-		position.x = get_viewport_rect().get_center().x
-	position.y = get_viewport_rect().get_center().y
-	
-	# Dynamically compute dimensions based on origin position
-	dimensions.x = position.x / TILE_SIZE
-	dimensions.y = get_viewport_rect().size.y / TILE_SIZE
+	# Disable collisions during telegraph
+	$HitZone.monitorable = false
+	$HitZone.monitoring = false
 
-	# Create collision area + shape, based on dimensions
+
+func start(direction: String):
+	set_direction(direction)
+	
+	normalize_position()
+	compute_dimensions()
+	generate_collision_area()
+	
+	$TelegraphTimer.start()
+	add_scene_on_every_tile($Telegraph, telegraph_image)
+	
+	
+# Allows parent nodes to set orientation of attack
+func set_direction(cardinal: String):
+	# Default to West on invalid input
+	if cardinal not in DIRECTIONS:
+		direction = "WEST"
+	else:
+		direction = cardinal
+
+
+func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
+	var x_offset: float = 0
+	var y_offset: float = 0
+	var x_invert: int = 1
+	var y_invert: int = 1
+	
+	match direction:
+		"WEST":
+			x_invert = -1
+			y_offset = -floor(dimensions.y/2)
+		"EAST":
+			y_offset = -floor(dimensions.y/2)
+		"NORTH":
+			y_invert = -1
+			x_offset = -floor(dimensions.x/2)
+		"SOUTH":
+			x_offset = -floor(dimensions.x/2)
+		
+	for i in dimensions.x:
+		for j in dimensions.y:
+			var telegraph = scene.instantiate()
+			telegraph.position.x = x_invert * TILE_SIZE*(i + x_offset)
+			telegraph.position.y = y_invert * TILE_SIZE*(j + y_offset)
+			parent.add_child(telegraph)	
+
+
+func normalize_position():
+	var viewport = get_viewport_rect()
+	var center = viewport.get_center()
+	
+	# Originate from center of arena by default
+	if position == Vector2.ZERO:
+		position.x = center.x
+		position.y = center.y
+		
+	# Center along an axis where appropriate
+	match direction:
+		"WEST", "EAST":
+			position.y = center.y
+		"NORTH", "SOUTH":
+			position.x = center.x
+	
+	# Get the position of top-left corner of the bounding tile
+	var x = int(position.x) - int(position.x) % TILE_SIZE
+	var y = int(position.y) - int(position.y) % TILE_SIZE
+	
+	## Set position to be the middle of tile, so that images appear centered
+	#position.x = x + TILE_SIZE / 2
+	#position.y = y + TILE_SIZE / 2
+	
+	# Store grid-based coordinates
+	coords.x = x / TILE_SIZE
+	coords.y = y / TILE_SIZE
+			
+			
+func compute_dimensions():
+	var viewport = get_viewport_rect()
+	var max_x = viewport.size.x / TILE_SIZE
+	var max_y = viewport.size.y / TILE_SIZE
+	
+	# Include the column/row that the attacker is standing on
+	match direction:
+		"WEST":
+			dimensions.x = coords.x   # -1: Don't extend into wall
+			dimensions.y = max_y - 2  # -2: Don't extend into walls 
+		"EAST":
+			dimensions.x = max_x - coords.x - 1  
+			dimensions.y = max_y - 2
+		"NORTH":
+			dimensions.x = max_x - 2
+			dimensions.y = coords.y
+		"SOUTH":
+			dimensions.x = max_x - 2
+			dimensions.y = max_y - coords.y - 1
+			
+	print("Cleaving ", direction, " from tile ", coords,
+		  ", in a ", dimensions.x, "x", dimensions.y, " area")
+
+
+# HitZone is intentionally missing CollisionShape. Added here.
+func generate_collision_area():
 	var collision_shape = CollisionShape2D.new()
 	var rect_shape = RectangleShape2D.new()
 	rect_shape.size = dimensions * TILE_SIZE
 	collision_shape.set_shape(rect_shape)
 	$HitZone.add_child(collision_shape)
-	$HitZone.position.x -= position.x / 2
-	# Disable collisions until telegraph ends
-	$HitZone.monitorable = false
-	$HitZone.monitoring = false
+	match direction:
+		"EAST":
+			$HitZone.position.x = (dimensions.x-1) * TILE_SIZE/2.0
+		"WEST":
+			$HitZone.position.x = -(dimensions.x-1) * TILE_SIZE/2.0
+		"NORTH":
+			$HitZone.position.y = -(dimensions.y-1) * TILE_SIZE/2.0
+		"SOUTH":
+			$HitZone.position.y = (dimensions.y-1)* TILE_SIZE/2.0
 	
-	# Add alert sign telegraph for every tile covered
-	for i in dimensions.x:
-		for j in dimensions.y:
-			var telegraph = telegraph_image.instantiate()
-			telegraph.position.x = -1 * TILE_SIZE*(i + 0.5)
-			telegraph.position.y = -1 * TILE_SIZE*(j - floor(dimensions.y/2))
-			$Telegraph.add_child(telegraph)
-
 
 func _on_telegraph_timer_timeout():
 	# Enable collision area
@@ -54,16 +146,10 @@ func _on_telegraph_timer_timeout():
 
 	# Could be optimized to avoid adding more children
 	$Telegraph.visible = false
-	for i in dimensions.x:
-		for j in dimensions.y:
-			var attack = attack_image.instantiate()
-			attack.position.x = -1 * TILE_SIZE*(i + 0.5)
-			attack.position.y = -1 * TILE_SIZE*(j - floor(dimensions.y/2))
-			add_child(attack)
+	add_scene_on_every_tile(self, attack_image)
 	$DespawnTimer.start()
 			
 			
 func _on_despawn_timer_timeout():
 	call_deferred("queue_free")
-	
 	
