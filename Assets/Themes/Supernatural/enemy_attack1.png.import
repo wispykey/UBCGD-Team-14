@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqwqv47t70l18"
-path="res://.godot/imported/ghostie2.png-0bb6420599c955e3a8aa6d47df2211b8.ctex"
+uid="uid://es04srj0p2ew"
+path="res://.godot/imported/enemy_attack1.png-1553eef5764d38d848d0da2214e2a44e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Themes/Supernatural/ghostie2.png"
-dest_files=["res://.godot/imported/ghostie2.png-0bb6420599c955e3a8aa6d47df2211b8.ctex"]
+source_file="res://Assets/Themes/Supernatural/enemy_attack1.png"
+dest_files=["res://.godot/imported/enemy_attack1.png-1553eef5764d38d848d0da2214e2a44e.ctex"]
 
 [params]
 

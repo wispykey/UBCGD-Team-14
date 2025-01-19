@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0mcqim45od27"
-path="res://.godot/imported/ghostie5.png-7cb79661ec5f5e382c81a1baddbd2965.ctex"
+uid="uid://d2vp2j4huxbmu"
+path="res://.godot/imported/fem_playercharacter3.png-6694a3c274995ea5d4bfa66666f80a8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Themes/Supernatural/ghostie5.png"
-dest_files=["res://.godot/imported/ghostie5.png-7cb79661ec5f5e382c81a1baddbd2965.ctex"]
+source_file="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter3.png"
+dest_files=["res://.godot/imported/fem_playercharacter3.png-6694a3c274995ea5d4bfa66666f80a8b.ctex"]
 
 [params]
 

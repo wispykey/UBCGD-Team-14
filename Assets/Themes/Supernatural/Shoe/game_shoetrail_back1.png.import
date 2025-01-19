@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcg7mms67mued"
-path="res://.godot/imported/fem_playercharacter1.png-b9797cc67626001dd7b7087eed5d3c63.ctex"
+uid="uid://jm7euh2ymjac"
+path="res://.godot/imported/game_shoetrail_back1.png-213ca702cb7df813a89bbbe4a48a665c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Themes/Supernatural/fem_playercharacter1.png"
-dest_files=["res://.godot/imported/fem_playercharacter1.png-b9797cc67626001dd7b7087eed5d3c63.ctex"]
+source_file="res://Assets/Themes/Supernatural/Shoe/game_shoetrail_back1.png"
+dest_files=["res://.godot/imported/game_shoetrail_back1.png-213ca702cb7df813a89bbbe4a48a665c.ctex"]
 
 [params]
 
