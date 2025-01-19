@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc1bm6fvuyn86"]
+
+[ext_resource type="PackedScene" uid="uid://di67atexby6hp" path="res://Components/GameOver.tscn" id="1_8sjqq"]
+
+[node name="GameOver" instance=ExtResource("1_8sjqq")]
