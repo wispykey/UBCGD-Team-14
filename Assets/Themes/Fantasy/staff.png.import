@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwuevv7opag5w"
-path="res://.godot/imported/fantasy_character.png-83223ea52d87bceb7836ae607c3356ac.ctex"
+uid="uid://bmpddhuuxo18w"
+path="res://.godot/imported/staff.png-c3e22e3b44c20fe443452179b469e95d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Themes/Fantasy/fantasy_character.png"
-dest_files=["res://.godot/imported/fantasy_character.png-83223ea52d87bceb7836ae607c3356ac.ctex"]
+source_file="res://Assets/Themes/Fantasy/staff.png"
+dest_files=["res://.godot/imported/staff.png-c3e22e3b44c20fe443452179b469e95d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3s1h307gq5mx"
-path="res://.godot/imported/fantasy_book.png-ab9e4aae11c0862495b8193d3fc199dc.ctex"
+uid="uid://btphoslsnr5d6"
+path="res://.godot/imported/fantasy-boss.png-b5cdd2c07afd5135ff28ad102ac1b571.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Themes/Fantasy/fantasy_book.png"
-dest_files=["res://.godot/imported/fantasy_book.png-ab9e4aae11c0862495b8193d3fc199dc.ctex"]
+source_file="res://Assets/Themes/Fantasy/fantasy-boss.png"
+dest_files=["res://.godot/imported/fantasy-boss.png-b5cdd2c07afd5135ff28ad102ac1b571.ctex"]
 
 [params]
 
