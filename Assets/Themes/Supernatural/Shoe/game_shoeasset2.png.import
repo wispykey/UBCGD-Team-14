@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diodd18bchuwd"
-path="res://.godot/imported/ghostie6.png-c221d5ce1a7e84640108490dcdbd0391.ctex"
+uid="uid://vnnf7qey13rg"
+path="res://.godot/imported/game_shoeasset2.png-2354ec6a4b153f4acecf74296a70c892.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Themes/Supernatural/ghostie6.png"
-dest_files=["res://.godot/imported/ghostie6.png-c221d5ce1a7e84640108490dcdbd0391.ctex"]
+source_file="res://Assets/Themes/Supernatural/Shoe/game_shoeasset2.png"
+dest_files=["res://.godot/imported/game_shoeasset2.png-2354ec6a4b153f4acecf74296a70c892.ctex"]
 
 [params]
 

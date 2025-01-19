@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cyevulsswg6t8"
-path="res://.godot/imported/fem_playercharacter2.png-b97bcfc2f698ffd5309a866e10bfb0cd.ctex"
+path="res://.godot/imported/fem_playercharacter2.png-3a99f96a2d9764b9c86d53c123b0c611.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Themes/Supernatural/fem_playercharacter2.png"
-dest_files=["res://.godot/imported/fem_playercharacter2.png-b97bcfc2f698ffd5309a866e10bfb0cd.ctex"]
+source_file="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter2.png"
+dest_files=["res://.godot/imported/fem_playercharacter2.png-3a99f96a2d9764b9c86d53c123b0c611.ctex"]
 
 [params]
 
