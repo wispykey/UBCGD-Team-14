@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di5xcx1ld75v3"
-path="res://.godot/imported/fantasy_potion.png-66306444c62e0e49e5840c0e564ba30f.ctex"
+uid="uid://t3hfol0phhs6"
+path="res://.godot/imported/book.png-2c8e8ca6d4e8aa77596ae62e1b93fe94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Themes/Fantasy/fantasy_potion.png"
-dest_files=["res://.godot/imported/fantasy_potion.png-66306444c62e0e49e5840c0e564ba30f.ctex"]
+source_file="res://Assets/Themes/Fantasy/book.png"
+dest_files=["res://.godot/imported/book.png-2c8e8ca6d4e8aa77596ae62e1b93fe94.ctex"]
 
 [params]
 
