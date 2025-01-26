@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhp84nbs5osdm"]
+
+[ext_resource type="Script" path="res://EnemyAttacks/PuddleHazard/puddle_hazard.gd" id="1_0w42w"]
+[ext_resource type="PackedScene" uid="uid://cnm8rfklhl5a" path="res://EnemyAttacks/PuddleHazard/AlertSign.tscn" id="2_ao7ew"]
+[ext_resource type="PackedScene" uid="uid://da85dffe03nhp" path="res://EnemyAttacks/PuddleHazard/PersistentFlame.tscn" id="3_pnqvt"]
+[ext_resource type="AudioStream" uid="uid://btp2hxbntuwtc" path="res://Assets/SFX/Fire/Fire 6.wav" id="4_12hqp"]
+[ext_resource type="AudioStream" uid="uid://dgx71205wv4n4" path="res://Assets/SFX/Fire/Fire Crackling 1.wav" id="5_u2n0y"]
+
+[node name="PuddleHazard" type="Node2D"]
+script = ExtResource("1_0w42w")
+telegraph_image = ExtResource("2_ao7ew")
+attack_image = ExtResource("3_pnqvt")
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HitZone" type="Area2D" parent="."]
+
+[node name="DespawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Telegraph" type="Node2D" parent="."]
+
+[node name="SpawnSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_12hqp")
+
+[node name="ContinuousSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_u2n0y")
+pitch_scale = 1.26
