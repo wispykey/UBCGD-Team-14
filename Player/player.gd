@@ -32,11 +32,13 @@ var directions: Dictionary = { # Directions the player can go in
 const original_modulate: Color = Color(1, 1, 1)  # White (default color)
 const max_color: Color = Color(0, 0, 1) # Blue. TODO: choose a better color to change to
 
-## COMMENTED OUT: "On-beat" validation variables
-#var current_time = 0.0 # Time in seconds of current beat
-#var last_beat_time = 0.0 # Time of last beat
-#const VALID_BEAT_WINDOW = 0.15 # Buffer for valid/onbeat input
-#const DELAY_TIME = 0.15 # human reaction time
+# "On-beat" validation variables
+var input_queue = []
+var current_time = 0.0 # Time since player loaded
+@onready var time_interval = Conductor.seconds_per_quarter_note # Expected Time between beats
+var expected_next_beat_time = 0.0 # Time for next anticipated beat; current_time + time_interval
+const DELAY_TIME = 0.15 # avg human reaction time
+var offset_adj = 0.35 # how off the song is from quarter beat
 
 ## COMMENTED OUT: Double tap variables
 #var last_key = null
@@ -60,26 +62,30 @@ func _physics_process(delta: float) -> void:
 			can_light_up = true
 			print("Lighting up tiles")
 	
-	# Timing code
-	#current_time += delta
+	current_time += delta
 	
-	handle_movement(delta)
+	handle_movement()
 	align_position_to_grid()
 
 
 # Handles player grid-based movement and input
-func handle_movement(_delta) -> void:	
+func handle_movement() -> void:	
 	for action in directions:
 		if Input.is_action_just_pressed(action):
-			_move_one_cell(directions[action].dir)
-			directions[action].held = true
+			if input_queue.is_empty():
+				if valid_input():
+					_move_one_cell(directions[action].dir)
+					directions[action].held = true
+				else: # Offbeat
+					player_sprite.modulate = Color(1,0,0)
+					input_queue.append(action)
+					print("added to current queue: " + str(input_queue))
 			
 			## COMMENTED OUT: Double Tap code
 			# Either double tap action or move one tile
 			#if not _detect_double_tap(action):
 				#_move_one_cell(directions[action].dir)
 		elif Input.is_action_just_released(action):
-			directions[action].held = false
 			handle_sustain(action, directions[action].count)
 
 
@@ -117,6 +123,7 @@ func handle_sustain(action, count):
 	else:
 		move_amount(directions[action].dir, count)
 	update_color(0)
+	directions[action].held = false
 	# TODO: when pressing multiple keys, visual color not aligned upon releasing one
 
 # Moves player by given count and direction
@@ -140,19 +147,44 @@ func update_color(beats_held: int):
 	var intensity = clamp(beats_held / 3.0, 0, 1)  # Adjust "10.0" for max beats
 	player_sprite.modulate = original_modulate.lerp(max_color, intensity)
 
-
+var buffer_count = 0
 ### TIMING/BEAT CODE:
 # Update time of most recent beat 
 func _on_quarter_beat(_beat_num):
-	#last_beat_time = current_time
-	
 	for action in directions:
 		if directions[action].held:
 			directions[action].count += 1
 			update_color(directions[action].count)
 		else:
 			directions[action].count = 0
-	#print("beat")
+	
+	if buffer_count <= 0:
+		handle_queue()
+		buffer_count = 1
+		player_sprite.modulate = original_modulate
+	else:
+		buffer_count -= 1
+	expected_next_beat_time = current_time + time_interval
+	#print("beat at time: " + str(current_time) + ", next beat at: " + str(expected_next_beat_time))
+
+# Check for valid timing of input
+func valid_input() -> bool:
+	var valid_start = expected_next_beat_time - DELAY_TIME
+	var valid_end = expected_next_beat_time + DELAY_TIME
+	var adj_time = current_time + offset_adj
+	
+	var is_on_beat = adj_time >= valid_start and adj_time <= valid_end
+	#if not is_on_beat:
+		#print("offbeat! adjustment: " + str(current_time - expected_next_beat_time))
+	
+	# Check if input falls in buffer range
+	return is_on_beat
+
+# Handles queued inputs on quarter beat
+func handle_queue():
+	for action in input_queue:
+		_move_one_cell(directions[action].dir)
+	input_queue.clear()
 
 ## Check if input is within time range, early/before
 #func is_input_onbeat():
