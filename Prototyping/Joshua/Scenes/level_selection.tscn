@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://hrdsqvtibmy4"]
+
+[ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_selection.gd" id="1_o8iav"]
+
+[node name="LevelSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o8iav")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LevelDisplayContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/LevelDisplayContainer"]
+layout_mode = 2
+text = "no world selected"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+theme_override_constants/separation = 636
+
+[node name="Back" type="Button" parent="VBoxContainer/ButtonContainer/HBoxContainer"]
+layout_mode = 2
+text = "<"
+
+[node name="Forward" type="Button" parent="VBoxContainer/ButtonContainer/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/HBoxContainer/Forward" to="." method="_on_forward_pressed"]
