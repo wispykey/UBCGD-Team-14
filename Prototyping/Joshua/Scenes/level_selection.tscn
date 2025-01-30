@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://hrdsqvtibmy4"]
+[gd_scene load_steps=3 format=3 uid="uid://hrdsqvtibmy4"]
 
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_selection.gd" id="1_o8iav"]
+[ext_resource type="Texture2D" uid="uid://0fo1xcfi2gfd" path="res://Prototyping/Joshua/Assets/supernaturalPortal.png" id="2_0exld"]
 
 [node name="LevelSelection" type="Control"]
 layout_mode = 3
@@ -13,14 +14,25 @@ script = ExtResource("1_o8iav")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 957.0
+offset_bottom = 686.0
+scale = Vector2(0.7, 0.7)
 
 [node name="LevelDisplayContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/LevelDisplayContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/LevelDisplayContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("2_0exld")
+
+[node name="Label" type="Label" parent="VBoxContainer/LevelDisplayContainer/TextureRect"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 599.0
+offset_right = 668.0
+offset_bottom = 627.0
 text = "no world selected"
 horizontal_alignment = 1
 
@@ -30,6 +42,7 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
 theme_override_constants/separation = 636
+alignment = 1
 
 [node name="Back" type="Button" parent="VBoxContainer/ButtonContainer/HBoxContainer"]
 layout_mode = 2

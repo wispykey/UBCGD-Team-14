@@ -1,9 +1,15 @@
 extends Control
 
 var levels = ["Spookesville", "Spellville", "Steamville"]
+var level_images = [
+	preload("res://Prototyping/Joshua/Assets/supernaturalPortal.png"),
+	preload("res://Prototyping/Joshua/Assets/fantasyPortal.png"),
+	preload("res://Prototyping/Joshua/Assets/steampunkPortal.png")
+]
 var current_index = 0
 
-@onready var label = $VBoxContainer/LevelDisplayContainer/Label
+@onready var label = $VBoxContainer/LevelDisplayContainer/TextureRect/Label
+@onready var texture_rect = $VBoxContainer/LevelDisplayContainer/TextureRect
 @onready var back_button = $VBoxContainer/ButtonContainer/HBoxContainer/Back
 @onready var forward_button = $VBoxContainer/ButtonContainer/HBoxContainer/Forward
 
@@ -13,6 +19,7 @@ func _ready():
 
 func update_label():
 	label.text = levels[current_index]
+	texture_rect.texture = level_images[current_index]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
