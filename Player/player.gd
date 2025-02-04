@@ -39,17 +39,13 @@ var directions: Dictionary = { # Directions the player can go in
 		"move_down": {"dir": Vector2(0, 1), "held": 0.0},
 }
 
-# Player Visual Modifications to AnimatedSprite2D
-const original_modulate: Color = Color(1, 1, 1)  # White (default color)
-# Colors for each level of charge. 0-index is original color (white)
+# Colors for each level of charge.
 const CHARGE_COLORS = [
-	Color(1, 1, 1),
+	Color(1, 1, 1), # 0-index is original modulate
 	Color(1, 0.65, 0), 
 	Color(1, 0.2, 0.2),
 	Color(0, 0.8, 1), 
 ]
-
-const max_color: Color = Color(0, 0, 1) # Blue. TODO: choose a better color to change to
 
 ## COMMENTED OUT: Double tap variables
 #var last_key = null
@@ -166,16 +162,16 @@ func move_to_end(direction: Vector2):
 ### VISUAL EFFECTS CODE
 # Function to update the player's color based on beats held
 func update_color(duration: float):
-	# Derive charges by comparing held duration to 
+	# Derive charges by comparing held duration to known beat duration
 	var num_charges: float = duration / Conductor.seconds_per_quarter_note
-	# Using decimal remainder lets us cycle intensity from 0 to 0.99 very charge.
+	# Decimal remainder lets us cycle intensity from 0 to 0.99 between every change.
 	var intensity = num_charges - floori(num_charges) if num_charges < MAX_CHARGES else 1
-	# We want the scale to cycle from 0-1, 0-1, 0-1 three times
-	# Each time, we will change the target modulate color
-	var next = min(MAX_CHARGES, int(num_charges)+1)
-	var curr = max(0, next-1)
+	# Two adjacent indices in CHARGE_COLORS
+	var next = min(1+int(num_charges), MAX_CHARGES)
+	var curr = next-1
 	var target_color = CHARGE_COLORS[next]
 	var curr_color = CHARGE_COLORS[curr]
+	# < -1.0 parameter is ease-in-out
 	intensity = ease(intensity, -1.8)
 	player_sprite.modulate = curr_color.lerp(target_color, intensity)
 
@@ -185,7 +181,7 @@ func update_color(duration: float):
 func _on_quarter_beat(_beat_num):
 	pass
 
-
+# Evaluate how well player timed an input (presses and long releases)
 func handle_input_timing():
 	# Subtract one because beats are 1-indexed
 	var prev_beat_in_secs = (Conductor.num_beats_passed-1) * Conductor.seconds_per_quarter_note
@@ -198,19 +194,17 @@ func handle_input_timing():
 	var close_enough = after_prev <= LEEWAY_IN_SECS or before_next <= LEEWAY_IN_SECS
 
 	if close_enough:
-		# TODO: Do stuff here. Recover health, increase combo, etc.
+		# TODO: Do stuff here (maybe a signal). Recover health, increase combo, etc.
 		pass
 	else:
-		# TODO: Do stuff here. Lose health, reset combo, etc.
+		# TODO: Do stuff here (maybe a signal). Lose health, reset combo, etc.
 		pass
 			
 	if debug_timing_info:
-		var result = "GOOD!" if close_enough else "Bad."
+		var result = "Good!" if close_enough else "BAD."
 		var min_error = min(after_prev, before_next) * 1000
 		print(result + " Within {error} ms of beat".format({"error": "%0.2f" % min_error})) 
 	
-	
-
 
 ### COMMENTED OUT: DOUBLE TAP MOVEMENT CODE
 # Detect if the player double tapped, an call a double tap func
