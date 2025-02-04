@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cnb7x1pkr34a4"]
+[gd_scene load_steps=16 format=4 uid="uid://cnb7x1pkr34a4"]
 
 [ext_resource type="Script" path="res://Levels/Fantasy.gd" id="1_qvkh8"]
 [ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_5na7h"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="7_pxnv2"]
 [ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="8_4rhck"]
 [ext_resource type="PackedScene" uid="uid://dhp84nbs5osdm" path="res://EnemyAttacks/PuddleHazard/puddle_hazard.tscn" id="10_t46jv"]
+[ext_resource type="PackedScene" uid="uid://biqni1sm5qhle" path="res://EnemyAttacks/BossStaff.tscn" id="11_hxj16"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ric4a"]
 texture = ExtResource("5_wbmv1")
@@ -64,3 +65,6 @@ z_index = 99
 metadata/_edit_use_anchors_ = true
 
 [node name="PuddleHazard" parent="." instance=ExtResource("10_t46jv")]
+
+[node name="BossStaff" parent="." instance=ExtResource("11_hxj16")]
+position = Vector2(490, 237)
