@@ -41,6 +41,14 @@ var directions: Dictionary = { # Directions the player can go in
 
 # Player Visual Modifications to AnimatedSprite2D
 const original_modulate: Color = Color(1, 1, 1)  # White (default color)
+# Colors for each level of charge. 0-index is original color (white)
+const CHARGE_COLORS = [
+	Color(1, 1, 1),
+	Color(1, 0.65, 0), 
+	Color(1, 0.2, 0.2),
+	Color(0, 0.8, 1), 
+]
+
 const max_color: Color = Color(0, 0, 1) # Blue. TODO: choose a better color to change to
 
 ## COMMENTED OUT: Double tap variables
@@ -158,10 +166,18 @@ func move_to_end(direction: Vector2):
 ### VISUAL EFFECTS CODE
 # Function to update the player's color based on beats held
 func update_color(duration: float):
-	# Blend from original_modulate to max_color
-	var intensity = duration / (3.0 * Conductor.seconds_per_quarter_note)
-	intensity = clamp(intensity, 0, 1)  # Adjust "10.0" for max beats
-	player_sprite.modulate = original_modulate.lerp(max_color, intensity)
+	# Derive charges by comparing held duration to 
+	var num_charges: float = duration / Conductor.seconds_per_quarter_note
+	# Using decimal remainder lets us cycle intensity from 0 to 0.99 very charge.
+	var intensity = num_charges - floori(num_charges) if num_charges < MAX_CHARGES else 1
+	# We want the scale to cycle from 0-1, 0-1, 0-1 three times
+	# Each time, we will change the target modulate color
+	var next = min(MAX_CHARGES, int(num_charges)+1)
+	var curr = max(0, next-1)
+	var target_color = CHARGE_COLORS[next]
+	var curr_color = CHARGE_COLORS[curr]
+	intensity = ease(intensity, -1.8)
+	player_sprite.modulate = curr_color.lerp(target_color, intensity)
 
 
 ### TIMING/BEAT CODE:
