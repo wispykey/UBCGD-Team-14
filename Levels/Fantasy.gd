@@ -6,6 +6,7 @@ extends Node2D
 @export var half_room_cleave: PackedScene
 @export var spawn_ghost: PackedScene
 @export var puddle_hazard: PackedScene
+
 @export var debug_random_test: bool = false
 
 var window_dimensions: Vector2
@@ -104,7 +105,6 @@ func spawn_ghost_on_player(args: Dictionary):
 func spawn_puddles_periodically(args: Dictionary):
 	Conductor.quarter_beat.connect(_on_quarter_beat_spawn_puddle)
 
-	
 func _on_quarter_beat_spawn_puddle(beat_num: int):
 	# Only every eight beats, starting on beat two
 	if floori(Conductor.num_beats_passed) % 8 != 2:
