@@ -9,6 +9,7 @@ signal quarter_beat(beat_num: int)
 @onready var sfx_test := $SFXTest
 
 # Drum stick sound on each quarter-note, for debug.
+@export var metronome_on: bool = true
 @export var debug_mode: bool = false
 
 
@@ -75,8 +76,9 @@ func update_beat_info() -> void:
 		# Emit signal for game events that happen on the quarter-note pulse
 		quarter_beat.emit(beat_number)
 		# Quarter note pulse, for debug
-		if debug_mode: 
+		if metronome_on: 
 			sfx_test.play()
+		if debug_mode:
 		# Debug output.
 			var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
 			print("Beat ", beat_number)
