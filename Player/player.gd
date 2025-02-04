@@ -24,7 +24,7 @@ const TILES_PER_CHARGE: int = 3
 # Duration to distinguish the releases of short taps vs intentional sustained taps
 const MIN_HOLD_DURATION: float = 0.35
 # Allow inputs to be timed earlier/later than the beat by this amount
-const LEEWAY_IN_SECS: float = 0.15
+const LEEWAY_IN_SECS: float = 0.15 # TODO: Allow calibration.
 
 ## Player propertes
 const PLAYER_SIZE: int = 32
@@ -171,21 +171,29 @@ func _on_quarter_beat(_beat_num):
 
 
 func handle_input_timing():
+	# Subtract one because beats are 1-indexed
 	var prev_beat_in_secs = (Conductor.num_beats_passed-1) * Conductor.seconds_per_quarter_note
 	var input_time = Conductor.current_time_in_secs
 	var next_beat_in_secs = prev_beat_in_secs + Conductor.seconds_per_quarter_note
 	
+	# Allow inputs slightly early/late relative to the most recent beat
 	var after_prev = abs(input_time - prev_beat_in_secs)
 	var before_next = abs(input_time - next_beat_in_secs)
-	
-	if !debug_timing_info:
-		return
-	
-	var min_error = min(after_prev, before_next) * 1000
-	if after_prev <= LEEWAY_IN_SECS or before_next <= LEEWAY_IN_SECS:
-		print("GOOD! Within {error} ms of beat".format({"error": "%0.2f" % min_error})) 
+	var close_enough = after_prev <= LEEWAY_IN_SECS or before_next <= LEEWAY_IN_SECS
+
+	if close_enough:
+		# TODO: Do stuff here. Recover health, increase combo, etc.
+		pass
 	else:
-		print("Bad. Within {error} ms of beat".format({"error": "%0.2f" % min_error})) 
+		# TODO: Do stuff here. Lose health, reset combo, etc.
+		pass
+			
+	if debug_timing_info:
+		var result = "GOOD!" if close_enough else "Bad."
+		var min_error = min(after_prev, before_next) * 1000
+		print(result + " Within {error} ms of beat".format({"error": "%0.2f" % min_error})) 
+	
+	
 
 
 ### COMMENTED OUT: DOUBLE TAP MOVEMENT CODE
