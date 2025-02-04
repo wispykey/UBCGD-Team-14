@@ -6,11 +6,19 @@ extends Node2D
 const DIRECTIONS = ["WEST", "EAST", "NORTH", "SOUTH"]
 const TILE_SIZE = 32
 
+var telegraph_rect
 var telegraph_duration: int  = 4 # Measured in beats
 # Width x Height of the attack, measured in tiles
 var direction: String = ""
 var dimensions: Vector2 # Measured in tiles
 var coords: Vector2 # Measured in tiles
+
+var window_dimensions
+var half_width
+var half_height
+var telegraph_dur_sec
+var size_tween
+var pos_tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,6 +28,15 @@ func _ready() -> void:
 	# Disable collisions during telegraph
 	$HitZone.monitorable = false
 	$HitZone.monitoring = false
+	
+	window_dimensions =  get_viewport_rect().size
+	half_width = window_dimensions.x/2
+	half_height = window_dimensions.y/2
+	telegraph_dur_sec = $TelegraphTimer.wait_time
+	
+	telegraph_rect = ColorRect.new()
+	size_tween = create_tween()
+	pos_tween = create_tween()
 
 
 func start(direction: String):
@@ -29,8 +46,10 @@ func start(direction: String):
 	compute_dimensions()
 	generate_collision_area()
 	
+	create_telegraph_rectangle()
 	$TelegraphTimer.start()
-	add_scene_on_every_tile($Telegraph, telegraph_image)
+	#add_scene_on_every_tile($Telegraph, telegraph_image)
+	
 	
 	
 # Allows parent nodes to set orientation of attack
@@ -48,6 +67,7 @@ func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
 	var x_invert: int = 1
 	var y_invert: int = 1
 	
+	print(direction)
 	match direction:
 		"WEST":
 			x_invert = -1
@@ -67,6 +87,41 @@ func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
 			telegraph.position.y = y_invert * TILE_SIZE*(j + y_offset)
 			parent.add_child(telegraph)	
 
+func create_telegraph_rectangle():
+	telegraph_rect.color = Color(1, 0, 0, 0.3)  # Semi-transparent red
+	add_child(telegraph_rect)
+
+	size_tween = create_tween() # between; interpolated object
+	pos_tween = create_tween() 
+	
+	# Calculate final size based on direction
+	match direction:
+		"EAST": # Left to Right -->
+			telegraph_rect.position = Vector2(-TILE_SIZE/2, -half_height) # Top Center
+			telegraph_rect.size = Vector2(0, window_dimensions.y) # Height of screen
+			size_tween.tween_property(telegraph_rect, "size:x", dimensions.x * TILE_SIZE + TILE_SIZE, telegraph_dur_sec)
+		
+		"WEST":  # Right to Left
+			telegraph_rect.position = Vector2(TILE_SIZE/2, -half_height) # Top center
+			telegraph_rect.size = Vector2(0, window_dimensions.y)
+			pos_tween.tween_property(telegraph_rect, "position:x", -half_width, telegraph_dur_sec)
+			size_tween.tween_property(telegraph_rect, "size:x", dimensions.x * TILE_SIZE + TILE_SIZE,telegraph_dur_sec)
+		
+		"SOUTH": # Top to Bottom
+			telegraph_rect.position = Vector2(-half_width, -TILE_SIZE/2)
+			telegraph_rect.size = Vector2(window_dimensions.x, 0)
+			size_tween.tween_property(telegraph_rect, "size:y", dimensions.y * TILE_SIZE, telegraph_dur_sec)
+
+		"NORTH": # Bottom to Top
+			telegraph_rect.position = Vector2(-half_width, TILE_SIZE/2)
+			telegraph_rect.size = Vector2(window_dimensions.x, 0)
+			pos_tween.tween_property(telegraph_rect, "position:y", -half_height, telegraph_dur_sec)
+			size_tween.tween_property(telegraph_rect, "size:y", dimensions.y * TILE_SIZE + TILE_SIZE, telegraph_dur_sec)
+
+	# Ensure telegraph disappears before the attack starts
+	size_tween.tween_callback(func(): telegraph_rect.queue_free())
+	#pos_tween.tween_callback(func(): telegraph_rect.queue_free())
+	
 
 func normalize_position():
 	var viewport = get_viewport_rect()
