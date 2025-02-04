@@ -81,7 +81,7 @@ func _process(delta: float) -> void:
 		calibration_offset += TIMING_CALIBRATION_STEP
 		print("New offset: ", calibration_offset)
 	
-	handle_movement(delta)
+	handle_movement()
 	align_position_to_grid()
 
 # Handles player grid-based movement and input
@@ -187,7 +187,7 @@ func update_color(duration: float):
 	intensity = ease(intensity, -1.8)
 	player_sprite.modulate = curr_color.lerp(target_color, intensity)
 
-
+var buffer_count = 0
 ### TIMING/BEAT CODE:
 # Update time of most recent beat 
 func _on_quarter_beat(_beat_num):
@@ -228,7 +228,6 @@ func handle_input_timing():
 			"closest": closest,
 			"stats": stats})) 
 			
-	
 
 ### COMMENTED OUT: DOUBLE TAP MOVEMENT CODE
 # Detect if the player double tapped, an call a double tap func
