@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://3p7va0o7hql7"]
+
+[ext_resource type="Texture2D" uid="uid://btphoslsnr5d6" path="res://Assets/Themes/Fantasy/fantasy-boss.png" id="1_qrxo2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6v857"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qrxo2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FantasyBoss" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_6v857")

@@ -5,6 +5,8 @@ extends Node2D
 
 @export var half_room_cleave: PackedScene
 @export var spawn_ghost: PackedScene
+@export var puddle_hazard: PackedScene
+
 @export var debug_random_test: bool = false
 
 var window_dimensions: Vector2
@@ -29,14 +31,15 @@ const VER_TILES: int = HEIGHT / TILE_SIZE
 #   'function' is the name of a function in this script; must be in quotation marks
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
-	{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
-	{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
-	{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
-	{"time": 16, "function": "cleave", "args": {"direction": "SOUTH"}},
-	{"time": 20, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 24, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 25, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 30, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 1, "function": "spawn_puddles_periodically", "args": {}},
+	#{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
+	#{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
+	#{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
+	#{"time": 16, "function": "cleave", "args": {"direction": "SOUTH"}},
+	#{"time": 20, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 24, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 25, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 30, "function": "spawn_ghost_on_player", "args": {}},
 ]
 var next_event: int = 0
 
@@ -98,3 +101,22 @@ func spawn_ghost_on_player(args: Dictionary):
 	var ghost = spawn_ghost.instantiate()
 	ghost.position = %Player.position
 	add_child(ghost)
+	
+func spawn_puddles_periodically(args: Dictionary):
+	Conductor.quarter_beat.connect(_on_quarter_beat_spawn_puddle)
+
+func _on_quarter_beat_spawn_puddle(beat_num: int):
+	# Only every eight beats, starting on beat two
+	if floori(Conductor.num_beats_passed) % 8 != 2:
+		return
+		
+	print("Spawning puddle")
+	var puddle = puddle_hazard.instantiate()
+	add_child(puddle)
+	if debug_random_test:
+		var random_width = randi_range(3,6)
+		# Always square, just for testing
+		puddle.set_dimensions(Vector2(random_width, random_width-1))
+		puddle.position = get_viewport_rect().get_center()
+		puddle.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
+	puddle.start()

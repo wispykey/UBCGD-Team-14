@@ -9,6 +9,7 @@ signal quarter_beat(beat_num: int)
 @onready var sfx_test := $SFXTest
 
 # Drum stick sound on each quarter-note, for debug.
+@export var metronome_on: bool = false
 @export var debug_mode: bool = false
 
 
@@ -54,7 +55,7 @@ var beat_number: int
 var current_time_in_secs: float
 
 func _ready() -> void:
-	set_music("Supernatural1")
+	set_music("Fantasy2")
 	current_time_in_secs = 0.0
 
 
@@ -75,8 +76,9 @@ func update_beat_info() -> void:
 		# Emit signal for game events that happen on the quarter-note pulse
 		quarter_beat.emit(beat_number)
 		# Quarter note pulse, for debug
-		if debug_mode: 
+		if metronome_on: 
 			sfx_test.play()
+		if debug_mode:
 		# Debug output.
 			var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
 			print("Beat ", beat_number)
@@ -116,7 +118,9 @@ func compute_playback_time() -> float:
 	var audio_delta = AudioServer.get_time_since_last_mix()
 	# Compensate for output latency.
 	var latency: float =  AudioServer.get_output_latency()
-	return max(0.0, time + audio_delta - latency)
+	
+	return max(0.0, time)
+	#return max(0.0, time + audio_delta - latency)
 
 
 # Converts bpm into how long a quarter lasts, in seconds
