@@ -17,14 +17,14 @@ const TILE_SIZE: int = 32
 const WIDTH: int = 640
 const HEIGHT: int = 448
 
-# The number of tiles to move per beat of sustained input
+# The number of charges to activate dash-to-the-wall
 const MAX_CHARGES: int = 3
+# The number of tiles to move per beat of sustained input
 const TILES_PER_CHARGE: int = 3
-
+# Duration to distinguish the releases of short taps vs intentional sustained taps
 const MIN_HOLD_DURATION: float = 0.35
-
-# Allow the player to be earlier/later than the beat by this amount
-const LEEWAY_IN_SECS: float = 0.12
+# Allow inputs to be timed earlier/later than the beat by this amount
+const LEEWAY_IN_SECS: float = 0.15
 
 ## Player propertes
 const PLAYER_SIZE: int = 32
@@ -33,23 +33,15 @@ var has_key: bool = false
 var can_light_up: bool = false
 
 var directions: Dictionary = { # Directions the player can go in
-		"move_right": {"dir": Vector2(1, 0), "held": 0.0, "count": 0},
-		"move_left": {"dir": Vector2(-1, 0), "held": 0.0, "count": 0},
-		"move_up": {"dir": Vector2(0, -1), "held": 0.0, "count": 0},
-		"move_down": {"dir": Vector2(0, 1), "held": 0.0, "count": 0},
+		"move_right": {"dir": Vector2(1, 0), "held": 0.0},
+		"move_left": {"dir": Vector2(-1, 0), "held": 0.0},
+		"move_up": {"dir": Vector2(0, -1), "held": 0.0},
+		"move_down": {"dir": Vector2(0, 1), "held": 0.0},
 }
 
 # Player Visual Modifications to AnimatedSprite2D
 const original_modulate: Color = Color(1, 1, 1)  # White (default color)
 const max_color: Color = Color(0, 0, 1) # Blue. TODO: choose a better color to change to
-
-# "On-beat" validation variables
-var current_time = 0.0 # Time since player loaded
-@onready var time_interval = Conductor.seconds_per_quarter_note # Expected Time between beats
-var expected_next_beat_time = 0.0 # Time for next anticipated beat; current_time + time_interval
-const DELAY_TIME = 0.15 # avg human reaction time
-var offset_adj = 0.35 - 0.35 # how off the song is from quarter beat
-
 
 ## COMMENTED OUT: Double tap variables
 #var last_key = null
@@ -73,8 +65,6 @@ func _process(delta: float) -> void:
 			can_light_up = true
 			print("Lighting up tiles")
 	
-	current_time += delta
-	
 	handle_movement(delta)
 	align_position_to_grid()
 
@@ -86,7 +76,7 @@ func handle_movement(delta: float) -> void:
 			_move_one_cell(directions[action].dir)
 			directions[action].held += delta
 			handle_input_timing()
-			return # Prevent processing multiple directions simultaneously
+			return # Early returns prevent processing multiple directions
 	
 	for action in directions:	
 		if Input.is_action_just_released(action):
@@ -136,15 +126,20 @@ func _light_up_tile():
 # Handle sustained inputs on release
 # Eventually, could make it a match (switch case)
 func handle_release(action):
-	var count = floori((directions[action].held + DELAY_TIME) / Conductor.seconds_per_quarter_note)
+	# Instead of manually counting charges on quarter beats, derive based on held duration 
+	# LEEWAY_IN_SECS allows player to release slightly early and still get the next beat's powerup
+	var count = floori((directions[action].held + LEEWAY_IN_SECS) / Conductor.seconds_per_quarter_note)
 	if count >= MAX_CHARGES:
 		move_to_end(directions[action].dir)
 	else:
 		move_amount(directions[action].dir, count * TILES_PER_CHARGE) 
-	update_color(0)
+	
 	for other_action in directions:
 		directions[other_action].held = 0.0
 		directions[other_action].count = 0
+	
+	# Reset player color
+	update_color(0.0)
 
 # Moves player by given count and direction
 # Lights up tiles
@@ -168,20 +163,12 @@ func update_color(duration: float):
 	intensity = clamp(intensity, 0, 1)  # Adjust "10.0" for max beats
 	player_sprite.modulate = original_modulate.lerp(max_color, intensity)
 
-var buffer_count = 0
+
 ### TIMING/BEAT CODE:
 # Update time of most recent beat 
 func _on_quarter_beat(_beat_num):
 	pass
-	
-	#if buffer_count <= 0:
-		#buffer_count = 1
-		#player_sprite.modulate = original_modulate
-	#else:
-		#buffer_count -= 1
-		
-	#expected_next_beat_time = current_time + time_interval
-	#print("beat at time: " + str(current_time) + ", next beat at: " + str(expected_next_beat_time))
+
 
 func handle_input_timing():
 	var prev_beat_in_secs = (Conductor.num_beats_passed-1) * Conductor.seconds_per_quarter_note
@@ -199,36 +186,6 @@ func handle_input_timing():
 		print("GOOD! Within {error} ms of beat".format({"error": "%0.2f" % min_error})) 
 	else:
 		print("Bad. Within {error} ms of beat".format({"error": "%0.2f" % min_error})) 
-
-
-
-# Check for valid timing of input
-func valid_input() -> bool:
-	var valid_start = expected_next_beat_time - DELAY_TIME
-	var valid_end = expected_next_beat_time + DELAY_TIME
-	var adj_time = current_time + offset_adj
-	
-	var is_on_beat = adj_time >= valid_start and adj_time <= valid_end
-	#if not is_on_beat:
-		#print("offbeat! adjustment: " + str(current_time - expected_next_beat_time))
-	
-	# Check if input falls in buffer range
-	return is_on_beat
-
-## Check if input is within time range, early/before
-#func is_input_onbeat():
-	#var valid_start = last_beat_time - VALID_BEAT_WINDOW
-	#var valid_end = last_beat_time + VALID_BEAT_WINDOW
-	#
-	#var too_early = current_time < valid_start
-	#var too_late = current_time > valid_end
-	#if too_early:
-		#print("too early!")
-	#if too_late:
-		#print("too late!")
-	#
-	##Check if input falls in buffer range
-	#return not too_early and not too_late
 
 
 ### COMMENTED OUT: DOUBLE TAP MOVEMENT CODE
