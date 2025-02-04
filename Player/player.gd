@@ -10,6 +10,8 @@ Player movement-related functionality should exist here.
 
 signal light_up_tile(cell_pos: Vector2) # Signal for tileManager to modify itself
 
+@export var debug_timing_info: bool = false
+
 # TODO: Use TileManager variables; if TileManager is global
 const TILE_SIZE: int = 32
 const WIDTH: int = 640
@@ -18,6 +20,11 @@ const HEIGHT: int = 448
 # The number of tiles to move per beat of sustained input
 const MAX_CHARGES: int = 3
 const TILES_PER_CHARGE: int = 3
+
+const MIN_HOLD_DURATION: float = 0.35
+
+# Allow the player to be earlier/later than the beat by this amount
+const LEEWAY_IN_SECS: float = 0.12
 
 ## Player propertes
 const PLAYER_SIZE: int = 32
@@ -78,18 +85,21 @@ func handle_movement(delta: float) -> void:
 		if Input.is_action_just_pressed(action):
 			_move_one_cell(directions[action].dir)
 			directions[action].held += delta
+			handle_input_timing()
 			return # Prevent processing multiple directions simultaneously
 	
 	for action in directions:	
 		if Input.is_action_just_released(action):
+			if directions[action].held > MIN_HOLD_DURATION:
+				handle_input_timing()
 			handle_release(action)
-			break
+			return
 	
 	for action in directions:
 		if Input.is_action_pressed(action):
 			directions[action].held += delta
 			update_color(directions[action].held)
-			break
+			return
 			
 		## COMMENTED OUT: Double Tap code
 		# Either double tap action or move one tile
@@ -130,18 +140,16 @@ func handle_release(action):
 	if count >= MAX_CHARGES:
 		move_to_end(directions[action].dir)
 	else:
-		# Count-1 to prevent including current beat, if player pressed slightly before
 		move_amount(directions[action].dir, count * TILES_PER_CHARGE) 
 	update_color(0)
-	for a in directions:
-		directions[a].held = 0.0
-		directions[a].count = 0
-	# TODO: when pressing multiple keys, visual color not aligned upon releasing one
+	for other_action in directions:
+		directions[other_action].held = 0.0
+		directions[other_action].count = 0
 
 # Moves player by given count and direction
 # Lights up tiles
 func move_amount(direction: Vector2, num_tiles: int):
-	for I in range(0, num_tiles):
+	for i in range(num_tiles):
 		_move_one_cell(direction)
 
 # Moves player by given direction until hitting a wall
@@ -164,13 +172,35 @@ var buffer_count = 0
 ### TIMING/BEAT CODE:
 # Update time of most recent beat 
 func _on_quarter_beat(_beat_num):
+	pass
+	
 	#if buffer_count <= 0:
 		#buffer_count = 1
 		#player_sprite.modulate = original_modulate
 	#else:
 		#buffer_count -= 1
-	expected_next_beat_time = current_time + time_interval
+		
+	#expected_next_beat_time = current_time + time_interval
 	#print("beat at time: " + str(current_time) + ", next beat at: " + str(expected_next_beat_time))
+
+func handle_input_timing():
+	var prev_beat_in_secs = (Conductor.num_beats_passed-1) * Conductor.seconds_per_quarter_note
+	var input_time = Conductor.current_time_in_secs
+	var next_beat_in_secs = prev_beat_in_secs + Conductor.seconds_per_quarter_note
+	
+	var after_prev = abs(input_time - prev_beat_in_secs)
+	var before_next = abs(input_time - next_beat_in_secs)
+	
+	if !debug_timing_info:
+		return
+	
+	var min_error = min(after_prev, before_next) * 1000
+	if after_prev <= LEEWAY_IN_SECS or before_next <= LEEWAY_IN_SECS:
+		print("GOOD! Within {error} ms of beat".format({"error": "%0.2f" % min_error})) 
+	else:
+		print("Bad. Within {error} ms of beat".format({"error": "%0.2f" % min_error})) 
+
+
 
 # Check for valid timing of input
 func valid_input() -> bool:
