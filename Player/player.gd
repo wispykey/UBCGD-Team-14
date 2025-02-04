@@ -15,6 +15,10 @@ const TILE_SIZE: int = 32
 const WIDTH: int = 640
 const HEIGHT: int = 448
 
+# The number of tiles to move per beat of sustained input
+const MAX_CHARGES: int = 3
+const TILES_PER_CHARGE: int = 3
+
 ## Player propertes
 const PLAYER_SIZE: int = 32
 @onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -22,10 +26,10 @@ var has_key: bool = false
 var can_light_up: bool = false
 
 var directions: Dictionary = { # Directions the player can go in
-		"move_right": {"dir": Vector2(1, 0), "held": false, "count": 0, "timer": Timer},
-		"move_left": {"dir": Vector2(-1, 0), "held": false, "count": 0, "timer": Timer},
-		"move_up": {"dir": Vector2(0, -1), "held": false, "count": 0, "timer": Timer},
-		"move_down": {"dir": Vector2(0, 1), "held": false, "count": 0, "timer": Timer},
+		"move_right": {"dir": Vector2(1, 0), "held": 0.0, "count": 0},
+		"move_left": {"dir": Vector2(-1, 0), "held": 0.0, "count": 0},
+		"move_up": {"dir": Vector2(0, -1), "held": 0.0, "count": 0},
+		"move_down": {"dir": Vector2(0, 1), "held": 0.0, "count": 0},
 }
 
 # Player Visual Modifications to AnimatedSprite2D
@@ -33,12 +37,12 @@ const original_modulate: Color = Color(1, 1, 1)  # White (default color)
 const max_color: Color = Color(0, 0, 1) # Blue. TODO: choose a better color to change to
 
 # "On-beat" validation variables
-var input_queue = []
 var current_time = 0.0 # Time since player loaded
 @onready var time_interval = Conductor.seconds_per_quarter_note # Expected Time between beats
 var expected_next_beat_time = 0.0 # Time for next anticipated beat; current_time + time_interval
 const DELAY_TIME = 0.15 # avg human reaction time
-var offset_adj = 0.35 # how off the song is from quarter beat
+var offset_adj = 0.35 - 0.35 # how off the song is from quarter beat
+
 
 ## COMMENTED OUT: Double tap variables
 #var last_key = null
@@ -52,7 +56,7 @@ func _ready() -> void:
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 
 # Get the input direction and handle the movement/deceleration.
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	# Toggle lighting up tiles
 	if Input.is_action_just_pressed("ui_accept"):
 		if can_light_up:
@@ -64,29 +68,33 @@ func _physics_process(delta: float) -> void:
 	
 	current_time += delta
 	
-	handle_movement()
+	handle_movement(delta)
 	align_position_to_grid()
 
-
 # Handles player grid-based movement and input
-func handle_movement() -> void:	
+func handle_movement(delta: float) -> void:
+	# Prioritize new key presses (e.g. to allow 'cancelling' a charge)
 	for action in directions:
 		if Input.is_action_just_pressed(action):
-			if input_queue.is_empty():
-				if valid_input():
-					_move_one_cell(directions[action].dir)
-					directions[action].held = true
-				else: # Offbeat
-					player_sprite.modulate = Color(1,0,0)
-					input_queue.append(action)
-					print("added to current queue: " + str(input_queue))
+			_move_one_cell(directions[action].dir)
+			directions[action].held += delta
+			return # Prevent processing multiple directions simultaneously
+	
+	for action in directions:	
+		if Input.is_action_just_released(action):
+			handle_release(action)
+			break
+	
+	for action in directions:
+		if Input.is_action_pressed(action):
+			directions[action].held += delta
+			update_color(directions[action].held)
+			break
 			
-			## COMMENTED OUT: Double Tap code
-			# Either double tap action or move one tile
-			#if not _detect_double_tap(action):
-				#_move_one_cell(directions[action].dir)
-		elif Input.is_action_just_released(action):
-			handle_sustain(action, directions[action].count)
+		## COMMENTED OUT: Double Tap code
+		# Either double tap action or move one tile
+		#if not _detect_double_tap(action):
+			#_move_one_cell(directions[action].dir)
 
 
 ## BASIC MOVEMENT CODE:
@@ -117,20 +125,24 @@ func _light_up_tile():
 ### SUSTAINED INPUT CODE:
 # Handle sustained inputs on release
 # Eventually, could make it a match (switch case)
-func handle_sustain(action, count):
-	if count > 2:
+func handle_release(action):
+	var count = floori((directions[action].held + DELAY_TIME) / Conductor.seconds_per_quarter_note)
+	if count >= MAX_CHARGES:
 		move_to_end(directions[action].dir)
 	else:
-		move_amount(directions[action].dir, count)
+		# Count-1 to prevent including current beat, if player pressed slightly before
+		move_amount(directions[action].dir, count * TILES_PER_CHARGE) 
 	update_color(0)
-	directions[action].held = false
+	for a in directions:
+		directions[a].held = 0.0
+		directions[a].count = 0
 	# TODO: when pressing multiple keys, visual color not aligned upon releasing one
 
 # Moves player by given count and direction
 # Lights up tiles
-func move_amount(dirction: Vector2, count):
-	for I in range(0, count*2):
-			_move_one_cell(dirction)
+func move_amount(direction: Vector2, num_tiles: int):
+	for I in range(0, num_tiles):
+		_move_one_cell(direction)
 
 # Moves player by given direction until hitting a wall
 # Does not light up tiles
@@ -142,28 +154,21 @@ func move_to_end(direction: Vector2):
 
 ### VISUAL EFFECTS CODE
 # Function to update the player's color based on beats held
-func update_color(beats_held: int):
+func update_color(duration: float):
 	# Blend from original_modulate to max_color
-	var intensity = clamp(beats_held / 3.0, 0, 1)  # Adjust "10.0" for max beats
+	var intensity = duration / (3.0 * Conductor.seconds_per_quarter_note)
+	intensity = clamp(intensity, 0, 1)  # Adjust "10.0" for max beats
 	player_sprite.modulate = original_modulate.lerp(max_color, intensity)
 
 var buffer_count = 0
 ### TIMING/BEAT CODE:
 # Update time of most recent beat 
 func _on_quarter_beat(_beat_num):
-	for action in directions:
-		if directions[action].held:
-			directions[action].count += 1
-			update_color(directions[action].count)
-		else:
-			directions[action].count = 0
-	
-	if buffer_count <= 0:
-		handle_queue()
-		buffer_count = 1
-		player_sprite.modulate = original_modulate
-	else:
-		buffer_count -= 1
+	#if buffer_count <= 0:
+		#buffer_count = 1
+		#player_sprite.modulate = original_modulate
+	#else:
+		#buffer_count -= 1
 	expected_next_beat_time = current_time + time_interval
 	#print("beat at time: " + str(current_time) + ", next beat at: " + str(expected_next_beat_time))
 
@@ -179,12 +184,6 @@ func valid_input() -> bool:
 	
 	# Check if input falls in buffer range
 	return is_on_beat
-
-# Handles queued inputs on quarter beat
-func handle_queue():
-	for action in input_queue:
-		_move_one_cell(directions[action].dir)
-	input_queue.clear()
 
 ## Check if input is within time range, early/before
 #func is_input_onbeat():
@@ -241,7 +240,7 @@ func pick_up_key():
 
 
 func _on_hitbox_area_entered(area: Area2D):
-	print("Player took ", area.damage, " damage from ", area.name)
+	#print("Player took ", area.damage, " damage from ", area.name)
 	GameState.update_life(-area.damage)
 	
 	if area is Projectile:
