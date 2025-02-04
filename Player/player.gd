@@ -24,7 +24,11 @@ const TILES_PER_CHARGE: int = 3
 # Duration to distinguish the releases of short taps vs intentional sustained taps
 const MIN_HOLD_DURATION: float = 0.35
 # Allow inputs to be timed earlier/later than the beat by this amount
-const LEEWAY_IN_SECS: float = 0.15 # TODO: Allow calibration.
+const LEEWAY_IN_SECS: float = 0.12 
+
+# Allow player to shift timings to match their device/feel
+const TIMING_CALIBRATION_STEP: float = 0.02 # In seconds
+var calibration_offset: float = -0.00 # In seconds
 
 ## Player propertes
 const PLAYER_SIZE: int = 32
@@ -68,6 +72,14 @@ func _process(delta: float) -> void:
 		else:
 			can_light_up = true
 			print("Lighting up tiles")
+			
+	if Input.is_action_just_pressed("calibrate_earlier"):
+		calibration_offset -= TIMING_CALIBRATION_STEP
+		print("New offset: ", calibration_offset)
+	
+	if Input.is_action_just_pressed("calibrate_later"):
+		calibration_offset += TIMING_CALIBRATION_STEP
+		print("New offset: ", calibration_offset)
 	
 	handle_movement(delta)
 	align_position_to_grid()
@@ -187,11 +199,14 @@ func handle_input_timing():
 	var prev_beat_in_secs = (Conductor.num_beats_passed-1) * Conductor.seconds_per_quarter_note
 	var input_time = Conductor.current_time_in_secs
 	var next_beat_in_secs = prev_beat_in_secs + Conductor.seconds_per_quarter_note
-	
-	# Allow inputs slightly early/late relative to the most recent beat
-	var after_prev = abs(input_time - prev_beat_in_secs)
-	var before_next = abs(input_time - next_beat_in_secs)
-	var close_enough = after_prev <= LEEWAY_IN_SECS or before_next <= LEEWAY_IN_SECS
+	var calibrated_time = input_time + calibration_offset
+	# If player hit early, "before_next" will be the anticipation before intended beat
+		# and "after_prev" will be the time since previous beat
+	# If player hit late, "before_next" will be the time before next beat
+		# and "after_prev" will be the delay after the intended beat
+	var before_next = abs(calibrated_time - next_beat_in_secs)
+	var after_prev = abs(calibrated_time - prev_beat_in_secs)
+	var close_enough = before_next <= LEEWAY_IN_SECS or after_prev <= LEEWAY_IN_SECS
 
 	if close_enough:
 		# TODO: Do stuff here (maybe a signal). Recover health, increase combo, etc.
@@ -203,7 +218,16 @@ func handle_input_timing():
 	if debug_timing_info:
 		var result = "Good!" if close_enough else "BAD."
 		var min_error = min(after_prev, before_next) * 1000
-		print(result + " Within {error} ms of beat".format({"error": "%0.2f" % min_error})) 
+		var closest = "after" if after_prev <= before_next else "before"
+		var stats = "{before} before, {after} after".format({
+			"before": "%0.2f" % before_next,
+			"after": "%0.2f" % after_prev})
+		print("{result} {error} ms {closest} ({stats})".format({
+			"error": "%0.2f" % min_error,
+			"result": result,
+			"closest": closest,
+			"stats": stats})) 
+			
 	
 
 ### COMMENTED OUT: DOUBLE TAP MOVEMENT CODE
