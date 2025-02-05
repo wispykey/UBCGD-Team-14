@@ -81,7 +81,7 @@ func _process(delta: float) -> void:
 		calibration_offset += TIMING_CALIBRATION_STEP
 		print("New offset: ", calibration_offset)
 	
-	handle_movement()
+	handle_movement(delta)
 	align_position_to_grid()
 
 # Handles player grid-based movement and input
@@ -170,7 +170,7 @@ func move_to_end(direction: Vector2):
 		#_light_up_tile()
 		position = position + direction * TILE_SIZE
 
-
+ha
 ### VISUAL EFFECTS CODE
 # Function to update the player's color based on beats held
 func update_color(duration: float):
