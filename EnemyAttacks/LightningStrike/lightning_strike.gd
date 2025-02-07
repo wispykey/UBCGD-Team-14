@@ -8,12 +8,14 @@ var x_center: float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	x_center = to_global(position).x
+	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
 	$DespawnTimer.timeout.connect(_on_despawn_timer_timeout)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	generate_path()
+	if $TelegraphTimer.is_stopped():
+		generate_path()
 
 # Build a random zig-zag path from spawn position to a location off-screen
 func generate_path():
@@ -27,9 +29,6 @@ func generate_path():
 		add_point(next_point)
 		curr_point = next_point
 		loops -= 1
-
-	print(points)
-	print(global_position)
 
 # Gets next point using weighted probabilities based on previous point
 func get_next_point(prev_point: Vector2):
@@ -45,6 +44,10 @@ func get_next_point(prev_point: Vector2):
 
 	return Vector2(offset, prev_point.y - SEGMENT_LENGTH)
 	
+func _on_telegraph_timer_timeout():
+	$Telegraph.queue_free()
+	$DespawnTimer.start()
+
 func _on_despawn_timer_timeout():
 	queue_free()
 

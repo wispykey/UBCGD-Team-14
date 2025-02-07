@@ -40,6 +40,7 @@ script = ExtResource("1_qvkh8")
 half_room_cleave = ExtResource("2_5na7h")
 spawn_ghost = ExtResource("3_akj2n")
 puddle_hazard = ExtResource("10_t46jv")
+lightning = ExtResource("14_joqy7")
 debug_random_test = true
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("4_p1dld")]
@@ -79,9 +80,3 @@ position = Vector2(381, 156.8)
 
 [node name="IternativeProjectile" parent="." instance=ExtResource("13_11hjv")]
 position = Vector2(175, 140)
-
-[node name="LightningStrike" parent="." instance=ExtResource("14_joqy7")]
-position = Vector2(486, 261)
-
-[node name="LightningStrike2" parent="." instance=ExtResource("14_joqy7")]
-position = Vector2(192, 345)
