@@ -10,6 +10,7 @@ func _ready() -> void:
 	x_center = to_global(position).x
 	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
 	$DespawnTimer.timeout.connect(_on_despawn_timer_timeout)
+	$HitZone.monitorable = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,6 +48,7 @@ func get_next_point(prev_point: Vector2):
 func _on_telegraph_timer_timeout():
 	$Telegraph.queue_free()
 	$DespawnTimer.start()
+	$HitZone.monitorable = true
 
 func _on_despawn_timer_timeout():
 	queue_free()
