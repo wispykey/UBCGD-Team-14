@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cnb7x1pkr34a4"]
+[gd_scene load_steps=19 format=4 uid="uid://cnb7x1pkr34a4"]
 
 [ext_resource type="Script" path="res://Levels/Fantasy.gd" id="1_qvkh8"]
 [ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_5na7h"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://EnemyAttacks/BossStaff.tscn" id="11_hxj16"]
 [ext_resource type="PackedScene" path="res://Enemies/FantasyBoss.tscn" id="12_yf31r"]
 [ext_resource type="PackedScene" uid="uid://bgm21f8w6825k" path="res://EnemyAttacks/Projectiles/iterative_projectile.tscn" id="13_11hjv"]
+[ext_resource type="PackedScene" uid="uid://cy70v507n40va" path="res://EnemyAttacks/LightningStrike/lightning_strike.tscn" id="14_joqy7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ric4a"]
 texture = ExtResource("5_wbmv1")
@@ -39,6 +40,7 @@ script = ExtResource("1_qvkh8")
 half_room_cleave = ExtResource("2_5na7h")
 spawn_ghost = ExtResource("3_akj2n")
 puddle_hazard = ExtResource("10_t46jv")
+lightning = ExtResource("14_joqy7")
 debug_random_test = true
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("4_p1dld")]
