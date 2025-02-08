@@ -15,7 +15,9 @@ func _process(delta: float) -> void:
 
 
 func update_life(amount: int):
-	life += amount
+	if life <= 0: # Only die once
+		return
+	life = max(0, life + amount)
 	GameEvents.life_changed.emit()
-	if life <= 0:
+	if life == 0:
 		GameEvents.player_died.emit()
