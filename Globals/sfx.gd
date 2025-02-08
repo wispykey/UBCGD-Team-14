@@ -4,6 +4,9 @@ extends Node2D
 var fire_spawn = preload("res://Assets/SFX/Fire/Fire 6.wav")
 var fire_crackling = preload("res://Assets/SFX/Fire/Fire Crackling 1.wav")
 
+
+var num_fire_crackling_entities: int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Set the Stream variable of all AudioStreamPlayer child nodes
@@ -16,7 +19,14 @@ func play_fire_spawn():
 	$FireSpawn.play()
 
 func play_fire_crackling():
+	num_fire_crackling_entities += 1
+	# Restart the sound each time a new source spawns
+	var pitch_variation = randf_range(0.25, 0.50)
+	$FireSpawn.pitch_scale = 1.0 + pitch_variation
 	$FireCrackling.play()
 
 func stop_fire_crackling():
-	$FireCrackling.stop()
+	# "Ref-counting" to just have a single crackling instance 
+	num_fire_crackling_entities -= 1
+	if num_fire_crackling_entities == 0:	
+		$FireCrackling.stop()
