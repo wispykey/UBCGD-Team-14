@@ -103,8 +103,6 @@ func spawn_thunderstorm(args: Dictionary):
 	var storm = thunderstorm.instantiate()
 	add_child(storm)
 
-
-
 func spawn_ghost_on_player(args: Dictionary):
 	var ghost = spawn_ghost.instantiate()
 	ghost.position = %Player.position
