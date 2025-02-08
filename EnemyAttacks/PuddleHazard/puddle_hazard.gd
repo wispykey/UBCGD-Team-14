@@ -125,9 +125,10 @@ func _on_telegraph_timer_timeout():
 	$DespawnTimer.start()
 	
 	# Play SFX
-	$SpawnSFX.play()
-	$ContinuousSFX.play()
+	SFX.play_fire_spawn()
+	SFX.play_fire_crackling()
 			
 			
 func _on_despawn_timer_timeout():
+	SFX.stop_fire_crackling()
 	call_deferred("queue_free")

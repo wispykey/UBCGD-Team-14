@@ -184,7 +184,7 @@ func update_color(duration: float):
 	var target_color = CHARGE_COLORS[next]
 	var curr_color = CHARGE_COLORS[curr]
 	# < -1.0 parameter is ease-in-out
-	intensity = ease(intensity, -1.8)
+	intensity = ease(intensity, -3.0)
 	player_sprite.modulate = curr_color.lerp(target_color, intensity)
 
 var buffer_count = 0

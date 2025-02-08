@@ -16,7 +16,7 @@ offsets = PackedFloat32Array(0.285714, 1)
 size = Vector2(32, 32)
 
 [node name="LightningStrike" type="Line2D"]
-z_index = 1
+z_index = 4
 width = 40.0
 width_curve = SubResource("Curve_n8vci")
 default_color = Color(0.3387, 0.232475, 0.866229, 1)

@@ -6,7 +6,7 @@ extends Node2D
 @export var half_room_cleave: PackedScene
 @export var spawn_ghost: PackedScene
 @export var puddle_hazard: PackedScene
-@export var lightning: PackedScene
+@export var thunderstorm: PackedScene
 
 @export var debug_random_test: bool = false
 
@@ -33,7 +33,7 @@ const VER_TILES: int = HEIGHT / TILE_SIZE
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
 	{"time": 1, "function": "spawn_puddles_periodically", "args": {}},
-	{"time": 2, "function": "thunderstorm", "args": {}}
+	{"time": 2, "function": "spawn_thunderstorm", "args": {}}
 	#{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
 	#{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
 	#{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
@@ -99,18 +99,9 @@ func cleave(args: Dictionary):
 	cleave.start(direction)
 	
 	
-func thunderstorm(args: Dictionary):
-	Conductor.quarter_beat.connect(spawn_lightning_strikes)
-
-
-func spawn_lightning_strikes(beat_num: int):
-	if int(Conductor.num_beats_passed) % 6 != 0:
-		return
-	var num_strikes = 4
-	for i in num_strikes:
-		var strike = lightning.instantiate()
-		strike.position = get_random_position()
-		add_child(strike)
+func spawn_thunderstorm(args: Dictionary):
+	var storm = thunderstorm.instantiate()
+	add_child(storm)
 
 func spawn_ghost_on_player(args: Dictionary):
 	var ghost = spawn_ghost.instantiate()
@@ -125,7 +116,7 @@ func _on_quarter_beat_spawn_puddle(beat_num: int):
 	if floori(Conductor.num_beats_passed) % 8 != 2:
 		return
 		
-	print("Spawning puddle")
+	#print("Spawning puddle")
 	var puddle = puddle_hazard.instantiate()
 	add_child(puddle)
 	if debug_random_test:
