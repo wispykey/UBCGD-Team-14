@@ -14,3 +14,5 @@ max_polyphony = 3
 [node name="FireCrackling" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_cl0pn")
 pitch_scale = 1.25
+
+[node name="DamageTaken" type="AudioStreamPlayer2D" parent="."]
