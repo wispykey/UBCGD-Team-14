@@ -21,7 +21,7 @@ func _ready() -> void:
 	$HitZone.monitorable = false
 	$HitZone.monitoring = false
 	
-	$DespawnTimer.wait_time = 4
+	$DespawnTimer.wait_time = 6
 	
 	telegraph_dur_sec = $TelegraphTimer.wait_time
 
@@ -41,6 +41,9 @@ func set_dimensions(new_dimensions: Vector2i):
 
 func set_duration(beats: int):
 	$DespawnTimer.wait_time = beats
+	
+func set_coords(new_coords: Vector2):
+	coords = new_coords
 
 func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
 	# For a 3x3, offset should be -1,-1; f
@@ -127,8 +130,14 @@ func _on_telegraph_timer_timeout():
 	# Play SFX
 	SFX.play_fire_spawn()
 	SFX.play_fire_crackling()
+	Conductor.quarter_beat.connect(_on_quarter_beat_fade)
 			
 			
 func _on_despawn_timer_timeout():
 	SFX.stop_fire_crackling()
 	call_deferred("queue_free")
+	
+func _on_quarter_beat_fade(beat_num: int):
+	if $DespawnTimer.time_left <= $DespawnTimer.wait_time / 2.0:
+		var progress = 1 - $DespawnTimer.time_left / $DespawnTimer.wait_time
+		modulate.a = lerp(1.0, 0.6, progress)

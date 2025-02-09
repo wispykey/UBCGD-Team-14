@@ -37,7 +37,6 @@ const WINNING_SCORE: int = 20
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
 	{"time": 4, "function": "spawn_thunderstorm", "args": {}},
-	#{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(4,4)}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(10,4)}},
@@ -48,10 +47,14 @@ var timeline = [
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(10,10)}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(16,10)}},
 	{"time": 22, "function": "spawn_puddles_periodically", "args": {}},
-	#{"time": 20, "function": "spawn_ghost_on_player", "args": {}},
-	#{"time": 24, "function": "spawn_ghost_on_player", "args": {}},
-	#{"time": 25, "function": "spawn_ghost_on_player", "args": {}},
-	#{"time": 30, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 40, "function": "spawn_thunderstorm", "args": {}},
+	{"time": 54, "function": "spawn_flame_wall", "args": {"position": Vector2(112,272)}},
+	{"time": 56, "function": "spawn_flame_wall", "args": {"position": Vector2(240,272)}},
+	{"time": 58, "function": "spawn_flame_wall", "args": {"position": Vector2(368,272)}},
+	{"time": 60, "function": "spawn_flame_wall", "args": {"position": Vector2(496,272)}},
+	{"time": 64, "function": "cleave", "args": {"direction": "SOUTH"}},
+	{"time": 68, "function": "cleave", "args": {"direction": "NORTH"}},
+	{"time": 80, "function": "cleave", "args": {"direction": "EAST"}},
 ]
 var next_event: int = 0
 
@@ -68,7 +71,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	print(HOR_TILES, " ", VER_TILES)
 	pass
 
 # Function to be called whenever quarter_beat signal is emitted
@@ -140,6 +142,13 @@ func spawn_ghost_on_player(args: Dictionary):
 func spawn_puddles_periodically(args: Dictionary):
 	Conductor.quarter_beat.connect(_on_quarter_beat_spawn_puddle)
 	
+func spawn_flame_wall(args: Dictionary):
+	var pos = args.position if args.has("position") else Vector2(112, 272)
+	var puddle = puddle_hazard.instantiate()
+	puddle.position = pos
+	puddle.set_dimensions(Vector2(4, 14))
+	add_child(puddle)
+	puddle.start()
 
 func spawn_vines_in_cross_pattern(args: Dictionary):
 	var coords = args.coords if args.has("coords") else Vector2(10, 7)
@@ -182,8 +191,9 @@ func spawn_vines(args: Dictionary):
 
 
 func _on_quarter_beat_spawn_puddle(beat_num: int):
+	var beats_passed = floori(Conductor.num_beats_passed)
 	# Only every four beats, starting on beat two of a measure
-	if floori(Conductor.num_beats_passed) % 4 != 2:
+	if beats_passed % 4 != 2 or beats_passed > 50:
 		return
 		
 	#print("Spawning puddle")
