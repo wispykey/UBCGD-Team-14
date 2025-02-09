@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0fo1xcfi2gfd"
-path="res://.godot/imported/supernaturalPortal.png-b5024e06665e7bf0537c6a5ec4ab2678.ctex"
+path="res://.godot/imported/supernaturalPortal.png-93ab6cadc2bbfe068c82377dcde3a213.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Prototyping/Joshua/Assets/supernaturalPortal.png"
-dest_files=["res://.godot/imported/supernaturalPortal.png-b5024e06665e7bf0537c6a5ec4ab2678.ctex"]
+source_file="res://Prototyping/joshua/assets/supernaturalPortal.png"
+dest_files=["res://.godot/imported/supernaturalPortal.png-93ab6cadc2bbfe068c82377dcde3a213.ctex"]
 
 [params]
 
