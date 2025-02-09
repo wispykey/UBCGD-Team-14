@@ -77,6 +77,7 @@ offset_bottom = 471.0
 color = Color(0.185383, 0.185383, 0.185383, 1)
 
 [node name="LevelDescription" type="Label" parent="InfoBox/ColorRect"]
+layout_mode = 0
 offset_left = 78.0
 offset_top = 262.0
 offset_right = 431.0
