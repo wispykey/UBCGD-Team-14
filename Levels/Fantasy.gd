@@ -36,15 +36,15 @@ const WINNING_SCORE: int = 20
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
 	{"time": 1, "function": "spawn_puddles_periodically", "args": {}},
-	{"time": 2, "function": "spawn_thunderstorm", "args": {}}
-	#{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
-	#{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
-	#{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
-	#{"time": 16, "function": "cleave", "args": {"direction": "SOUTH"}},
-	#{"time": 20, "function": "spawn_ghost_on_player", "args": {}},
-	#{"time": 24, "function": "spawn_ghost_on_player", "args": {}},
-	#{"time": 25, "function": "spawn_ghost_on_player", "args": {}},
-	#{"time": 30, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 2, "function": "spawn_thunderstorm", "args": {}},
+	{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
+	{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
+	{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
+	{"time": 16, "function": "cleave", "args": {"direction": "SOUTH"}},
+	{"time": 20, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 24, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 25, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 30, "function": "spawn_ghost_on_player", "args": {}},
 ]
 var next_event: int = 0
 
@@ -52,13 +52,19 @@ var next_event: int = 0
 func _ready() -> void:
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
+	Conductor.song_finished.connect(_on_song_finished)
 	window_dimensions =  get_viewport_rect().size
 	
 	%Player.position = get_viewport_rect().get_center()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	# Check if the game is over. If player died, should happen instantly.
+	if GameState.life <= 0:
+		timeline = []
+		var game_over = GameOverComponent.instantiate()
+		add_child(game_over)
+		Conductor.stop_music()
 	
 
 # Function to be called whenever quarter_beat signal is emitted
@@ -75,18 +81,12 @@ func _on_quarter_beat(beat_num: int):
 		call(timeline[next_event].function, timeline[next_event].args)
 		next_event += 1
 
-
-	# Check if the game is over
-	if GameState.life <= 0:
-		timeline = []
-		var game_over = GameOverComponent.instantiate()
-		self.get_tree().root.get_node("Fantasy").add_child(game_over)
-		#TODO stop the conductor
-		
+func _on_song_finished():
+	# Only check score once song has finished (i.e. player must survive entire song)
 	if GameState.score >= WINNING_SCORE:
 		var victory = VictoryComponent.instantiate()
-		self.get_tree().root.get_node("Fantasy").add_child(victory)
-
+		add_child(victory)
+	
 
 func _on_eighth_beat(_beat_num: int):
 	pass
