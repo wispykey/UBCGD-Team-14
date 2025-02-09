@@ -34,3 +34,9 @@ func stop_fire_crackling():
 		
 func play_damage_taken():
 	$DamageTaken.play()
+
+func play_UI_accept():
+	$UIAccept.play()
+	
+func play_UI_switch_level():
+	$UISwitchLevel.play()

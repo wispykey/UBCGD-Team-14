@@ -37,14 +37,14 @@ const WINNING_SCORE: int = 20
 var timeline = [
 	{"time": 1, "function": "spawn_puddles_periodically", "args": {}},
 	{"time": 2, "function": "spawn_thunderstorm", "args": {}},
-	{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
-	{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
-	{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
-	{"time": 16, "function": "cleave", "args": {"direction": "SOUTH"}},
-	{"time": 20, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 24, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 25, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 30, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
+	#{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
+	#{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
+	#{"time": 16, "function": "cleave", "args": {"direction": "SOUTH"}},
+	#{"time": 20, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 24, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 25, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 30, "function": "spawn_ghost_on_player", "args": {}},
 ]
 var next_event: int = 0
 
@@ -57,6 +57,7 @@ func _ready() -> void:
 	window_dimensions =  get_viewport_rect().size
 	
 	%Player.position = get_viewport_rect().get_center()
+	Conductor.set_music("Fantasy2")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

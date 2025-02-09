@@ -44,7 +44,7 @@ var songs: Dictionary = {
 }
 
 # Duration of a quarter note, in seconds.
-var seconds_per_quarter_note: float
+var seconds_per_quarter_note: float = 1.0 # Prevent crashes when no music playing
 # How often to send signals.
 var signal_step_interval: float 
 # 1-indexed. A value of +1.0 means one quarter note has passed.
@@ -56,7 +56,7 @@ var beat_number: int
 var current_time_in_secs: float
 
 func _ready() -> void:
-	set_music("Fantasy2")
+	#set_music("Fantasy2")
 	current_time_in_secs = 0.0
 
 

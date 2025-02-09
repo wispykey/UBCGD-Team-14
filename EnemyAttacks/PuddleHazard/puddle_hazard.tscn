@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhp84nbs5osdm"]
+[gd_scene load_steps=5 format=3 uid="uid://dhp84nbs5osdm"]
 
 [ext_resource type="Script" path="res://EnemyAttacks/PuddleHazard/puddle_hazard.gd" id="1_0w42w"]
 [ext_resource type="PackedScene" uid="uid://cnm8rfklhl5a" path="res://EnemyAttacks/PuddleHazard/AlertSign.tscn" id="2_ao7ew"]
 [ext_resource type="PackedScene" uid="uid://da85dffe03nhp" path="res://EnemyAttacks/PuddleHazard/PersistentFlame.tscn" id="3_pnqvt"]
+[ext_resource type="Script" path="res://EnemyAttacks/PuddleHazard/hit_zone.gd" id="4_vl1vn"]
 
 [node name="PuddleHazard" type="Node2D"]
 script = ExtResource("1_0w42w")
@@ -13,6 +14,9 @@ attack_image = ExtResource("3_pnqvt")
 one_shot = true
 
 [node name="HitZone" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("4_vl1vn")
 
 [node name="DespawnTimer" type="Timer" parent="."]
 one_shot = true
