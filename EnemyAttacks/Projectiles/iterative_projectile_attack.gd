@@ -16,7 +16,6 @@ func _ready() -> void:
 
 
 func start(input_direction: String, input_coord: Vector2):
-	print("Projectile generated")
 	direction = input_direction
 	coord = input_coord
 

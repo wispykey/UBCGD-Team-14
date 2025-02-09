@@ -37,14 +37,11 @@ func _ready() -> void:
 	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
 
 func start(input_direction: String, input_type: String, input_coords: PackedVector2Array, input_turn_count: int):
-	print("Projectile generated")
 	set_direction(input_direction)
 	set_attack_type(input_type)
 	for i in range(input_coords.size()):
 		var projectile_attack = generate_projectile.instantiate()
-		# Keep references to projectile nodes
 		projectiles.append(projectile_attack)
-		# AND make sure to add them to the tree!! (as a child of this scene, IteractiveProjectile)
 		add_child(projectile_attack)
 		projectiles[i].start(direction, input_coords[i])
 		starting_coords.append(input_coords[i])
@@ -77,13 +74,10 @@ func start(input_direction: String, input_type: String, input_coords: PackedVect
 			add_scene($Telegraph, telegraph_image_tracking);
 
 func start_one_coord(input_direction: String, input_type: String, input_coord: Vector2, input_turn_count: int):
-	print("Projectile generated")
 	set_direction(input_direction)
 	set_attack_type(input_type)
 	var projectile_attack = generate_projectile.instantiate()
-	# Keep reference to projectile
 	projectiles.append(projectile_attack)
-	# AND add it to tree!!
 	add_child(projectile_attack)
 	projectiles[0].start(direction, input_coord)
 	starting_coords.append(input_coord)
@@ -116,7 +110,6 @@ func start_one_coord(input_direction: String, input_type: String, input_coord: V
 			add_scene($Telegraph, telegraph_image_tracking);
 
 # Called every beat.
-#TODO: Make this based on beat, not time
 func update(beat_num: int) -> void:
 	for child in get_children():
 		# Changed to remove sprites only (used to be 'not Timer')
@@ -247,7 +240,6 @@ func _on_telegraph_timer_timeout():
 	# Could be optimized to avoid adding more children
 	$Telegraph.visible = false
 	#add_scene(self)
-	# Connect to beat signal rather than using UpdateTimer
 	Conductor.quarter_beat.connect(update)
 	
 	

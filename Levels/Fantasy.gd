@@ -172,6 +172,7 @@ func spawn_vines(args: Dictionary):
 	add_child(projectile)
 	projectile.start_one_coord(direction, type, coords, turn_count)
 
+
 func _on_quarter_beat_spawn_puddle(beat_num: int):
 	# Only every eight beats, starting on beat two
 	if floori(Conductor.num_beats_passed) % 8 != 2:
