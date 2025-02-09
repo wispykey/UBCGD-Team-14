@@ -41,7 +41,11 @@ func start(input_direction: String, input_type: String, input_coords: PackedVect
 	set_direction(input_direction)
 	set_attack_type(input_type)
 	for i in range(input_coords.size()):
-		projectiles.append(generate_projectile.instantiate())
+		var projectile_attack = generate_projectile.instantiate()
+		# Keep references to projectile nodes
+		projectiles.append(projectile_attack)
+		# AND make sure to add them to the tree!! (as a child of this scene, IteractiveProjectile)
+		add_child(projectile_attack)
 		projectiles[i].start(direction, input_coords[i])
 		starting_coords.append(input_coords[i])
 	turn_count = input_turn_count
@@ -76,7 +80,11 @@ func start_one_coord(input_direction: String, input_type: String, input_coord: V
 	print("Projectile generated")
 	set_direction(input_direction)
 	set_attack_type(input_type)
-	projectiles.append(generate_projectile.instantiate())
+	var projectile_attack = generate_projectile.instantiate()
+	# Keep reference to projectile
+	projectiles.append(projectile_attack)
+	# AND add it to tree!!
+	add_child(projectile_attack)
 	projectiles[0].start(direction, input_coord)
 	starting_coords.append(input_coord)
 	turn_count = input_turn_count
@@ -111,7 +119,8 @@ func start_one_coord(input_direction: String, input_type: String, input_coord: V
 #TODO: Make this based on beat, not time
 func update(beat_num: int) -> void:
 	for child in get_children():
-		if child is not Timer:
+		# Changed to remove sprites only (used to be 'not Timer')
+		if child is Sprite2D:
 			remove_child(child)
 	match type:
 		"STRAIGHT":
