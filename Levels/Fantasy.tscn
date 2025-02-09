@@ -41,7 +41,6 @@ spawn_ghost = ExtResource("3_akj2n")
 puddle_hazard = ExtResource("10_t46jv")
 thunderstorm = ExtResource("5_5lko7")
 iterative_projectile = ExtResource("13_11hjv")
-debug_random_test = true
 
 [node name="TileManager" parent="." instance=ExtResource("5_asoik")]
 unique_name_in_owner = true
