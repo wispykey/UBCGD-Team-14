@@ -41,6 +41,7 @@ half_room_cleave = ExtResource("2_5na7h")
 spawn_ghost = ExtResource("3_akj2n")
 puddle_hazard = ExtResource("10_t46jv")
 thunderstorm = ExtResource("5_5lko7")
+iterative_projectile = ExtResource("13_11hjv")
 debug_random_test = true
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("4_p1dld")]
