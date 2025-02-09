@@ -7,7 +7,7 @@ const TILE_SIZE = 32
 
 var telegraph_duration: int  = 4 # Measured in beats
 # Width x Height of the attack, measured in tiles
-@export var dimensions: Vector2i # Measured in tiles
+@export var dimensions: Vector2i = Vector2i(5,5) # Measured in tiles
 var coords: Vector2 # Measured in tiles
 
 var telegraph_dur_sec # Measured in seconds

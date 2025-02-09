@@ -4,7 +4,7 @@ extends Node2D
 
 var num_waves: int = 8
 var num_strikes: int = 4
-var beats_between_waves: int = 6
+var beats_between_waves: int = 2
 
 const TILE_SIZE: int = 32
 const WIDTH: int = 640
@@ -21,13 +21,17 @@ func set_waves(waves: int):
 	
 func set_beats_between_waves(beats: int):
 	beats_between_waves = beats
+	
+func set_strikes(strikes: int):
+	num_strikes = strikes
 
 func spawn_lightning_strikes(beat_num: int):
 	if int(Conductor.num_beats_passed) % beats_between_waves != 0:
 		return
+	if num_waves <= 0:
+		$DespawnTimer.start()
+		return
 	num_waves -=1
-	if num_waves < 0:
-		queue_free()
 	var positions = get_random_quadrant_positions()
 	for i in num_strikes:
 		var strike = lightning.instantiate()
