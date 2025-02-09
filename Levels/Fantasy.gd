@@ -54,7 +54,7 @@ var timeline = [
 	{"time": 60, "function": "spawn_flame_wall", "args": {"position": Vector2(496,272)}},
 	{"time": 64, "function": "cleave", "args": {"direction": "SOUTH"}},
 	{"time": 68, "function": "cleave", "args": {"direction": "NORTH"}},
-	{"time": 80, "function": "cleave", "args": {"direction": "EAST"}},
+	{"time": 76, "function": "cleave", "args": {"direction": "EAST"}},
 ]
 var next_event: int = 0
 
