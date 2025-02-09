@@ -6,6 +6,8 @@ extends Node2D
 @export var half_room_cleave: PackedScene
 @export var spawn_ghost: PackedScene
 @export var puddle_hazard: PackedScene
+@export var thunderstorm: PackedScene
+
 @export var debug_random_test: bool = false
 
 var window_dimensions: Vector2
@@ -31,6 +33,7 @@ const VER_TILES: int = HEIGHT / TILE_SIZE
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
 	{"time": 1, "function": "spawn_puddles_periodically", "args": {}},
+	{"time": 2, "function": "spawn_thunderstorm", "args": {}}
 	#{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
 	#{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
 	#{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
@@ -95,6 +98,10 @@ func cleave(args: Dictionary):
 	# start() depends on being added to tree beforehand
 	cleave.start(direction)
 	
+	
+func spawn_thunderstorm(args: Dictionary):
+	var storm = thunderstorm.instantiate()
+	add_child(storm)
 
 func spawn_ghost_on_player(args: Dictionary):
 	var ghost = spawn_ghost.instantiate()
@@ -104,13 +111,12 @@ func spawn_ghost_on_player(args: Dictionary):
 func spawn_puddles_periodically(args: Dictionary):
 	Conductor.quarter_beat.connect(_on_quarter_beat_spawn_puddle)
 
-	
 func _on_quarter_beat_spawn_puddle(beat_num: int):
 	# Only every eight beats, starting on beat two
 	if floori(Conductor.num_beats_passed) % 8 != 2:
 		return
 		
-	print("Spawning puddle")
+	#print("Spawning puddle")
 	var puddle = puddle_hazard.instantiate()
 	add_child(puddle)
 	if debug_random_test:

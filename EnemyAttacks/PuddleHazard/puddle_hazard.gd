@@ -10,6 +10,8 @@ var telegraph_duration: int  = 4 # Measured in beats
 @export var dimensions: Vector2i # Measured in tiles
 var coords: Vector2 # Measured in tiles
 
+var telegraph_dur_sec # Measured in seconds
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$TelegraphTimer.wait_time = telegraph_duration * Conductor.seconds_per_quarter_note
@@ -20,6 +22,8 @@ func _ready() -> void:
 	$HitZone.monitoring = false
 	
 	$DespawnTimer.wait_time = 4
+	
+	telegraph_dur_sec = $TelegraphTimer.wait_time
 
 
 func start():
@@ -27,7 +31,10 @@ func start():
 	generate_collision_area()
 	
 	$TelegraphTimer.start()
-	add_scene_on_every_tile($Telegraph, telegraph_image)
+	create_telegraph_puddle(telegraph_dur_sec)
+	await get_tree().create_timer(telegraph_dur_sec/3).timeout
+	create_telegraph_puddle(telegraph_dur_sec*2/3)
+	#add_scene_on_every_tile($Telegraph, telegraph_image)
 
 func set_dimensions(new_dimensions: Vector2i):
 	dimensions = new_dimensions
@@ -47,6 +54,34 @@ func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
 			telegraph.position.y = TILE_SIZE*(j + offset_in_tiles.y)
 			parent.add_child(telegraph)	
 
+
+func create_telegraph_puddle(duration):
+	var telegraph_rect = ColorRect.new()
+	telegraph_rect.color = Color(1, 0, 0, 0.3)  # Semi-transparent red
+	
+	var half_pud_width = (dimensions.x*TILE_SIZE)/2
+	var half_pud_height = (dimensions.y*TILE_SIZE)/2
+	var start_pos = Vector2(0, 0)
+	var end_pos = Vector2(-half_pud_width, -half_pud_height)
+	
+	if dimensions.x % 2 == 0: # Puddle is even width; floored to match tilemap
+		start_pos.x -= TILE_SIZE/2
+		end_pos.x -= TILE_SIZE/2
+	if dimensions.y % 2 == 0: # Puddle is even height; floored to match tilemap
+		start_pos.y -= TILE_SIZE/2
+		end_pos.y -= TILE_SIZE/2
+	
+	add_child(telegraph_rect)
+	telegraph_rect.position = start_pos
+	telegraph_rect.size = Vector2(1,1)
+	var size_tween = create_tween() # from 0 to size of puddle
+	var pos_tween = create_tween() # from center of puddle to top left corner
+	pos_tween.tween_property(telegraph_rect, "position", end_pos, duration) # offset
+	size_tween.tween_property(telegraph_rect, "size", Vector2(dimensions * TILE_SIZE), duration)
+	
+	await size_tween.finished
+	telegraph_rect.queue_free()
+	
 
 func normalize_position():
 	var viewport = get_viewport_rect()
@@ -90,9 +125,10 @@ func _on_telegraph_timer_timeout():
 	$DespawnTimer.start()
 	
 	# Play SFX
-	$SpawnSFX.play()
-	$ContinuousSFX.play()
+	SFX.play_fire_spawn()
+	SFX.play_fire_crackling()
 			
 			
 func _on_despawn_timer_timeout():
+	SFX.stop_fire_crackling()
 	call_deferred("queue_free")
