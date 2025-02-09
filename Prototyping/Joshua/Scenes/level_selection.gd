@@ -3,11 +3,11 @@ extends Control
 var levels = ["Spookesville", "Spellville", "Steamville"]
 var current_index = 0
 var level_map = {
-	"Spookesville": {	"scene": "res://Prototyping/Example/ExampleLevel.tscn",
+	"Spookesville": {	"scene": "res://Levels/Supernatural.tscn",
 						"image": preload("res://Prototyping/Joshua/Assets/supernaturalPortal.png"),
 						"info": "A mist-shrouded realm where flickering lanterns cast eerie glows over crumbling mausoleums. Once a haven for harmonious ghostly existence, the land is now gripped by turmoil as a vengeful spirit rises, threatening to shatter the delicate peace"
 						},
-	"Spellville": { 		"scene": "res://Prototyping/Example/ExampleLevelTwo.tscn",
+	"Spellville": { 	"scene": "res://Levels/Fantasy.tscn",
 						"image": preload("res://Prototyping/Joshua/Assets/fantasyPortal.png"),
 						"info": "A vibrant fantasy town where magic weaves through everyday life, from glowing cobblestone streets to floating marketplaces. Unbeknownst to its residents, a rogue magic now threatens to unravel its harmony."
 						},
