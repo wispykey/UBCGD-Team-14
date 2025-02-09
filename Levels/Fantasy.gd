@@ -53,19 +53,14 @@ func _ready() -> void:
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	Conductor.song_finished.connect(_on_song_finished)
+	GameEvents.player_died.connect(_on_player_died)
 	window_dimensions =  get_viewport_rect().size
 	
 	%Player.position = get_viewport_rect().get_center()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	# Check if the game is over. If player died, should happen instantly.
-	if GameState.life <= 0:
-		timeline = []
-		var game_over = GameOverComponent.instantiate()
-		add_child(game_over)
-		Conductor.stop_music()
-	
+	pass
 
 # Function to be called whenever quarter_beat signal is emitted
 func _on_quarter_beat(beat_num: int):
@@ -86,7 +81,13 @@ func _on_song_finished():
 	if GameState.score >= WINNING_SCORE:
 		var victory = VictoryComponent.instantiate()
 		add_child(victory)
-	
+
+func _on_player_died():
+	# TODO: Despawn player, stop processing input
+	timeline = []
+	var game_over = GameOverComponent.instantiate()
+	add_child(game_over)
+	Conductor.stop_music()
 
 func _on_eighth_beat(_beat_num: int):
 	pass
