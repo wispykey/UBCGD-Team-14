@@ -19,6 +19,7 @@ corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
 [node name="GameOver" type="Node2D"]
+z_index = 10
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource("CanvasItemMaterial_ko7wh")

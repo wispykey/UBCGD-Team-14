@@ -3,6 +3,7 @@ extends Node
 
 # Emitted on every quarter beat
 signal quarter_beat(beat_num: int)
+signal song_finished
 
 # Type-inferred references for IntelliSense.
 @onready var music := $Music
@@ -102,7 +103,13 @@ func set_music(name: String) -> void:
 	music.stream = load(file_path)
 	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
 	music.play()
+	music.finished.connect(_on_music_finished)
 	print("Playing song: \"", name, "\"\n")
+	
+
+func stop_music():
+	# TODO: Add a cool transition
+	music.stop()
 
 	
 # Returns how long audio has played for, in seconds.
@@ -126,3 +133,6 @@ func compute_playback_time() -> float:
 # Converts bpm into how long a quarter lasts, in seconds
 func convert_bpm_to_quarter_note_in_secs(bpm: int) -> float:
 	return 60.0 / bpm
+
+func _on_music_finished():
+	song_finished.emit()
