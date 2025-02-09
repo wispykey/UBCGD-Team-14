@@ -21,7 +21,6 @@ Conductor="*res://Globals/Conductor.tscn"
 GameEvents="*res://Globals/game_events.gd"
 GameState="*res://Globals/game_state.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
-UiSoundFx="*res://Prototyping/joshua/Scenes/ui_sound_fx.tscn"
 SFX="*res://Globals/SFX.tscn"
 
 [dialogic]
