@@ -23,7 +23,7 @@ const WINNING_SCORE: int = 20
 
 #const TILES = {
 	#"RED": {"src": 2, "atlas": Vector2(0,0), "alt": 3},
-	#"DANGER": {"src": 3, "atlas": Vector2(0, 0), "alt": 0},
+	#"DANGER": {"src": 3, "atlas": eVector2(0, 0), "alt": 0},
 	#"FLOOR_DARK": {"src": 1, "atlas": Vector2(0,0), "alt": 3},
 	#"FLOOR_MED": {"src": 1, "atlas": Vector2(0,0), "alt": 1},
 	#"FLOOR_LIGHT": {"src": 1, "atlas": Vector2(0,0), "alt": 0},
@@ -38,10 +38,7 @@ const WINNING_SCORE: int = 20
 var timeline = [
 	#{"time": 1, "function": "spawn_puddles_periodically", "args": {}},
 	#{"time": 2, "function": "spawn_thunderstorm", "args": {}},
-	{"time": 2, "function": "spawn_vines", "args": {"direction": "NORTH", "coord_x": 10, "coord_y": 7}},
-	{"time": 2, "function": "spawn_vines", "args": {"direction": "EAST", "coord_x": 10, "coord_y": 7}},
-	{"time": 2, "function": "spawn_vines", "args": {"direction": "WEST", "coord_x": 10, "coord_y": 7}},
-	{"time": 2, "function": "spawn_vines", "args": {"direction": "SOUTH", "coord_x": 10, "coord_y": 7}},
+	{"time": 2, "function": "spawn_vines_in_cross_pattern", "args": {}},
 	#{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
 	#{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
 	#{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
@@ -135,6 +132,19 @@ func spawn_ghost_on_player(args: Dictionary):
 func spawn_puddles_periodically(args: Dictionary):
 	Conductor.quarter_beat.connect(_on_quarter_beat_spawn_puddle)
 	
+
+func spawn_vines_in_cross_pattern(args: Dictionary):
+	# TODO: Parameterize to allow non-central position
+	var calls = [
+		{"direction": "NORTH", "coord_x": 10, "coord_y": 7},
+		{"direction": "EAST", "coord_x": 10, "coord_y": 7},
+		{"direction": "WEST", "coord_x": 10, "coord_y": 7},
+		{"direction": "SOUTH", "coord_x": 10, "coord_y": 7}
+	]
+	for spawn_vines_args in calls:
+		call("spawn_vines", spawn_vines_args)
+	
+
 func spawn_vines(args: Dictionary):
 	var projectile = iterative_projectile.instantiate()
 	var type  = args.type if args.has("type") else ""
