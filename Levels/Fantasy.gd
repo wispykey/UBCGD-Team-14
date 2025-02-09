@@ -9,6 +9,8 @@ extends Node2D
 @export var thunderstorm: PackedScene
 
 @export var debug_random_test: bool = false
+var GameOverComponent = preload("res://Components/GameOver.tscn")
+var VictoryComponent = preload("res://Components/Victory.tscn")
 
 var window_dimensions: Vector2
 const WIDTH: int = 640
@@ -16,6 +18,7 @@ const HEIGHT: int = 448
 const TILE_SIZE: int = 32
 const HOR_TILES: int = WIDTH / TILE_SIZE
 const VER_TILES: int = HEIGHT / TILE_SIZE
+const WINNING_SCORE: int = 20
 
 #const TILES = {
 	#"RED": {"src": 2, "atlas": Vector2(0,0), "alt": 3},
@@ -71,6 +74,18 @@ func _on_quarter_beat(beat_num: int):
 	if int(floor(Conductor.num_beats_passed)) == timeline[next_event].time:
 		call(timeline[next_event].function, timeline[next_event].args)
 		next_event += 1
+
+
+	# Check if the game is over
+	if GameState.life <= 0:
+		timeline = []
+		var game_over = GameOverComponent.instantiate()
+		self.get_tree().root.get_node("Fantasy").add_child(game_over)
+		#TODO stop the conductor
+		
+	if GameState.score >= WINNING_SCORE:
+		var victory = VictoryComponent.instantiate()
+		self.get_tree().root.get_node("Fantasy").add_child(victory)
 
 
 func _on_eighth_beat(_beat_num: int):

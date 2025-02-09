@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://celpllxw0fw5l"]
+
+[ext_resource type="FontFile" uid="uid://c62dm4okl438n" path="res://Assets/Fonts/DenkOne-Regular.ttf" id="1_x3td0"]
+[ext_resource type="FontFile" uid="uid://dab5enenec7kl" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_rbat8"]
+[ext_resource type="Texture2D" uid="uid://vla18vvkp2dn" path="res://Assets/Objects/chevron_right.png" id="4_74yns"]
+[ext_resource type="Texture2D" uid="uid://d1ufcbh1vxie8" path="res://Assets/Objects/home.png" id="4_lg5o1"]
+[ext_resource type="Texture2D" uid="uid://cm2xgq1oxk7k3" path="res://Assets/Objects/crown.png" id="5_3204o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5w44s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5rpe"]
+bg_color = Color(0.121569, 0.486275, 0.498039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3sma"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="GameOver" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+material = SubResource("CanvasItemMaterial_5w44s")
+offset_left = 186.0
+offset_top = 115.0
+offset_right = 486.0
+offset_bottom = 365.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v5rpe")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 305.0
+offset_top = 148.0
+offset_right = 498.0
+offset_bottom = 224.0
+theme_override_colors/default_color = Color(0.933333, 0.823529, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_x3td0")
+theme_override_font_sizes/normal_font_size = 50
+text = "Victory"
+
+[node name="Panel3" type="Panel" parent="."]
+offset_left = 347.0
+offset_top = 296.0
+offset_right = 462.0
+offset_bottom = 342.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x3sma")
+
+[node name="Panel4" type="Panel" parent="."]
+offset_left = 201.0
+offset_top = 233.0
+offset_right = 470.0
+offset_bottom = 279.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x3sma")
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 200.0
+offset_top = 295.0
+offset_right = 315.0
+offset_bottom = 341.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x3sma")
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = 378.0
+offset_top = 309.0
+offset_right = 462.0
+offset_bottom = 342.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_rbat8")
+text = "Next Level"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 247.0
+offset_top = 308.0
+offset_right = 310.0
+offset_bottom = 336.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_rbat8")
+text = "Home"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 305.0
+offset_top = 245.0
+offset_right = 368.0
+offset_bottom = 273.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_rbat8")
+text = "Score: 0"
+
+[node name="Home" type="Sprite2D" parent="."]
+position = Vector2(226, 317)
+texture = ExtResource("4_lg5o1")
+
+[node name="Line2D6" type="Line2D" parent="."]
+position = Vector2(186, 127)
+rotation = 1.56277
+scale = Vector2(1.19893, 1.19893)
+skew = -8.13007e-05
+points = PackedVector2Array(-10, 0, -7.97964, -250.296)
+width = 0.5
+
+[node name="Line2D5" type="Line2D" parent="."]
+position = Vector2(486, 355)
+rotation = -1.57102
+scale = Vector2(1, 1.19893)
+points = PackedVector2Array(-10, 0, -9.93311, -250.226)
+width = 0.5
+
+[node name="Line2D4" type="Line2D" parent="."]
+position = Vector2(496, 365)
+points = PackedVector2Array(-10, 0, -10, -250)
+width = 0.5
+
+[node name="Line2D3" type="Line2D" parent="."]
+position = Vector2(196, 365)
+points = PackedVector2Array(-10, 0, -10, -250)
+width = 0.5
+
+[node name="ChevronRight" type="Sprite2D" parent="."]
+position = Vector2(365, 320)
+texture = ExtResource("4_74yns")
+
+[node name="Crown" type="Sprite2D" parent="."]
+position = Vector2(252, 179)
+texture = ExtResource("5_3204o")

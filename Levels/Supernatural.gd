@@ -13,6 +13,7 @@ const HEIGHT: int = 448
 const TILE_SIZE: int = 32
 const HOR_TILES: int = WIDTH / TILE_SIZE
 const VER_TILES: int = HEIGHT / TILE_SIZE
+const WINNING_SCORE: int = 100 # The score the user has to reach to win the level.
 
 #const TILES = {
 	#"RED": {"src": 2, "atlas": Vector2(0,0), "alt": 3},
