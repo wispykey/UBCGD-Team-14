@@ -16,7 +16,6 @@ func _ready() -> void:
 
 
 func start(input_direction: String, input_coord: Vector2):
-	print("Projectile generated")
 	direction = input_direction
 	coord = input_coord
 
@@ -56,5 +55,5 @@ func generate_collision_area():
 	rect_shape.size = dimension
 	collision_shape.set_shape(rect_shape)
 	$HitZone.add_child(collision_shape)
-	$HitZone.position.x = coord.x * TILE_SIZE
-	$HitZone.position.y = coord.y * TILE_SIZE
+	$HitZone.position.x = coord.x * TILE_SIZE + TILE_SIZE / 2
+	$HitZone.position.y = coord.y * TILE_SIZE + TILE_SIZE / 2

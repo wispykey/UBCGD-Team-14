@@ -35,15 +35,14 @@ var turn_count: int # Spinning projectiles only
 func _ready() -> void:
 	$TelegraphTimer.wait_time = telegraph_duration * Conductor.seconds_per_quarter_note
 	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
-	$UpdateTimer.wait_time = Conductor.seconds_per_quarter_note
-	$UpdateTimer.timeout.connect(_on_update_timer_timeout)
 
 func start(input_direction: String, input_type: String, input_coords: PackedVector2Array, input_turn_count: int):
-	print("Projectile generated")
 	set_direction(input_direction)
 	set_attack_type(input_type)
 	for i in range(input_coords.size()):
-		projectiles.append(generate_projectile.instantiate())
+		var projectile_attack = generate_projectile.instantiate()
+		projectiles.append(projectile_attack)
+		add_child(projectile_attack)
 		projectiles[i].start(direction, input_coords[i])
 		starting_coords.append(input_coords[i])
 	turn_count = input_turn_count
@@ -75,10 +74,11 @@ func start(input_direction: String, input_type: String, input_coords: PackedVect
 			add_scene($Telegraph, telegraph_image_tracking);
 
 func start_one_coord(input_direction: String, input_type: String, input_coord: Vector2, input_turn_count: int):
-	print("Projectile generated")
 	set_direction(input_direction)
 	set_attack_type(input_type)
-	projectiles.append(generate_projectile.instantiate())
+	var projectile_attack = generate_projectile.instantiate()
+	projectiles.append(projectile_attack)
+	add_child(projectile_attack)
 	projectiles[0].start(direction, input_coord)
 	starting_coords.append(input_coord)
 	turn_count = input_turn_count
@@ -110,10 +110,10 @@ func start_one_coord(input_direction: String, input_type: String, input_coord: V
 			add_scene($Telegraph, telegraph_image_tracking);
 
 # Called every beat.
-#TODO: Make this based on beat, not time
-func update() -> void:
+func update(beat_num: int) -> void:
 	for child in get_children():
-		if child is not Timer:
+		# Changed to remove sprites only (used to be 'not Timer')
+		if child is Sprite2D:
 			remove_child(child)
 	match type:
 		"STRAIGHT":
@@ -175,7 +175,6 @@ func update() -> void:
 							projectile.direction = "EAST"
 				projectile.move()
 				projectile.add_scene(self)
-	$UpdateTimer.start()
 
 # Adds courners to expanding projectiles
 func add_corners():
@@ -241,10 +240,8 @@ func _on_telegraph_timer_timeout():
 	# Could be optimized to avoid adding more children
 	$Telegraph.visible = false
 	#add_scene(self)
-	$UpdateTimer.start()
+	Conductor.quarter_beat.connect(update)
 	
-func _on_update_timer_timeout():
-	update()
 	
 func add_scene(parent: Node2D, scene: PackedScene):
 	for projectile in projectiles:

@@ -7,6 +7,7 @@ extends Node2D
 @export var spawn_ghost: PackedScene
 @export var puddle_hazard: PackedScene
 @export var thunderstorm: PackedScene
+@export var iterative_projectile: PackedScene
 
 @export var debug_random_test: bool = false
 var GameOverComponent = preload("res://Components/GameOver.tscn")
@@ -22,7 +23,7 @@ const WINNING_SCORE: int = 20
 
 #const TILES = {
 	#"RED": {"src": 2, "atlas": Vector2(0,0), "alt": 3},
-	#"DANGER": {"src": 3, "atlas": Vector2(0, 0), "alt": 0},
+	#"DANGER": {"src": 3, "atlas": eVector2(0, 0), "alt": 0},
 	#"FLOOR_DARK": {"src": 1, "atlas": Vector2(0,0), "alt": 3},
 	#"FLOOR_MED": {"src": 1, "atlas": Vector2(0,0), "alt": 1},
 	#"FLOOR_LIGHT": {"src": 1, "atlas": Vector2(0,0), "alt": 0},
@@ -35,8 +36,9 @@ const WINNING_SCORE: int = 20
 #   'function' is the name of a function in this script; must be in quotation marks
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
-	{"time": 1, "function": "spawn_puddles_periodically", "args": {}},
-	{"time": 2, "function": "spawn_thunderstorm", "args": {}},
+	#{"time": 1, "function": "spawn_puddles_periodically", "args": {}},
+	#{"time": 2, "function": "spawn_thunderstorm", "args": {}},
+	{"time": 2, "function": "spawn_vines_in_cross_pattern", "args": {}},
 	#{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
 	#{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
 	#{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
@@ -73,9 +75,11 @@ func _on_quarter_beat(beat_num: int):
 		return
 	
 	# Check if the next event in timeline queue should start
-	if int(floor(Conductor.num_beats_passed)) == timeline[next_event].time:
+	while int(floor(Conductor.num_beats_passed)) == timeline[next_event].time:
 		call(timeline[next_event].function, timeline[next_event].args)
 		next_event += 1
+		if next_event >= len(timeline):
+			break
 
 func _on_song_finished():
 	# Only check score once song has finished (i.e. player must survive entire song)
@@ -127,6 +131,47 @@ func spawn_ghost_on_player(args: Dictionary):
 	
 func spawn_puddles_periodically(args: Dictionary):
 	Conductor.quarter_beat.connect(_on_quarter_beat_spawn_puddle)
+	
+
+func spawn_vines_in_cross_pattern(args: Dictionary):
+	# TODO: Parameterize to allow non-central position
+	var calls = [
+		{"direction": "NORTH", "coord_x": 10, "coord_y": 7},
+		{"direction": "EAST", "coord_x": 10, "coord_y": 7},
+		{"direction": "WEST", "coord_x": 10, "coord_y": 7},
+		{"direction": "SOUTH", "coord_x": 10, "coord_y": 7}
+	]
+	for spawn_vines_args in calls:
+		call("spawn_vines", spawn_vines_args)
+	
+
+func spawn_vines(args: Dictionary):
+	var projectile = iterative_projectile.instantiate()
+	var type  = args.type if args.has("type") else ""
+	var direction  = args.direction if args.has("direction") else ""
+	var turn_count = int(args.turn) if args.has("turn") else 0
+	var coords
+	if (args.has("coord1_x") && args.has("coord1_y")):
+		coords = PackedVector2Array()
+		coords.append(Vector2(int(args.coord1_x), int(args.coord1_y)))
+		if (args.has("coord2_x") && args.has("coord2_y")):
+			coords.append(Vector2(int(args.coord2_x), int(args.coord2_y)))
+			if (args.has("coord3_x") && args.has("coord3_y")):
+				coords.append(Vector2(int(args.coord3_x), int(args.coord3_y)))
+				if (args.has("coord4_x") && args.has("coord4_y")):
+					coords.append(Vector2(int(args.coord4_x), int(args.coord4_y)))
+					if (args.has("coord5_x") && args.has("coord5_y")):
+						coords.append(Vector2(int(args.coord5_x), int(args.coord5_y)))
+		add_child(projectile)
+		projectile.start(direction, type, coords, turn_count)
+		return
+	elif (args.has("coord_x") && args.has("coord_y")):
+		coords = Vector2(int(args.coord_x), int(args.coord_y))
+	else:
+		coords = Vector2(0, 0)
+	add_child(projectile)
+	projectile.start_one_coord(direction, type, coords, turn_count)
+
 
 func _on_quarter_beat_spawn_puddle(beat_num: int):
 	# Only every eight beats, starting on beat two
