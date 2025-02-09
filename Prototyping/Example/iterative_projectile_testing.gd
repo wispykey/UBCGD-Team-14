@@ -18,16 +18,17 @@ const VER_TILES: int = HEIGHT / TILE_SIZE
 #   'function' is the name of a function in this script; must be in quotation marks
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
-	{"time": 12, "function": "spawn_projectile_at_position", "args": {"coord_x": 5, "coord_y": 6}},
-	{"time": 16, "function": "spawn_projectile_at_position", "args": {"direction": "NORTH", "coord_x": 3, "coord_y": 5}},
-	{"time": 20, "function": "spawn_projectile_at_position", "args": {"direction": "SOUTH", "coord1_x": 15, "coord1_y": 5, "coord2_x": 16, "coord2_y": 5, "coord3_x": 17, "coord3_y": 5}},
-	{"time": 24, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "coord1_x": 7, "coord1_y": 5, "coord2_x": 9, "coord2_y": 9}},
-	{"time": 40, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "type": "EXPANDING", "coord_x": 5, "coord_y": 5}},
-	{"time": 60, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "type": "SPINNING", "turn": "4", "coord_x": 5, "coord_y": 5}},
-	{"time": 64, "function": "spawn_projectile_at_position", "args": {"direction": "NORTH", "type": "SPINNING", "turn": "3", "coord_x": 5, "coord_y": 7}},
-	{"time": 68, "function": "spawn_projectile_at_position", "args": {"direction": "SOUTH", "type": "SPINNING", "turn": "7", "coord_x": 15, "coord_y": 3}},
-	{"time": 72, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "type": "SPINNING", "coord_x": 7, "coord_y": 4}},
-	{"time": 78, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "type": "TRACKING", "coord_x": 10, "coord_y": 10}},
+	{"time": 4, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "type": "EXPANDING", "coord_x": 5, "coord_y": 5}},
+	#{"time": 12, "function": "spawn_projectile_at_position", "args": {"coord_x": 5, "coord_y": 6}},
+	#{"time": 16, "function": "spawn_projectile_at_position", "args": {"direction": "NORTH", "coord_x": 3, "coord_y": 5}},
+	#{"time": 20, "function": "spawn_projectile_at_position", "args": {"direction": "SOUTH", "coord1_x": 15, "coord1_y": 5, "coord2_x": 16, "coord2_y": 5, "coord3_x": 17, "coord3_y": 5}},
+	#{"time": 24, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "coord1_x": 7, "coord1_y": 5, "coord2_x": 9, "coord2_y": 9}},
+	#{"time": 40, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "type": "EXPANDING", "coord_x": 5, "coord_y": 5}},
+	#{"time": 60, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "type": "SPINNING", "turn": "4", "coord_x": 5, "coord_y": 5}},
+	#{"time": 64, "function": "spawn_projectile_at_position", "args": {"direction": "NORTH", "type": "SPINNING", "turn": "3", "coord_x": 5, "coord_y": 7}},
+	#{"time": 68, "function": "spawn_projectile_at_position", "args": {"direction": "SOUTH", "type": "SPINNING", "turn": "7", "coord_x": 15, "coord_y": 3}},
+	#{"time": 72, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "type": "SPINNING", "coord_x": 7, "coord_y": 4}},
+	#{"time": 78, "function": "spawn_projectile_at_position", "args": {"direction": "WEST", "type": "TRACKING", "coord_x": 10, "coord_y": 10}},
 ]
 var next_event: int = 0
 
@@ -38,6 +39,7 @@ func _ready() -> void:
 	window_dimensions =  get_viewport_rect().size
 	
 	%Player.position = get_viewport_rect().get_center()
+	Conductor.set_music("Supernatural1")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
