@@ -57,6 +57,7 @@ func _ready() -> void:
 	window_dimensions =  get_viewport_rect().size
 	
 	%Player.position = get_viewport_rect().get_center()
+	Conductor.set_music("Fantasy2")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
