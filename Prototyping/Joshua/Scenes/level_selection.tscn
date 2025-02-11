@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://hrdsqvtibmy4"]
 
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_selection.gd" id="1_o8iav"]
-[ext_resource type="Texture2D" uid="uid://0fo1xcfi2gfd" path="res://Prototyping/joshua/assets/supernaturalPortal.png" id="2_0exld"]
+[ext_resource type="Texture2D" uid="uid://0fo1xcfi2gfd" path="res://Prototyping/Joshua/Assets/supernaturalPortal.png" id="2_0exld"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/selection_label.gd" id="3_wuryj"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_description.gd" id="6_2wuik"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/info_box.gd" id="6_abimb"]
