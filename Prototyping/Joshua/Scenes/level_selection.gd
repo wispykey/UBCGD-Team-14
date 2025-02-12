@@ -17,10 +17,12 @@ var level_map = {
 						}
 }
 
-@onready var label = $VBoxContainer/LevelDisplayContainer/TextureRect/SelectionLabel
+#@onready var label = $VBoxContainer/LevelDisplayContainer/TextureRect/SelectionLabel
+@onready var label = $VBoxContainer/ButtonContainer/HBoxContainer/SelectionLabel
 @onready var texture_rect = $VBoxContainer/LevelDisplayContainer/TextureRect
 @onready var back_button = $VBoxContainer/ButtonContainer/HBoxContainer/Back
 @onready var forward_button = $VBoxContainer/ButtonContainer/HBoxContainer/Forward
+@onready var level_select_vbox = $VBoxContainer
 
 @onready var info_box = $InfoBox
 # Called when the node enters the scene tree for the first time.
@@ -41,6 +43,7 @@ func _process(delta: float) -> void:
 		selectLevel()
 		
 	if Input.is_action_just_pressed("ui_cancel"):
+		level_select_vbox.show()
 		info_box.hide()
 		
 func selectLevel() -> void:
@@ -67,6 +70,7 @@ func _on_forward_pressed() -> void:
 	update_label()
 
 func showInfo():
+	level_select_vbox.hide()
 	info_box.update() # update information in info box
 	info_box.show()
 

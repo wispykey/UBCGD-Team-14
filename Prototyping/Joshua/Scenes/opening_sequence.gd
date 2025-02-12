@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var continue_label = $Label
+@onready var continue_label = $continue_label
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var animation = $AnimationPlayer
@@ -20,5 +20,5 @@ func _input(event: InputEvent) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	continue_label.show()
-	var label_animation = $ContinueText
-	label_animation.play("continue_text")
+	#var label_animation = $ContinueText
+	#label_animation.play("continue_text")

@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://hrdsqvtibmy4"]
+[gd_scene load_steps=8 format=3 uid="uid://hrdsqvtibmy4"]
 
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_selection.gd" id="1_o8iav"]
 [ext_resource type="Texture2D" uid="uid://0fo1xcfi2gfd" path="res://Prototyping/Joshua/Assets/supernaturalPortal.png" id="2_0exld"]
-[ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/selection_label.gd" id="3_wuryj"]
+[ext_resource type="Texture2D" uid="uid://bhtywrmi4log8" path="res://Prototyping/Joshua/Assets/info_box.png" id="5_2tggb"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_description.gd" id="6_2wuik"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/info_box.gd" id="6_abimb"]
-[ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/label.gd" id="6_xffx0"]
+[ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/continue_label.gd" id="7_xyunw"]
+[ext_resource type="Texture2D" uid="uid://df33wwjpavxsq" path="res://Prototyping/Joshua/Assets/main_menu_background.png" id="8_l5wb0"]
 
 [node name="LevelSelection" type="Control"]
 layout_mode = 3
@@ -15,6 +16,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o8iav")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 676.0
+offset_bottom = 483.0
+texture = ExtResource("8_l5wb0")
+expand_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -31,22 +39,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = ExtResource("2_0exld")
 
-[node name="SelectionLabel" type="Label" parent="VBoxContainer/LevelDisplayContainer/TextureRect"]
-layout_mode = 2
-offset_left = 32.0
-offset_top = 599.0
-offset_right = 668.0
-offset_bottom = 627.0
-text = "no world selected"
-horizontal_alignment = 1
-script = ExtResource("3_wuryj")
-
 [node name="ButtonContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
-theme_override_constants/separation = 636
+theme_override_constants/separation = 246
 alignment = 1
 
 [node name="Back" type="Button" parent="VBoxContainer/ButtonContainer/HBoxContainer"]
@@ -54,42 +52,58 @@ layout_mode = 2
 focus_mode = 0
 text = "<"
 
+[node name="SelectionLabel" type="Label" parent="VBoxContainer/ButtonContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "- no world selected -"
+horizontal_alignment = 1
+
 [node name="Forward" type="Button" parent="VBoxContainer/ButtonContainer/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 text = ">"
 
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "hit enter to continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="InfoBox" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("6_abimb")
 
-[node name="ColorRect" type="ColorRect" parent="InfoBox"]
-offset_left = 91.0
-offset_top = 13.0
+[node name="TextureRect" type="TextureRect" parent="InfoBox"]
+offset_left = 93.0
+offset_top = 15.0
 offset_right = 585.0
-offset_bottom = 471.0
-color = Color(0.185383, 0.185383, 0.185383, 1)
+offset_bottom = 470.0
+texture = ExtResource("5_2tggb")
 
-[node name="CenterContainer" type="CenterContainer" parent="InfoBox/ColorRect"]
+[node name="CenterContainer" type="CenterContainer" parent="InfoBox/TextureRect"]
 layout_mode = 0
-offset_right = 495.0
-offset_bottom = 463.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 493.0
+offset_bottom = 461.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InfoBox/ColorRect/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoBox/TextureRect/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="LevelTitle" type="Label" parent="InfoBox/ColorRect/CenterContainer/VBoxContainer"]
+[node name="LevelTitle" type="Label" parent="InfoBox/TextureRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 19
 text = "title placeholder"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="InfoBox/ColorRect/CenterContainer/VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="InfoBox/TextureRect/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="LevelDescription" type="Label" parent="InfoBox/ColorRect/CenterContainer/VBoxContainer"]
+[node name="LevelDescription" type="Label" parent="InfoBox/TextureRect/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(400, 50)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -98,12 +112,13 @@ horizontal_alignment = 1
 autowrap_mode = 2
 script = ExtResource("6_2wuik")
 
-[node name="Label" type="Label" parent="InfoBox/ColorRect/CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="InfoBox/TextureRect/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.305015, 0.629507, 0.871297, 1)
 theme_override_font_sizes/font_size = 15
-text = "hit enter to continue"
+text = "hit enter to jump in"
 horizontal_alignment = 1
-script = ExtResource("6_xffx0")
+script = ExtResource("7_xyunw")
 
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/HBoxContainer/Forward" to="." method="_on_forward_pressed"]

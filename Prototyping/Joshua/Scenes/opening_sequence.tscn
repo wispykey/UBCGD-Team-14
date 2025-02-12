@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://db6qgoqnxpahd"]
+[gd_scene load_steps=14 format=3 uid="uid://db6qgoqnxpahd"]
 
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/opening_sequence.gd" id="1_n8rav"]
 [ext_resource type="Texture2D" uid="uid://b6oqw0ek3ywfo" path="res://Prototyping/Joshua/Assets/ubc_gamedev_logo.png" id="2_s1tcu"]
 [ext_resource type="Texture2D" uid="uid://d0msqka8lpqd1" path="res://Prototyping/Joshua/Assets/team_studio_credit.png" id="3_2lgiq"]
 [ext_resource type="Texture2D" uid="uid://bo3b7a4l3r7dh" path="res://Prototyping/Joshua/Assets/game_logo.png" id="4_lteph"]
 [ext_resource type="Texture2D" uid="uid://b412ptkl2eb8x" path="res://Prototyping/Joshua/Assets/game_title.png" id="5_mof7h"]
+[ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/continue_label.gd" id="6_auihl"]
+[ext_resource type="Texture2D" uid="uid://df33wwjpavxsq" path="res://Prototyping/Joshua/Assets/main_menu_background.png" id="7_yossd"]
 
 [sub_resource type="Animation" id="Animation_u7vit"]
 length = 0.001
@@ -80,10 +82,22 @@ tracks/5/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("background:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ks7tl"]
 resource_name = "title_sequence"
-length = 5.0
+length = 5.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -91,7 +105,7 @@ tracks/0/path = NodePath("logo:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(3.96667, 4.23333),
+"times": PackedFloat32Array(4.26667, 4.53333),
 "transitions": PackedFloat32Array(1, -2),
 "update": 0,
 "values": [Vector2(361, 242), Vector2(170, 242)]
@@ -103,7 +117,7 @@ tracks/1/path = NodePath("title:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(4.03333, 4.76667),
+"times": PackedFloat32Array(4.33333, 5.06667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -115,7 +129,7 @@ tracks/2/path = NodePath("logo:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(3.23333, 3.56667, 3.9),
+"times": PackedFloat32Array(3.53333, 3.86667, 4.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
@@ -127,7 +141,7 @@ tracks/3/path = NodePath("logo:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(2.9, 3.33333),
+"times": PackedFloat32Array(3.2, 3.63333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -139,10 +153,10 @@ tracks/4/path = NodePath("opening_cred1:self_modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.0333333, 0.533333, 1.23333),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.333333, 0.766667, 1.13333, 1.53333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -151,10 +165,22 @@ tracks/5/path = NodePath("opening_cred2:self_modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.43333, 1.96667, 2.7),
-"transitions": PackedFloat32Array(1, 1, 0),
+"times": PackedFloat32Array(1.73333, 2.2, 2.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 0),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("background:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(4.13333, 4.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8l3sh"]
@@ -169,7 +195,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = false
-tracks/0/path = NodePath("Label:position")
+tracks/0/path = NodePath("continue_label:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -180,8 +206,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Label:modulate")
+tracks/1/enabled = false
+tracks/1/path = NodePath("continue_label:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -196,7 +222,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label:position")
+tracks/0/path = NodePath("continue_label:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -208,7 +234,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:modulate")
+tracks/1/path = NodePath("continue_label:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -232,12 +258,18 @@ libraries = {
 "": SubResource("AnimationLibrary_8l3sh")
 }
 
+[node name="background" type="TextureRect" parent="."]
+offset_right = 672.0
+offset_bottom = 480.0
+texture = ExtResource("7_yossd")
+expand_mode = 2
+
 [node name="opening_cred1" type="Sprite2D" parent="."]
-position = Vector2(348, 267)
+position = Vector2(336, 264)
 texture = ExtResource("2_s1tcu")
 
 [node name="opening_cred2" type="Sprite2D" parent="."]
-position = Vector2(350, 240)
+position = Vector2(344, 240)
 texture = ExtResource("3_2lgiq")
 
 [node name="logo" type="Sprite2D" parent="."]
@@ -253,11 +285,12 @@ libraries = {
 "": SubResource("AnimationLibrary_2umxx")
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="continue_label" type="Label" parent="."]
 offset_left = 248.0
 offset_top = 344.0
 offset_right = 425.0
 offset_bottom = 367.0
 text = "hit any key to continue"
+script = ExtResource("6_auihl")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
