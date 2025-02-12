@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://db6qgoqnxpahd"]
+[gd_scene load_steps=12 format=3 uid="uid://db6qgoqnxpahd"]
 
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/opening_sequence.gd" id="1_n8rav"]
 [ext_resource type="Texture2D" uid="uid://b6oqw0ek3ywfo" path="res://Prototyping/Joshua/Assets/ubc_gamedev_logo.png" id="2_s1tcu"]
@@ -139,7 +139,7 @@ tracks/4/path = NodePath("opening_cred1:self_modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(-0.1, 0.4, 1.1),
+"times": PackedFloat32Array(0.0333333, 0.533333, 1.23333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -161,6 +161,67 @@ tracks/5/keys = {
 _data = {
 "RESET": SubResource("Animation_u7vit"),
 "title_sequence": SubResource("Animation_ks7tl")
+}
+
+[sub_resource type="Animation" id="Animation_xhuee"]
+resource_name = "continue_text"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(248, 344), Vector2(248, 348), Vector2(248, 340)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.533333, 1),
+"transitions": PackedFloat32Array(1, -0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ok0rs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(248, 344)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2umxx"]
+_data = {
+"RESET": SubResource("Animation_ok0rs"),
+"continue_text": SubResource("Animation_xhuee")
 }
 
 [node name="OpeningSequence" type="Node2D"]
@@ -186,3 +247,17 @@ texture = ExtResource("4_lteph")
 [node name="title" type="Sprite2D" parent="."]
 position = Vector2(397, 253)
 texture = ExtResource("5_mof7h")
+
+[node name="ContinueText" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2umxx")
+}
+
+[node name="Label" type="Label" parent="."]
+offset_left = 248.0
+offset_top = 344.0
+offset_right = 425.0
+offset_bottom = 367.0
+text = "hit any key to continue"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
