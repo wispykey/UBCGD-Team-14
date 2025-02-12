@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://hrdsqvtibmy4"]
+[gd_scene load_steps=7 format=3 uid="uid://hrdsqvtibmy4"]
 
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_selection.gd" id="1_o8iav"]
 [ext_resource type="Texture2D" uid="uid://0fo1xcfi2gfd" path="res://Prototyping/Joshua/Assets/supernaturalPortal.png" id="2_0exld"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/selection_label.gd" id="3_wuryj"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_description.gd" id="6_2wuik"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/info_box.gd" id="6_abimb"]
+[ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/label.gd" id="6_xffx0"]
 
 [node name="LevelSelection" type="Control"]
 layout_mode = 3
@@ -68,28 +69,41 @@ offset_right = 585.0
 offset_bottom = 471.0
 color = Color(0.185383, 0.185383, 0.185383, 1)
 
-[node name="LevelDescription" type="Label" parent="InfoBox/ColorRect"]
+[node name="CenterContainer" type="CenterContainer" parent="InfoBox/ColorRect"]
 layout_mode = 0
-offset_left = 78.0
-offset_top = 262.0
-offset_right = 431.0
-offset_bottom = 299.0
+offset_right = 495.0
+offset_bottom = 463.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoBox/ColorRect/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="LevelTitle" type="Label" parent="InfoBox/ColorRect/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 19
+text = "title placeholder"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="InfoBox/ColorRect/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="LevelDescription" type="Label" parent="InfoBox/ColorRect/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "level description placeholder"
 horizontal_alignment = 1
 autowrap_mode = 2
 script = ExtResource("6_2wuik")
 
-[node name="LevelTitle" type="Label" parent="InfoBox/ColorRect"]
-layout_mode = 0
-offset_left = 189.0
-offset_top = 76.0
-offset_right = 339.0
-offset_bottom = 103.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 19
-text = "title placeholder"
+[node name="Label" type="Label" parent="InfoBox/ColorRect/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "hit enter to continue"
 horizontal_alignment = 1
+script = ExtResource("6_xffx0")
 
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/HBoxContainer/Forward" to="." method="_on_forward_pressed"]
