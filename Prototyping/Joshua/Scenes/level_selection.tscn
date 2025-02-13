@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://hrdsqvtibmy4"]
+[gd_scene load_steps=9 format=3 uid="uid://hrdsqvtibmy4"]
 
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_selection.gd" id="1_o8iav"]
 [ext_resource type="Texture2D" uid="uid://0fo1xcfi2gfd" path="res://Prototyping/Joshua/Assets/supernaturalPortal.png" id="2_0exld"]
+[ext_resource type="Texture2D" uid="uid://b3krecc87hmae" path="res://Prototyping/Joshua/Assets/empty_portal.png" id="4_1qbh8"]
 [ext_resource type="Texture2D" uid="uid://bhtywrmi4log8" path="res://Prototyping/Joshua/Assets/info_box.png" id="5_2tggb"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/level_description.gd" id="6_2wuik"]
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/info_box.gd" id="6_abimb"]
@@ -32,12 +33,26 @@ scale = Vector2(0.7, 0.7)
 
 [node name="LevelDisplayContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = -550
+theme_override_constants/margin_right = -550
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/LevelDisplayContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = ExtResource("2_0exld")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/LevelDisplayContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("4_1qbh8")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/LevelDisplayContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("4_1qbh8")
+stretch_mode = 2
 
 [node name="ButtonContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -69,6 +84,7 @@ layout_mode = 2
 text = "hit enter to continue"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="InfoBox" type="CanvasLayer" parent="."]
 visible = false
@@ -118,6 +134,7 @@ theme_override_colors/font_color = Color(0.305015, 0.629507, 0.871297, 1)
 theme_override_font_sizes/font_size = 15
 text = "hit enter to jump in"
 horizontal_alignment = 1
+uppercase = true
 script = ExtResource("7_xyunw")
 
 [connection signal="pressed" from="VBoxContainer/ButtonContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
