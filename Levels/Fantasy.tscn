@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cnb7x1pkr34a4"]
+[gd_scene load_steps=19 format=4 uid="uid://cnb7x1pkr34a4"]
 
 [ext_resource type="Script" path="res://Levels/Fantasy.gd" id="1_qvkh8"]
 [ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_5na7h"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dtpt4up38l8d4" path="res://Assets/Themes/Fantasy/fantasy_floor.png" id="5_wbmv1"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="7_pxnv2"]
 [ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="8_4rhck"]
+[ext_resource type="PackedScene" uid="uid://d3muoiwq1oikx" path="res://Player/beat_indicator.tscn" id="9_rhr37"]
 [ext_resource type="PackedScene" uid="uid://dhp84nbs5osdm" path="res://EnemyAttacks/PuddleHazard/puddle_hazard.tscn" id="10_t46jv"]
 [ext_resource type="PackedScene" path="res://EnemyAttacks/BossStaff.tscn" id="11_hxj16"]
 [ext_resource type="PackedScene" path="res://Enemies/FantasyBoss.tscn" id="12_yf31r"]
@@ -59,6 +60,10 @@ tile_set = SubResource("TileSet_atj3u")
 unique_name_in_owner = true
 z_index = 1
 position = Vector2(339, 244)
+
+[node name="BeatIndicator" parent="." instance=ExtResource("9_rhr37")]
+position = Vector2(336, 441)
+scale = Vector2(2, 2)
 
 [node name="HUD" parent="." instance=ExtResource("8_4rhck")]
 unique_name_in_owner = true
