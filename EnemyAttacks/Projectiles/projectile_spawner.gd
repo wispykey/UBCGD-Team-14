@@ -60,7 +60,7 @@ func _spawn_circle_projectile():
 		
 		# Add the projectile to the scene
 		get_parent().add_child(projectile)
-		print("Spawning projectile at: ", projectile.position)
+		#print("Spawning projectile at: ", projectile.position)
 
 
 func _spawn_path_projectile():

@@ -13,6 +13,7 @@ const HEIGHT: int = 448
 const TILE_SIZE: int = 32
 const HOR_TILES: int = WIDTH / TILE_SIZE
 const VER_TILES: int = HEIGHT / TILE_SIZE
+const WINNING_SCORE: int = 100 # The score the user has to reach to win the level.
 
 #const TILES = {
 	#"RED": {"src": 2, "atlas": Vector2(0,0), "alt": 3},
@@ -47,6 +48,7 @@ func _ready() -> void:
 	window_dimensions =  get_viewport_rect().size
 	
 	%Player.position = get_viewport_rect().get_center()
+	Conductor.set_music("Supernatural1")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

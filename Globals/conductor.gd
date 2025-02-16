@@ -3,12 +3,14 @@ extends Node
 
 # Emitted on every quarter beat
 signal quarter_beat(beat_num: int)
+signal song_finished
 
 # Type-inferred references for IntelliSense.
 @onready var music := $Music
 @onready var sfx_test := $SFXTest
 
 # Drum stick sound on each quarter-note, for debug.
+@export var metronome_on: bool = false
 @export var debug_mode: bool = false
 
 
@@ -42,7 +44,7 @@ var songs: Dictionary = {
 }
 
 # Duration of a quarter note, in seconds.
-var seconds_per_quarter_note: float
+var seconds_per_quarter_note: float = 1.0 # Prevent crashes when no music playing
 # How often to send signals.
 var signal_step_interval: float 
 # 1-indexed. A value of +1.0 means one quarter note has passed.
@@ -54,7 +56,7 @@ var beat_number: int
 var current_time_in_secs: float
 
 func _ready() -> void:
-	set_music("Supernatural1")
+	#set_music("Fantasy2")
 	current_time_in_secs = 0.0
 
 
@@ -75,8 +77,9 @@ func update_beat_info() -> void:
 		# Emit signal for game events that happen on the quarter-note pulse
 		quarter_beat.emit(beat_number)
 		# Quarter note pulse, for debug
-		if debug_mode: 
+		if metronome_on: 
 			sfx_test.play()
+		if debug_mode:
 		# Debug output.
 			var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
 			print("Beat ", beat_number)
@@ -100,7 +103,13 @@ func set_music(name: String) -> void:
 	music.stream = load(file_path)
 	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
 	music.play()
+	music.finished.connect(_on_music_finished)
 	print("Playing song: \"", name, "\"\n")
+	
+
+func stop_music():
+	# TODO: Add a cool transition
+	music.stop()
 
 	
 # Returns how long audio has played for, in seconds.
@@ -116,9 +125,14 @@ func compute_playback_time() -> float:
 	var audio_delta = AudioServer.get_time_since_last_mix()
 	# Compensate for output latency.
 	var latency: float =  AudioServer.get_output_latency()
-	return max(0.0, time + audio_delta - latency)
+	
+	return max(0.0, time)
+	#return max(0.0, time + audio_delta - latency)
 
 
 # Converts bpm into how long a quarter lasts, in seconds
 func convert_bpm_to_quarter_note_in_secs(bpm: int) -> float:
 	return 60.0 / bpm
+
+func _on_music_finished():
+	song_finished.emit()

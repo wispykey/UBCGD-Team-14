@@ -1,0 +1,33 @@
+[gd_scene load_steps=13 format=3 uid="uid://bgm21f8w6825k"]
+
+[ext_resource type="Script" path="res://EnemyAttacks/Projectiles/iterative_projectile.gd" id="1_8v1o3"]
+[ext_resource type="PackedScene" uid="uid://c4qarlapcm34x" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_west.tscn" id="2_wrsa5"]
+[ext_resource type="PackedScene" uid="uid://crty55i4hkry8" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_east.tscn" id="3_3iylw"]
+[ext_resource type="PackedScene" uid="uid://cxxilvsrw8kin" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_north.tscn" id="4_m0qd5"]
+[ext_resource type="PackedScene" uid="uid://cq4tphgsccaws" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_south.tscn" id="5_lryb0"]
+[ext_resource type="PackedScene" path="res://EnemyAttacks/Projectiles/Telegraphs/expanding.tscn" id="6_0pfvb"]
+[ext_resource type="PackedScene" uid="uid://c7eyerkvjh8no" path="res://EnemyAttacks/Projectiles/iterative_projectile_attack.tscn" id="6_uho0d"]
+[ext_resource type="PackedScene" path="res://EnemyAttacks/Projectiles/Telegraphs/spinning_west.tscn" id="7_1feid"]
+[ext_resource type="PackedScene" path="res://EnemyAttacks/Projectiles/Telegraphs/spinning_east.tscn" id="8_k6vnp"]
+[ext_resource type="PackedScene" path="res://EnemyAttacks/Projectiles/Telegraphs/spinning_north.tscn" id="9_pew24"]
+[ext_resource type="PackedScene" path="res://EnemyAttacks/Projectiles/Telegraphs/spinning_south.tscn" id="10_pligr"]
+[ext_resource type="PackedScene" uid="uid://233scfblkwon" path="res://EnemyAttacks/HalfRoomCleave/AlertSign.tscn" id="11_wg2fk"]
+
+[node name="IternativeProjectile" type="Node2D"]
+script = ExtResource("1_8v1o3")
+telegraph_image_west = ExtResource("2_wrsa5")
+telegraph_image_east = ExtResource("3_3iylw")
+telegraph_image_north = ExtResource("4_m0qd5")
+telegraph_image_south = ExtResource("5_lryb0")
+telegraph_image_expanding = ExtResource("6_0pfvb")
+telegraph_image_spinning_west = ExtResource("7_1feid")
+telegraph_image_spinning_east = ExtResource("8_k6vnp")
+telegraph_image_spinning_north = ExtResource("9_pew24")
+telegraph_image_spinning_south = ExtResource("10_pligr")
+telegraph_image_tracking = ExtResource("11_wg2fk")
+generate_projectile = ExtResource("6_uho0d")
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Telegraph" type="Node2D" parent="."]

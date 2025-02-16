@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://l5lf3cg0mvsl"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_mdkiw"]
-[ext_resource type="Texture2D" uid="uid://dcg7mms67mued" path="res://Assets/Themes/Supernatural/fem_playercharacter1.png" id="2_yk37a"]
+[ext_resource type="Texture2D" uid="uid://dcg7mms67mued" path="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter1.png" id="2_yk37a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qikx4"]
 size = Vector2(29, 30)

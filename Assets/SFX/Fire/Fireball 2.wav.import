@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ds6im1chry14t"
+path="res://.godot/imported/Fireball 2.wav-c341ec253f2922d7393e4344f663cd32.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Fire/Fireball 2.wav"
+dest_files=["res://.godot/imported/Fireball 2.wav-c341ec253f2922d7393e4344f663cd32.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
