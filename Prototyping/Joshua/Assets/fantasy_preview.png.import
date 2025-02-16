@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dum1fvmx2iu04"
-path="res://.godot/imported/fantasyInfoScreen.png-c787b92e76b911bcc54266c5ae596d16.ctex"
+uid="uid://bf6n6aqc8te8p"
+path="res://.godot/imported/fantasy_preview.png-1ec36df8c04440675846887981cfe774.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Prototyping/Joshua/Assets/fantasyInfoScreen.png"
-dest_files=["res://.godot/imported/fantasyInfoScreen.png-c787b92e76b911bcc54266c5ae596d16.ctex"]
+source_file="res://Prototyping/Joshua/Assets/fantasy_preview.png"
+dest_files=["res://.godot/imported/fantasy_preview.png-1ec36df8c04440675846887981cfe774.ctex"]
 
 [params]
 

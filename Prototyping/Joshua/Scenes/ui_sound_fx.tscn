@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkwo1fa6ocsai"]
 
 [ext_resource type="Script" path="res://Prototyping/Joshua/Scenes/ui_sound_fx.gd" id="1_lh8xd"]
-[ext_resource type="AudioStream" uid="uid://yksedoacka87" path="res://Prototyping/joshua/assets/acceptSound.mp3" id="1_yqe3u"]
+[ext_resource type="AudioStream" uid="uid://yksedoacka87" path="res://Prototyping/Joshua/Assets/acceptSound.mp3" id="1_yqe3u"]
 
 [node name="UISoundFx" type="Node"]
 script = ExtResource("1_lh8xd")
