@@ -126,7 +126,7 @@ func update(beat_num: int) -> void:
 			for projectile in projectiles:
 				projectile.move()
 				projectile.add_scene(self)
-		"SPINNING":
+		"SPINNING": # TODO: Needs a way to terminate! Currently spins forever
 			if count >= turn_count - 1:
 				match projectiles[0].direction:
 					"WEST":
