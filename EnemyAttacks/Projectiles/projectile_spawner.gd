@@ -10,7 +10,7 @@ var spawn_timer: Timer
 func _ready() -> void:
 	screen_size.x = 160
 	screen_size.y = 160
-	start_spawning()
+	#start_spawning() # TODO: I paused this spawner -Marcus
 
 func start_spawning():
 	spawn_timer = Timer.new()

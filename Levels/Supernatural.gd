@@ -3,8 +3,9 @@ extends Node2D
 @onready var player := $Player
 @onready var hud := $HUD
 
-@export var half_room_cleave: PackedScene
+@export var half_room_cleave: PackedScene # TODO remove?
 @export var spawn_ghost: PackedScene
+@export var spawn_projectile: PackedScene
 @export var debug_random_test: bool = false
 
 var window_dimensions: Vector2
@@ -15,6 +16,9 @@ const HOR_TILES: int = WIDTH / TILE_SIZE
 const VER_TILES: int = HEIGHT / TILE_SIZE
 const WINNING_SCORE: int = 100 # The score the user has to reach to win the level.
 
+# TODO: The following code is a tile dictionary for if we wanted to "Light up" the map
+#       beyond solid blue tiles, ie. the tiles look like "cleaner" FLOOR_DARK tiles
+#       by using alternate versions. Can probably be removed.
 #const TILES = {
 	#"RED": {"src": 2, "atlas": Vector2(0,0), "alt": 3},
 	#"DANGER": {"src": 3, "atlas": Vector2(0, 0), "alt": 0},
@@ -30,14 +34,88 @@ const WINNING_SCORE: int = 100 # The score the user has to reach to win the leve
 #   'function' is the name of a function in this script; must be in quotation marks
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
-	{"time": 4, "function": "cleave", "args": {}}, # Test defaulting to West
-	{"time": 8, "function": "cleave", "args": {"direction": "EAST"}},
-	{"time": 12, "function": "cleave", "args": {"direction": "NORTH"}},
-	{"time": 16, "function": "cleave", "args": {"direction": "SOUTH"}},
-	{"time": 20, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 24, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 25, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 30, "function": "spawn_ghost_on_player", "args": {}},
+	# Intro
+	{"time": 1, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 6, "coord1_y": 5, "coord2_x": 14, "coord2_y": 5}},
+	{"time": 5, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 6, "coord1_y": 5, "coord2_x": 6, "coord2_y": 9}},
+	{"time": 9, "function": "spawn_pr", "args": {"direction": "WEST", "coord1_x": 14, "coord1_y": 5, "coord2_x": 14, "coord2_y": 9}},
+	{"time": 13, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 6, "coord1_y": 9, "coord2_x": 14, "coord2_y": 9, "coord3_x": 10, "coord3_y": 9}},
+	# Drums enter 17
+	{"time": 17, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 1, "coord1_y": 1, "coord2_x": 3, "coord2_y": 1}}, # Cascade SOUTH
+	{"time": 18, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 5, "coord_y": 1}},
+	{"time": 19, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 7, "coord_y": 1}},
+	{"time": 20, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 9, "coord_y": 1}},
+	{"time": 21, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 11, "coord1_y": 1, "coord2_x": 13, "coord2_y": 1}},
+	{"time": 22, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 15, "coord_y": 1}},
+	{"time": 23, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 17, "coord_y": 1}},
+	{"time": 24, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 19, "coord_y": 1}},
+	{"time": 25, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 2, "coord1_y": 13, "coord2_x": 4, "coord2_y": 13}}, # Cascade NORTH
+	{"time": 26, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 6, "coord1_y": 13, "coord2_x": 8, "coord2_y": 13}},
+	{"time": 27, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 10, "coord1_y": 13, "coord2_x": 12, "coord2_y": 13}},
+	{"time": 28, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 14, "coord1_y": 13, "coord2_x": 16, "coord2_y": 13}},
+	{"time": 29, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 18, "coord1_y": 13, "coord2_x": 9, "coord2_y": 13, "coord3_x": 10, "coord3_y": 13, "coord4_x": 11, "coord4_y": 13, "coord5_x": 2, "coord5_y": 13}},
+	# Bells enter 33
+	{"time": 33, "function": "spawn_ghost_on_player", "args": {}}, # Bells attack
+	{"time": 35, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 37, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 39, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 41, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 5, "coord1_y": 3, "coord2_x": 5, "coord2_y": 5, "coord3_x": 5, "coord3_y": 7, "coord4_x": 5, "coord4_y": 9, "coord5_x": 5, "coord5_y": 11}},
+	{"time": 42, "function": "spawn_pr", "args": {"direction": "WEST", "coord1_x": 15, "coord1_y": 3, "coord2_x": 15, "coord2_y": 5, "coord3_x": 15, "coord3_y": 7, "coord4_x": 15, "coord4_y": 9, "coord5_x": 15, "coord5_y": 11}},
+	{"time": 43, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 6, "coord1_y": 1, "coord2_x": 8, "coord2_y": 1,  "coord3_x": 10, "coord3_y": 1,  "coord4_x": 12, "coord4_y": 1, "coord5_x": 14, "coord5_y": 1}},
+	{"time": 45, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 1, "coord1_y": 13, "coord2_x": 2, "coord2_y": 13, "coord3_x": 3, "coord3_y": 13, "coord4_x": 4, "coord4_y": 13, "coord5_x": 5, "coord5_y": 13}},
+	{"time": 46, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 15, "coord1_y": 13, "coord2_x": 16, "coord2_y": 13, "coord3_x": 17, "coord3_y": 13, "coord4_x": 18, "coord4_y": 13, "coord5_x": 19, "coord5_y": 13}},
+	{"time": 49, "function": "spawn_pr", "args": {"direction": "EAST", "type": "SPINNING", "turn": "5", "coord_x": 1, "coord_y": 1}}, # Spirals start
+	{"time": 52, "function": "spawn_pr", "args": {"direction": "WEST", "type": "SPINNING", "turn": "5", "coord_x": 5, "coord_y": 5}},
+	{"time": 53, "function": "spawn_pr", "args": {"direction": "SOUTH", "type": "SPINNING", "turn": "5", "coord_x": 19, "coord_y": 1}},
+	{"time": 56, "function": "spawn_pr", "args": {"direction": "NORTH", "type": "SPINNING", "turn": "5", "coord_x": 15, "coord_y": 5}},
+	{"time": 57, "function": "spawn_pr", "args": {"direction": "WEST", "type": "SPINNING", "turn": "5", "coord_x": 19, "coord_y": 13}},
+	{"time": 60, "function": "spawn_pr", "args": {"direction": "EAST", "type": "SPINNING", "turn": "5", "coord_x": 15, "coord_y": 9}},
+	{"time": 61, "function": "spawn_pr", "args": {"direction": "NORTH", "type": "SPINNING", "turn": "5", "coord_x": 1, "coord_y": 13}},
+	{"time": 64, "function": "spawn_pr", "args": {"direction": "SOUTH", "type": "SPINNING", "turn": "5", "coord_x": 5, "coord_y": 9}},
+	# Bongos enter 65
+	{"time": 65, "function": "spawn_ghost_on_player", "args": {}}, # Bells attack
+	{"time": 67, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 69, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 71, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 73, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 5, "coord1_y": 3, "coord2_x": 5, "coord2_y": 5, "coord3_x": 5, "coord3_y": 7, "coord4_x": 5, "coord4_y": 9, "coord5_x": 5, "coord5_y": 11}},
+	{"time": 74, "function": "spawn_pr", "args": {"direction": "WEST", "coord1_x": 15, "coord1_y": 3, "coord2_x": 15, "coord2_y": 5, "coord3_x": 15, "coord3_y": 7, "coord4_x": 15, "coord4_y": 9, "coord5_x": 15, "coord5_y": 11}},
+	{"time": 75, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 6, "coord1_y": 1, "coord2_x": 8, "coord2_y": 1,  "coord3_x": 10, "coord3_y": 1,  "coord4_x": 12, "coord4_y": 1, "coord5_x": 14, "coord5_y": 1}},
+	{"time": 77, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 1, "coord1_y": 13, "coord2_x": 2, "coord2_y": 13, "coord3_x": 3, "coord3_y": 13, "coord4_x": 4, "coord4_y": 13, "coord5_x": 5, "coord5_y": 13}},
+	{"time": 78, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 15, "coord1_y": 13, "coord2_x": 16, "coord2_y": 13, "coord3_x": 17, "coord3_y": 13, "coord4_x": 18, "coord4_y": 13, "coord5_x": 19, "coord5_y": 13}},
+	{"time": 81, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 1, "coord1_y": 1, "coord2_x": 19, "coord2_y": 1}}, # Curtains SOUTH
+	{"time": 82, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 2, "coord1_y": 1, "coord2_x": 18, "coord2_y": 1}},
+	{"time": 83, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 3, "coord1_y": 1, "coord2_x": 17, "coord2_y": 1}},
+	{"time": 84, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 4, "coord1_y": 1, "coord2_x": 16, "coord2_y": 1}},
+	{"time": 85, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 5, "coord1_y": 1, "coord2_x": 15, "coord2_y": 1}},
+	{"time": 86, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 6, "coord1_y": 1, "coord2_x": 14, "coord2_y": 1}},
+	{"time": 87, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 7, "coord1_y": 1, "coord2_x": 13, "coord2_y": 1}},
+	{"time": 88, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 8, "coord1_y": 1, "coord2_x": 12, "coord2_y": 1}},
+	{"time": 89, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 9, "coord1_y": 1, "coord2_x": 11, "coord2_y": 1}},
+	{"time": 90, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 10, "coord_y": 1}},
+	
+	# Bongos repeat 97
+	{"time": 97, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 1, "coord2_x": 1, "coord2_y": 2}}, # Cascade EAST
+	{"time": 98, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 3, "coord2_x": 1, "coord2_y": 4}},
+	{"time": 99, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 5, "coord2_x": 1, "coord2_y": 6}},
+	{"time": 100, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 7, "coord2_x": 1, "coord2_y": 8}},
+	{"time": 101, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 9, "coord2_x": 1, "coord2_y": 10}},
+	{"time": 102, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 11, "coord2_x": 1, "coord2_y": 12}},
+	{"time": 109, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 1, "coord1_y": 13, "coord2_x": 2, "coord2_y": 13, "coord3_x": 3, "coord3_y": 13, "coord4_x": 4, "coord4_y": 13, "coord5_x": 5, "coord5_y": 13}},
+	{"time": 110, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 15, "coord1_y": 13, "coord2_x": 16, "coord2_y": 13, "coord3_x": 17, "coord3_y": 13, "coord4_x": 18, "coord4_y": 13, "coord5_x": 19, "coord5_y": 13}},
+	{"time": 113, "function": "spawn_ghost_on_player", "args": {}}, # Ghost bells attack 2
+	{"time": 115, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 116, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 117, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 120, "function": "spawn_ghost_on_player", "args": {}}, # Ghost bells attack 2
+	{"time": 122, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 123, "function": "spawn_ghost_on_player", "args": {}},
+	{"time": 124, "function": "spawn_ghost_on_player", "args": {}},
+	# Synthy part 129
+	{"time": 129, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord_x": 5, "coord_y": 5}}, # EXpanding corners attack
+	{"time": 137, "function": "spawn_pr", "args": {"direction": "WEST", "type": "EXPANDING", "coord_x": 15, "coord_y": 10}},
+	{"time": 145, "function": "spawn_pr", "args": {"direction": "WEST", "type": "EXPANDING", "coord_x": 15, "coord_y": 5}},
+	{"time": 153, "function": "spawn_pr", "args": {"direction": "WEST", "type": "EXPANDING", "coord_x": 5, "coord_y": 10}},
+	# Trail off 161
+	
 ]
 var next_event: int = 0
 
@@ -100,3 +178,47 @@ func spawn_ghost_on_player(args: Dictionary):
 	var ghost = spawn_ghost.instantiate()
 	ghost.position = %Player.position
 	add_child(ghost)
+
+
+# Can spawn up to 5 projectiles at athe same time currently
+func spawn_pr(args: Dictionary):
+	var projectile = spawn_projectile.instantiate()
+	var type  = args.type if args.has("type") else ""
+	var direction  = args.direction if args.has("direction") else ""
+	var turn_count = int(args.turn) if args.has("turn") else 0
+	var coords
+	
+	# TODO: Abstract if possible, maybe rename coordinates to "cx_1", "cy_1" and then use a for loop
+		#for n in 8: 
+			#if (args.has("cx_" + str(n)) && args.has("cy_" + str(n)):
+				#coords.append(Vector2(int(args.c # Here is where the problem would be
+	if (args.has("coord1_x") && args.has("coord1_y")):
+		coords = PackedVector2Array()
+		coords.append(Vector2(int(args.coord1_x), int(args.coord1_y)))
+		if (args.has("coord2_x") && args.has("coord2_y")):
+			coords.append(Vector2(int(args.coord2_x), int(args.coord2_y)))
+			if (args.has("coord3_x") && args.has("coord3_y")):
+				coords.append(Vector2(int(args.coord3_x), int(args.coord3_y)))
+				if (args.has("coord4_x") && args.has("coord4_y")):
+					coords.append(Vector2(int(args.coord4_x), int(args.coord4_y)))
+					if (args.has("coord5_x") && args.has("coord5_y")):
+						coords.append(Vector2(int(args.coord5_x), int(args.coord5_y)))
+		add_child(projectile)
+		projectile.start(direction, type, coords, turn_count)
+		return
+	elif (args.has("coord_x") && args.has("coord_y")): # TODO: remove this and just use coord1?
+		coords = Vector2(int(args.coord_x), int(args.coord_y))
+	else:
+		coords = Vector2(0, 0) # Default
+	add_child(projectile)
+	projectile.start_one_coord(direction, type, coords, turn_count)
+	
+
+func spawn_pr_random(args: Dictionary):
+	var projectile = spawn_projectile.instantiate()
+	var type  = args.type if args.has("type") else ""
+	var direction  = args.direction if args.has("direction") else ""
+	var coords = get_random_position()
+	var turn_count = int(args.turn) if args.has("turn") else 2
+	add_child(projectile)
+	projectile.start_one_coord(direction, type, coords, turn_count)
