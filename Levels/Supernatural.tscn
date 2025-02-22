@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bomiqmq23yxw5" path="res://EnemyAttacks/Projectiles/projectile_spawner.tscn" id="4_rmsie"]
 [ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://TileManager/TileManager.tscn" id="5_tcjr5"]
 [ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Prototyping/Marcus/Assets/marcus_tileset.tres" id="6_v2rvb"]
-[ext_resource type="PackedScene" path="res://Player/beat_indicator.tscn" id="7_81wl2"]
+[ext_resource type="PackedScene" uid="uid://d3muoiwq1oikx" path="res://Player/beat_indicator.tscn" id="7_81wl2"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="7_yhfch"]
 [ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="8_ote3p"]
 
