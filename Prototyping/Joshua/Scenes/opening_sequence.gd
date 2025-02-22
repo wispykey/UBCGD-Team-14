@@ -6,6 +6,8 @@ func _ready() -> void:
 	var animation = $AnimationPlayer
 	continue_label.hide()
 	animation.play("title_sequence")
+	$AnimationPlayer.animation_finished.connect(_on_animation_player_animation_finished)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
