@@ -30,6 +30,8 @@ var can_light_up = false
 
 var has_key = false
 
+var dead = false
+
 func _ready() -> void:
 	$Hitbox.area_entered.connect(_on_hitbox_area_entered)
 	GameEvents.player_died.connect(_on_player_died)
@@ -117,6 +119,8 @@ func pick_up_key():
 
 
 func _on_hitbox_area_entered(area: Area2D):
+	if (dead):
+		return
 	print("Player took ", area.damage, " damage from ", area.name)
 	GameState.update_life(-area.damage)
 	
@@ -125,6 +129,7 @@ func _on_hitbox_area_entered(area: Area2D):
 	
 
 func _on_player_died():
+	dead = true
 	print("Player died (currently does nothing)")
 	# queue_free()
 

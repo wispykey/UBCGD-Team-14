@@ -8,6 +8,8 @@ signal quarter_beat(beat_num: int)
 @onready var music := $Music
 @onready var sfx_test := $SFXTest
 
+var running: bool = true
+
 # Drum stick sound on each quarter-note, for debug.
 @export var debug_mode: bool = false
 
@@ -56,10 +58,12 @@ var current_time_in_secs: float
 func _ready() -> void:
 	set_music("Supernatural1")
 	current_time_in_secs = 0.0
+	GameEvents.player_died.connect(game_over)
 
 
 func _process(delta: float) -> void:
-	update_beat_info()
+	if (self.running):
+		update_beat_info()
 	
 # Updates number of beats 
 func update_beat_info() -> void:
@@ -122,3 +126,9 @@ func compute_playback_time() -> float:
 # Converts bpm into how long a quarter lasts, in seconds
 func convert_bpm_to_quarter_note_in_secs(bpm: int) -> float:
 	return 60.0 / bpm
+
+func game_over():
+	music.stop()
+	self.running = false
+	
+	

@@ -32,6 +32,8 @@ func _ready():
 	set_physics_process(true)
 
 func _physics_process(delta):
+	if current_offset >= DisplayServer.screen_get_size().x * 10:
+		self.queue_free();
 	if follow_type == 1:
 		current_offset += speed * delta / path_2d.curve.get_baked_length()
 		current_offset = clamp(current_offset, 0.0, 1.0)

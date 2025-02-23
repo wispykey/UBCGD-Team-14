@@ -1,5 +1,7 @@
 extends Node2D
 
+signal stopConductor()
+
 @onready var player := $Player
 @onready var hud := $HUD
 
@@ -48,6 +50,7 @@ func _ready() -> void:
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	window_dimensions =  get_viewport_rect().size
+	GameEvents.player_died.connect(handle_player_died)
 	
 	%Player.position = get_viewport_rect().get_center()
 
@@ -69,15 +72,8 @@ func _on_quarter_beat(beat_num: int):
 	if int(floor(Conductor.num_beats_passed)) == timeline[next_event].time:
 		call(timeline[next_event].function, timeline[next_event].args)
 		next_event += 1
-
-
-	# Check if the game is over
-	if GameState.life <= 0:
-		timeline = []
-		var game_over = GameOverComponent.instantiate()
-		self.get_tree().root.get_node("Fantasy").add_child(game_over)
-		#TODO stop the conductor
 		
+	# Check if the player won the game
 	if GameState.score >= WINNING_SCORE:
 		var victory = VictoryComponent.instantiate()
 		self.get_tree().root.get_node("Fantasy").add_child(victory)
@@ -113,3 +109,10 @@ func spawn_ghost_on_player(args: Dictionary):
 	var ghost = spawn_ghost.instantiate()
 	ghost.position = %Player.position
 	add_child(ghost)
+
+func handle_player_died():
+	timeline = []
+	var game_over = GameOverComponent.instantiate()
+	self.get_tree().root.get_node("Fantasy").add_child(game_over)
+	game_over.get_node("ScoreLabel").text = "Score " + str(GameState.score)
+	#TODO stop the conductor

@@ -77,11 +77,11 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_rbat8")
 text = "Home"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 305.0
-offset_top = 245.0
-offset_right = 368.0
-offset_bottom = 273.0
+[node name="ScoreLabel" type="RichTextLabel" parent="."]
+offset_left = 211.0
+offset_top = 243.0
+offset_right = 462.0
+offset_bottom = 271.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_rbat8")
 text = "Score: 0"
