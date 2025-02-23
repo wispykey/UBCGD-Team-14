@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnxo07bbnqblp"]
+[gd_scene load_steps=3 format=3 uid="uid://bnxo07bbnqblp"]
 
 [ext_resource type="Script" path="res://Prototyping/Marcus/Scripts/hud.gd" id="1_jrng0"]
+[ext_resource type="PackedScene" uid="uid://d3muoiwq1oikx" path="res://Player/beat_indicator.tscn" id="2_0ffxg"]
 
 [node name="Control" type="Control"]
 z_index = 1
@@ -31,3 +32,14 @@ offset_bottom = 477.0
 theme_override_font_sizes/font_size = 45
 text = "0"
 horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 480.0
+offset_right = 672.0
+offset_bottom = 550.0
+color = Color(0, 0, 0, 1)
+
+[node name="BeatIndicator" parent="." instance=ExtResource("2_0ffxg")]
+position = Vector2(336, 515)
+scale = Vector2(2, 2)

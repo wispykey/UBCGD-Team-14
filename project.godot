@@ -30,10 +30,11 @@ directories/dtl_directory={}
 
 [display]
 
-window/size/viewport_width=928
-window/size/viewport_height=480
+window/size/viewport_width=672
+window/size/viewport_height=550
+window/size/resizable=false
 window/size/window_width_override=1344
-window/size/window_height_override=960
+window/size/window_height_override=1100
 window/stretch/mode="viewport"
 
 [editor_plugins]

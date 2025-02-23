@@ -6,7 +6,7 @@ var control_port : Rect2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	control_port = get_viewport_rect()
+	control_port = Rect2(0,0, 672, 480)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
