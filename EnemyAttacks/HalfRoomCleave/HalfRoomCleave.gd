@@ -29,7 +29,7 @@ func _ready() -> void:
 	$HitZone.monitorable = false
 	$HitZone.monitoring = false
 	
-	window_dimensions =  get_viewport_rect().size
+	window_dimensions =  GameState.control_port.size
 	half_width = window_dimensions.x/2
 	half_height = window_dimensions.y/2
 	telegraph_dur_sec = $TelegraphTimer.wait_time
@@ -124,7 +124,7 @@ func create_telegraph_rectangle():
 	
 
 func normalize_position():
-	var viewport = get_viewport_rect()
+	var viewport = GameState.control_port
 	var center = viewport.get_center()
 	
 	# Originate from center of arena by default
@@ -153,7 +153,7 @@ func normalize_position():
 			
 			
 func compute_dimensions():
-	var viewport = get_viewport_rect()
+	var viewport = GameState.control_port
 	var max_x = viewport.size.x / TILE_SIZE
 	var max_y = viewport.size.y / TILE_SIZE
 	

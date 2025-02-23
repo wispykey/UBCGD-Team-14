@@ -87,7 +87,7 @@ func create_telegraph_puddle(duration):
 	
 
 func normalize_position():
-	var viewport = get_viewport_rect()
+	var viewport = GameState.control_port
 	var center = viewport.get_center()
 	
 	# Originate from center of arena by default

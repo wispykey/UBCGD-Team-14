@@ -43,7 +43,7 @@ func spawn_danger_sign_at_random_location():
 
 func get_random_position() -> Vector2:
 	# Get the window size
-	var window_dimensions: Vector2 = get_viewport_rect().size
+	var window_dimensions: Vector2 = GameState.control_port.size
 	# Keep position well-within bounds
 	var random_x = randi_range(TILE_WIDTH * 2, window_dimensions.x - TILE_WIDTH * 2)
 	var random_y = randi_range(TILE_WIDTH * 2, window_dimensions.y - TILE_WIDTH * 2)

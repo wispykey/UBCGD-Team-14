@@ -41,4 +41,3 @@ func _input(event:InputEvent) -> void:
 
 		auto_skip.disable_on_unread_text = false
 		auto_skip.enabled = not is_auto_skip_enabled
-

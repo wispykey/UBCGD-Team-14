@@ -2,11 +2,11 @@ extends Node2D
 
 var score: int = 0
 var life: int = 10
-var viewport
+var control_port : Rect2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	viewport = get_viewport_rect()
+	control_port = Rect2(0,0, 672, 480)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

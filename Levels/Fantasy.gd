@@ -64,9 +64,9 @@ func _ready() -> void:
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	Conductor.song_finished.connect(_on_song_finished)
 	GameEvents.player_died.connect(_on_player_died)
-	window_dimensions =  get_viewport_rect().size
+	window_dimensions =  GameState.control_port.size
 	
-	%Player.position = get_viewport_rect().get_center()
+	%Player.position = GameState.control_port.get_center()
 	Conductor.set_music("Fantasy2")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -122,7 +122,7 @@ func cleave(args: Dictionary):
 	var direction = args.direction if args.has("direction") else ""
 	add_child(cleave)
 	if debug_random_test:
-		cleave.position = get_viewport_rect().get_center()
+		cleave.position = GameState.control_port.get_center()
 		cleave.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
 	# start() depends on being added to tree beforehand
 	cleave.start(direction)
@@ -204,6 +204,6 @@ func _on_quarter_beat_spawn_puddle(beat_num: int):
 		var random_width = randi_range(3,6)
 		# Always square, just for testing
 		puddle.set_dimensions(Vector2(random_width, random_width-1))
-		puddle.position = get_viewport_rect().get_center()
+		puddle.position = GameState.control_port.get_center()
 		puddle.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
 	puddle.start()
