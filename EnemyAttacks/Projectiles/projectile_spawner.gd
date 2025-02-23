@@ -45,7 +45,7 @@ func _spawn_circle_projectile():
 	var radius_increment = 1  # Adjust this value to control how far apart the projectiles spawn
 	var angle_step = 2 * PI / projectile_count  # 2 * PI (360°) divided by the number of projectiles
 	# NOTE: Changed center_position from Vector2(0,0) to the center of our game window
-	var center_position = get_viewport_rect().get_center()  # Center of the spiral
+	var center_position = GameState.control_port.get_center()  # Center of the spiral
 	var start_angle = randf_range(0, 2 * PI)  # Random starting angle to vary the spiral
 	
 	# Spawn all projectiles at the center position

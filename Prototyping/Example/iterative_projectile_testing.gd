@@ -36,9 +36,9 @@ var next_event: int = 0
 func _ready() -> void:
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
-	window_dimensions =  get_viewport_rect().size
+	window_dimensions =  GameState.control_port.size
 	
-	%Player.position = get_viewport_rect().get_center()
+	%Player.position = GameState.control_port.get_center()
 	Conductor.set_music("Supernatural1")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

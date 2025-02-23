@@ -8,7 +8,7 @@ extends Node2D
 
 signal update_HUD(score: int, life: int)
 
-var window_dimensions: Vector2 = get_viewport_rect().size
+var window_dimensions: Vector2 = GameState.control_port.size
 const WIDTH: int = 640
 const HEIGHT: int = 480
 const TILE_SIZE: int = 32
