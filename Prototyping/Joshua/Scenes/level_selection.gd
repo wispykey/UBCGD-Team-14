@@ -39,6 +39,14 @@ func update_label():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+		pass
+		
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_left"):
+		_on_back_pressed()
+	elif event.is_action_pressed("ui_right"):
+		_on_forward_pressed()
+		
 	if Input.is_action_just_pressed("ui_accept") and info_box.visible and level_map[levels[current_index]].scene:
 		get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
 		
