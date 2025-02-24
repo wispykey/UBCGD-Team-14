@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player := $Player
 @onready var hud := $HUD
+@onready var staff := %BossStaff
 
 @export var half_room_cleave: PackedScene
 @export var spawn_ghost: PackedScene
@@ -36,6 +37,7 @@ const WINNING_SCORE: int = 20
 #   'function' is the name of a function in this script; must be in quotation marks
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
+	{"time": 2, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 4, "function": "spawn_thunderstorm", "args": {}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(4,4)}},
@@ -47,6 +49,7 @@ var timeline = [
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(10,10)}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(16,10)}},
 	{"time": 22, "function": "spawn_puddles_periodically", "args": {}},
+	{"time": 38, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 40, "function": "spawn_thunderstorm", "args": {}},
 	{"time": 54, "function": "spawn_flame_wall", "args": {"position": Vector2(112,272)}},
 	{"time": 56, "function": "spawn_flame_wall", "args": {"position": Vector2(240,272)}},
@@ -126,6 +129,10 @@ func cleave(args: Dictionary):
 		cleave.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
 	# start() depends on being added to tree beforehand
 	cleave.start(direction)
+	
+# telegraphs the thunderstorm by playing staff animation
+func thunderstorm_telegraph(args: Dictionary):
+	staff.anim.play("call_lightning")
 	
 	
 func spawn_thunderstorm(args: Dictionary):
