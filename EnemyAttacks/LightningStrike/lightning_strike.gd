@@ -11,6 +11,8 @@ func _ready() -> void:
 	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
 	$DespawnTimer.timeout.connect(_on_despawn_timer_timeout)
 	$HitZone.monitorable = false
+	
+	$TelegraphTimer.wait_time *= 1 / Conductor.seconds_per_quarter_note
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
