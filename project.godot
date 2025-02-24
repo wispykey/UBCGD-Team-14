@@ -25,8 +25,15 @@ SFX="*res://Globals/SFX.tscn"
 
 [dialogic]
 
-directories/dch_directory={}
-directories/dtl_directory={}
+directories/dch_directory={
+"Lunatic_Mage_dialogic": "res://Interactables/Dialog/Lunatic_Mage_dialogic.dch",
+"Viola_dialogic": "res://Interactables/Dialog/Viola_dialogic.dch"
+}
+directories/dtl_directory={
+"fantasy_dialogic": "res://Interactables/Dialog/fantasy_dialogic.dtl"
+}
+layout/style_list=["res://Interactables/Dialog/Side.tres"]
+layout/default_style="res://Interactables/Dialog/Side.tres"
 
 [display]
 

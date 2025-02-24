@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="8_4rhck"]
 [ext_resource type="PackedScene" uid="uid://dhp84nbs5osdm" path="res://EnemyAttacks/PuddleHazard/puddle_hazard.tscn" id="10_t46jv"]
 [ext_resource type="PackedScene" uid="uid://biqni1sm5qhle" path="res://EnemyAttacks/BossStaff.tscn" id="11_hxj16"]
-[ext_resource type="PackedScene" uid="uid://3p7va0o7hql7" path="res://Enemies/FantasyBoss.tscn" id="12_yf31r"]
-[ext_resource type="PackedScene" uid="uid://bgm21f8w6825k" path="res://EnemyAttacks/Projectiles/iterative_projectile.tscn" id="13_11hjv"]
+[ext_resource type="PackedScene" path="res://Enemies/FantasyBoss.tscn" id="12_yf31r"]
+[ext_resource type="PackedScene" path="res://EnemyAttacks/Projectiles/iterative_projectile.tscn" id="13_11hjv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ric4a"]
 texture = ExtResource("5_wbmv1")

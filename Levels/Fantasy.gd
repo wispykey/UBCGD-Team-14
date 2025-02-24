@@ -63,6 +63,10 @@ var next_event: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Dialogic.start("fantasy_dialogic")
+	Dialogic.signal_event.connect(_ready_post_dialog)
+
+func _ready_post_dialog():
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	Conductor.song_finished.connect(_on_song_finished)
@@ -74,7 +78,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	pass;
 
 # Function to be called whenever quarter_beat signal is emitted
 func _on_quarter_beat(beat_num: int):
