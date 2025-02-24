@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player := $Player
 @onready var hud := $HUD
+@onready var staff := %BossStaff
 
 @export var half_room_cleave: PackedScene
 @export var spawn_ghost: PackedScene
@@ -37,6 +38,7 @@ const WINNING_SCORE: int = 20
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
 	{"time": 4, "function": "spawn_thunderstorm", "args": {}},
+	{"time": 4, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(4,4)}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(10,4)}},
@@ -126,6 +128,10 @@ func cleave(args: Dictionary):
 		cleave.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
 	# start() depends on being added to tree beforehand
 	cleave.start(direction)
+	
+# telegraphs the thunderstorm by playing staff animation
+func thunderstorm_telegraph(args: Dictionary):
+	staff.anim.play("call_lightning")
 	
 	
 func spawn_thunderstorm(args: Dictionary):
