@@ -49,6 +49,7 @@ var timeline = [
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(10,10)}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(16,10)}},
 	{"time": 22, "function": "spawn_puddles_periodically", "args": {}},
+	{"time": 38, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 40, "function": "spawn_thunderstorm", "args": {}},
 	{"time": 54, "function": "spawn_flame_wall", "args": {"position": Vector2(112,272)}},
 	{"time": 56, "function": "spawn_flame_wall", "args": {"position": Vector2(240,272)}},
