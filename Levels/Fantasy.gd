@@ -37,8 +37,8 @@ const WINNING_SCORE: int = 20
 #   'function' is the name of a function in this script; must be in quotation marks
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
+	{"time": 2, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 4, "function": "spawn_thunderstorm", "args": {}},
-	{"time": 4, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(4,4)}},
 	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(10,4)}},
