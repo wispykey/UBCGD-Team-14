@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="1_47pda"]
 [ext_resource type="PackedScene" uid="uid://c1k5m0w3r40xf" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_FullBackground/full_background_layer.tscn" id="2_mbk1q"]
 [ext_resource type="PackedScene" uid="uid://cn674foxwedqu" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Input/full_advance_input_layer.tscn" id="3_muhlb"]
-[ext_resource type="PackedScene" uid="uid://by6waso0mjpjp" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_SpeakerPortraitTextbox/textbox_with_speaker_portrait.tscn" id="4_3b6mg"]
 [ext_resource type="PackedScene" uid="uid://dsbwnp5hegnu3" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Glossary/glossary_popup_layer.tscn" id="5_floxx"]
 [ext_resource type="PackedScene" uid="uid://dhk6j6eb6e3q" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Choices/vn_choice_layer.tscn" id="6_tjsvo"]
 [ext_resource type="PackedScene" uid="uid://cvgf4c6gg0tsy" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_TextInput/text_input_layer.tscn" id="7_cgrn5"]
 [ext_resource type="PackedScene" uid="uid://lx24i8fl6uo" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_History/history_layer.tscn" id="8_nw736"]
 [ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="9_4kcq2"]
+[ext_resource type="PackedScene" uid="uid://by6waso0mjpjp" path="res://Interactables/Dialog/Layer_SpeakerPortraitTextbox/textbox_with_speaker_portrait.tscn" id="9_f5euv"]
 
 [sub_resource type="Resource" id="Resource_m080x"]
 script = ExtResource("1_47pda")
@@ -22,11 +22,6 @@ overrides = {}
 [sub_resource type="Resource" id="Resource_cvyph"]
 script = ExtResource("1_47pda")
 scene = ExtResource("3_muhlb")
-overrides = {}
-
-[sub_resource type="Resource" id="Resource_bo5mg"]
-script = ExtResource("1_47pda")
-scene = ExtResource("4_3b6mg")
 overrides = {}
 
 [sub_resource type="Resource" id="Resource_h1pv1"]
@@ -49,15 +44,23 @@ script = ExtResource("1_47pda")
 scene = ExtResource("8_nw736")
 overrides = {}
 
+[sub_resource type="Resource" id="Resource_go770"]
+script = ExtResource("1_47pda")
+scene = ExtResource("9_f5euv")
+overrides = {
+"box_modulate_global_color": "false",
+"box_panel": "\"res://Interactables/Dialog/Layer_SpeakerPortraitTextbox/Border.tres\""
+}
+
 [resource]
 script = ExtResource("9_4kcq2")
 name = "Side"
-layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16"])
+layer_list = Array[String](["10", "12", "11", "13", "14", "15", "16"])
 layer_info = {
 "": SubResource("Resource_m080x"),
 "10": SubResource("Resource_6udap"),
 "11": SubResource("Resource_cvyph"),
-"12": SubResource("Resource_bo5mg"),
+"12": SubResource("Resource_go770"),
 "13": SubResource("Resource_h1pv1"),
 "14": SubResource("Resource_oxj0f"),
 "15": SubResource("Resource_k73vf"),
@@ -65,4 +68,4 @@ layer_info = {
 }
 base_overrides = {}
 layers = Array[ExtResource("1_47pda")]([])
-metadata/_latest_layer = ""
+metadata/_latest_layer = "12"

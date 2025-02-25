@@ -66,11 +66,12 @@ func _ready() -> void:
 	Dialogic.start("fantasy_dialogic")
 	Dialogic.signal_event.connect(_ready_post_dialog)
 
-func _ready_post_dialog():
+func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	Conductor.song_finished.connect(_on_song_finished)
 	GameEvents.player_died.connect(_on_player_died)
+	GameEvents.game_start.emit()
 	window_dimensions =  GameState.control_port.size
 	
 	%Player.position = GameState.control_port.get_center()
