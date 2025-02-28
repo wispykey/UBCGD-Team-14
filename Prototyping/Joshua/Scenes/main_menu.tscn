@@ -13,6 +13,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.0027, 1)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_cvohv")
