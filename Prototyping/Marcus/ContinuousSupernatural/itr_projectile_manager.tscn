@@ -1,0 +1,31 @@
+[gd_scene load_steps=12 format=3 uid="uid://b024hq7e6g6ce"]
+
+[ext_resource type="Script" path="res://Prototyping/Marcus/ContinuousSupernatural/itr_projectile_manager.gd" id="1_6ktm4"]
+[ext_resource type="PackedScene" uid="uid://c4qarlapcm34x" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_west.tscn" id="2_teywt"]
+[ext_resource type="PackedScene" uid="uid://crty55i4hkry8" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_east.tscn" id="3_4gweh"]
+[ext_resource type="PackedScene" uid="uid://cxxilvsrw8kin" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_north.tscn" id="4_gx86y"]
+[ext_resource type="PackedScene" uid="uid://cq4tphgsccaws" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_south.tscn" id="5_4j5bu"]
+[ext_resource type="PackedScene" uid="uid://caj36swymv0da" path="res://EnemyAttacks/Projectiles/Telegraphs/expanding.tscn" id="6_8i6bk"]
+[ext_resource type="PackedScene" uid="uid://bm8ffvphvw2bu" path="res://EnemyAttacks/Projectiles/Telegraphs/spinning_west.tscn" id="7_b1gqy"]
+[ext_resource type="PackedScene" uid="uid://dhw7dermh0y86" path="res://EnemyAttacks/Projectiles/Telegraphs/spinning_east.tscn" id="8_denb3"]
+[ext_resource type="PackedScene" uid="uid://yc5fvg4rdt7p" path="res://EnemyAttacks/Projectiles/Telegraphs/spinning_north.tscn" id="9_mqi86"]
+[ext_resource type="PackedScene" uid="uid://by3px2geipkq6" path="res://EnemyAttacks/Projectiles/Telegraphs/spinning_south.tscn" id="10_ln04l"]
+[ext_resource type="PackedScene" uid="uid://dgqiwa6qw1j83" path="res://Prototyping/Marcus/ContinuousSupernatural/itr_projectile_instance.tscn" id="11_m5cgb"]
+
+[node name="IternativeProjectile" type="Node2D"]
+script = ExtResource("1_6ktm4")
+telegraph_image_left = ExtResource("2_teywt")
+telegraph_image_right = ExtResource("3_4gweh")
+telegraph_image_up = ExtResource("4_gx86y")
+telegraph_image_down = ExtResource("5_4j5bu")
+telegraph_image_expanding = ExtResource("6_8i6bk")
+telegraph_image_spinning_left = ExtResource("7_b1gqy")
+telegraph_image_spinning_right = ExtResource("10_ln04l")
+telegraph_image_spinning_up = ExtResource("9_mqi86")
+telegraph_image_spinning_down = ExtResource("8_denb3")
+projectile_instance = ExtResource("11_m5cgb")
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Telegraph" type="Node2D" parent="."]
