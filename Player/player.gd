@@ -51,6 +51,8 @@ const CHARGE_COLORS = [
 	Color(0, 0.8, 1), 
 ]
 
+var gameRunning = false
+
 ## COMMENTED OUT: Double tap variables
 #var last_key = null
 #var last_tap_time = 0
@@ -60,10 +62,13 @@ const CHARGE_COLORS = [
 func _ready() -> void:
 	$Hitbox.area_entered.connect(_on_hitbox_area_entered)
 	GameEvents.player_died.connect(_on_player_died)
+	GameEvents.game_start.connect(_on_game_start)
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 
 # Get the input direction and handle the movement/deceleration.
 func _process(delta: float) -> void:
+	if !gameRunning:
+		return
 	# Toggle lighting up tiles
 	if Input.is_action_just_pressed("ui_accept"):
 		if can_light_up:
@@ -274,8 +279,11 @@ func _on_hitbox_area_entered(area: Area2D):
 	if area is Projectile:
 		area.queue_free()
 
+func _on_game_start():
+	gameRunning = true
 
 func _on_player_died():
+	gameRunning = false
 	print("Player died (currently does nothing)")
 	# queue_free()
 

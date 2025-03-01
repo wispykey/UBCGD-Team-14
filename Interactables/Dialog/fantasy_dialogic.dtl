@@ -1,0 +1,14 @@
+join Lunatic_Mage_dialogic center
+Lunatic_Mage_dialogic: Ah, the prodigy herself graces my humble sanctuary. Viola, the shining star of Mount Astraeus. How quaint that you would stumble upon my little rebellion.
+join Viola_dialogic center
+Viola_dialogic: Stumble? Don’t flatter yourself, Azazel. I know this crystal ball has been tampered with by Wisteria Tree. It led me here. You left breadcrumbs, and I followed.
+Lunatic_Mage_dialogic: Breadcrumbs, you say? No, child. I left nothing but chaos in my wake. But you, curious little clairvoyant, peered into the void and decided to chase the storm. Brave. Foolish. Delightful.
+Viola_dialogic: I couldn’t ignore what I saw — your twisted meetings, your deranged plans to dismantle everything magic stands for.
+Lunatic_Mage_dialogic: Everything magic stands for? You speak like a true disciple of that wretched school. Do you even understand what you defend?
+Lunatic_Mage_dialogic: Magic has become a cage, dividing humanity. Those who wield it sit high and mighty, while the rest of the world suffers.
+Viola_dialogic: And your solution is to tear it all down? To drown the world in chaos by destroying magic? That’s not freedom; you will be putting us all in disarray.
+Lunatic_Mage_dialogic: Destruction is often the first step to liberation. Tell me, Viola, does the great prodigy not see the hypocrisy of her own kind?
+Viola_dialogic: I know enough to see that you’re trying to twist reality. Whatever you’re planning, it stops here.
+Lunatic_Mage_dialogic: Ah, the resolve of youth. But tell me, will your precious future still shine so brightly when it’s consumed by the fire of truth?
+Lunatic_Mage_dialogic: Let’s see if you’re as quick on your feet as you are with that sharp tongue.
+[signal arg="Ready"]

@@ -3,6 +3,7 @@ extends Node
 signal score_changed
 signal life_changed
 signal player_died
+signal game_start
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

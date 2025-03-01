@@ -124,6 +124,7 @@ func _ready() -> void:
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	window_dimensions =  GameState.control_port.size
+	GameEvents.game_start.emit()
 	
 	%Player.position = GameState.control_port.get_center()
 	Conductor.set_music("Supernatural1")
