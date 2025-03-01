@@ -13,6 +13,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.0027, 1)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_cvohv")
@@ -20,9 +21,9 @@ script = ExtResource("1_cvohv")
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 offset_left = -336.0
-offset_top = -241.0
+offset_top = -281.0
 offset_right = 340.0
-offset_bottom = 246.0
+offset_bottom = 290.0
 texture = ExtResource("2_k5son")
 expand_mode = 2
 

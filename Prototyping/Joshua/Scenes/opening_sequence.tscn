@@ -260,7 +260,7 @@ libraries = {
 
 [node name="background" type="TextureRect" parent="."]
 offset_right = 672.0
-offset_bottom = 480.0
+offset_bottom = 555.0
 texture = ExtResource("7_yossd")
 expand_mode = 2
 
