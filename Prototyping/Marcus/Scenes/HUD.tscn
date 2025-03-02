@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnxo07bbnqblp"]
+
+[ext_resource type="Script" path="res://Prototyping/Marcus/Scripts/hud.gd" id="1_jrng0"]
+[ext_resource type="PackedScene" uid="uid://d3muoiwq1oikx" path="res://Player/beat_indicator.tscn" id="2_0ffxg"]
+
+[node name="Control" type="Control"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jrng0")
+
+[node name="LifeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 403.0
+offset_right = 643.0
+offset_bottom = 477.0
+theme_override_font_sizes/font_size = 45
+text = "0"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 403.0
+offset_right = 301.0
+offset_bottom = 477.0
+theme_override_font_sizes/font_size = 45
+text = "0"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_top = 480.0
+offset_right = 672.0
+offset_bottom = 550.0
+color = Color(0, 0, 0, 1)
+
+[node name="BeatIndicator" parent="." instance=ExtResource("2_0ffxg")]
+position = Vector2(336, 515)
+scale = Vector2(2, 2)
