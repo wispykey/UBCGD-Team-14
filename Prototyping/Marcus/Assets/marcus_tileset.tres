@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://daerj0gkopmpn" path="res://Prototyping/Marcus/Assets/ghostie6.png" id="1_opdwh"]
 [ext_resource type="Texture2D" uid="uid://slv3f7olgnc6" path="res://Assets/Background/example_tileset.png" id="1_p4jlc"]
-[ext_resource type="Texture2D" uid="uid://yfs7usc851jc" path="res://Prototyping/Marcus/Assets/supernatural_brick_path.png" id="2_7t3xl"]
+[ext_resource type="Texture2D" uid="uid://yfs7usc851jc" path="res://Assets/Themes/Fantasy/supernatural_brick_path.png" id="2_7t3xl"]
 [ext_resource type="Texture2D" uid="uid://dnl7p3latop2x" path="res://Assets/Objects/triangle.png" id="4_icot0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j1hau"]

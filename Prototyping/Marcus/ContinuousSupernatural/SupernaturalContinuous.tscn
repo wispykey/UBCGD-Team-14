@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=4 uid="uid://cctcpb0vas64q"]
 
 [ext_resource type="Script" path="res://Prototyping/Marcus/ContinuousSupernatural/SupernaturalContinuous.gd" id="1_0iimm"]
-[ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_gd4c7"]
-[ext_resource type="PackedScene" uid="uid://dwhhs4cspt0f" path="res://EnemyAttacks/SpawnGhost/SpawnGhost.tscn" id="3_psn2g"]
+[ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://Enemies/EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_gd4c7"]
+[ext_resource type="PackedScene" uid="uid://dwhhs4cspt0f" path="res://Enemies/EnemyAttacks/SpawnGhost/SpawnGhost.tscn" id="3_psn2g"]
 [ext_resource type="PackedScene" uid="uid://b024hq7e6g6ce" path="res://Prototyping/Marcus/ContinuousSupernatural/itr_projectile_manager.tscn" id="4_533sh"]
 [ext_resource type="PackedScene" uid="uid://d28eekj8djk1r" path="res://Prototyping/Marcus/ContinuousSupernatural/c_projectile_manager.tscn" id="5_m5fpe"]
-[ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://TileManager/TileManager.tscn" id="6_sxaxk"]
+[ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://Levels/TileManager.tscn" id="6_sxaxk"]
 [ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Prototyping/Marcus/Assets/marcus_tileset.tres" id="7_bi0v1"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="8_bbfr6"]
-[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/Prototype scenes/HUD.tscn" id="9_gmgjw"]
+[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="9_gmgjw"]
 [ext_resource type="PackedScene" uid="uid://d3muoiwq1oikx" path="res://Player/beat_indicator.tscn" id="10_6ykw3"]
 
 [node name="Supernatural" type="Node2D"]
