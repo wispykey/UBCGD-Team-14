@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctpiuuv8tujwi"
-path="res://.godot/imported/steampunkPortal.png-7a1636091426f4a08ae9270d3136b63f.ctex"
+uid="uid://yfs7usc851jc"
+path="res://.godot/imported/supernatural_brick_path.png-f7fae5ed135d4d5f3d0832c72732ccc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Prototyping/Joshua/Assets/steampunkPortal.png"
-dest_files=["res://.godot/imported/steampunkPortal.png-7a1636091426f4a08ae9270d3136b63f.ctex"]
+source_file="res://Assets/Background/supernatural_brick_path.png"
+dest_files=["res://.godot/imported/supernatural_brick_path.png-f7fae5ed135d4d5f3d0832c72732ccc7.ctex"]
 
 [params]
 

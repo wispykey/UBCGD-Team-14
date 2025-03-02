@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bo3b7a4l3r7dh"
-path="res://.godot/imported/game_logo.png-36829467c3a6c4002a635c60f06c44a2.ctex"
+uid="uid://b6oqw0ek3ywfo"
+path="res://.godot/imported/ubc_gamedev_logo.png-872edcfccb635b95ea6817a63889ec5c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Prototyping/Joshua/Assets/game_logo.png"
-dest_files=["res://.godot/imported/game_logo.png-36829467c3a6c4002a635c60f06c44a2.ctex"]
+source_file="res://Assets/Joshua_Assets_Unsorted/ubc_gamedev_logo.png"
+dest_files=["res://.godot/imported/ubc_gamedev_logo.png-872edcfccb635b95ea6817a63889ec5c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhtywrmi4log8"
-path="res://.godot/imported/info_box.png-29587d13aac74503730d5451e370023d.ctex"
+uid="uid://0fo1xcfi2gfd"
+path="res://.godot/imported/supernaturalPortal.png-cbfbd511e92b382990e37ccf168626ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Prototyping/Joshua/Assets/info_box.png"
-dest_files=["res://.godot/imported/info_box.png-29587d13aac74503730d5451e370023d.ctex"]
+source_file="res://Assets/Joshua_Assets_Unsorted/supernaturalPortal.png"
+dest_files=["res://.godot/imported/supernaturalPortal.png-cbfbd511e92b382990e37ccf168626ba.ctex"]
 
 [params]
 
