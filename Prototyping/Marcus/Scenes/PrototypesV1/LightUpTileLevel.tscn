@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=4 uid="uid://dxcs2cu6tl8gu"]
 
 [ext_resource type="Script" path="res://Prototyping/Marcus/Scripts/PrototypesV1/light_up_tile_level.gd" id="1_7dqtl"]
-[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Prototyping/Marcus/Assets/marcus_tileset.tres" id="2_qebvr"]
+[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Assets/marcus_tileset.tres" id="2_qebvr"]
 [ext_resource type="PackedScene" uid="uid://din3ddqunskxh" path="res://Prototyping/Marcus/Scenes/PrototypesV1/TilePlayer.tscn" id="3_intom"]
-[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/Prototype scenes/HUD.tscn" id="4_xqfai"]
+[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="4_xqfai"]
 
 [node name="ColorTrailLevel" type="Node2D"]
 script = ExtResource("1_7dqtl")

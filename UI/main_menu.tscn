@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5p8qp6ujusj"]
 
 [ext_resource type="Script" path="res://UI/main_menu.gd" id="1_cvohv"]
-[ext_resource type="Texture2D" uid="uid://bo3b7a4l3r7dh" path="res://Prototyping/Joshua/Assets/game_logo.png" id="1_mxtbq"]
-[ext_resource type="Texture2D" uid="uid://df33wwjpavxsq" path="res://Prototyping/Joshua/Assets/main_menu_background.png" id="2_k5son"]
+[ext_resource type="Texture2D" uid="uid://bo3b7a4l3r7dh" path="res://Assets/LevelSelect/game_logo.png" id="1_mxtbq"]
+[ext_resource type="Texture2D" uid="uid://df33wwjpavxsq" path="res://Assets/LevelSelect/main_menu_background.png" id="2_k5son"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Prototyping/Example/iterative_projectile_testing.gd" id="1_lnwul"]
 [ext_resource type="PackedScene" uid="uid://bgm21f8w6825k" path="res://Enemies/EnemyAttacks/Projectiles/iterative_projectile.tscn" id="2_ddk26"]
 [ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://Levels/TileManager.tscn" id="5_njdxu"]
-[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Levels/marcus_tileset.tres" id="6_hw6oq"]
+[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Assets/marcus_tileset.tres" id="6_hw6oq"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="7_7jlws"]
-[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Interactables/HUD.tscn" id="8_wlyb3"]
+[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="8_wlyb3"]
 
 [node name="IterativeProjectileTesting" type="Node2D"]
 script = ExtResource("1_lnwul")

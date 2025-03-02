@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=4 uid="uid://dv1leo3g56ib3"]
 
 [ext_resource type="Script" path="res://Prototyping/Example/example_level_two.gd" id="1_2s8ci"]
-[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Levels/marcus_tileset.tres" id="2_grxjp"]
+[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Assets/marcus_tileset.tres" id="2_grxjp"]
 [ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://Enemies/EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_tt2uv"]
 [ext_resource type="PackedScene" uid="uid://dwhhs4cspt0f" path="res://Enemies/EnemyAttacks/SpawnGhost/SpawnGhost.tscn" id="3_1wyjw"]
 [ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://Levels/TileManager.tscn" id="4_0k0m3"]
-[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Interactables/HUD.tscn" id="4_snpa6"]
+[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="4_snpa6"]
 [ext_resource type="PackedScene" uid="uid://bomiqmq23yxw5" path="res://Enemies/EnemyAttacks/Projectiles/projectile_spawner.tscn" id="4_xoji6"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="5_e3tsv"]
 

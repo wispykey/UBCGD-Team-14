@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://hrdsqvtibmy4"]
 
 [ext_resource type="Script" path="res://UI/level_selection.gd" id="1_o8iav"]
-[ext_resource type="Texture2D" uid="uid://bhtywrmi4log8" path="res://Prototyping/Joshua/Assets/info_box.png" id="5_2tggb"]
+[ext_resource type="Texture2D" uid="uid://bhtywrmi4log8" path="res://Assets/LevelSelect/info_box.png" id="5_2tggb"]
 [ext_resource type="Script" path="res://UI/level_description.gd" id="6_2wuik"]
 [ext_resource type="Script" path="res://UI/info_box.gd" id="6_abimb"]
 [ext_resource type="PackedScene" uid="uid://jpt50igaasi2" path="res://UI/flame_portal.tscn" id="6_emj5n"]
-[ext_resource type="Texture2D" uid="uid://bq8t4xkbm3k4e" path="res://Prototyping/Joshua/Assets/grave_bg.png" id="6_iuh3n"]
-[ext_resource type="Texture2D" uid="uid://b0h7j6rosxsfk" path="res://Prototyping/Joshua/Assets/fantasy_preview1.png" id="7_kahdp"]
+[ext_resource type="Texture2D" uid="uid://bq8t4xkbm3k4e" path="res://Assets/LevelSelect/PortalImages/grave_background_circular.png" id="6_iuh3n"]
+[ext_resource type="Texture2D" uid="uid://b0h7j6rosxsfk" path="res://Assets/LevelSelect/Previews/fantasy_preview1.png" id="7_kahdp"]
 [ext_resource type="Script" path="res://UI/continue_label.gd" id="7_xyunw"]
-[ext_resource type="Texture2D" uid="uid://df33wwjpavxsq" path="res://Prototyping/Joshua/Assets/main_menu_background.png" id="8_l5wb0"]
+[ext_resource type="Texture2D" uid="uid://df33wwjpavxsq" path="res://Assets/LevelSelect/main_menu_background.png" id="8_l5wb0"]
 
 [node name="LevelSelection" type="Control"]
 layout_mode = 3

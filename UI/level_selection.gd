@@ -4,19 +4,19 @@ var levels = ["Spookesville", "Spellville", "Steamville"]
 var current_index = 0
 var level_map = {
 	"Spookesville": {	"scene": "res://Levels/Supernatural.tscn",
-						"image": preload("res://Prototyping/Joshua/Assets/grave_bg.png"),
+						"image": preload("res://Assets/LevelSelect/PortalImages/grave_background_circular.png"),
 						"info": "A mist-shrouded realm where flickering lanterns cast eerie glows over crumbling mausoleums. Once a haven for harmonious ghostly existence, the land is now gripped by turmoil as a vengeful spirit rises, threatening to shatter the delicate peace",
-						"preview": preload("res://Prototyping/Joshua/Assets/supernatural_preview1.png")
+						"preview": preload("res://Assets/LevelSelect/Previews/supernatural_preview1.png")
 						},
 	"Spellville": { 	"scene": "res://Levels/Fantasy.tscn",
-						"image": preload("res://Prototyping/Joshua/Assets/magic_bg.png"),
+						"image": preload("res://Assets/LevelSelect/PortalImages/magic_background_circular.png"),
 						"info": "A vibrant fantasy town where magic weaves through everyday life, from glowing cobblestone streets to floating marketplaces. Unbeknownst to its residents, a rogue magic now threatens to unravel its harmony.",
-						"preview": preload("res://Prototyping/Joshua/Assets/fantasy_preview1.png")
+						"preview": preload("res://Assets/LevelSelect/Previews/fantasy_preview1.png")
 						},
 	"Steamville": {		"scene": "",
-						"image": preload("res://Prototyping/Joshua/Assets/grave_bg.png"),
+						"image": preload("res://Assets/LevelSelect/PortalImages/grave_background_circular.png"),
 						"info": "A steampunk metropolis of towering brass spires, airships, and intricate machinery, where innovation thrives amidst the hum of gears. Beneath its gleaming surface, a shadowy faction seeks to sabotage the city's power core, threatening to plunge it into darkness.",
-						"preview": preload("res://Prototyping/Joshua/Assets/fantasy_preview1.png") # change me
+						"preview": preload("res://Assets/LevelSelect/Previews/supernatural_preview1.png") # change me
 						}
 }
 
