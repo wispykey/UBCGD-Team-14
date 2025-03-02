@@ -9,6 +9,7 @@ extends Node2D
 @export var puddle_hazard: PackedScene
 @export var thunderstorm: PackedScene
 @export var iterative_projectile: PackedScene
+@export var vine_cross: PackedScene
 
 @export var debug_random_test: bool = false
 var GameOverComponent = preload("res://UI/GameOver.tscn")
@@ -39,15 +40,15 @@ const WINNING_SCORE: int = 20
 var timeline = [
 	{"time": 2, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 4, "function": "spawn_thunderstorm", "args": {}},
-	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {}},
-	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(4,4)}},
-	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(10,4)}},
-	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(16,4)}},
-	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(4,7)}},
-	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(16,7)}},
-	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(4,10)}},
-	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(10,10)}},
-	{"time": 18, "function": "spawn_vines_in_cross_pattern", "args": {"coords": Vector2(16,10)}},
+	{"time": 18, "function": "spawn_vine_cross", "args": {}},
+	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(4,4)}},
+	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(10,4)}},
+	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(16,4)}},
+	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(4,7)}},
+	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(16,7)}},
+	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(4,10)}},
+	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(10,10)}},
+	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(16,10)}},
 	{"time": 22, "function": "spawn_puddles_periodically", "args": {}},
 	{"time": 38, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 40, "function": "spawn_thunderstorm", "args": {}},
@@ -172,7 +173,7 @@ func spawn_vines_in_cross_pattern(args: Dictionary):
 	]
 	for spawn_vines_args in calls:
 		call("spawn_vines", spawn_vines_args)
-	
+
 
 func spawn_vines(args: Dictionary):
 	var projectile = iterative_projectile.instantiate()
@@ -201,6 +202,11 @@ func spawn_vines(args: Dictionary):
 	add_child(projectile)
 	projectile.start_one_coord(direction, type, coords, turn_count)
 
+func spawn_vine_cross(args: Dictionary):
+	var coords = args.coords if args.has("coords") else Vector2(10, 7)
+	var cross = vine_cross.instantiate()
+	cross.position = coords * 32
+	add_child(cross)
 
 func _on_quarter_beat_spawn_puddle(beat_num: int):
 	var beats_passed = floori(Conductor.num_beats_passed)

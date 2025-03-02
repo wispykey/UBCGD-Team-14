@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=3 uid="uid://b11rmeh0136ep"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/VineCross/vine_cross.gd" id="1_wly15"]
+[ext_resource type="Texture2D" uid="uid://ctwf8gqvrn22h" path="res://Assets/Themes/Fantasy/vines.png" id="2_c6gdu"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/VineCross/vine_single.gd" id="2_ce4ge"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/VineCross/x_axis.gd" id="2_mos62"]
+[ext_resource type="Texture2D" uid="uid://7cdqvtbs8thg" path="res://Assets/Themes/Fantasy/vine_right.png" id="3_d1x3s"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/VineCross/vine_hit_zone.gd" id="5_milvm"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/VineCross/y_axis.gd" id="7_1dfhp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdno0"]
+size = Vector2(32, 32)
+
+[sub_resource type="Curve" id="Curve_fcr8r"]
+_data = [Vector2(0.0157068, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.763686), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_osspe"]
+size = Vector2(32, 32)
+
+[node name="VineCross" type="Node2D"]
+script = ExtResource("1_wly15")
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="FullyGrownDuration" type="Timer" parent="."]
+one_shot = true
+
+[node name="XAxis" type="Node2D" parent="."]
+script = ExtResource("2_mos62")
+
+[node name="XHitZone" type="Area2D" parent="XAxis"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("5_milvm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="XAxis/XHitZone"]
+shape = SubResource("RectangleShape2D_cdno0")
+
+[node name="Right" type="Line2D" parent="XAxis"]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 32, 0)
+width = 32.0
+width_curve = SubResource("Curve_fcr8r")
+texture = ExtResource("2_c6gdu")
+texture_mode = 1
+script = ExtResource("2_ce4ge")
+
+[node name="Head" type="Sprite2D" parent="XAxis/Right"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_d1x3s")
+
+[node name="Left" type="Line2D" parent="XAxis"]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, -32, 0)
+width = 32.0
+width_curve = SubResource("Curve_fcr8r")
+texture = ExtResource("2_c6gdu")
+texture_mode = 1
+script = ExtResource("2_ce4ge")
+
+[node name="Head" type="Sprite2D" parent="XAxis/Left"]
+rotation = 3.14159
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_d1x3s")
+
+[node name="YAxis" type="Node2D" parent="."]
+script = ExtResource("7_1dfhp")
+
+[node name="YHitZone" type="Area2D" parent="YAxis"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("5_milvm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YAxis/YHitZone"]
+shape = SubResource("RectangleShape2D_osspe")
+
+[node name="Up" type="Line2D" parent="YAxis"]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, -32)
+width = 32.0
+width_curve = SubResource("Curve_fcr8r")
+texture = ExtResource("2_c6gdu")
+texture_mode = 1
+script = ExtResource("2_ce4ge")
+
+[node name="Head" type="Sprite2D" parent="YAxis/Up"]
+rotation = 4.71239
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_d1x3s")
+
+[node name="Down" type="Line2D" parent="YAxis"]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 32)
+width = 32.0
+width_curve = SubResource("Curve_fcr8r")
+texture = ExtResource("2_c6gdu")
+texture_mode = 1
+script = ExtResource("2_ce4ge")
+
+[node name="Head" type="Sprite2D" parent="YAxis/Down"]
+rotation = 1.5708
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_d1x3s")
