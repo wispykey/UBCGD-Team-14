@@ -21,7 +21,20 @@ func _ready() -> void:
 	
 	$TelegraphTimer.wait_time = 4 * Conductor.seconds_per_quarter_note
 	$LifetimeTimer.wait_time = 10 * Conductor.seconds_per_quarter_note
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	update_collision_regions()
 	
+	if !$TelegraphTimer.is_stopped():
+		return 
+	if !all_directions_finished:
+		grow(delta)
+	elif all_directions_finished and $LifetimeTimer.is_stopped():
+		recede(delta)
+
+
 func normalize_position():
 	var center = GameState.control_port.get_center()
 	
@@ -49,18 +62,6 @@ func compute_furthest_direction():
 	longest_distance = max(to_left_wall, to_right_wall, to_upper_wall, to_lower_wall)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	update_collision_regions()
-	
-	if !$TelegraphTimer.is_stopped():
-		return 
-	if !all_directions_finished:
-		grow(delta)
-	elif all_directions_finished and $LifetimeTimer.is_stopped():
-		recede(delta)
-
-
 func grow(delta: float):
 	for i in range(len(vines)):
 		var vine = vines[i]
@@ -69,9 +70,10 @@ func grow(delta: float):
 		vine.add_point(new_point)
 		check_finished(new_point)
 	
+	
 func update_collision_regions():
-	$XAxis.update_collision_region($XAxis/Right/Head.position.x)
-	$YAxis.update_collision_region($YAxis/Down/Head.position.y)
+	$XAxis.update_collision_region()
+	$YAxis.update_collision_region()
 		
 	
 func recede(delta: float):
