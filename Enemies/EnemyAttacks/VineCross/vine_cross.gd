@@ -13,10 +13,9 @@ var directions = [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	vines = [$Right, $Left, $Up, $Down]
+	vines = [$XAxis/Right, $XAxis/Left]
 	compute_furthest_direction()
 	
-	print(Conductor.seconds_per_quarter_note)
 	$TelegraphTimer.wait_time = 4 * Conductor.seconds_per_quarter_note
 	$LifetimeTimer.wait_time = 10 * Conductor.seconds_per_quarter_note
 	
@@ -35,6 +34,8 @@ func compute_furthest_direction():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	update_collision_regions()
+	
 	if !$TelegraphTimer.is_stopped():
 		return 
 	if !all_directions_finished:
@@ -44,27 +45,25 @@ func _process(delta: float) -> void:
 
 
 func grow(delta: float):
-	for i in range(len(vines)):
+	for i in range(2):
 		var vine = vines[i]
 		var last_point = vine.points[vine.get_point_count()-1]
 		var new_point = last_point + delta*directions[i]*growth_rate
 		vine.add_point(new_point)
-		check_bounds(new_point)
-	update_collision_regions()
+		check_finished(new_point)
 	
 func update_collision_regions():
-	pass
+	$XAxis.update_collision_region($XAxis/Right/Head.position.x)
+		
 	
 func recede(delta: float):
 	for i in range(len(vines)):
 		var vine = vines[i]
 		if (vine.points.size() > 2):
 			var point_to_remove = vine.points[vine.points.size()-1]
-			print(point_to_remove)
 			vine.remove_point(vine.points.size()-1)
 
-func check_bounds(point):
+func check_finished(point):
 	if point.x > longest_distance or point.y > longest_distance:
 		all_directions_finished = true
-		print("Finished")
 		$LifetimeTimer.start()
