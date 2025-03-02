@@ -2,7 +2,7 @@ extends Node2D
 
 const TILE_SIZE: int = 32
 
-var growth_rate: int = 150
+var growth_rate: int = 150 # This is multiplied by delta
 var all_directions_finished: bool = false
 
 # The longest distance any vine has to travel before hitting wall
@@ -20,7 +20,8 @@ func _ready() -> void:
 	compute_furthest_direction()
 	
 	$TelegraphTimer.wait_time = 4 * Conductor.seconds_per_quarter_note
-	$LifetimeTimer.wait_time = 10 * Conductor.seconds_per_quarter_note
+	# How long vines should persist, after all segments have reached wall
+	$FullyGrownDuration.wait_time = 10 * Conductor.seconds_per_quarter_note
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,7 +32,7 @@ func _process(delta: float) -> void:
 		return 
 	if !all_directions_finished:
 		grow(delta)
-	elif all_directions_finished and $LifetimeTimer.is_stopped():
+	elif all_directions_finished and $FullyGrownDuration.is_stopped():
 		recede(delta)
 
 
@@ -79,11 +80,17 @@ func update_collision_regions():
 func recede(delta: float):
 	for i in range(len(vines)):
 		var vine = vines[i]
-		if (vine.points.size() > 2):
+		if vine.points.size() > 2:
 			var point_to_remove = vine.points[vine.points.size()-1]
 			vine.remove_point(vine.points.size()-1)
+		else:
+			# TODO: Replace with animation that invokes this as callback
+			_on_despawn_animation_finished()
 
 func check_finished(point):
 	if point.x > longest_distance or point.y > longest_distance:
 		all_directions_finished = true
-		$LifetimeTimer.start()
+		$FullyGrownDuration.start()
+		
+func _on_despawn_animation_finished():
+	call_deferred("queue_free")
