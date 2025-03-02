@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=8 format=3 uid="uid://plb73a4d0dqi"]
 
-[ext_resource type="Texture2D" uid="uid://yfs7usc851jc" path="res://Assets/Themes/Fantasy/supernatural_brick_path.png" id="1_jy1u0"]
+[ext_resource type="Texture2D" uid="uid://yfs7usc851jc" path="res://Assets/Background/supernatural_brick_path.png" id="1_jy1u0"]
 [ext_resource type="Texture2D" uid="uid://slv3f7olgnc6" path="res://Assets/Background/example_tileset.png" id="1_p4jlc"]
 [ext_resource type="Texture2D" uid="uid://dnl7p3latop2x" path="res://Assets/Objects/triangle.png" id="4_icot0"]
 

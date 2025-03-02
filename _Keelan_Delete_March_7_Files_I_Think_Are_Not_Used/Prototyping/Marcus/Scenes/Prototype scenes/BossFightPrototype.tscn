@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=4 uid="uid://dilso6lk2t1pt"]
 
 [ext_resource type="Script" path="res://Prototyping/Marcus/Scripts/boss_fight_prototype.gd" id="1_a3nh7"]
-[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Levels/marcus_tileset.tres" id="2_8jdpa"]
-[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Interactables/HUD.tscn" id="4_fd1ig"]
-[ext_resource type="PackedScene" uid="uid://dwntotwnfhb3i" path="res://_Keelan_Delete_March_7_Files_I_Think_Are_Not_Used/Prototyping/Marcus/CustomConductor/CustomConductor.tscn" id="5_jsyuk"]
-[ext_resource type="PackedScene" uid="uid://c8018wk3a2r7w" path="res://_Keelan_Delete_March_7_Files_I_Think_Are_Not_Used/Prototyping/Marcus/Scenes/Prototype scenes/SpookyPlayer.tscn" id="5_v4ubj"]
+[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Assets/marcus_tileset.tres" id="2_8jdpa"]
+[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="4_fd1ig"]
+[ext_resource type="PackedScene" uid="uid://dwntotwnfhb3i" path="res://Prototyping/Marcus/CustomConductor/CustomConductor.tscn" id="5_jsyuk"]
+[ext_resource type="PackedScene" uid="uid://c8018wk3a2r7w" path="res://Prototyping/Marcus/Scenes/Prototype scenes/SpookyPlayer.tscn" id="5_v4ubj"]
 
 [node name="BossFightPrototype" type="Node2D"]
 script = ExtResource("1_a3nh7")
