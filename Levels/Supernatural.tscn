@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dwhhs4cspt0f" path="res://Enemies/EnemyAttacks/SpawnGhost/SpawnGhost.tscn" id="3_pkwar"]
 [ext_resource type="PackedScene" uid="uid://bomiqmq23yxw5" path="res://Enemies/EnemyAttacks/Projectiles/projectile_spawner.tscn" id="4_rmsie"]
 [ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://Levels/TileManager.tscn" id="5_tcjr5"]
-[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Assets/Background/marcus_tileset.tres" id="7_tjjkr"]
+[ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Levels/marcus_tileset.tres" id="7_tjjkr"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="7_yhfch"]
 [ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="8_ote3p"]
 
