@@ -13,7 +13,7 @@ var directions = [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	vines = [$XAxis/Right, $XAxis/Left]
+	vines = [$XAxis/Right, $XAxis/Left, $YAxis/Up, $YAxis/Down]
 	compute_furthest_direction()
 	
 	$TelegraphTimer.wait_time = 4 * Conductor.seconds_per_quarter_note
@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 
 
 func grow(delta: float):
-	for i in range(2):
+	for i in range(len(vines)):
 		var vine = vines[i]
 		var last_point = vine.points[vine.get_point_count()-1]
 		var new_point = last_point + delta*directions[i]*growth_rate
@@ -54,6 +54,7 @@ func grow(delta: float):
 	
 func update_collision_regions():
 	$XAxis.update_collision_region($XAxis/Right/Head.position.x)
+	$YAxis.update_collision_region($YAxis/Down/Head.position.y)
 		
 	
 func recede(delta: float):
