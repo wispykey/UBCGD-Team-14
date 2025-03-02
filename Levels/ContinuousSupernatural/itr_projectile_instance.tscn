@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dgqiwa6qw1j83"]
 
-[ext_resource type="Script" path="res://Levels/ContinuousSupernatural/itr_projectile_instance.gd" id="1_wojqj"]
-[ext_resource type="PackedScene" uid="uid://ixwndwmexdeb" path="res://Enemies/EnemyAttacks/Projectiles/attack.tscn" id="2_xocga"]
-[ext_resource type="Script" path="res://Enemies/EnemyAttacks/Projectiles/hit_zone.gd" id="3_jcw60"]
+[ext_resource type="Script" path="res://Prototyping/Marcus/ContinuousSupernatural/itr_projectile_instance.gd" id="1_wojqj"]
+[ext_resource type="PackedScene" uid="uid://ixwndwmexdeb" path="res://EnemyAttacks/Projectiles/attack.tscn" id="2_xocga"]
+[ext_resource type="Script" path="res://EnemyAttacks/Projectiles/hit_zone.gd" id="3_jcw60"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rmyv"]
 size = Vector2(29, 30)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cce6fwm3ntsir"]
 
-[ext_resource type="Script" path="res://Levels/ContinuousSupernatural/c_projectile_instance.gd" id="1_mf0n0"]
+[ext_resource type="Script" path="res://Prototyping/Marcus/ContinuousSupernatural/c_projectile_instance.gd" id="1_mf0n0"]
 [ext_resource type="Texture2D" uid="uid://dcih3mngutdov" path="res://Assets/Themes/Supernatural/Shoe/game_shoeasset1.png" id="2_gja21"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_51kr5"]

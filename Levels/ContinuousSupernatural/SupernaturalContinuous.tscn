@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=4 uid="uid://cctcpb0vas64q"]
 
-[ext_resource type="Script" path="res://Levels/ContinuousSupernatural/SupernaturalContinuous.gd" id="1_0iimm"]
+[ext_resource type="Script" path="res://Prototyping/Marcus/ContinuousSupernatural/SupernaturalContinuous.gd" id="1_0iimm"]
 [ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://Enemies/EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_gd4c7"]
 [ext_resource type="PackedScene" uid="uid://dwhhs4cspt0f" path="res://Enemies/EnemyAttacks/SpawnGhost/SpawnGhost.tscn" id="3_psn2g"]
 [ext_resource type="PackedScene" uid="uid://b024hq7e6g6ce" path="res://Levels/ContinuousSupernatural/itr_projectile_manager.tscn" id="4_533sh"]
