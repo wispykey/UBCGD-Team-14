@@ -23,8 +23,7 @@ var direction
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	screen_size.x = 160
-	screen_size.y = 160
+	screen_size =  GameState.control_port.size
 	$TelegraphTimer.wait_time = telegraph_duration * Conductor.seconds_per_quarter_note
 	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
 
