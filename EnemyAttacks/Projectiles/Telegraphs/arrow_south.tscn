@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq4tphgsccaws"]
-
-[ext_resource type="Texture2D" uid="uid://cbun5nfmmwm68" path="res://Assets/Objects/down_arrow.png" id="1_qj2sw"]
-
-[node name="Sprite2D" type="Sprite2D"]
-texture = ExtResource("1_qj2sw")

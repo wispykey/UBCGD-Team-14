@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhw7dermh0y86"]
-
-[ext_resource type="Texture2D" uid="uid://csys7qt3lquuw" path="res://Assets/Objects/PLACEHOLDER3.png" id="1_86eho"]
-
-[node name="SpinningEast" type="Sprite2D"]
-texture = ExtResource("1_86eho")

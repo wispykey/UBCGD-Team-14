@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ixwndwmexdeb"]
-
-[ext_resource type="Texture2D" uid="uid://ctwf8gqvrn22h" path="res://Assets/Themes/Fantasy/vines.png" id="1_fnnpm"]
-
-[node name="Sprite2D" type="Sprite2D"]
-texture = ExtResource("1_fnnpm")

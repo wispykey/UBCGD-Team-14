@@ -24,6 +24,14 @@ script = ExtResource("1_47pda")
 scene = ExtResource("3_muhlb")
 overrides = {}
 
+[sub_resource type="Resource" id="Resource_go770"]
+script = ExtResource("1_47pda")
+scene = ExtResource("9_f5euv")
+overrides = {
+"box_modulate_global_color": "false",
+"box_panel": "\"res://Interactables/Dialog/Layer_SpeakerPortraitTextbox/Border.tres\""
+}
+
 [sub_resource type="Resource" id="Resource_h1pv1"]
 script = ExtResource("1_47pda")
 scene = ExtResource("5_floxx")
@@ -43,14 +51,6 @@ overrides = {}
 script = ExtResource("1_47pda")
 scene = ExtResource("8_nw736")
 overrides = {}
-
-[sub_resource type="Resource" id="Resource_go770"]
-script = ExtResource("1_47pda")
-scene = ExtResource("9_f5euv")
-overrides = {
-"box_modulate_global_color": "false",
-"box_panel": "\"res://Interactables/Dialog/Layer_SpeakerPortraitTextbox/Border.tres\""
-}
 
 [resource]
 script = ExtResource("9_4kcq2")
