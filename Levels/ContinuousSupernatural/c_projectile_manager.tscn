@@ -1,14 +1,14 @@
 [gd_scene load_steps=7 format=3 uid="uid://d28eekj8djk1r"]
 
-[ext_resource type="Script" path="res://Prototyping/Marcus/ContinuousSupernatural/c_projectile_manager.gd" id="1_vllpv"]
-[ext_resource type="PackedScene" uid="uid://c4qarlapcm34x" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_west.tscn" id="2_r2naj"]
-[ext_resource type="PackedScene" uid="uid://crty55i4hkry8" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_east.tscn" id="3_swqbx"]
-[ext_resource type="PackedScene" uid="uid://cxxilvsrw8kin" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_north.tscn" id="4_8dicd"]
-[ext_resource type="PackedScene" uid="uid://cq4tphgsccaws" path="res://EnemyAttacks/Projectiles/Telegraphs/arrow_south.tscn" id="5_vm5o8"]
-[ext_resource type="PackedScene" uid="uid://cce6fwm3ntsir" path="res://Prototyping/Marcus/ContinuousSupernatural/c_projectile_instance.tscn" id="6_0sigw"]
+[ext_resource type="Script" path="res://Levels/ContinuousSupernatural/c_projectile_manager.gd" id="1_10dat"]
+[ext_resource type="PackedScene" uid="uid://c4qarlapcm34x" path="res://Enemies/EnemyAttacks/Projectiles/Telegraphs/arrow_west.tscn" id="2_r2naj"]
+[ext_resource type="PackedScene" uid="uid://crty55i4hkry8" path="res://Enemies/EnemyAttacks/Projectiles/Telegraphs/arrow_east.tscn" id="3_swqbx"]
+[ext_resource type="PackedScene" uid="uid://cxxilvsrw8kin" path="res://Enemies/EnemyAttacks/Projectiles/Telegraphs/arrow_north.tscn" id="4_8dicd"]
+[ext_resource type="PackedScene" uid="uid://cq4tphgsccaws" path="res://Enemies/EnemyAttacks/Projectiles/Telegraphs/arrow_south.tscn" id="5_vm5o8"]
+[ext_resource type="PackedScene" uid="uid://cce6fwm3ntsir" path="res://Levels/ContinuousSupernatural/c_projectile_instance.tscn" id="6_0sigw"]
 
 [node name="ProjectileSpawner" type="Node2D"]
-script = ExtResource("1_vllpv")
+script = ExtResource("1_10dat")
 t_img_left = ExtResource("2_r2naj")
 t_img_right = ExtResource("3_swqbx")
 t_img_up = ExtResource("4_8dicd")
