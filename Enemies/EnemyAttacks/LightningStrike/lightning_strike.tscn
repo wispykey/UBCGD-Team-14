@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://cy70v507n40va"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/LightningStrike/lightning_strike.gd" id="1_2unhd"]
+[ext_resource type="Texture2D" uid="uid://bdwvdm6cu037h" path="res://Assets/Objects/purple_line.png" id="2_1xvff"]
+[ext_resource type="PackedScene" uid="uid://cxoyq5ljqviu4" path="res://Enemies/EnemyAttacks/LightningStrike/AlertSign.tscn" id="3_pxgd5"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/LightningStrike/HitZone.gd" id="4_qkv2d"]
+
+[sub_resource type="Curve" id="Curve_n8vci"]
+_data = [Vector2(0, 0.344413), 0.0, 0.0, 0, 0, Vector2(0.270073, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lp66j"]
+offsets = PackedFloat32Array(0.285714, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g87gp"]
+size = Vector2(32, 32)
+
+[node name="LightningStrike" type="Line2D"]
+z_index = 4
+width = 40.0
+width_curve = SubResource("Curve_n8vci")
+default_color = Color(0.3387, 0.232475, 0.866229, 1)
+gradient = SubResource("Gradient_lp66j")
+texture = ExtResource("2_1xvff")
+texture_mode = 1
+sharp_limit = 20.0
+script = ExtResource("1_2unhd")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Telegraph" type="Node2D" parent="."]
+
+[node name="AlertSign" parent="Telegraph" instance=ExtResource("3_pxgd5")]
+
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_qkv2d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
+shape = SubResource("RectangleShape2D_g87gp")

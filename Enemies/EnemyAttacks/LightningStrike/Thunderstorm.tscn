@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://coodvgreajv2t"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/LightningStrike/thunderstorm.gd" id="1_xmirx"]
+[ext_resource type="PackedScene" uid="uid://cy70v507n40va" path="res://Enemies/EnemyAttacks/LightningStrike/lightning_strike.tscn" id="2_n5nj7"]
+
+[node name="Thunderstorm" type="Node2D"]
+script = ExtResource("1_xmirx")
+lightning = ExtResource("2_n5nj7")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true

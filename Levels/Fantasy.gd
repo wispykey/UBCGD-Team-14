@@ -11,8 +11,8 @@ extends Node2D
 @export var iterative_projectile: PackedScene
 
 @export var debug_random_test: bool = false
-var GameOverComponent = preload("res://Components/GameOver.tscn")
-var VictoryComponent = preload("res://Components/Victory.tscn")
+var GameOverComponent = preload("res://UI/GameOver.tscn")
+var VictoryComponent = preload("res://UI/Victory.tscn")
 
 var window_dimensions: Vector2
 const WIDTH: int = 640
