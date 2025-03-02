@@ -1,5 +1,5 @@
 extends Area2D
-class_name CProjectile
+class_name Projectile
 
 @onready var path_2d: Path2D = $Path2D
 @onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
