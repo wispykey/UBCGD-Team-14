@@ -1,0 +1,244 @@
+[gd_scene load_steps=24 format=3 uid="uid://biqni1sm5qhle"]
+
+[ext_resource type="Texture2D" uid="uid://cwhrsaiq00o0j" path="res://Assets/Themes/Fantasy/boss_staff_spritesheet.png" id="1_fj6fs"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/boss_staff.gd" id="2_nhety"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt0eb"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(0, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnofq"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(42, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tu3s0"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(84, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj4nm"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(126, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35ddc"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(168, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nulp"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(210, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h63ya"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(252, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nos6"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(294, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wociy"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(336, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv3f5"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(378, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7yrp"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(420, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gm1d"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(462, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_moeap"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(336, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okg4m"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(378, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoawk"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(420, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0hvf"]
+atlas = ExtResource("1_fj6fs")
+region = Rect2(462, 0, 42, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_svtsh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt0eb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnofq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tu3s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sj4nm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35ddc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nulp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h63ya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nos6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wociy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv3f5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7yrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gm1d")
+}],
+"loop": true,
+"name": &"cast",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_moeap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okg4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoawk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0hvf")
+}],
+"loop": true,
+"name": &"charge",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt0eb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_r3use"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="Animation" id="Animation_cb4pn"]
+resource_name = "hover"
+length = 4.0
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_ooql5"]
+resource_name = "call_lightning"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 13, 15, 17, 19),
+"transitions": PackedFloat32Array(0.258816, 12.5533, 4.5, 4.5, 4.5, 4.5),
+"update": 0,
+"values": [0.0, -0.785398, -2.26893, 0.698132, -2.26893, 0.698132]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.6, 0, 1, 11, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [&"idle", &"idle", &"charge", &"idle", &"cast", &"idle", &"cast", &"idle", &"cast", &"idle", &"cast", &"idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 12.9, 13, 13.5, 14.9, 15, 15.5, 16.9, 17, 17.5, 18.9, 19, 19.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(2, 2), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(2, 2), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(2, 2), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(2, 2), Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hcwrv"]
+_data = {
+"RESET": SubResource("Animation_r3use"),
+"call_lightning": SubResource("Animation_ooql5"),
+"hover": SubResource("Animation_cb4pn")
+}
+
+[node name="BossStaff" type="AnimatedSprite2D" node_paths=PackedStringArray("anim")]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_svtsh")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.280919
+offset = Vector2(16.5, -16.5)
+script = ExtResource("2_nhety")
+anim = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hcwrv")
+}
+autoplay = "hover"

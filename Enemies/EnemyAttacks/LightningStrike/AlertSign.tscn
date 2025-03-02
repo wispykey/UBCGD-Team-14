@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxoyq5ljqviu4"]
+
+[ext_resource type="Texture2D" uid="uid://d3xo3eh5tmrh8" path="res://Assets/Objects/triangle_flashing.png" id="1_7aj78"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/HalfRoomCleave/alert_sign.gd" id="2_21wsf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wquxr"]
+atlas = ExtResource("1_7aj78")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0h3fw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wquxr")
+}],
+"loop": true,
+"name": &"flash",
+"speed": 5.0
+}]
+
+[node name="AlertSign" type="AnimatedSprite2D"]
+modulate = Color(1, 1, 1, 0.734)
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_0h3fw")
+animation = &"flash"
+autoplay = "flash"
+script = ExtResource("2_21wsf")

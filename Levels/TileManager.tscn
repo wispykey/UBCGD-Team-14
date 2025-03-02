@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0yyqdkpueu2n"]
+
+[ext_resource type="Script" path="res://Levels/tile_manager.gd" id="1_qusne"]
+
+[node name="TileManager" type="Node2D"]
+z_index = -1
+script = ExtResource("1_qusne")

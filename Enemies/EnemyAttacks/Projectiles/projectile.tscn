@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpoc745abffae"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/Projectiles/projectile.gd" id="1_lr4rj"]
+[ext_resource type="Texture2D" uid="uid://bwke0uchycnoa" path="res://Assets/Objects/orange_circle.png" id="2_ufddj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_51kr5"]
+radius = 4.12311
+
+[sub_resource type="Curve2D" id="Curve2D_d5qba"]
+bake_interval = 38.76
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 35, -33, 0, 0, 0, 0, 72, 38, 0, 0, 0, 0, 114, -33, 0, 0, 0, 0, 156, 38, 0, 0, 0, 0, 205, -29, 0, 0, 0, 0, 245, 37, 0, 0, 0, 0, 292, -32, 0, 0, 0, 0, 340, 36, 0, 0, 0, 0, 386, -29)
+}
+point_count = 10
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_lr4rj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_51kr5")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_d5qba")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(1, 0)
+rotation = -0.770474
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D"]
+position = Vector2(-0.717581, -0.696476)
+rotation = 0.770474
+scale = Vector2(0.28125, 0.273438)
+texture = ExtResource("2_ufddj")

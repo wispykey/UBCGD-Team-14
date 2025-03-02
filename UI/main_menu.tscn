@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5p8qp6ujusj"]
+
+[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_cvohv"]
+[ext_resource type="Texture2D" uid="uid://bo3b7a4l3r7dh" path="res://Prototyping/Joshua/Assets/game_logo.png" id="1_mxtbq"]
+[ext_resource type="Texture2D" uid="uid://df33wwjpavxsq" path="res://Prototyping/Joshua/Assets/main_menu_background.png" id="2_k5son"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0027, 1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_cvohv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = -336.0
+offset_top = -281.0
+offset_right = 340.0
+offset_bottom = 290.0
+texture = ExtResource("2_k5son")
+expand_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -342.0
+offset_top = -244.0
+offset_right = 341.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.0862745, 0.0862745, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -33.0
+offset_right = 46.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_mxtbq")
+
+[node name="start_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "start game"
+
+[node name="quit_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "quit
+"
+
+[connection signal="pressed" from="VBoxContainer/start_button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
