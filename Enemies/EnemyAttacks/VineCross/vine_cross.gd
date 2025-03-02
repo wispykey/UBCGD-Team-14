@@ -1,5 +1,6 @@
 extends Node2D
 
+const TILE_SIZE: int = 32
 
 var growth_rate: int = 150
 var all_directions_finished: bool = false
@@ -14,10 +15,26 @@ var directions = [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	vines = [$XAxis/Right, $XAxis/Left, $YAxis/Up, $YAxis/Down]
+	
+	normalize_position()	
 	compute_furthest_direction()
 	
 	$TelegraphTimer.wait_time = 4 * Conductor.seconds_per_quarter_note
 	$LifetimeTimer.wait_time = 10 * Conductor.seconds_per_quarter_note
+	
+func normalize_position():
+	var center = GameState.control_port.get_center()
+	
+	# Originate from center of arena by default
+	if position == Vector2.ZERO:
+		position.x = center.x
+		position.y = center.y
+	
+	# Get the position of top-left corner of the bounding tile
+	var x = int(position.x) - int(position.x) % TILE_SIZE
+	var y = int(position.y) - int(position.y) % TILE_SIZE
+	
+	position = Vector2(x + TILE_SIZE/2, y + TILE_SIZE/2)
 	
 
 func compute_furthest_direction():
