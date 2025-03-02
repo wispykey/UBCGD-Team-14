@@ -1,4 +1,5 @@
 extends Area2D
+class_name SpinningContinuousProjectile
 
 @onready var sprite: Sprite2D = $Sprite2D
 
