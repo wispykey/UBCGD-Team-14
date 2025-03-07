@@ -43,6 +43,8 @@ func _unhandled_input(event):
 		_on_forward_pressed()
 		
 	if Input.is_action_just_pressed("ui_accept") and info_box.visible and level_map[levels[current_index]].scene:
+		TransitionScreen.transition()
+		await TransitionScreen.on_transition_finished
 		get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
 		
 	elif Input.is_action_just_pressed("ui_accept"):
@@ -57,13 +59,6 @@ func selectLevel() -> void:
 	print("Level selected: ", levels[current_index])
 	showInfo()
 	
-	#if Input.is_action_just_pressed("ui_accept") and info_box.visible and level_map[levels[current_index]].scene:
-		#get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
-		
-		
-	# switch scene
-	#if (level_map[levels[current_index]].scene):
-		#get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
 
 func _on_back_pressed() -> void:
 	SFX.play_UI_switch_level()
