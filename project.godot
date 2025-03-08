@@ -30,7 +30,8 @@ directories/dch_directory={
 "Viola_dialogic": "res://Interactables/Dialog/Viola_dialogic.dch"
 }
 directories/dtl_directory={
-"fantasy_dialogic": "res://Interactables/Dialog/fantasy_dialogic.dtl"
+"fantasy_dialogic": "res://Interactables/Dialog/fantasy_dialogic.dtl",
+"supernatural_dialogic": "res://Interactables/Dialog/supernatural_dialogic.dtl"
 }
 layout/style_list=["res://Interactables/Dialog/Side.tres"]
 layout/default_style="res://Interactables/Dialog/Side.tres"
