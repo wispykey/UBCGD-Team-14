@@ -176,44 +176,35 @@ func update(beat_num: int) -> void:
 				projectile.move()
 				projectile.add_scene(self)
 
-# Adds courners to expanding projectiles
+# Adds corners to expanding projectiles
 func add_corners():
 	for coord in starting_coords:
 		var to_generate: Vector2
 		to_generate.x = coord.x - count
 		to_generate.y = coord.y - count
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("NORTH", to_generate)
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("WEST", to_generate)
+		corner_helper("WEST", to_generate)
 		to_generate.x -= 1
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("NORTH", to_generate)
+		corner_helper("NORTH", to_generate)
 		to_generate.x = coord.x + count
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("EAST", to_generate)
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("NORTH", to_generate)
+		corner_helper("NORTH", to_generate)
 		to_generate.y -= 1
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("EAST", to_generate)
+		corner_helper("EAST", to_generate)
 		to_generate.y = coord.y + count
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("SOUTH", to_generate)
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("EAST", to_generate)
+		corner_helper("EAST", to_generate)
 		to_generate.x += 1
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("SOUTH", to_generate)
+		corner_helper("SOUTH", to_generate)
 		to_generate.x = coord.x - count
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("WEST", to_generate)
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("SOUTH", to_generate)
+		corner_helper("SOUTH", to_generate)
 		to_generate.y += 1
-		projectiles.append(generate_projectile.instantiate())
-		projectiles[-1].start("WEST", to_generate)
+		corner_helper("WEST", to_generate)
 
+# Helper function for add_corners
+func corner_helper(dir: String, coord: Vector2):
+	var projectile = generate_projectile.instantiate()
+	projectiles.append(projectile)
+	add_child(projectile)
+	projectile.add_scene(self)
+	projectile.start(dir, coord)
 
 # Allows parent nodes to set orientation of attack
 func set_direction(cardinal: String):

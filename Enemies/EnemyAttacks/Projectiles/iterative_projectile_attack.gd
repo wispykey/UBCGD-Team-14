@@ -36,6 +36,10 @@ func enable_hitzone():
 	$HitZone.monitoring = true
 	$HitZone.monitorable = true
 	generate_collision_area()
+	
+func disable_hitzone():
+	$HitZone.monitoring = false
+	$HitZone.monitorable = false
 
 func add_scene(parent: Node2D):
 	var sprite = attack_image.instantiate()
