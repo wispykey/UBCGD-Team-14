@@ -121,6 +121,10 @@ var next_event: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Dialogic.start("supernatural_dialogic")
+	Dialogic.signal_event.connect(_ready_post_dialog)
+
+func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	window_dimensions =  GameState.control_port.size

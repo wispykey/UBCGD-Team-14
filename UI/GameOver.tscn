@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://di67atexby6hp"]
+[gd_scene load_steps=11 format=3 uid="uid://di67atexby6hp"]
 
 [ext_resource type="FontFile" uid="uid://c62dm4okl438n" path="res://Assets/Fonts/DenkOne-Regular.ttf" id="1_4m3rt"]
 [ext_resource type="FontFile" uid="uid://dab5enenec7kl" path="res://Assets/Fonts/PixelifySans-Regular.ttf" id="2_l88qm"]
+[ext_resource type="Script" path="res://UI/GameMenu.gd" id="3_0kc5b"]
 [ext_resource type="Texture2D" uid="uid://csi43if3x3xxn" path="res://Assets/Objects/defeat.png" id="3_i601x"]
 [ext_resource type="Texture2D" uid="uid://d1ufcbh1vxie8" path="res://Assets/Objects/home.png" id="4_gk1k0"]
 [ext_resource type="Texture2D" uid="uid://6bninb4pd50d" path="res://Assets/Objects/restart.png" id="5_4ehaa"]
@@ -18,8 +19,11 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
+[sub_resource type="Theme" id="Theme_o6aol"]
+
 [node name="GameOver" type="Node2D"]
 z_index = 10
+script = ExtResource("3_0kc5b")
 
 [node name="Panel" type="Panel" parent="."]
 material = SubResource("CanvasItemMaterial_ko7wh")
@@ -39,12 +43,31 @@ theme_override_fonts/normal_font = ExtResource("1_4m3rt")
 theme_override_font_sizes/normal_font_size = 50
 text = "Defeat"
 
-[node name="Panel3" type="Panel" parent="."]
+[node name="ResetPanel" type="Panel" parent="."]
 offset_left = 347.0
 offset_top = 296.0
 offset_right = 462.0
 offset_bottom = 342.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6lrsc")
+
+[node name="Restart" type="Sprite2D" parent="ResetPanel"]
+position = Vector2(23, 23)
+texture = ExtResource("5_4ehaa")
+
+[node name="RestartLabel" type="RichTextLabel" parent="ResetPanel"]
+offset_left = 41.0
+offset_top = 13.0
+offset_right = 125.0
+offset_bottom = 46.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_l88qm")
+text = "Restart"
+
+[node name="RestartButton" type="Button" parent="ResetPanel"]
+offset_right = 115.0
+offset_bottom = 47.0
+theme = SubResource("Theme_o6aol")
+theme_type_variation = &"FlatButton"
 
 [node name="Panel4" type="Panel" parent="."]
 offset_left = 201.0
@@ -53,35 +76,36 @@ offset_right = 470.0
 offset_bottom = 279.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6lrsc")
 
-[node name="Panel2" type="Panel" parent="."]
-offset_left = 200.0
-offset_top = 295.0
-offset_right = 315.0
-offset_bottom = 341.0
+[node name="HomePanel" type="Panel" parent="."]
+offset_left = 202.0
+offset_top = 297.0
+offset_right = 317.0
+offset_bottom = 343.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6lrsc")
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="."]
-offset_left = 388.0
-offset_top = 309.0
-offset_right = 472.0
-offset_bottom = 342.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("2_l88qm")
-text = "Restart"
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="."]
-offset_left = 239.0
-offset_top = 309.0
-offset_right = 302.0
-offset_bottom = 337.0
+[node name="RichTextLabel3" type="RichTextLabel" parent="HomePanel"]
+offset_left = 37.0
+offset_top = 12.0
+offset_right = 100.0
+offset_bottom = 40.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_l88qm")
 text = "Home"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+[node name="Home" type="Sprite2D" parent="HomePanel"]
+position = Vector2(18, 22)
+texture = ExtResource("4_gk1k0")
+
+[node name="HomeButton" type="Button" parent="HomePanel"]
+offset_right = 115.0
+offset_bottom = 47.0
+theme = SubResource("Theme_o6aol")
+theme_type_variation = &"FlatButton"
+
+[node name="ScoreLabel" type="RichTextLabel" parent="."]
 offset_left = 213.0
 offset_top = 245.0
-offset_right = 276.0
+offset_right = 461.0
 offset_bottom = 273.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_l88qm")
@@ -90,14 +114,6 @@ text = "Score: 0"
 [node name="Defeat" type="Sprite2D" parent="."]
 position = Vector2(260, 175)
 texture = ExtResource("3_i601x")
-
-[node name="Home" type="Sprite2D" parent="."]
-position = Vector2(220, 319)
-texture = ExtResource("4_gk1k0")
-
-[node name="Restart" type="Sprite2D" parent="."]
-position = Vector2(370, 319)
-texture = ExtResource("5_4ehaa")
 
 [node name="Line2D6" type="Line2D" parent="."]
 position = Vector2(186, 127)
@@ -123,3 +139,6 @@ width = 0.5
 position = Vector2(196, 365)
 points = PackedVector2Array(-10, 0, -10, -250)
 width = 0.5
+
+[connection signal="pressed" from="ResetPanel/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="HomePanel/HomeButton" to="." method="_on_home_button_pressed"]
