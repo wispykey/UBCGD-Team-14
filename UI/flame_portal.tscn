@@ -11,7 +11,7 @@ colors = PackedColorArray(0.792524, 0.94163, 0.997677, 1, 0.603478, 0.891197, 0.
 [node name="Portal" type="Node2D"]
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-amount = 200000
+amount = 8000
 lifetime = 0.8
 preprocess = 1.5
 speed_scale = 0.1
@@ -20,6 +20,7 @@ emission_sphere_radius = 100.0
 gravity = Vector2(0, -700)
 radial_accel_min = -50.0
 radial_accel_max = -40.0
-scale_amount_max = 1.8
+scale_amount_min = 3.0
+scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_jsseq")
 color_ramp = SubResource("Gradient_62rhf")

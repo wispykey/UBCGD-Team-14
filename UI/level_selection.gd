@@ -1,6 +1,6 @@
 extends Control
 
-var levels = ["Spookesville", "Spellville", "Steamville"]
+var levels = ["Spookesville", "Spellville"]
 var current_index = 0
 var level_map = {
 	"Spookesville": {	"scene": "res://Levels/Supernatural.tscn",
@@ -13,11 +13,6 @@ var level_map = {
 						"info": "A vibrant fantasy town where magic weaves through everyday life, from glowing cobblestone streets to floating marketplaces. Unbeknownst to its residents, a rogue magic now threatens to unravel its harmony.",
 						"preview": preload("res://Assets/LevelSelect/Previews/fantasy_preview1.png")
 						},
-	"Steamville": {		"scene": "",
-						"image": preload("res://Assets/LevelSelect/PortalImages/grave_background_circular.png"),
-						"info": "A steampunk metropolis of towering brass spires, airships, and intricate machinery, where innovation thrives amidst the hum of gears. Beneath its gleaming surface, a shadowy faction seeks to sabotage the city's power core, threatening to plunge it into darkness.",
-						"preview": preload("res://Assets/LevelSelect/Previews/supernatural_preview1.png") # change me
-						}
 }
 
 #@onready var label = $VBoxContainer/LevelDisplayContainer/TextureRect/SelectionLabel
@@ -48,6 +43,8 @@ func _unhandled_input(event):
 		_on_forward_pressed()
 		
 	if Input.is_action_just_pressed("ui_accept") and info_box.visible and level_map[levels[current_index]].scene:
+		TransitionScreen.transition()
+		await TransitionScreen.on_transition_finished
 		get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
 		
 	elif Input.is_action_just_pressed("ui_accept"):
@@ -62,13 +59,6 @@ func selectLevel() -> void:
 	print("Level selected: ", levels[current_index])
 	showInfo()
 	
-	#if Input.is_action_just_pressed("ui_accept") and info_box.visible and level_map[levels[current_index]].scene:
-		#get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
-		
-		
-	# switch scene
-	#if (level_map[levels[current_index]].scene):
-		#get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
 
 func _on_back_pressed() -> void:
 	SFX.play_UI_switch_level()

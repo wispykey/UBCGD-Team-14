@@ -22,6 +22,7 @@ GameEvents="*res://Globals/game_events.gd"
 GameState="*res://Globals/game_state.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 SFX="*res://Globals/SFX.tscn"
+TransitionScreen="*res://UI/transition_screen.tscn"
 
 [dialogic]
 
