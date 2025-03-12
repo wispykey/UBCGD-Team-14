@@ -43,7 +43,15 @@ func play_UI_switch_level():
 
 func play_dash_release(charges: int):
 	const MAX_CHARGES = 3
-	const pitch_increase = 0.2 # Increase pitch scale for smaller dashes
+	const pitch_increase = 0.3 # Increase pitch scale for smaller dashes
+	var random_shift = randf_range(-0.1, 0.1) # Should be much less than pitch_increase
+	
+	const cutoffs = [0, 600, 300, 50]
+	# Get hard-coded bus ("DashRelease") and effect (HighPassFilter)
+	var audio := AudioServer.get_bus_effect(1, 0)
+	# Higher cutoff for lower charges (i.e. more charges = more bass)
+	audio.set_cutoff(cutoffs[charges])
+	
 	$DashRelease.volume_db = 0.0 - 2.0*(MAX_CHARGES - charges)
-	$DashRelease.pitch_scale = 1.0 + 0.2*(MAX_CHARGES - charges)
+	$DashRelease.pitch_scale = 1.0 + 0.2*(MAX_CHARGES - charges) + random_shift
 	$DashRelease.play()
