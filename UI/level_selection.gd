@@ -23,8 +23,11 @@ var level_map = {
 @onready var level_select_vbox = $VBoxContainer
 
 @onready var info_box = $InfoBox
+@onready var enable_controls = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Dialogic.signal_event.connect(_dialogic_complete)
+	Dialogic.start("intro_dialogic")
 	info_box.hide()
 	update_label()
 
@@ -37,22 +40,23 @@ func _process(delta: float) -> void:
 		pass
 		
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_left"):
-		_on_back_pressed()
-	elif event.is_action_pressed("ui_right"):
-		_on_forward_pressed()
-		
-	if Input.is_action_just_pressed("ui_accept") and info_box.visible and level_map[levels[current_index]].scene:
-		TransitionScreen.transition()
-		await TransitionScreen.on_transition_finished
-		get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
-		
-	elif Input.is_action_just_pressed("ui_accept"):
-		selectLevel()
-		
-	if Input.is_action_just_pressed("ui_cancel"):
-		level_select_vbox.show()
-		info_box.hide()
+	if enable_controls == true:
+		if event.is_action_pressed("ui_left"):
+			_on_back_pressed()
+		elif event.is_action_pressed("ui_right"):
+			_on_forward_pressed()
+			
+		if Input.is_action_just_pressed("ui_accept") and info_box.visible and level_map[levels[current_index]].scene:
+			TransitionScreen.transition()
+			await TransitionScreen.on_transition_finished
+			get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
+			
+		elif Input.is_action_just_pressed("ui_accept"):
+			selectLevel()
+			
+		if Input.is_action_just_pressed("ui_cancel"):
+			level_select_vbox.show()
+			info_box.hide()
 		
 func selectLevel() -> void:
 	SFX.play_UI_accept()
@@ -74,6 +78,10 @@ func showInfo():
 	level_select_vbox.hide()
 	info_box.update() # update information in info box
 	info_box.show()
+
+func _dialogic_complete(String):
+	enable_controls = true
+	#print("DIALOGUE COMPLETE")
 
 func getCurrentLevel():
 	return levels[current_index]
