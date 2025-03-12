@@ -171,6 +171,9 @@ func handle_release(action):
 	# Reset player color
 	update_color(0.0)
 	update_dash_telegraph(0, Vector2(0,0))
+	
+	for bar in $DashBar.get_children():
+		bar.value = 0.0
 
 # Moves player by given count and direction
 # Lights up tiles
@@ -205,10 +208,18 @@ func update_color(duration: float):
 	var sprite_intensity = ease(intensity, -3.0)
 	player_sprite.modulate = curr_color.lerp(target_color, sprite_intensity)
  
-	if duration >= MIN_HOLD_DURATION/2.5 or $DashBar.value > 0.0:
+	var dash_bar 
+	if num_charges > 2:
+		dash_bar = $DashBar/Charge3
+	elif num_charges > 1:
+		dash_bar = $DashBar/Charge2
+	else:
+		dash_bar = $DashBar/Charge1
+			
+	if duration >= MIN_HOLD_DURATION/2.5 or dash_bar.value > 0.0:
 		var bar_intensity = ease(intensity, 0.82)
-		$DashBar.tint_progress = target_color
-		$DashBar.value = bar_intensity
+		dash_bar.tint_progress = target_color
+		dash_bar.value = bar_intensity
 
 var buffer_count = 0
 
