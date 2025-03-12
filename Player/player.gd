@@ -198,8 +198,14 @@ func update_color(duration: float):
 	var target_color = CHARGE_COLORS[next]
 	var curr_color = CHARGE_COLORS[curr]
 	# < -1.0 parameter is ease-in-out
-	intensity = ease(intensity, -3.0)
-	player_sprite.modulate = curr_color.lerp(target_color, intensity)
+
+	var sprite_intensity = ease(intensity, -3.0)
+	player_sprite.modulate = curr_color.lerp(target_color, sprite_intensity)
+ 
+	if duration >= MIN_HOLD_DURATION/2.5 or $DashBar.value > 0.0:
+		var bar_intensity = ease(intensity, 0.82)
+		$DashBar.tint_progress = target_color
+		$DashBar.value = bar_intensity
 
 var buffer_count = 0
 

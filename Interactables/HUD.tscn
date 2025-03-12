@@ -38,6 +38,7 @@ position = Vector2(336, 515)
 scale = Vector2(2, 2)
 
 [node name="LifeProgress" type="TextureProgressBar" parent="."]
+layout_mode = 0
 offset_left = 239.0
 offset_top = 408.0
 offset_right = 335.0
