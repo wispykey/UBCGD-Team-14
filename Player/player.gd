@@ -159,7 +159,10 @@ func handle_release(action):
 	if count >= MAX_CHARGES:
 		move_to_end(directions[action].dir)
 	else:
-		move_amount(directions[action].dir, count * TILES_PER_CHARGE) 
+		move_amount(directions[action].dir, count * TILES_PER_CHARGE)
+		
+	if count > 0:
+		SFX.play_dash_release(count) 
 	
 	for other_action in directions:
 		directions[other_action].held = 0.0

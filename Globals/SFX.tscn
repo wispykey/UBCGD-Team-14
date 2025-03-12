@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpqw0icl8bj32"]
+[gd_scene load_steps=7 format=3 uid="uid://cpqw0icl8bj32"]
 
 [ext_resource type="Script" path="res://Globals/sfx.gd" id="1_h3ton"]
 [ext_resource type="AudioStream" uid="uid://btp2hxbntuwtc" path="res://Assets/SFX/Fire/Fire 6.wav" id="2_qnywp"]
 [ext_resource type="AudioStream" uid="uid://dgx71205wv4n4" path="res://Assets/SFX/Fire/Fire Crackling 1.wav" id="3_cl0pn"]
 [ext_resource type="AudioStream" uid="uid://yksedoacka87" path="res://Assets/LevelSelect/acceptSound.mp3" id="4_gpwf3"]
 [ext_resource type="AudioStream" uid="uid://ccqbw36j3ug8y" path="res://Assets/SFX/Fire/Fireball 3.wav" id="5_jli1o"]
+[ext_resource type="AudioStream" uid="uid://bpq4sca0f4sxd" path="res://Assets/SFX/dash_release.wav" id="6_ysuk5"]
 
 [node name="SFX" type="Node2D"]
 script = ExtResource("1_h3ton")
@@ -24,3 +25,6 @@ stream = ExtResource("4_gpwf3")
 
 [node name="UISwitchLevel" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_jli1o")
+
+[node name="DashRelease" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ysuk5")

@@ -40,3 +40,10 @@ func play_UI_accept():
 	
 func play_UI_switch_level():
 	$UISwitchLevel.play()
+
+func play_dash_release(charges: int):
+	const MAX_CHARGES = 3
+	const pitch_increase = 0.2 # Increase pitch scale for smaller dashes
+	$DashRelease.volume_db = 0.0 - 2.0*(MAX_CHARGES - charges)
+	$DashRelease.pitch_scale = 1.0 + 0.2*(MAX_CHARGES - charges)
+	$DashRelease.play()
