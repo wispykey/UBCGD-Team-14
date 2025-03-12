@@ -159,7 +159,10 @@ func handle_release(action):
 	if count >= MAX_CHARGES:
 		move_to_end(directions[action].dir)
 	else:
-		move_amount(directions[action].dir, count * TILES_PER_CHARGE) 
+		move_amount(directions[action].dir, count * TILES_PER_CHARGE)
+		
+	if count > 0:
+		SFX.play_dash_release(min(count, MAX_CHARGES)) 
 	
 	for other_action in directions:
 		directions[other_action].held = 0.0
@@ -168,6 +171,9 @@ func handle_release(action):
 	# Reset player color
 	update_color(0.0)
 	update_dash_telegraph(0, Vector2(0,0))
+	
+	for bar in $DashBar.get_children():
+		bar.value = 0.0
 
 # Moves player by given count and direction
 # Lights up tiles
@@ -198,8 +204,22 @@ func update_color(duration: float):
 	var target_color = CHARGE_COLORS[next]
 	var curr_color = CHARGE_COLORS[curr]
 	# < -1.0 parameter is ease-in-out
-	intensity = ease(intensity, -3.0)
-	player_sprite.modulate = curr_color.lerp(target_color, intensity)
+
+	var sprite_intensity = ease(intensity, -3.0)
+	player_sprite.modulate = curr_color.lerp(target_color, sprite_intensity)
+ 
+	var dash_bar 
+	if num_charges > 2:
+		dash_bar = $DashBar/Charge3
+	elif num_charges > 1:
+		dash_bar = $DashBar/Charge2
+	else:
+		dash_bar = $DashBar/Charge1
+			
+	if duration >= MIN_HOLD_DURATION/2.5 or dash_bar.value > 0.0:
+		var bar_intensity = ease(intensity, 0.82)
+		dash_bar.tint_progress = target_color
+		dash_bar.value = bar_intensity
 
 var buffer_count = 0
 
