@@ -9,6 +9,8 @@ Player movement-related functionality should exist here.
 @onready var walls: TileMapLayer = get_node("../TileManager/Walls")
 
 signal light_up_tile(cell_pos: Vector2) # Signal for tileManager to modify itself
+signal spawn_afterimage(player_pos: Vector2) # SIgnal for Scene Parent to spawn afterimage
+signal update_telegraph(player_pos: Vector2, charges: float, direction: Vector2) # Signal for Scene Parent to generate telegraph square
 
 @export var debug_timing_info: bool = false
 
@@ -110,6 +112,7 @@ func handle_movement(delta: float) -> void:
 		if Input.is_action_pressed(action):
 			directions[action].held += delta
 			update_color(directions[action].held)
+			update_dash_telegraph(directions[action].held, directions[action].dir)
 			return
 			
 		## COMMENTED OUT: Double Tap code
@@ -142,6 +145,8 @@ func _light_up_tile():
 	if can_light_up:
 		light_up_tile.emit(cell_pos)
 
+func _spawn_afterimage():
+	spawn_afterimage.emit(position)
 
 ### SUSTAINED INPUT CODE:
 # Handle sustained inputs on release
@@ -150,6 +155,7 @@ func handle_release(action):
 	# Instead of manually counting charges on quarter beats, derive based on held duration 
 	# LEEWAY_IN_SECS allows player to release slightly early and still get the next beat's powerup
 	var count = floori((directions[action].held + LEEWAY_IN_SECS) / Conductor.seconds_per_quarter_note)
+	
 	if count >= MAX_CHARGES:
 		move_to_end(directions[action].dir)
 	else:
@@ -161,11 +167,13 @@ func handle_release(action):
 	
 	# Reset player color
 	update_color(0.0)
+	update_dash_telegraph(0, Vector2(0,0))
 
 # Moves player by given count and direction
 # Lights up tiles
 func move_amount(direction: Vector2, num_tiles: int):
 	for i in range(num_tiles):
+		_spawn_afterimage()
 		_move_one_cell(direction)
 
 # Moves player by given direction until hitting a wall
@@ -173,6 +181,7 @@ func move_amount(direction: Vector2, num_tiles: int):
 func move_to_end(direction: Vector2):
 	while _is_valid_next_cell(direction):
 		#_light_up_tile()
+		_spawn_afterimage()
 		position = position + direction * TILE_SIZE
 
 
@@ -193,6 +202,13 @@ func update_color(duration: float):
 	player_sprite.modulate = curr_color.lerp(target_color, intensity)
 
 var buffer_count = 0
+
+# Function to update player's dash telegraph based on beats held
+func update_dash_telegraph(duration: float, direction: Vector2):
+	var num_charges: float = duration / Conductor.seconds_per_quarter_note
+	update_telegraph.emit(position, num_charges, direction)
+
+
 ### TIMING/BEAT CODE:
 # Update time of most recent beat 
 func _on_quarter_beat(_beat_num):

@@ -6,6 +6,8 @@ extends Node2D
 @export var half_room_cleave: PackedScene # TODO remove?
 @export var spawn_ghost: PackedScene
 @export var spawn_projectile: PackedScene
+@export var spawn_afterimage: PackedScene
+@export var dash_telegraph: PackedScene
 @export var debug_random_test: bool = false
 
 var window_dimensions: Vector2
@@ -15,6 +17,10 @@ const TILE_SIZE: int = 32
 const HOR_TILES: int = WIDTH / TILE_SIZE
 const VER_TILES: int = HEIGHT / TILE_SIZE
 const WINNING_SCORE: int = 100 # The score the user has to reach to win the level.
+
+var telegraph # An instance of the dash_telegraph
+var dash_telegraph_rect # A basic rectangle for the telegraph
+var dash_telegraph_rect_size = TILE_SIZE * 0.8
 
 # TODO: The following code is a tile dictionary for if we wanted to "Light up" the map
 #       beyond solid blue tiles, ie. the tiles look like "cleaner" FLOOR_DARK tiles
@@ -123,6 +129,13 @@ var next_event: int = 0
 func _ready() -> void:
 	Dialogic.start("supernatural_dialogic")
 	Dialogic.signal_event.connect(_ready_post_dialog)
+	
+	telegraph = dash_telegraph.instantiate()
+	add_child(telegraph)
+	
+	#dash_telegraph_rect = ColorRect.new()
+	#dash_telegraph_rect.color = Color(68, 85, 120, 0.7)  # Semi-transparent light blue
+	#add_child(dash_telegraph_rect)
 
 func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
@@ -227,3 +240,38 @@ func spawn_pr_random(args: Dictionary):
 	var turn_count = int(args.turn) if args.has("turn") else 2
 	add_child(projectile)
 	projectile.start_one_coord(direction, type, coords, turn_count)
+
+
+
+func _on_player_spawn_afterimage(player_pos: Vector2) -> void:
+	var afterimage = spawn_afterimage.instantiate()
+	afterimage.position = player_pos
+	add_child(afterimage)
+	
+
+
+func _on_player_update_telegraph(player_pos: Vector2, charges: float, direction: Vector2) -> void:	
+	var centered_player_pos = player_pos - Vector2(dash_telegraph_rect_size / 2, dash_telegraph_rect_size / 2)
+	var chosen_start_pos = player_pos # Can choose: rectangle = use centered, scene = use player_pos
+	
+	var telegraph_pos
+	if (floor(charges) == 1):
+		telegraph_pos = chosen_start_pos + direction * 3 * TILE_SIZE;
+	elif (floor(charges) == 2):
+		telegraph_pos = chosen_start_pos + direction * 6 * TILE_SIZE;
+	else:
+		telegraph_pos = chosen_start_pos
+	
+	# Code if Using Rectangle
+	#dash_telegraph_rect.position = telegraph_pos
+	#if (floor(charges) == 0):
+		#dash_telegraph_rect.size = Vector2(0, 0)
+	#else:
+		#dash_telegraph_rect.size = Vector2(dash_telegraph_rect_size, dash_telegraph_rect_size)
+	
+	# Code if Using Dash Telegraph Scene
+	telegraph.position = telegraph_pos
+	if (floor(charges) == 0):
+		telegraph.visible = false
+	else:
+		telegraph.visible = true

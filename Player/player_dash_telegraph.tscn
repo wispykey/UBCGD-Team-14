@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5phwx71g2ad"]
+
+[ext_resource type="Texture2D" uid="uid://cok6ft5dn25st" path="res://Assets/Objects/star.png" id="1_p1ble"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p08wq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_p1ble")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player Dash" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p08wq")
