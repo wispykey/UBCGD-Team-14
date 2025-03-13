@@ -55,3 +55,10 @@ func play_dash_release(charges: int):
 	$DashRelease.volume_db = 0.0 - 2.0*(MAX_CHARGES - charges)
 	$DashRelease.pitch_scale = 1.0 + 0.2*(MAX_CHARGES - charges) + random_shift
 	$DashRelease.play()
+
+func play_lightning_strike():
+	var random_shift = randf_range(-0.1, 0.1)
+	var random_version = randi_range(1, 2)
+	var sfx = get_node("Lightning/LightningStirke" + str(random_version))
+	sfx.pitch_scale = 1.0 + random_shift
+	sfx.play()
