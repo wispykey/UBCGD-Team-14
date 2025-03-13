@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cuesjx5sbu83f" path="res://Assets/BattleUI/health_bar_top_2.png" id="5_5cat8"]
 
 [node name="HUD" type="Control"]
-z_index = 1
+z_index = 5
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
