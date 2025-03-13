@@ -37,6 +37,7 @@ const PLAYER_SIZE: int = 32
 @onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var has_key: bool = false
 var can_light_up: bool = false
+var last_action: String = "move_down"
 
 var directions: Dictionary = { # Directions the player can go in
 		"move_right": {"dir": Vector2(1, 0), "held": 0.0},
@@ -88,39 +89,47 @@ func _process(delta: float) -> void:
 		calibration_offset += TIMING_CALIBRATION_STEP
 		print("New offset: ", calibration_offset)
 	
-	handle_movement(delta)
+	last_action = handle_movement(delta)
+	update_facing()
 	align_position_to_grid()
 
 # Handles player grid-based movement and input
-func handle_movement(delta: float) -> void:
+func handle_movement(delta: float) -> String:
 	# Prioritize new key presses (e.g. to allow 'cancelling' a charge)
 	for action in directions:
 		if Input.is_action_just_pressed(action):
 			_move_one_cell(directions[action].dir)
 			directions[action].held += delta
 			handle_input_timing()
-			return # Early returns prevent processing multiple directions
+			return action # Early returns prevent processing multiple directions
 	
 	for action in directions:	
 		if Input.is_action_just_released(action):
 			if directions[action].held > MIN_HOLD_DURATION:
 				handle_input_timing()
 			handle_release(action)
-			return
+			return action
 	
 	for action in directions:
 		if Input.is_action_pressed(action):
 			directions[action].held += delta
 			update_color(directions[action].held)
 			update_dash_telegraph(directions[action].held, directions[action].dir)
-			return
-			
+			return action
+	
 		## COMMENTED OUT: Double Tap code
 		# Either double tap action or move one tile
 		#if not _detect_double_tap(action):
 			#_move_one_cell(directions[action].dir)
+			
+	return last_action # No input was detected this frame
 
-
+func update_facing():
+	var facing = last_action.split("_")[1]
+	# NOTE: Only works due to coupled naming between inputs and animations
+	player_sprite.play(facing)
+	
+	
 ## BASIC MOVEMENT CODE:
 # Aligns player position to the grid
 func align_position_to_grid() -> void:
