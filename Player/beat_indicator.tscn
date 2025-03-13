@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://d3muoiwq1oikx"]
 
 [ext_resource type="Script" path="res://Player/beat_indicator.gd" id="1_8kri8"]
-[ext_resource type="Texture2D" uid="uid://br7260wxql0ey" path="res://Assets/Objects/beat_indicator/temp_beat_point.png" id="1_vxuvb"]
 [ext_resource type="Texture2D" uid="uid://v7cpx11sttjn" path="res://Assets/Objects/beat_indicator/temp_beat_line.png" id="2_i8wop"]
+[ext_resource type="Texture2D" uid="uid://jt3neaosaymy" path="res://Assets/BattleUI/blue_flame_player.png" id="2_psn7p"]
 
 [sub_resource type="Animation" id="Animation_cximu"]
 length = 0.001
@@ -196,7 +196,7 @@ autoplay = "beat_cycle"
 
 [node name="BeatPoint" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("1_vxuvb")
+texture = ExtResource("2_psn7p")
 
 [node name="BeatLine" type="Sprite2D" parent="."]
 texture = ExtResource("2_i8wop")

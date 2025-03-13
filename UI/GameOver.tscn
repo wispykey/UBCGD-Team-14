@@ -55,6 +55,7 @@ position = Vector2(23, 23)
 texture = ExtResource("5_4ehaa")
 
 [node name="RestartLabel" type="RichTextLabel" parent="ResetPanel"]
+layout_mode = 0
 offset_left = 41.0
 offset_top = 13.0
 offset_right = 125.0
@@ -64,6 +65,7 @@ theme_override_fonts/normal_font = ExtResource("2_l88qm")
 text = "Restart"
 
 [node name="RestartButton" type="Button" parent="ResetPanel"]
+layout_mode = 0
 offset_right = 115.0
 offset_bottom = 47.0
 theme = SubResource("Theme_o6aol")
@@ -84,6 +86,7 @@ offset_bottom = 343.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6lrsc")
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="HomePanel"]
+layout_mode = 0
 offset_left = 37.0
 offset_top = 12.0
 offset_right = 100.0
@@ -97,6 +100,7 @@ position = Vector2(18, 22)
 texture = ExtResource("4_gk1k0")
 
 [node name="HomeButton" type="Button" parent="HomePanel"]
+layout_mode = 0
 offset_right = 115.0
 offset_bottom = 47.0
 theme = SubResource("Theme_o6aol")
