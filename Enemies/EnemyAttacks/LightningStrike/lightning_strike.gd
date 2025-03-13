@@ -51,6 +51,7 @@ func _on_telegraph_timer_timeout():
 	$Telegraph.queue_free()
 	$DespawnTimer.start()
 	$HitZone.monitorable = true
+	SFX.play_lightning_strike()
 
 func _on_despawn_timer_timeout():
 	queue_free()

@@ -1,8 +1,10 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://plb73a4d0dqi"]
+[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://plb73a4d0dqi"]
 
 [ext_resource type="Texture2D" uid="uid://yfs7usc851jc" path="res://Assets/Themes/Fantasy/supernatural_brick_path.png" id="1_jy1u0"]
 [ext_resource type="Texture2D" uid="uid://slv3f7olgnc6" path="res://Assets/Background/example_tileset.png" id="1_p4jlc"]
 [ext_resource type="Texture2D" uid="uid://dnl7p3latop2x" path="res://Assets/Objects/triangle.png" id="4_icot0"]
+[ext_resource type="Texture2D" uid="uid://bnldx0sfmpagm" path="res://Assets/Themes/Supernatural/supernatural_wall.png" id="4_yfiw8"]
+[ext_resource type="Texture2D" uid="uid://bl10i8q2cucut" path="res://Assets/Themes/Supernatural/supernatural_wall_hole.png" id="5_7n6h7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j1hau"]
 texture_region_size = Vector2i(32, 32)
@@ -44,6 +46,18 @@ texture = ExtResource("4_icot0")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g2g5r"]
+texture = ExtResource("4_yfiw8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dyvfi"]
+texture = ExtResource("5_7n6h7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 128
@@ -51,3 +65,5 @@ sources/2 = SubResource("TileSetAtlasSource_aaqtr")
 sources/0 = SubResource("TileSetAtlasSource_j1hau")
 sources/1 = SubResource("TileSetAtlasSource_qi4ub")
 sources/3 = SubResource("TileSetAtlasSource_y8iuc")
+sources/4 = SubResource("TileSetAtlasSource_g2g5r")
+sources/5 = SubResource("TileSetAtlasSource_dyvfi")

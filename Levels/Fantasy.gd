@@ -66,6 +66,9 @@ var next_event: int = 0
 func _ready() -> void:
 	Dialogic.start("fantasy_dialogic")
 	Dialogic.signal_event.connect(_ready_post_dialog)
+	
+	# Change sprite to Wizard
+	%Player.player_sprite.sprite_frames = load("res://Player/fantasy_sprite_frames.tres")
 
 func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted

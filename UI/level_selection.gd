@@ -37,6 +37,8 @@ func _process(delta: float) -> void:
 		pass
 		
 func _unhandled_input(event):
+	if TransitionScreen.animation_player.is_playing():
+		return
 	if event.is_action_pressed("ui_left"):
 		_on_back_pressed()
 	elif event.is_action_pressed("ui_right"):
