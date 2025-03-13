@@ -34,10 +34,12 @@ bus = &"DashRelease"
 
 [node name="Lightning" type="Node2D" parent="."]
 
-[node name="LightningStirke1" type="AudioStreamPlayer2D" parent="Lightning"]
+[node name="LightningStrike1" type="AudioStreamPlayer2D" parent="Lightning"]
 stream = ExtResource("7_p5005")
-max_polyphony = 3
+volume_db = -6.0
+max_polyphony = 2
 
-[node name="LightningStirke2" type="AudioStreamPlayer2D" parent="Lightning"]
+[node name="LightningStrike2" type="AudioStreamPlayer2D" parent="Lightning"]
 stream = ExtResource("8_gct66")
+volume_db = -6.0
 max_polyphony = 3
