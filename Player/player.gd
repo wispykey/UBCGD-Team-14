@@ -127,7 +127,7 @@ func handle_movement(delta: float) -> String:
 func update_facing():
 	var facing = last_action.split("_")[1]
 	# NOTE: Only works due to coupled naming between inputs and animations
-	player_sprite.play(facing)
+	player_sprite.play(facing) 
 	
 	
 ## BASIC MOVEMENT CODE:
