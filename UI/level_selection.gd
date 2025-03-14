@@ -91,3 +91,8 @@ func getLevelInfo():
 	
 func getCurrentLevelPreview():
 	return level_map[levels[current_index]].preview
+
+
+func _on_texture_button_pressed() -> void:
+	level_select_vbox.show()
+	info_box.hide()

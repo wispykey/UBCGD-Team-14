@@ -1,3 +1,4 @@
-Alert! Disturbances detected. Multiple worlds are destabilizing. Immediate intervention required.
-Portals are now active. Proceed at once to restore balance!
+join alert center
+alert: Alert! Disturbances detected. Multiple worlds are destabilizing. Immediate intervention required.
+alert: Portals are now active. Proceed at once to restore balance!
 [signal arg="done_dialogic"]
