@@ -265,11 +265,11 @@ texture = ExtResource("7_yossd")
 expand_mode = 2
 
 [node name="opening_cred1" type="Sprite2D" parent="."]
-position = Vector2(336, 264)
+position = Vector2(336, 292)
 texture = ExtResource("2_s1tcu")
 
 [node name="opening_cred2" type="Sprite2D" parent="."]
-position = Vector2(344, 240)
+position = Vector2(344, 282)
 texture = ExtResource("3_2lgiq")
 
 [node name="logo" type="Sprite2D" parent="."]
