@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://dopkx05tnyenk"]
+
+[ext_resource type="Texture2D" uid="uid://dcg7mms67mued" path="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter1.png" id="1_0egkt"]
+[ext_resource type="Texture2D" uid="uid://cyevulsswg6t8" path="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter2.png" id="2_1dcap"]
+[ext_resource type="Texture2D" uid="uid://brmdi76iqs2wh" path="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter4.png" id="3_xeri2"]
+[ext_resource type="Texture2D" uid="uid://d2vp2j4huxbmu" path="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter3.png" id="4_6m0sk"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0egkt")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1dcap")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xeri2")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_6m0sk")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]

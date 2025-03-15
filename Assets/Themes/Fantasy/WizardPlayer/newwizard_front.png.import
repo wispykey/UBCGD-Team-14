@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c46uc27r6trnx"
-path="res://.godot/imported/wizardplayer_edit_left.png-ae1cb482e56deb0dbef78cdabf7be173.ctex"
+uid="uid://c03srncvhvoir"
+path="res://.godot/imported/newwizard_front.png-4c29110d824a0604a7a8da80d7a018ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Themes/Fantasy/WizardPlayer/wizardplayer_edit_left.png"
-dest_files=["res://.godot/imported/wizardplayer_edit_left.png-ae1cb482e56deb0dbef78cdabf7be173.ctex"]
+source_file="res://Assets/Themes/Fantasy/WizardPlayer/newwizard_front.png"
+dest_files=["res://.godot/imported/newwizard_front.png-4c29110d824a0604a7a8da80d7a018ed.ctex"]
 
 [params]
 

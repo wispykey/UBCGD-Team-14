@@ -12,6 +12,8 @@ func _process(delta: float) -> void:
 
 		
 func _on_start_button_pressed() -> void:
+	if TransitionScreen.animation_player.is_playing():
+		return
 	#print("start pressed!!")
 	#$TransitionScreen.show()
 	#$TransitionScreen.transition()

@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://d0h1na6mnvku7"]
+
+[ext_resource type="Texture2D" uid="uid://c03srncvhvoir" path="res://Assets/Themes/Fantasy/WizardPlayer/newwizard_front.png" id="1_f3p2p"]
+[ext_resource type="Texture2D" uid="uid://cqakg5wkc7s0d" path="res://Assets/Themes/Fantasy/WizardPlayer/newwizard_left.png" id="2_82mtw"]
+[ext_resource type="Texture2D" uid="uid://cb8kfv7ewulh7" path="res://Assets/Themes/Fantasy/WizardPlayer/newwizard_right.png" id="3_6lreb"]
+[ext_resource type="Texture2D" uid="uid://dn2uu1v8fcu8c" path="res://Assets/Themes/Fantasy/WizardPlayer/newwizard_back.png" id="4_iua2w"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_f3p2p")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_82mtw")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6lreb")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_iua2w")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]

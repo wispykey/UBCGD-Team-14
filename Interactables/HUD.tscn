@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dt0a2hvca0irt" path="res://Assets/BattleUI/health_bar_fill_red.png" id="4_0acop"]
 [ext_resource type="Texture2D" uid="uid://cuesjx5sbu83f" path="res://Assets/BattleUI/health_bar_top_2.png" id="5_5cat8"]
 
-[node name="Control" type="Control"]
-z_index = 1
+[node name="HUD" type="Control"]
+z_index = 5
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ grow_vertical = 2
 script = ExtResource("1_jrng0")
 
 [node name="ScoreLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1.0
 offset_top = 403.0
