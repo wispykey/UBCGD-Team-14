@@ -12,3 +12,4 @@ Viola_dialogic: I know enough to see that you’re trying to twist reality. What
 Lunatic_Mage_dialogic: Ah, the resolve of youth. But tell me, will your precious future still shine so brightly when it’s consumed by the fire of truth?
 Lunatic_Mage_dialogic: Let’s see if you’re as quick on your feet as you are with that sharp tongue.
 [signal arg="Ready"]
+jump 
