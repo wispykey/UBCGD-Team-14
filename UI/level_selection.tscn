@@ -145,9 +145,9 @@ uppercase = true
 script = ExtResource("7_xyunw")
 
 [node name="TextureButton" type="TextureButton" parent="InfoBox"]
-offset_left = 102.0
+offset_left = 547.0
 offset_top = 52.0
-offset_right = 502.0
+offset_right = 947.0
 offset_bottom = 136.0
 scale = Vector2(0.346148, 0.354359)
 action_mode = 0

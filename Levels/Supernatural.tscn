@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b5phwx71g2ad" path="res://Player/player_dash_telegraph.tscn" id="6_5iqgo"]
 [ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Levels/marcus_tileset.tres" id="7_tjjkr"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="7_yhfch"]
-[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Interactables/HUD.tscn" id="11_fmwre"]
+[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Prototyping/Marcus/Scenes/HUD.tscn" id="11_fmwre"]
 
 [node name="Supernatural" type="Node2D"]
 script = ExtResource("1_xqloe")
