@@ -28,7 +28,7 @@ const MIN_HOLD_DURATION: float = 0.35
 # Allow inputs to be timed earlier/later than the beat by this amount
 const LEEWAY_IN_SECS: float = 0.12 
 # The amount of HP recovered per well-timed input
-const HP_RECOVERY_PER_TICK: float = 0.05
+const HP_RECOVERY_PER_TICK: float = 0.1
 
 # Allow player to shift timings to match their device/feel
 const TIMING_CALIBRATION_STEP: float = 0.02 # In seconds
