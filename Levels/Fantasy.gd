@@ -10,6 +10,7 @@ extends Node2D
 @export var thunderstorm: PackedScene
 @export var iterative_projectile: PackedScene
 @export var vine_cross: PackedScene
+@export var spawn_afterimage: PackedScene
 
 @export var debug_random_test: bool = false
 var GameOverComponent = preload("res://UI/GameOver.tscn")
@@ -80,6 +81,7 @@ func _ready_post_dialog(arg: String):
 	window_dimensions =  GameState.control_port.size
 	
 	%Player.position = GameState.control_port.get_center()
+	%Player.spawn_afterimage.connect(_on_player_spawn_afterimage)
 	Conductor.set_music("Fantasy2")
 	$HUD.start_beat_indicator()
 
@@ -225,3 +227,8 @@ func _on_quarter_beat_spawn_puddle(beat_num: int):
 		puddle.position = GameState.control_port.get_center()
 		puddle.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
 	puddle.start()
+
+func _on_player_spawn_afterimage(player_pos: Vector2) -> void:
+	var afterimage = spawn_afterimage.instantiate()
+	afterimage.position = player_pos
+	add_child(afterimage)

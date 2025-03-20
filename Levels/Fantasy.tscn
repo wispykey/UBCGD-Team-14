@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cnb7x1pkr34a4"]
+[gd_scene load_steps=20 format=4 uid="uid://cnb7x1pkr34a4"]
 
 [ext_resource type="Script" path="res://Levels/Fantasy.gd" id="1_qvkh8"]
 [ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://Enemies/EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_5na7h"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://Levels/TileManager.tscn" id="5_asoik"]
 [ext_resource type="Texture2D" uid="uid://dtpt4up38l8d4" path="res://Assets/Themes/Fantasy/fantasy_floor.png" id="5_wbmv1"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="7_pxnv2"]
+[ext_resource type="PackedScene" uid="uid://cvb1i0ttffw0f" path="res://Player/player_afterimage.tscn" id="8_aecmi"]
 [ext_resource type="PackedScene" uid="uid://dhp84nbs5osdm" path="res://Enemies/EnemyAttacks/PuddleHazard/puddle_hazard.tscn" id="10_t46jv"]
 [ext_resource type="PackedScene" uid="uid://biqni1sm5qhle" path="res://Enemies/EnemyAttacks/BossStaff.tscn" id="11_hxj16"]
 [ext_resource type="PackedScene" uid="uid://3p7va0o7hql7" path="res://Enemies/FantasyBoss.tscn" id="12_yf31r"]
@@ -43,6 +44,7 @@ puddle_hazard = ExtResource("10_t46jv")
 thunderstorm = ExtResource("5_5lko7")
 iterative_projectile = ExtResource("13_11hjv")
 vine_cross = ExtResource("14_gwcx7")
+spawn_afterimage = ExtResource("8_aecmi")
 
 [node name="TileManager" parent="." instance=ExtResource("5_asoik")]
 unique_name_in_owner = true
