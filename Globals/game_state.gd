@@ -1,7 +1,9 @@
 extends Node2D
 
+const MAX_LIFE: int = 5
+
 var score: int = 0
-var life: int = 10
+var life: int = MAX_LIFE
 var control_port : Rect2
 
 # Called when the node enters the scene tree for the first time.
