@@ -22,6 +22,8 @@ func update_life(amount: float):
 	# Guard to prevent multiple death bugs
 	if life <= 0:
 		return
+	# Scale damage to use 'life' as progress bar's value (which has weird margins)
+	var normalized_amount = amount * MAX_VISIBLE_LIFE / MAX_LIFE
 	life = clamp(life + amount, 0 , MAX_VISIBLE_LIFE)
 	GameEvents.life_changed.emit()
 	if amount < 0:

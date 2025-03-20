@@ -27,6 +27,8 @@ const TILES_PER_CHARGE: int = 3
 const MIN_HOLD_DURATION: float = 0.35
 # Allow inputs to be timed earlier/later than the beat by this amount
 const LEEWAY_IN_SECS: float = 0.12 
+# The amount of HP recovered per well-timed input
+const HP_RECOVERY_PER_TICK: float = 0.05
 
 # Allow player to shift timings to match their device/feel
 const TIMING_CALIBRATION_STEP: float = 0.02 # In seconds
@@ -260,7 +262,7 @@ func handle_input_timing():
 
 	if close_enough:
 		# TODO: Do stuff here (maybe a signal). Recover health, increase combo, etc.
-		GameState.update_life(0.1) # Recover HP when inputs are timed well
+		GameState.update_life(HP_RECOVERY_PER_TICK) # Recover HP when inputs are timed well
 	else:
 		# TODO: Do stuff here (maybe a signal). Lose health, reset combo, etc.
 		pass
