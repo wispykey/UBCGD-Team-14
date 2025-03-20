@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://c74es3dlr6hv8"]
+[gd_scene load_steps=14 format=4 uid="uid://c74es3dlr6hv8"]
 
 [ext_resource type="Script" path="res://Levels/Supernatural.gd" id="1_xqloe"]
 [ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://Enemies/EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_gcs8v"]
@@ -11,6 +11,7 @@
 [ext_resource type="TileSet" uid="uid://plb73a4d0dqi" path="res://Levels/marcus_tileset.tres" id="7_tjjkr"]
 [ext_resource type="PackedScene" uid="uid://d28eekj8djk1r" path="res://Enemies/EnemyAttacks/Projectiles/c_projectile_manager.tscn" id="7_wjyos"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="7_yhfch"]
+[ext_resource type="PackedScene" uid="uid://b024hq7e6g6ce" path="res://Enemies/EnemyAttacks/Projectiles/itr_projectile_manager.tscn" id="8_hfw50"]
 [ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Interactables/HUD.tscn" id="11_4g68x"]
 
 [node name="Supernatural" type="Node2D"]
@@ -21,6 +22,7 @@ spawn_projectile = ExtResource("3_8h3mh")
 spawn_afterimage = ExtResource("5_c0isn")
 dash_telegraph = ExtResource("6_5iqgo")
 cont_projectile_manager = ExtResource("7_wjyos")
+itr_projectile_manager = ExtResource("8_hfw50")
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource("4_rmsie")]
 
