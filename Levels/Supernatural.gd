@@ -9,6 +9,7 @@ extends Node2D
 @export var spawn_afterimage: PackedScene
 @export var dash_telegraph: PackedScene
 @export var debug_random_test: bool = false
+@export var cont_projectile_manager: PackedScene
 
 var window_dimensions: Vector2
 const WIDTH: int = 640
@@ -41,72 +42,72 @@ var dash_telegraph_rect_size = TILE_SIZE * 0.8
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
 	# Intro
-	{"time": 1, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 6, "coord1_y": 5, "coord2_x": 14, "coord2_y": 5}},
-	{"time": 5, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 6, "coord1_y": 5, "coord2_x": 6, "coord2_y": 9}},
-	{"time": 9, "function": "spawn_pr", "args": {"direction": "WEST", "coord1_x": 14, "coord1_y": 5, "coord2_x": 14, "coord2_y": 9}},
-	{"time": 13, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 6, "coord1_y": 9, "coord2_x": 14, "coord2_y": 9, "coord3_x": 10, "coord3_y": 9}},
-	# Drums enter 17
-	{"time": 17, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 1, "coord1_y": 1, "coord2_x": 3, "coord2_y": 1}}, # Cascade SOUTH
-	{"time": 18, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 5, "coord_y": 1}},
-	{"time": 19, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 7, "coord_y": 1}},
-	{"time": 20, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 9, "coord_y": 1}},
-	{"time": 21, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 11, "coord1_y": 1, "coord2_x": 13, "coord2_y": 1}},
-	{"time": 22, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 15, "coord_y": 1}},
-	{"time": 23, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 17, "coord_y": 1}},
-	{"time": 24, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 19, "coord_y": 1}},
-	{"time": 25, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 2, "coord1_y": 13, "coord2_x": 4, "coord2_y": 13}}, # Cascade NORTH
-	{"time": 26, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 6, "coord1_y": 13, "coord2_x": 8, "coord2_y": 13}},
-	{"time": 27, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 10, "coord1_y": 13, "coord2_x": 12, "coord2_y": 13}},
-	{"time": 28, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 14, "coord1_y": 13, "coord2_x": 16, "coord2_y": 13}},
-	{"time": 29, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 18, "coord1_y": 13, "coord2_x": 9, "coord2_y": 13, "coord3_x": 10, "coord3_y": 13, "coord4_x": 11, "coord4_y": 13, "coord5_x": 2, "coord5_y": 13}},
-	# Bells enter 33
+	{"time": 1, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 5), "coord2": Vector2i(14, 5)}},
+	{"time": 5, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(6, 5), "coord2": Vector2i(6, 9)}},
+	{"time": 9, "function": "spawn_pr_cont", "args": {"direction": "LEFT", "coord1": Vector2i(14, 5), "coord2": Vector2i(14, 9)}},
+	{"time": 13, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(6, 9), "coord2": Vector2i(14, 9), "coord3": Vector2i(10, 9)}},
+	## Drums enter 17
+	{"time": 17, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(1, 1), "coord2": Vector2i(3, 1)}}, # Cascade DOWN
+	{"time": 18, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(5, 1)}},
+	{"time": 19, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(7, 1)}},
+	{"time": 20, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(9, 1)}},
+	{"time": 21, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(11, 1), "coord2": Vector2i(13, 1)}},
+	{"time": 22, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(15, 1)}},
+	{"time": 23, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(17, 1)}},
+	{"time": 24, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(19, 1)}},
+	{"time": 25, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(2, 13), "coord2": Vector2i(4, 13)}}, # Cascade UP
+	{"time": 26, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(6, 13), "coord2": Vector2i(8, 13)}},
+	{"time": 27, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(10, 13), "coord2": Vector2i(12, 13)}},
+	{"time": 28, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(14, 13), "coord2": Vector2i(16, 13)}},
+	{"time": 29, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(18, 13), "coord2": Vector2i(20, 13), "coord3": Vector2i(9, 13), "coord4": Vector2i(10, 13), "coord5": Vector2i(11, 13)}},
+	## Bells enter 33
 	{"time": 33, "function": "spawn_ghost_on_player", "args": {}}, # Bells attack
 	{"time": 35, "function": "spawn_ghost_on_player", "args": {}},
 	{"time": 37, "function": "spawn_ghost_on_player", "args": {}},
 	{"time": 39, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 41, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 5, "coord1_y": 3, "coord2_x": 5, "coord2_y": 5, "coord3_x": 5, "coord3_y": 7, "coord4_x": 5, "coord4_y": 9, "coord5_x": 5, "coord5_y": 11}},
-	{"time": 42, "function": "spawn_pr", "args": {"direction": "WEST", "coord1_x": 15, "coord1_y": 3, "coord2_x": 15, "coord2_y": 5, "coord3_x": 15, "coord3_y": 7, "coord4_x": 15, "coord4_y": 9, "coord5_x": 15, "coord5_y": 11}},
-	{"time": 43, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 6, "coord1_y": 1, "coord2_x": 8, "coord2_y": 1,  "coord3_x": 10, "coord3_y": 1,  "coord4_x": 12, "coord4_y": 1, "coord5_x": 14, "coord5_y": 1}},
-	{"time": 45, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 1, "coord1_y": 13, "coord2_x": 2, "coord2_y": 13, "coord3_x": 3, "coord3_y": 13, "coord4_x": 4, "coord4_y": 13, "coord5_x": 5, "coord5_y": 13}},
-	{"time": 46, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 15, "coord1_y": 13, "coord2_x": 16, "coord2_y": 13, "coord3_x": 17, "coord3_y": 13, "coord4_x": 18, "coord4_y": 13, "coord5_x": 19, "coord5_y": 13}},
-	{"time": 49, "function": "spawn_pr", "args": {"direction": "EAST", "type": "SPINNING", "turn": "5", "coord_x": 1, "coord_y": 1}}, # Spirals start
-	{"time": 52, "function": "spawn_pr", "args": {"direction": "WEST", "type": "SPINNING", "turn": "5", "coord_x": 5, "coord_y": 5}},
-	{"time": 53, "function": "spawn_pr", "args": {"direction": "SOUTH", "type": "SPINNING", "turn": "5", "coord_x": 19, "coord_y": 1}},
-	{"time": 56, "function": "spawn_pr", "args": {"direction": "NORTH", "type": "SPINNING", "turn": "5", "coord_x": 15, "coord_y": 5}},
-	{"time": 57, "function": "spawn_pr", "args": {"direction": "WEST", "type": "SPINNING", "turn": "5", "coord_x": 19, "coord_y": 13}},
-	{"time": 60, "function": "spawn_pr", "args": {"direction": "EAST", "type": "SPINNING", "turn": "5", "coord_x": 15, "coord_y": 9}},
-	{"time": 61, "function": "spawn_pr", "args": {"direction": "NORTH", "type": "SPINNING", "turn": "5", "coord_x": 1, "coord_y": 13}},
-	{"time": 64, "function": "spawn_pr", "args": {"direction": "SOUTH", "type": "SPINNING", "turn": "5", "coord_x": 5, "coord_y": 9}},
-	# Bongos enter 65
+	{"time": 41, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(5, 3), "coord2": Vector2i(5, 5), "coord3": Vector2i(5, 7), "coord4": Vector2i(5, 9), "coord5": Vector2i(5, 11)}},
+	{"time": 42, "function": "spawn_pr_cont", "args": {"direction": "LEFT", "coord1": Vector2i(15, 3), "coord2": Vector2i(15, 5), "coord3": Vector2i(15, 7), "coord4": Vector2i(15, 9), "coord5": Vector2i(15, 11)}},
+	{"time": 43, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 1), "coord2": Vector2i(8, 1), "coord3": Vector2i(10, 1), "coord4": Vector2i(12, 1), "coord5": Vector2i(14, 1)}},
+	{"time": 45, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(1, 13), "coord2": Vector2i(2, 13), "coord3": Vector2i(3, 13), "coord4": Vector2i(4, 13), "coord5": Vector2i(5, 13)}},
+	{"time": 46, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(15, 13), "coord2": Vector2i(16, 13), "coord3": Vector2i(17, 13), "coord4": Vector2i(18, 13), "coord5": Vector2i(19, 13)}},
+	#{"time": 49, "function": "spawn_pr", "args": {"direction": "RIGHT", "type": "SPINNING", "turn": "5", "coord_x": 1, "coord_y": 1}}, # Spirals start
+	#{"time": 52, "function": "spawn_pr", "args": {"direction": "LEFT", "type": "SPINNING", "turn": "5", "coord_x": 5, "coord_y": 5}}, # TODO: spinning projectiles dont work
+	#{"time": 53, "function": "spawn_pr", "args": {"direction": "DOWN", "type": "SPINNING", "turn": "5", "coord_x": 19, "coord_y": 1}},
+	#{"time": 56, "function": "spawn_pr", "args": {"direction": "UP", "type": "SPINNING", "turn": "5", "coord_x": 15, "coord_y": 5}},
+	#{"time": 57, "function": "spawn_pr", "args": {"direction": "LEFT", "type": "SPINNING", "turn": "5", "coord_x": 19, "coord_y": 13}},
+	#{"time": 60, "function": "spawn_pr", "args": {"direction": "RIGHT", "type": "SPINNING", "turn": "5", "coord_x": 15, "coord_y": 9}},
+	#{"time": 61, "function": "spawn_pr", "args": {"direction": "UP", "type": "SPINNING", "turn": "5", "coord_x": 1, "coord_y": 13}},
+	#{"time": 64, "function": "spawn_pr", "args": {"direction": "DOWN", "type": "SPINNING", "turn": "5", "coord_x": 5, "coord_y": 9}},
+	## Bongos enter 65
 	{"time": 65, "function": "spawn_ghost_on_player", "args": {}}, # Bells attack
 	{"time": 67, "function": "spawn_ghost_on_player", "args": {}},
 	{"time": 69, "function": "spawn_ghost_on_player", "args": {}},
 	{"time": 71, "function": "spawn_ghost_on_player", "args": {}},
-	{"time": 73, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 5, "coord1_y": 3, "coord2_x": 5, "coord2_y": 5, "coord3_x": 5, "coord3_y": 7, "coord4_x": 5, "coord4_y": 9, "coord5_x": 5, "coord5_y": 11}},
-	{"time": 74, "function": "spawn_pr", "args": {"direction": "WEST", "coord1_x": 15, "coord1_y": 3, "coord2_x": 15, "coord2_y": 5, "coord3_x": 15, "coord3_y": 7, "coord4_x": 15, "coord4_y": 9, "coord5_x": 15, "coord5_y": 11}},
-	{"time": 75, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 6, "coord1_y": 1, "coord2_x": 8, "coord2_y": 1,  "coord3_x": 10, "coord3_y": 1,  "coord4_x": 12, "coord4_y": 1, "coord5_x": 14, "coord5_y": 1}},
-	{"time": 77, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 1, "coord1_y": 13, "coord2_x": 2, "coord2_y": 13, "coord3_x": 3, "coord3_y": 13, "coord4_x": 4, "coord4_y": 13, "coord5_x": 5, "coord5_y": 13}},
-	{"time": 78, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 15, "coord1_y": 13, "coord2_x": 16, "coord2_y": 13, "coord3_x": 17, "coord3_y": 13, "coord4_x": 18, "coord4_y": 13, "coord5_x": 19, "coord5_y": 13}},
-	{"time": 81, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 1, "coord1_y": 1, "coord2_x": 19, "coord2_y": 1}}, # Curtains SOUTH
-	{"time": 82, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 2, "coord1_y": 1, "coord2_x": 18, "coord2_y": 1}},
-	{"time": 83, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 3, "coord1_y": 1, "coord2_x": 17, "coord2_y": 1}},
-	{"time": 84, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 4, "coord1_y": 1, "coord2_x": 16, "coord2_y": 1}},
-	{"time": 85, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 5, "coord1_y": 1, "coord2_x": 15, "coord2_y": 1}},
-	{"time": 86, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 6, "coord1_y": 1, "coord2_x": 14, "coord2_y": 1}},
-	{"time": 87, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 7, "coord1_y": 1, "coord2_x": 13, "coord2_y": 1}},
-	{"time": 88, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 8, "coord1_y": 1, "coord2_x": 12, "coord2_y": 1}},
-	{"time": 89, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord1_x": 9, "coord1_y": 1, "coord2_x": 11, "coord2_y": 1}},
-	{"time": 90, "function": "spawn_pr", "args": {"direction": "SOUTH", "coord_x": 10, "coord_y": 1}},
-	
-	# Bongos repeat 97
-	{"time": 97, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 1, "coord2_x": 1, "coord2_y": 2}}, # Cascade EAST
-	{"time": 98, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 3, "coord2_x": 1, "coord2_y": 4}},
-	{"time": 99, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 5, "coord2_x": 1, "coord2_y": 6}},
-	{"time": 100, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 7, "coord2_x": 1, "coord2_y": 8}},
-	{"time": 101, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 9, "coord2_x": 1, "coord2_y": 10}},
-	{"time": 102, "function": "spawn_pr", "args": {"direction": "EAST", "coord1_x": 1, "coord1_y": 11, "coord2_x": 1, "coord2_y": 12}},
-	{"time": 109, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 1, "coord1_y": 13, "coord2_x": 2, "coord2_y": 13, "coord3_x": 3, "coord3_y": 13, "coord4_x": 4, "coord4_y": 13, "coord5_x": 5, "coord5_y": 13}},
-	{"time": 110, "function": "spawn_pr", "args": {"direction": "NORTH", "coord1_x": 15, "coord1_y": 13, "coord2_x": 16, "coord2_y": 13, "coord3_x": 17, "coord3_y": 13, "coord4_x": 18, "coord4_y": 13, "coord5_x": 19, "coord5_y": 13}},
+	{"time": 73, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(5, 3), "coord2": Vector2i(5, 5), "coord3": Vector2i(5, 7), "coord4": Vector2i(5, 9), "coord5": Vector2i(5, 11)}},
+	{"time": 74, "function": "spawn_pr_cont", "args": {"direction": "LEFT", "coord1": Vector2i(15, 3), "coord2": Vector2i(15, 5), "coord3": Vector2i(15, 7), "coord4": Vector2i(15, 9), "coord5": Vector2i(15, 11)}},
+	{"time": 75, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 1), "coord2": Vector2i(8, 1), "coord3": Vector2i(10, 1), "coord4": Vector2i(12, 1), "coord5": Vector2i(14, 1)}},
+	{"time": 77, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(1, 13), "coord2": Vector2i(2, 13), "coord3": Vector2i(3, 13), "coord4": Vector2i(4, 13), "coord5": Vector2i(5, 13)}},
+	{"time": 78, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(15, 13), "coord2": Vector2i(16, 13), "coord3": Vector2i(17, 13), "coord4": Vector2i(18, 13), "coord5": Vector2i(19, 13)}},
+	{"time": 81, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(1, 1), "coord2": Vector2i(19, 1)}}, # Curtains DOWN
+	{"time": 82, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(2, 1), "coord2": Vector2i(18, 1)}},
+	{"time": 83, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(3, 1), "coord2": Vector2i(17, 1)}},
+	{"time": 84, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(4, 1), "coord2": Vector2i(16, 1)}},
+	{"time": 85, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(5, 1), "coord2": Vector2i(15, 1)}},
+	{"time": 86, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 1), "coord2": Vector2i(14, 1)}},
+	{"time": 87, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(7, 1), "coord2": Vector2i(13, 1)}},
+	{"time": 88, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(8, 1), "coord2": Vector2i(12, 1)}},
+	{"time": 89, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(9, 1), "coord2": Vector2i(11, 1)}},
+	{"time": 90, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(10, 1)}},
+
+	## Bongos repeat 97
+	{"time": 97, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(1, 1), "coord2": Vector2i(1, 2)}}, # Cascade RIGHT
+	{"time": 98, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(1, 3), "coord2": Vector2i(1, 4)}},
+	{"time": 99, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(1, 5), "coord2": Vector2i(1, 6)}},
+	{"time": 100, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(1, 7), "coord2": Vector2i(1, 8)}},
+	{"time": 101, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(1, 9), "coord2": Vector2i(1, 10)}},
+	{"time": 102, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(1, 11), "coord2": Vector2i(1, 12)}},
+	{"time": 109, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(1, 13), "coord2": Vector2i(2, 13), "coord3": Vector2i(3, 13), "coord4": Vector2i(4, 13), "coord5": Vector2i(5, 13)}},
+	{"time": 110, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(15, 13), "coord2": Vector2i(16, 13), "coord3": Vector2i(17, 13), "coord4": Vector2i(18, 13), "coord5": Vector2i(19, 13)}},
 	{"time": 113, "function": "spawn_ghost_on_player", "args": {}}, # Ghost bells attack 2
 	{"time": 115, "function": "spawn_ghost_on_player", "args": {}},
 	{"time": 116, "function": "spawn_ghost_on_player", "args": {}},
@@ -115,12 +116,12 @@ var timeline = [
 	{"time": 122, "function": "spawn_ghost_on_player", "args": {}},
 	{"time": 123, "function": "spawn_ghost_on_player", "args": {}},
 	{"time": 124, "function": "spawn_ghost_on_player", "args": {}},
-	# Synthy part 129
-	{"time": 129, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord_x": 5, "coord_y": 5}}, # EXpanding corners attack
-	{"time": 137, "function": "spawn_pr", "args": {"direction": "WEST", "type": "EXPANDING", "coord_x": 15, "coord_y": 10}},
-	{"time": 145, "function": "spawn_pr", "args": {"direction": "WEST", "type": "EXPANDING", "coord_x": 15, "coord_y": 5}},
-	{"time": 153, "function": "spawn_pr", "args": {"direction": "WEST", "type": "EXPANDING", "coord_x": 5, "coord_y": 10}},
-	# Trail off 161
+	## Synthy part 129
+	{"time": 129, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(5, 5)}}, # Expanding corners attack
+	{"time": 137, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(15, 10)}},
+	{"time": 145, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(15, 5)}},
+	{"time": 153, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(5, 10)}},
+	## Trail off 161
 	
 ]
 var next_event: int = 0
@@ -242,7 +243,21 @@ func spawn_pr_random(args: Dictionary):
 	var turn_count = int(args.turn) if args.has("turn") else 2
 	add_child(projectile)
 	projectile.start_one_coord(direction, type, coords, turn_count)
-
+	
+	
+func spawn_pr_cont(args: Dictionary):
+	var prm = cont_projectile_manager.instantiate()
+	var direction = args.direction if args.has("direction") else "DOWN"
+	var type  = args.type if args.has("type") else 0
+	var coords = PackedVector2Array()
+	
+	for i in range(1, 6):  # Adjust if needed
+		var coord_key = "coord" + str(i)
+		if args.has(coord_key):
+			coords.append(args[coord_key])
+	
+	add_child(prm)
+	prm.spawn_projectiles(type, coords, direction)
 
 
 func _on_player_spawn_afterimage(player_pos: Vector2) -> void:
