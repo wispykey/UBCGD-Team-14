@@ -80,6 +80,7 @@ func showInfo():
 	info_box.show()
 
 func _dialogic_complete(String):
+	await get_tree().create_timer(1.0).timeout
 	enable_controls = true
 	#print("DIALOGUE COMPLETE")
 

@@ -9,5 +9,10 @@ func _on_home_button_pressed() -> void:
 
 
 func _on_restart_button_pressed() -> void:
-	# TODO reset the game
-	pass # Replace with function body.
+	var path: String = get_parent().get_path();
+	if path.ends_with("Fantasy"):
+		get_tree().change_scene_to_file("res://Levels/Fantasy.tscn")
+	elif path.ends_with("Supernatural"):
+		get_tree().change_scene_to_file("res://Levels/Supernatural.tscn")
+	else:
+		get_tree().change_scene_to_file("res://UI/main_menu.tscn")
