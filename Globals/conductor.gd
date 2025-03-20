@@ -58,6 +58,7 @@ var current_time_in_secs: float
 func _ready() -> void:
 	#set_music("Fantasy2")
 	current_time_in_secs = 0.0
+	music.finished.connect(_on_music_finished)
 
 
 func _process(delta: float) -> void:
@@ -103,7 +104,6 @@ func set_music(name: String) -> void:
 	music.stream = load(file_path)
 	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
 	music.play()
-	music.finished.connect(_on_music_finished)
 	print("Playing song: \"", name, "\"\n")
 	
 
@@ -126,8 +126,7 @@ func compute_playback_time() -> float:
 	# Compensate for output latency.
 	var latency: float =  AudioServer.get_output_latency()
 	
-	return max(0.0, time)
-	#return max(0.0, time + audio_delta - latency)
+	return max(0.0, time + audio_delta - latency)
 
 
 # Converts bpm into how long a quarter lasts, in seconds
