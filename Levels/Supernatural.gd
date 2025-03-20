@@ -11,6 +11,9 @@ extends Node2D
 @export var debug_random_test: bool = false
 @export var cont_projectile_manager: PackedScene
 
+var GameOverComponent = preload("res://UI/GameOver.tscn")
+var VictoryComponent = preload("res://UI/Victory.tscn")
+
 var window_dimensions: Vector2
 const WIDTH: int = 640
 const HEIGHT: int = 448
@@ -135,6 +138,9 @@ func _ready() -> void:
 	add_child(telegraph)
 	Conductor.set_music("Supernatural2")
 	
+	# Change sprite to Supernatural character
+	%Player.player_sprite.sprite_frames = load("res://Player/supernatural_sprite_frames.tres")
+	
 	#dash_telegraph_rect = ColorRect.new()
 	#dash_telegraph_rect.color = Color(68, 85, 120, 0.7)  # Semi-transparent light blue
 	#add_child(dash_telegraph_rect)
@@ -142,6 +148,8 @@ func _ready() -> void:
 func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
 	Conductor.quarter_beat.connect(_on_quarter_beat)
+	Conductor.song_finished.connect(_on_song_finished)
+	GameEvents.player_died.connect(_on_player_died)
 	window_dimensions =  GameState.control_port.size
 	GameEvents.game_start.emit()
 	
@@ -262,6 +270,7 @@ func spawn_pr_cont(args: Dictionary):
 
 func _on_player_spawn_afterimage(player_pos: Vector2) -> void:
 	var afterimage = spawn_afterimage.instantiate()
+	afterimage.set_image($Player.player_sprite)
 	afterimage.position = player_pos
 	add_child(afterimage)
 	
@@ -292,3 +301,14 @@ func _on_player_update_telegraph(player_pos: Vector2, charges: float, direction:
 		telegraph.visible = false
 	else:
 		telegraph.visible = true
+
+func _on_song_finished():
+	var victory = VictoryComponent.instantiate()
+	add_child(victory)
+
+func _on_player_died():
+	# TODO: Despawn player, stop processing input
+	timeline = []
+	var game_over = GameOverComponent.instantiate()
+	add_child(game_over)
+	Conductor.stop_music()

@@ -5,11 +5,10 @@ extends Control
 func _ready() -> void:
 	GameEvents.score_changed.connect(_on_score_changed)
 	GameEvents.life_changed.connect(_on_life_changed)
+	GameState.reset_life()
 	
 	$ScoreLabel.text = str(GameState.score)
-	#$LifeLabel.text = str(GameState.life)
 	$LifeProgress.value = GameState.life;
-	$LifeProgress.max_value = GameState.life;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

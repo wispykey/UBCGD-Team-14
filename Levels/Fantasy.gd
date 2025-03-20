@@ -10,6 +10,7 @@ extends Node2D
 @export var thunderstorm: PackedScene
 @export var iterative_projectile: PackedScene
 @export var vine_cross: PackedScene
+@export var spawn_afterimage: PackedScene
 
 @export var debug_random_test: bool = false
 var GameOverComponent = preload("res://UI/GameOver.tscn")
@@ -80,6 +81,7 @@ func _ready_post_dialog(arg: String):
 	window_dimensions =  GameState.control_port.size
 	
 	%Player.position = GameState.control_port.get_center()
+	%Player.spawn_afterimage.connect(_on_player_spawn_afterimage)
 	Conductor.set_music("Fantasy2")
 	$HUD.start_beat_indicator()
 
@@ -104,10 +106,9 @@ func _on_quarter_beat(beat_num: int):
 			break
 
 func _on_song_finished():
-	# Only check score once song has finished (i.e. player must survive entire song)
-	if GameState.score >= WINNING_SCORE:
-		var victory = VictoryComponent.instantiate()
-		add_child(victory)
+	# Player wins automatically if they make it to the end. Score is a bonus.
+	var victory = VictoryComponent.instantiate()
+	add_child(victory)
 
 func _on_player_died():
 	# TODO: Despawn player, stop processing input
@@ -115,10 +116,6 @@ func _on_player_died():
 	var game_over = GameOverComponent.instantiate()
 	add_child(game_over)
 	Conductor.stop_music()
-
-func _on_eighth_beat(_beat_num: int):
-	pass
-
 
 func get_random_position() -> Vector2:
 	# Create a random x and y for the danger sign
@@ -230,3 +227,9 @@ func _on_quarter_beat_spawn_puddle(beat_num: int):
 		puddle.position = GameState.control_port.get_center()
 		puddle.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
 	puddle.start()
+
+func _on_player_spawn_afterimage(player_pos: Vector2) -> void:
+	var afterimage = spawn_afterimage.instantiate()
+	afterimage.set_image($Player.player_sprite)
+	afterimage.position = player_pos
+	add_child(afterimage)

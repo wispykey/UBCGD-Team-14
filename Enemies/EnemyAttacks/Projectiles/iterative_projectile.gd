@@ -27,7 +27,7 @@ var type: String = ""
 var projectiles = []  # List of attacks
 var starting_coords = []  # List of starting coordinates, measured in tiles
 var speed = 1
-var damage: int = 5
+var damage: int = 3
 var count: int = 0
 var turn_count: int # Spinning projectiles only
 

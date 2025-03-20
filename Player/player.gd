@@ -27,6 +27,8 @@ const TILES_PER_CHARGE: int = 3
 const MIN_HOLD_DURATION: float = 0.35
 # Allow inputs to be timed earlier/later than the beat by this amount
 const LEEWAY_IN_SECS: float = 0.12 
+# The amount of HP recovered per well-timed input
+const HP_RECOVERY_PER_TICK: float = 0.1
 
 # Allow player to shift timings to match their device/feel
 const TIMING_CALIBRATION_STEP: float = 0.02 # In seconds
@@ -34,7 +36,7 @@ var calibration_offset: float = -0.00 # In seconds
 
 ## Player propertes
 const PLAYER_SIZE: int = 32
-@onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var player_sprite: AnimatedSprite2D = $Sprite
 var has_key: bool = false
 var can_light_up: bool = false
 var last_action: String = "move_down"
@@ -73,13 +75,13 @@ func _process(delta: float) -> void:
 	if !gameRunning:
 		return
 	# Toggle lighting up tiles
-	if Input.is_action_just_pressed("ui_accept"):
-		if can_light_up:
-			can_light_up = false
-			print("Not lighting up tiles")
-		else:
-			can_light_up = true
-			print("Lighting up tiles")
+	#if Input.is_action_just_pressed("ui_accept"):
+		#if can_light_up:
+			#can_light_up = false
+			#print("Not lighting up tiles")
+		#else:
+			#can_light_up = true
+			#print("Lighting up tiles")
 			
 	if Input.is_action_just_pressed("calibrate_earlier"):
 		calibration_offset -= TIMING_CALIBRATION_STEP
@@ -260,7 +262,7 @@ func handle_input_timing():
 
 	if close_enough:
 		# TODO: Do stuff here (maybe a signal). Recover health, increase combo, etc.
-		pass
+		GameState.update_life(HP_RECOVERY_PER_TICK) # Recover HP when inputs are timed well
 	else:
 		# TODO: Do stuff here (maybe a signal). Lose health, reset combo, etc.
 		pass
@@ -329,8 +331,7 @@ func _on_game_start():
 
 func _on_player_died():
 	gameRunning = false
-	print("Player died (currently does nothing)")
-	# queue_free()
+	queue_free()
 
 func _kill():
 	queue_free()

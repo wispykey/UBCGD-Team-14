@@ -16,7 +16,7 @@ var distance: float = 0.0
 var speed = 100
 var direction = Vector2.ZERO
 
-var damage: int = 5
+var damage: int = 2
 
 func _ready():
 	if follow_type == 1:
