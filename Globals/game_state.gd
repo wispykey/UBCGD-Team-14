@@ -19,15 +19,14 @@ func _process(delta: float) -> void:
 
 
 func update_life(amount: float):
-	# TODO: Uncomment this when death is functional
-	#if life <= 0: # Only die once
-		#return
+	# Guard to prevent multiple death bugs
+	if life <= 0:
+		return
 	life = clamp(life + amount, 0 , MAX_VISIBLE_LIFE)
 	GameEvents.life_changed.emit()
-	print(life)
-	
 	if amount < 0:
 		SFX.play_damage_taken()
+	# Only emit signal once
 	if life <= 0:
 		GameEvents.player_died.emit()
 
