@@ -132,6 +132,7 @@ func _ready() -> void:
 	
 	telegraph = dash_telegraph.instantiate()
 	add_child(telegraph)
+	Conductor.set_music("Supernatural2")
 	
 	#dash_telegraph_rect = ColorRect.new()
 	#dash_telegraph_rect.color = Color(68, 85, 120, 0.7)  # Semi-transparent light blue
@@ -145,6 +146,7 @@ func _ready_post_dialog(arg: String):
 	
 	%Player.position = GameState.control_port.get_center()
 	Conductor.set_music("Supernatural1")
+	$HUD.start_beat_indicator()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
