@@ -12,6 +12,11 @@ func _process(delta: float) -> void:
 	# Get time left and scale it to range [0, initial_a]
 	var new_a = $Timer.time_left * afterimage_fct
 	modulate.a = new_a
+	
+func set_image(sprite: AnimatedSprite2D):
+	$AnimatedSprite2D.sprite_frames = sprite.sprite_frames
+	$AnimatedSprite2D.animation = sprite.animation
+	pass
 
 func _on_timer_timeout():
 	# Removes this node from the scene tree

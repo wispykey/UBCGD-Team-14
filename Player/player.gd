@@ -34,7 +34,7 @@ var calibration_offset: float = -0.00 # In seconds
 
 ## Player propertes
 const PLAYER_SIZE: int = 32
-@onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var player_sprite: AnimatedSprite2D = $Sprite
 var has_key: bool = false
 var can_light_up: bool = false
 var last_action: String = "move_down"

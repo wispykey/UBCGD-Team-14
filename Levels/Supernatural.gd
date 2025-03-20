@@ -138,6 +138,9 @@ func _ready() -> void:
 	add_child(telegraph)
 	Conductor.set_music("Supernatural2")
 	
+	# Change sprite to Supernatural character
+	%Player.player_sprite.sprite_frames = load("res://Player/supernatural_sprite_frames.tres")
+	
 	#dash_telegraph_rect = ColorRect.new()
 	#dash_telegraph_rect.color = Color(68, 85, 120, 0.7)  # Semi-transparent light blue
 	#add_child(dash_telegraph_rect)
@@ -267,6 +270,7 @@ func spawn_pr_cont(args: Dictionary):
 
 func _on_player_spawn_afterimage(player_pos: Vector2) -> void:
 	var afterimage = spawn_afterimage.instantiate()
+	afterimage.set_image($Player.player_sprite)
 	afterimage.position = player_pos
 	add_child(afterimage)
 	

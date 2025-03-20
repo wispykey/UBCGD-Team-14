@@ -230,5 +230,6 @@ func _on_quarter_beat_spawn_puddle(beat_num: int):
 
 func _on_player_spawn_afterimage(player_pos: Vector2) -> void:
 	var afterimage = spawn_afterimage.instantiate()
+	afterimage.set_image($Player.player_sprite)
 	afterimage.position = player_pos
 	add_child(afterimage)
