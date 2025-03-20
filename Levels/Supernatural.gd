@@ -10,7 +10,6 @@ extends Node2D
 @export var dash_telegraph: PackedScene
 @export var debug_random_test: bool = false
 @export var cont_projectile_manager: PackedScene
-@export var itr_projectile_manager: PackedScene
 
 var GameOverComponent = preload("res://UI/GameOver.tscn")
 var VictoryComponent = preload("res://UI/Victory.tscn")
@@ -45,17 +44,12 @@ var dash_telegraph_rect_size = TILE_SIZE * 0.8
 #   'function' is the name of a function in this script; must be in quotation marks
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
-	
-	{"time": 1, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(5, 5)}}, # Expanding corners attack
-	{"time": 4, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(15, 10)}},
-	{"time": 8, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(15, 5)}},
-	{"time": 12, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(5, 10)}},
-	## Intro
-	#{"time": 1, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 5), "coord2": Vector2i(14, 5)}},
-	#{"time": 5, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(6, 5), "coord2": Vector2i(6, 9)}},
-	#{"time": 9, "function": "spawn_pr_cont", "args": {"direction": "LEFT", "coord1": Vector2i(14, 5), "coord2": Vector2i(14, 9)}},
-	#{"time": 13, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(6, 9), "coord2": Vector2i(14, 9), "coord3": Vector2i(10, 9)}},
-	### Drums enter 17
+	# Intro
+	{"time": 1, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 5), "coord2": Vector2i(14, 5)}},
+	{"time": 5, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(6, 5), "coord2": Vector2i(6, 9)}},
+	{"time": 9, "function": "spawn_pr_cont", "args": {"direction": "LEFT", "coord1": Vector2i(14, 5), "coord2": Vector2i(14, 9)}},
+	{"time": 13, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(6, 9), "coord2": Vector2i(14, 9), "coord3": Vector2i(10, 9)}},
+	## Drums enter 17
 	{"time": 17, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(1, 1), "coord2": Vector2i(3, 1)}}, # Cascade DOWN
 	{"time": 18, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(5, 1)}},
 	{"time": 19, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(7, 1)}},
@@ -215,29 +209,38 @@ func spawn_ghost_on_player(args: Dictionary):
 	add_child(ghost)
 
 
+# Can spawn up to 5 projectiles at athe same time currently
 func spawn_pr(args: Dictionary):
-	var projectile = itr_projectile_manager.instantiate()
+	var projectile = spawn_projectile.instantiate()
 	var type  = args.type if args.has("type") else ""
 	var direction  = args.direction if args.has("direction") else ""
 	var turn_count = int(args.turn) if args.has("turn") else 0
-	var coords = PackedVector2Array()
-
-	for i in range(1, 6):  # Adjust if needed
-		var coord_key = "coord" + str(i)
-		if args.has(coord_key):
-			coords.append(args[coord_key])
+	var coords
 	
-	for i in range(1, 6):  # Adjust if needed
-		var x_key = "coord" + str(i) + "_x"
-		var y_key = "coord" + str(i) + "_y"
-		if args.has(x_key) and args.has(y_key):
-			coords.append(Vector2(int(args[x_key]), int(args[y_key])))
-
-	if coords.is_empty():
-		coords.append(Vector2(0, 0)) # default for badly defined coordinates
-	
+	# TODO: Abstract if possible, maybe rename coordinates to "cx_1", "cy_1" and then use a for loop
+		#for n in 8: 
+			#if (args.has("cx_" + str(n)) && args.has("cy_" + str(n)):
+				#coords.append(Vector2(int(args.c # Here is where the problem would be
+	if (args.has("coord1_x") && args.has("coord1_y")):
+		coords = PackedVector2Array()
+		coords.append(Vector2(int(args.coord1_x), int(args.coord1_y)))
+		if (args.has("coord2_x") && args.has("coord2_y")):
+			coords.append(Vector2(int(args.coord2_x), int(args.coord2_y)))
+			if (args.has("coord3_x") && args.has("coord3_y")):
+				coords.append(Vector2(int(args.coord3_x), int(args.coord3_y)))
+				if (args.has("coord4_x") && args.has("coord4_y")):
+					coords.append(Vector2(int(args.coord4_x), int(args.coord4_y)))
+					if (args.has("coord5_x") && args.has("coord5_y")):
+						coords.append(Vector2(int(args.coord5_x), int(args.coord5_y)))
+		add_child(projectile)
+		projectile.start(direction, type, coords, turn_count)
+		return
+	elif (args.has("coord_x") && args.has("coord_y")): # TODO: remove this and just use coord1?
+		coords = Vector2(int(args.coord_x), int(args.coord_y))
+	else:
+		coords = Vector2(0, 0) # Default
 	add_child(projectile)
-	projectile.start(direction, type, coords, turn_count)
+	projectile.start_one_coord(direction, type, coords, turn_count)
 	
 
 func spawn_pr_random(args: Dictionary):
