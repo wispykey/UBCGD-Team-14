@@ -7,9 +7,8 @@ func _ready() -> void:
 	GameEvents.life_changed.connect(_on_life_changed)
 	
 	$ScoreLabel.text = str(GameState.score)
-	#$LifeLabel.text = str(GameState.life)
 	$LifeProgress.value = GameState.life;
-	$LifeProgress.max_value = GameState.life;
+	print($LifeProgress.value)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

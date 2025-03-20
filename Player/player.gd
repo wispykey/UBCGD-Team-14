@@ -260,6 +260,8 @@ func handle_input_timing():
 
 	if close_enough:
 		# TODO: Do stuff here (maybe a signal). Recover health, increase combo, etc.
+		GameState.update_life(0.1) # Recover HP when inputs are timed well
+		print("GOOD")
 		pass
 	else:
 		# TODO: Do stuff here (maybe a signal). Lose health, reset combo, etc.
