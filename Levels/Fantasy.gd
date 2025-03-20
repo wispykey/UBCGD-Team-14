@@ -104,10 +104,9 @@ func _on_quarter_beat(beat_num: int):
 			break
 
 func _on_song_finished():
-	# Only check score once song has finished (i.e. player must survive entire song)
-	if GameState.score >= WINNING_SCORE:
-		var victory = VictoryComponent.instantiate()
-		add_child(victory)
+	# Player wins automatically if they make it to the end. Score is a bonus.
+	var victory = VictoryComponent.instantiate()
+	add_child(victory)
 
 func _on_player_died():
 	# TODO: Despawn player, stop processing input
@@ -115,10 +114,6 @@ func _on_player_died():
 	var game_over = GameOverComponent.instantiate()
 	add_child(game_over)
 	Conductor.stop_music()
-
-func _on_eighth_beat(_beat_num: int):
-	pass
-
 
 func get_random_position() -> Vector2:
 	# Create a random x and y for the danger sign
