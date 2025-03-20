@@ -75,13 +75,13 @@ func _process(delta: float) -> void:
 	if !gameRunning:
 		return
 	# Toggle lighting up tiles
-	if Input.is_action_just_pressed("UNUSED"):
-		if can_light_up:
-			can_light_up = false
-			print("Not lighting up tiles")
-		else:
-			can_light_up = true
-			print("Lighting up tiles")
+	#if Input.is_action_just_pressed("ui_accept"):
+		#if can_light_up:
+			#can_light_up = false
+			#print("Not lighting up tiles")
+		#else:
+			#can_light_up = true
+			#print("Lighting up tiles")
 			
 	if Input.is_action_just_pressed("calibrate_earlier"):
 		calibration_offset -= TIMING_CALIBRATION_STEP
