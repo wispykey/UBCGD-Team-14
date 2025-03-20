@@ -26,8 +26,9 @@ var level_map = {
 @onready var enable_controls = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Dialogic.signal_event.connect(_dialogic_complete)
+	Dialogic.signal_event.connect(_process_dialogic_signal)
 	Dialogic.start("intro_dialogic")
+	level_select_vbox.modulate.a = 0
 	info_box.hide()
 	update_label()
 
@@ -37,7 +38,9 @@ func update_label():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-		pass
+	if Input.is_action_just_pressed("skip_dialog"):
+		Dialogic.end_timeline()
+		_process_dialogic_signal("done_dialogic")
 		
 func _unhandled_input(event):
 	if enable_controls == true:
@@ -62,7 +65,6 @@ func selectLevel() -> void:
 	SFX.play_UI_accept()
 	print("Level selected: ", levels[current_index])
 	showInfo()
-	
 
 func _on_back_pressed() -> void:
 	SFX.play_UI_switch_level()
@@ -78,6 +80,14 @@ func showInfo():
 	level_select_vbox.hide()
 	info_box.update() # update information in info box
 	info_box.show()
+
+func _process_dialogic_signal(sig: String):
+	if sig == "reveal_portals":
+		fade_in(level_select_vbox)
+	
+	if sig == "done_dialogic":
+		level_select_vbox.modulate.a = 1
+		enable_controls = true
 
 func _dialogic_complete(String):
 	await get_tree().create_timer(1.0).timeout
@@ -97,3 +107,7 @@ func getCurrentLevelPreview():
 func _on_texture_button_pressed() -> void:
 	level_select_vbox.show()
 	info_box.hide()
+	
+func fade_in(node: CanvasItem):
+	var tween = get_tree().create_tween()
+	tween.tween_property(node, "modulate:a", 1.0, 0.5)
