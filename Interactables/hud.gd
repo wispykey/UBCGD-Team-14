@@ -11,12 +11,12 @@ func _ready() -> void:
 	$LifeProgress.value = GameState.life;
 	$LifeProgress.max_value = GameState.life;
 
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
+	
+func start_beat_indicator():
+	Conductor.quarter_beat.connect($BeatIndicator.restart_anim)
 
 func _on_score_changed():
 	$ScoreLabel.text = str(GameState.score)
