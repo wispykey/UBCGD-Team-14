@@ -331,8 +331,7 @@ func _on_game_start():
 
 func _on_player_died():
 	gameRunning = false
-	print("Player died (currently does nothing)")
-	# queue_free()
+	queue_free()
 
 func _kill():
 	queue_free()
