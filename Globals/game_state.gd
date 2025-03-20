@@ -30,3 +30,6 @@ func update_life(amount: float):
 		SFX.play_damage_taken()
 	if life <= 0:
 		GameEvents.player_died.emit()
+
+func reset_life():
+	life = MAX_VISIBLE_LIFE
