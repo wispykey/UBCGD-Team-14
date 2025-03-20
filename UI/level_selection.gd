@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 		_process_dialogic_signal("done_dialogic")
 		
 func _unhandled_input(event):
-	if enable_controls == true:
+	if enable_controls == true and not TransitionScreen.animation_player.is_playing():
 		if event.is_action_pressed("ui_left"):
 			_on_back_pressed()
 		elif event.is_action_pressed("ui_right"):
@@ -52,6 +52,7 @@ func _unhandled_input(event):
 		if Input.is_action_just_pressed("ui_accept") and info_box.visible and level_map[levels[current_index]].scene:
 			TransitionScreen.transition()
 			await TransitionScreen.on_transition_finished
+
 			get_tree().change_scene_to_file(level_map[levels[current_index]].scene)
 			
 		elif Input.is_action_just_pressed("ui_accept"):
