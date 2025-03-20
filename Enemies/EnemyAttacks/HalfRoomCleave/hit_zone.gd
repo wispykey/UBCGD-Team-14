@@ -1,6 +1,6 @@
 extends Area2D
 
-var damage: int = 5
+var damage: int = 3
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
