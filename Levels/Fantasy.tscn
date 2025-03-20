@@ -8,11 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://Levels/TileManager.tscn" id="5_asoik"]
 [ext_resource type="Texture2D" uid="uid://dtpt4up38l8d4" path="res://Assets/Themes/Fantasy/fantasy_floor.png" id="5_wbmv1"]
 [ext_resource type="PackedScene" uid="uid://l5lf3cg0mvsl" path="res://Player/player.tscn" id="7_pxnv2"]
+[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Interactables/HUD.tscn" id="8_0asac"]
 [ext_resource type="PackedScene" uid="uid://dhp84nbs5osdm" path="res://Enemies/EnemyAttacks/PuddleHazard/puddle_hazard.tscn" id="10_t46jv"]
 [ext_resource type="PackedScene" uid="uid://biqni1sm5qhle" path="res://Enemies/EnemyAttacks/BossStaff.tscn" id="11_hxj16"]
 [ext_resource type="PackedScene" uid="uid://3p7va0o7hql7" path="res://Enemies/FantasyBoss.tscn" id="12_yf31r"]
 [ext_resource type="PackedScene" uid="uid://bgm21f8w6825k" path="res://Enemies/EnemyAttacks/Projectiles/iterative_projectile.tscn" id="13_11hjv"]
-[ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Interactables/HUD.tscn" id="14_8swii"]
 [ext_resource type="PackedScene" uid="uid://b11rmeh0136ep" path="res://Enemies/EnemyAttacks/VineCross/VineCross.tscn" id="14_gwcx7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ric4a"]
@@ -44,6 +44,8 @@ thunderstorm = ExtResource("5_5lko7")
 iterative_projectile = ExtResource("13_11hjv")
 vine_cross = ExtResource("14_gwcx7")
 
+[node name="HUD" parent="." instance=ExtResource("8_0asac")]
+
 [node name="TileManager" parent="." instance=ExtResource("5_asoik")]
 unique_name_in_owner = true
 z_index = 0
@@ -73,5 +75,3 @@ scale = Vector2(1.8, 1.4)
 unique_name_in_owner = true
 z_index = 3
 position = Vector2(381, 156.8)
-
-[node name="HUD" parent="." instance=ExtResource("14_8swii")]

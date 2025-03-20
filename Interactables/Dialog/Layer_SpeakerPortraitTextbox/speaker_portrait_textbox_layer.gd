@@ -118,6 +118,6 @@ func _apply_export_overrides() -> void:
 	name_label.hide_when_empty = name_label_hide_when_no_character
 
 func _input(_ev):
-	if Input.is_key_pressed(KEY_ESCAPE) || Input.is_key_pressed(KEY_SPACE):
+	if Input.is_key_pressed(KEY_ESCAPE):
 		Dialogic.end_timeline();
 		Dialogic.signal_event.emit("Ready")
