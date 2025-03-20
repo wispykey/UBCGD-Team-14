@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgqiwa6qw1j83"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/Projectiles/itr_projectile_instance.gd" id="1_wojqj"]
+[ext_resource type="PackedScene" uid="uid://ixwndwmexdeb" path="res://Enemies/EnemyAttacks/Projectiles/attack.tscn" id="2_xocga"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/Projectiles/hit_zone.gd" id="3_jcw60"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rmyv"]
+size = Vector2(29, 30)
+
+[node name="IterativeProjectileAttack" type="Area2D"]
+script = ExtResource("1_wojqj")
+attack_image = ExtResource("2_xocga")
+
+[node name="HitZone" type="Area2D" parent="."]
+collision_layer = 16
+script = ExtResource("3_jcw60")
+
+[node name="TerrainCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_4rmyv")
