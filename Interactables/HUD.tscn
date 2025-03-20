@@ -40,11 +40,11 @@ scale = Vector2(2, 2)
 
 [node name="LifeProgress" type="TextureProgressBar" parent="."]
 layout_mode = 0
-offset_left = 239.0
-offset_top = 408.0
-offset_right = 335.0
-offset_bottom = 448.0
-scale = Vector2(2, 2)
+offset_left = 275.6
+offset_top = 447.2
+offset_right = 371.6
+offset_bottom = 487.2
+scale = Vector2(1.2, 1.2)
 min_value = -2.0
 max_value = 5.0
 step = 0.1
@@ -54,16 +54,16 @@ texture_progress = ExtResource("4_0acop")
 [node name="HealthBackground" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(335, 440)
-scale = Vector2(2, 2)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_q2x6t")
 
 [node name="Health" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(335.5, 439.5)
-scale = Vector2(2.01042, 1.96875)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_0acop")
 
 [node name="Outline" type="Sprite2D" parent="."]
-position = Vector2(335, 440)
-scale = Vector2(2, 2)
+position = Vector2(332.6, 466.2)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("5_5cat8")
