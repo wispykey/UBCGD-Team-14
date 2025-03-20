@@ -89,6 +89,11 @@ func _process_dialogic_signal(sig: String):
 		level_select_vbox.modulate.a = 1
 		enable_controls = true
 
+func _dialogic_complete(String):
+	await get_tree().create_timer(1.0).timeout
+	enable_controls = true
+	#print("DIALOGUE COMPLETE")
+
 func getCurrentLevel():
 	return levels[current_index]
 	
