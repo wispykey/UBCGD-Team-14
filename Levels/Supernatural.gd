@@ -46,10 +46,16 @@ var dash_telegraph_rect_size = TILE_SIZE * 0.8
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
 	# Intro
-	{"time": 1, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 5), "coord2": Vector2i(14, 5)}},
-	{"time": 5, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(6, 5), "coord2": Vector2i(6, 9)}},
-	{"time": 9, "function": "spawn_pr_cont", "args": {"direction": "LEFT", "coord1": Vector2i(14, 5), "coord2": Vector2i(14, 9)}},
-	{"time": 13, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(6, 9), "coord2": Vector2i(14, 9), "coord3": Vector2i(10, 9)}},
+	## Synthy part 129
+	{"time": 1, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(5, 5)}}, # Expanding corners attack
+	{"time": 5, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(15, 10)}},
+	{"time": 9, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(15, 5)}},
+	{"time": 13, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(5, 10)}},
+	#
+	#{"time": 1, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 5), "coord2": Vector2i(14, 5)}},
+	#{"time": 5, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(6, 5), "coord2": Vector2i(6, 9)}},
+	#{"time": 9, "function": "spawn_pr_cont", "args": {"direction": "LEFT", "coord1": Vector2i(14, 5), "coord2": Vector2i(14, 9)}},
+	#{"time": 13, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(6, 9), "coord2": Vector2i(14, 9), "coord3": Vector2i(10, 9)}},
 	## Drums enter 17
 	{"time": 17, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(1, 1), "coord2": Vector2i(3, 1)}}, # Cascade DOWN
 	{"time": 18, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(5, 1)}},
@@ -120,11 +126,6 @@ var timeline = [
 	{"time": 122, "function": "spawn_ghost_on_player", "args": {}},
 	{"time": 123, "function": "spawn_ghost_on_player", "args": {}},
 	{"time": 124, "function": "spawn_ghost_on_player", "args": {}},
-	## Synthy part 129
-	{"time": 129, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(5, 5)}}, # Expanding corners attack
-	{"time": 137, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(15, 10)}},
-	{"time": 145, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(15, 5)}},
-	{"time": 153, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(5, 10)}},
 	## Trail off 161
 	
 ]
