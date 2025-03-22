@@ -26,7 +26,7 @@ const TILES_PER_CHARGE: int = 3
 # Duration to distinguish the releases of short taps vs intentional sustained taps
 const MIN_HOLD_DURATION: float = 0.35
 # Allow inputs to be timed earlier/later than the beat by this amount
-const LEEWAY_IN_SECS: float = 0.20 
+const LEEWAY_IN_SECS: float = 0.15
 # The amount of HP recovered per well-timed input
 const HP_RECOVERY_PER_TICK: float = 0.1
 

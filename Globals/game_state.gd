@@ -19,7 +19,8 @@ func _process(delta: float) -> void:
 	pass
 
 func update_combo(amount: int):
-	if amount == -1:
+	# Reset on -1 flag, or if player is spamming to artificially inflating combo
+	if amount == -1 or combo + amount > Conductor.num_beats_passed:
 		combo = 0
 	else:
 		combo += amount
