@@ -9,6 +9,8 @@ const TILE_SIZE = 32
 @export var t_img_up: PackedScene
 @export var t_img_down: PackedScene
 
+@export var hand_throw: PackedScene
+
 @export var projectile_instance: PackedScene
 var screen_size: Vector2
 var spawn_timer: Timer
@@ -40,15 +42,18 @@ func start_spawning():
 	add_child(spawn_timer)
 
 func add_telegraph_image(direction: String, coord: Vector2):
+	var hand = hand_throw.instantiate()
+	hand.position = coord * TILE_SIZE + Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
 	match direction:
 		"LEFT":
-			add_scene($Telegraph, t_img_left, coord)
+			pass # Images are drawn left by default
 		"RIGHT":
-			add_scene($Telegraph, t_img_right, coord)
+			hand.flip_h = true # Flip to preserve palm facing downwards
 		"UP":
-			add_scene($Telegraph, t_img_up, coord)
+			hand.rotation_degrees = 90
 		"DOWN":
-			add_scene($Telegraph, t_img_down, coord)
+			hand.rotation_degrees = 270
+	$Telegraph.add_child(hand)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -148,4 +153,10 @@ func _on_telegraph_timer_timeout():
 func add_scene(parent: Node2D, scene: PackedScene, coord: Vector2):
 	var sprite = scene.instantiate()
 	sprite.position = coord * TILE_SIZE + Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
+	parent.add_child(sprite)
+	
+func add_rotated_scene(parent: Node2D, scene: PackedScene, coord: Vector2, degrees: int):
+	var sprite = scene.instantiate()
+	sprite.position = coord * TILE_SIZE + Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
+	sprite.rotation_degrees = degrees
 	parent.add_child(sprite)
