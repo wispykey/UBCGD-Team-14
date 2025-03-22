@@ -26,7 +26,7 @@ const TILES_PER_CHARGE: int = 3
 # Duration to distinguish the releases of short taps vs intentional sustained taps
 const MIN_HOLD_DURATION: float = 0.35
 # Allow inputs to be timed earlier/later than the beat by this amount
-const LEEWAY_IN_SECS: float = 0.12 
+const LEEWAY_IN_SECS: float = 0.15
 # The amount of HP recovered per well-timed input
 const HP_RECOVERY_PER_TICK: float = 0.1
 
@@ -102,14 +102,18 @@ func handle_movement(delta: float) -> String:
 		if Input.is_action_just_pressed(action):
 			_move_one_cell(directions[action].dir)
 			directions[action].held += delta
-			handle_input_timing()
+			handle_input_timing(1)
+			$ComboTimer.start(Conductor.seconds_per_quarter_note)
 			return action # Early returns prevent processing multiple directions
 	
 	for action in directions:	
 		if Input.is_action_just_released(action):
-			if directions[action].held > MIN_HOLD_DURATION:
-				handle_input_timing()
+			var duration = directions[action].held
+			if duration > MIN_HOLD_DURATION:
+				var combo_gain = calculate_charge_count(duration)
+				handle_input_timing(combo_gain)
 			handle_release(action)
+			$ComboTimer.start(Conductor.seconds_per_quarter_note)
 			return action
 	
 	for action in directions:
@@ -117,6 +121,7 @@ func handle_movement(delta: float) -> String:
 			directions[action].held += delta
 			update_color(directions[action].held)
 			update_dash_telegraph(directions[action].held, directions[action].dir)
+			$ComboTimer.start(Conductor.seconds_per_quarter_note)
 			return action
 	
 		## COMMENTED OUT: Double Tap code
@@ -159,25 +164,30 @@ func _light_up_tile():
 func _spawn_afterimage():
 	spawn_afterimage.emit(position)
 
+func calculate_charge_count(duration: float):
+	var charge_count = floori((duration + LEEWAY_IN_SECS) / Conductor.seconds_per_quarter_note)
+	charge_count = min(charge_count, MAX_CHARGES)
+	return charge_count
+	
+
 ### SUSTAINED INPUT CODE:
 # Handle sustained inputs on release
 # Eventually, could make it a match (switch case)
 func handle_release(action):
 	# Instead of manually counting charges on quarter beats, derive based on held duration 
 	# LEEWAY_IN_SECS allows player to release slightly early and still get the next beat's powerup
-	var count = floori((directions[action].held + LEEWAY_IN_SECS) / Conductor.seconds_per_quarter_note)
+	var charge_count = calculate_charge_count(directions[action].held)
 	
-	if count >= MAX_CHARGES:
+	if charge_count >= MAX_CHARGES:
 		move_to_end(directions[action].dir)
 	else:
-		move_amount(directions[action].dir, count * TILES_PER_CHARGE)
+		move_amount(directions[action].dir, charge_count * TILES_PER_CHARGE)
 		
-	if count > 0:
-		SFX.play_dash_release(min(count, MAX_CHARGES)) 
+	if charge_count > 0:
+		SFX.play_dash_release(min(charge_count, MAX_CHARGES)) 
 	
 	for other_action in directions:
 		directions[other_action].held = 0.0
-		directions[other_action].count = 0
 	
 	# Reset player color
 	update_color(0.0)
@@ -241,12 +251,13 @@ func update_dash_telegraph(duration: float, direction: Vector2):
 
 
 ### TIMING/BEAT CODE:
-# Update time of most recent beat 
 func _on_quarter_beat(_beat_num):
-	pass
+	# Reset combo if player has not acted recently (tracked using timer)
+	if $ComboTimer.is_stopped():
+		GameState.update_combo(-1)
 
 # Evaluate how well player timed an input (presses and long releases)
-func handle_input_timing():
+func handle_input_timing(combo_gain: int):
 	# Subtract one because beats are 1-indexed
 	var prev_beat_in_secs = (Conductor.num_beats_passed-1) * Conductor.seconds_per_quarter_note
 	var input_time = Conductor.current_time_in_secs
@@ -261,11 +272,10 @@ func handle_input_timing():
 	var close_enough = before_next <= LEEWAY_IN_SECS or after_prev <= LEEWAY_IN_SECS
 
 	if close_enough:
-		# TODO: Do stuff here (maybe a signal). Recover health, increase combo, etc.
 		GameState.update_life(HP_RECOVERY_PER_TICK) # Recover HP when inputs are timed well
+		GameState.update_combo(combo_gain)
 	else:
-		# TODO: Do stuff here (maybe a signal). Lose health, reset combo, etc.
-		pass
+		GameState.update_combo(-1)
 			
 	if debug_timing_info:
 		var result = "Good!" if close_enough else "BAD."
@@ -320,8 +330,9 @@ func pick_up_key():
 
 
 func _on_hitbox_area_entered(area: Area2D):
-	#print("Player took ", area.damage, " damage from ", area.name)
 	GameState.update_life(-area.damage)
+	# Reset combo on taking damage (design decision)
+	GameState.update_combo(-1)
 	
 	if area is Projectile or area is SpinningContinuousProjectile:
 		area.queue_free()

@@ -5,6 +5,7 @@ const MAX_LIFE: float = 5.0
 const MAX_VISIBLE_LIFE: float = 4.4
 
 var score: int = 0
+var combo: int = 0
 var life: float = MAX_VISIBLE_LIFE
 var control_port : Rect2
 
@@ -17,6 +18,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func update_combo(amount: int):
+	# Reset on -1 flag, or if player is spamming to artificially inflating combo
+	if amount == -1 or combo + amount > Conductor.num_beats_passed:
+		combo = 0
+	else:
+		combo += amount
+	GameEvents.combo_changed.emit()
 
 func update_life(amount: float):
 	# Guard to prevent multiple death bugs
