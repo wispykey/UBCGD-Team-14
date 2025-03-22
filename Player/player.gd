@@ -26,7 +26,7 @@ const TILES_PER_CHARGE: int = 3
 # Duration to distinguish the releases of short taps vs intentional sustained taps
 const MIN_HOLD_DURATION: float = 0.35
 # Allow inputs to be timed earlier/later than the beat by this amount
-const LEEWAY_IN_SECS: float = 0.12 
+const LEEWAY_IN_SECS: float = 0.20 
 # The amount of HP recovered per well-timed input
 const HP_RECOVERY_PER_TICK: float = 0.1
 
@@ -74,7 +74,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !gameRunning:
 		return
-	print(Conductor.seconds_per_quarter_note)
 	# Toggle lighting up tiles
 	#if Input.is_action_just_pressed("ui_accept"):
 		#if can_light_up:
@@ -105,7 +104,6 @@ func handle_movement(delta: float) -> String:
 			directions[action].held += delta
 			handle_input_timing(1)
 			$ComboTimer.start(Conductor.seconds_per_quarter_note)
-			print($ComboTimer.time_left)
 			return action # Early returns prevent processing multiple directions
 	
 	for action in directions:	
@@ -332,8 +330,9 @@ func pick_up_key():
 
 
 func _on_hitbox_area_entered(area: Area2D):
-	#print("Player took ", area.damage, " damage from ", area.name)
 	GameState.update_life(-area.damage)
+	# Reset combo on taking damage (design decision)
+	GameState.update_combo(-1)
 	
 	if area is Projectile or area is SpinningContinuousProjectile:
 		area.queue_free()
