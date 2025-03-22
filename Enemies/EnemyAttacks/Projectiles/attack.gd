@@ -9,6 +9,7 @@ func _ready() -> void:
 func _on_animation_finished():
 	# On first time finishing, plays animation backwards
 	if !finished:
+		speed_scale = 1.8
 		play_backwards()
 	else:
 		# On second time finishing, deletes itself
