@@ -49,4 +49,5 @@ func add_scene(parent: Node2D):
 	var sprite = attack_image.instantiate()
 	sprite.position.x = coord.x * TILE_SIZE + TILE_SIZE / 2
 	sprite.position.y = coord.y * TILE_SIZE + TILE_SIZE / 2
+	sprite.play("emergy", false)
 	parent.add_child(sprite)

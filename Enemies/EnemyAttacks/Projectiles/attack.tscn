@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://ixwndwmexdeb"]
+[gd_scene load_steps=3 format=3 uid="uid://ixwndwmexdeb"]
 
-[ext_resource type="Texture2D" uid="uid://ctwf8gqvrn22h" path="res://Assets/Themes/Fantasy/vines.png" id="1_fnnpm"]
+[ext_resource type="SpriteFrames" uid="uid://cdnuhgahb7ct3" path="res://Enemies/EnemyAttacks/Projectiles/Telegraphs/hands.tres" id="1_n0ne0"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/Projectiles/attack.gd" id="2_fnc7s"]
 
-[node name="Sprite2D" type="Sprite2D"]
-texture = ExtResource("1_fnnpm")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_n0ne0")
+animation = &"emerge"
+autoplay = "emerge"
+script = ExtResource("2_fnc7s")
