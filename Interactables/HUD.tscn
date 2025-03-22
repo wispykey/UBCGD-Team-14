@@ -67,3 +67,12 @@ texture = ExtResource("4_0acop")
 position = Vector2(332.6, 466.2)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("5_5cat8")
+
+[node name="Combo" type="Label" parent="."]
+layout_mode = 0
+offset_left = 608.0
+offset_top = 23.0
+offset_right = 648.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 30
+text = "0"

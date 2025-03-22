@@ -5,6 +5,7 @@ const MAX_LIFE: float = 5.0
 const MAX_VISIBLE_LIFE: float = 4.4
 
 var score: int = 0
+var combo: int = 0
 var life: float = MAX_VISIBLE_LIFE
 var control_port : Rect2
 
@@ -17,6 +18,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func update_combo(amount: int):
+	if amount == -1:
+		combo = 0
+	else:
+		combo += amount
+	GameEvents.combo_changed.emit()
+	
+func reset_combo():
+	combo = 0
+	GameEvents.combo_changed.emit()
 
 func update_life(amount: float):
 	# Guard to prevent multiple death bugs

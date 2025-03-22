@@ -1,7 +1,9 @@
 extends Node
 
 signal score_changed
+signal combo_changed
 signal life_changed
+
 signal player_died
 signal game_start
 
