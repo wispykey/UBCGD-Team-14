@@ -74,6 +74,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !gameRunning:
 		return
+	print(Conductor.seconds_per_quarter_note)
 	# Toggle lighting up tiles
 	#if Input.is_action_just_pressed("ui_accept"):
 		#if can_light_up:
@@ -103,6 +104,8 @@ func handle_movement(delta: float) -> String:
 			_move_one_cell(directions[action].dir)
 			directions[action].held += delta
 			handle_input_timing(1)
+			$ComboTimer.start(Conductor.seconds_per_quarter_note)
+			print($ComboTimer.time_left)
 			return action # Early returns prevent processing multiple directions
 	
 	for action in directions:	
@@ -112,6 +115,7 @@ func handle_movement(delta: float) -> String:
 				var combo_gain = calculate_charge_count(duration)
 				handle_input_timing(combo_gain)
 			handle_release(action)
+			$ComboTimer.start(Conductor.seconds_per_quarter_note)
 			return action
 	
 	for action in directions:
@@ -119,6 +123,7 @@ func handle_movement(delta: float) -> String:
 			directions[action].held += delta
 			update_color(directions[action].held)
 			update_dash_telegraph(directions[action].held, directions[action].dir)
+			$ComboTimer.start(Conductor.seconds_per_quarter_note)
 			return action
 	
 		## COMMENTED OUT: Double Tap code
@@ -248,9 +253,10 @@ func update_dash_telegraph(duration: float, direction: Vector2):
 
 
 ### TIMING/BEAT CODE:
-# Update time of most recent beat 
 func _on_quarter_beat(_beat_num):
-	pass
+	# Reset combo if player has not acted recently (tracked using timer)
+	if $ComboTimer.is_stopped():
+		GameState.update_combo(-1)
 
 # Evaluate how well player timed an input (presses and long releases)
 func handle_input_timing(combo_gain: int):

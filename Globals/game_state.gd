@@ -24,10 +24,6 @@ func update_combo(amount: int):
 	else:
 		combo += amount
 	GameEvents.combo_changed.emit()
-	
-func reset_combo():
-	combo = 0
-	GameEvents.combo_changed.emit()
 
 func update_life(amount: float):
 	# Guard to prevent multiple death bugs
