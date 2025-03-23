@@ -1,11 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://dd2trpbran7di"]
+[gd_scene load_steps=10 format=3 uid="uid://dd2trpbran7di"]
 
 [ext_resource type="Texture2D" uid="uid://bplkv7ks2dori" path="res://Assets/Themes/Supernatural/FriendlyGhost/ghostie1.png" id="1_6cvml"]
+[ext_resource type="Shader" path="res://Player/wrapping_outline.gdshader" id="1_sk01d"]
 [ext_resource type="Texture2D" uid="uid://bqwqv47t70l18" path="res://Assets/Themes/Supernatural/FriendlyGhost/ghostie2.png" id="2_rl3rv"]
 [ext_resource type="Texture2D" uid="uid://dfdfrpjn2s427" path="res://Assets/Themes/Supernatural/FriendlyGhost/ghostie3.png" id="3_vw0t5"]
 [ext_resource type="Texture2D" uid="uid://beersa5f1iq6x" path="res://Assets/Themes/Supernatural/FriendlyGhost/ghostie4.png" id="4_nivl2"]
 [ext_resource type="Texture2D" uid="uid://d0mcqim45od27" path="res://Assets/Themes/Supernatural/FriendlyGhost/ghostie5.png" id="5_pyt8o"]
 [ext_resource type="Texture2D" uid="uid://diodd18bchuwd" path="res://Assets/Themes/Supernatural/FriendlyGhost/ghostie6.png" id="6_wg2xl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3k2wl"]
+shader = ExtResource("1_sk01d")
+shader_parameter/line_color = Color(1, 0, 0, 1)
+shader_parameter/width = 0.8
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xn851"]
 animations = [{
@@ -34,6 +40,7 @@ animations = [{
 }]
 
 [node name="Ghost" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_3k2wl")
 sprite_frames = SubResource("SpriteFrames_xn851")
 autoplay = "default"
 frame_progress = 0.695252

@@ -1,10 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://ixwndwmexdeb"]
+[gd_scene load_steps=5 format=3 uid="uid://ixwndwmexdeb"]
 
-[ext_resource type="SpriteFrames" uid="uid://cdnuhgahb7ct3" path="res://Enemies/EnemyAttacks/Projectiles/Telegraphs/hands.tres" id="1_n0ne0"]
+[ext_resource type="Shader" path="res://Player/wrapping_outline.gdshader" id="1_dhfse"]
+[ext_resource type="SpriteFrames" uid="uid://be6h8oe4dc0ij" path="res://Enemies/EnemyAttacks/Projectiles/Telegraphs/hands.tres" id="1_n0ne0"]
 [ext_resource type="Script" path="res://Enemies/EnemyAttacks/Projectiles/attack.gd" id="2_fnc7s"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_86lyd"]
+shader = ExtResource("1_dhfse")
+shader_parameter/line_color = Color(1, 0, 0, 1)
+shader_parameter/width = 0.8
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_86lyd")
 sprite_frames = ExtResource("1_n0ne0")
 animation = &"emerge"
 autoplay = "emerge"
+frame = 15
+frame_progress = 1.0
 script = ExtResource("2_fnc7s")
