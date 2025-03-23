@@ -1,0 +1,119 @@
+[gd_resource type="SpriteFrames" load_steps=27 format=3 uid="uid://be6h8oe4dc0ij"]
+
+[ext_resource type="Texture2D" uid="uid://dsliqypbnxsx" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emerge_1.png" id="1_gn3pb"]
+[ext_resource type="Texture2D" uid="uid://dvkvd0negotgv" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_2.png" id="2_efm3o"]
+[ext_resource type="Texture2D" uid="uid://slhrprat0x7d" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_3.png" id="3_x0st0"]
+[ext_resource type="Texture2D" uid="uid://ci67jvy7kp44p" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_4.png" id="4_7nfl8"]
+[ext_resource type="Texture2D" uid="uid://clenc6ygqg3ol" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_5.png" id="5_8884p"]
+[ext_resource type="Texture2D" uid="uid://b6a12md8ykxtm" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_6.png" id="6_0m2wh"]
+[ext_resource type="Texture2D" uid="uid://wyjure5q2i45" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_7.png" id="7_q1t4f"]
+[ext_resource type="Texture2D" uid="uid://hxbd2j74nv7u" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_8.png" id="8_4i1j5"]
+[ext_resource type="Texture2D" uid="uid://bb6gargrax1kj" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_9.png" id="9_e63mj"]
+[ext_resource type="Texture2D" uid="uid://bj072b712i5" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_10.png" id="10_mj2n1"]
+[ext_resource type="Texture2D" uid="uid://d1ktmnu0ixdgs" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_11.png" id="11_jp6vf"]
+[ext_resource type="Texture2D" uid="uid://bh5vnjxlr1k6n" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_12.png" id="12_7y8b5"]
+[ext_resource type="Texture2D" uid="uid://udnf6c7qqbe0" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_13.png" id="13_821j1"]
+[ext_resource type="Texture2D" uid="uid://f4gfga80pohc" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_14.png" id="14_4sv38"]
+[ext_resource type="Texture2D" uid="uid://c10c1bkkhvmtp" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_15.png" id="15_5krcj"]
+[ext_resource type="Texture2D" uid="uid://boe4lljtr5d2b" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_16.png" id="16_iy6cs"]
+[ext_resource type="Texture2D" uid="uid://civ4utm1kwgvg" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_1.png" id="17_urrhy"]
+[ext_resource type="Texture2D" uid="uid://dc14aw14mi33q" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_7.png" id="18_n1iif"]
+[ext_resource type="Texture2D" uid="uid://bq5u0c41um0lg" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_9.png" id="19_a532a"]
+[ext_resource type="Texture2D" uid="uid://dd8lov1cjnv02" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_2.png" id="20_fw3yp"]
+[ext_resource type="Texture2D" uid="uid://dr18tfkpleqp5" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_10.png" id="21_8fghk"]
+[ext_resource type="Texture2D" uid="uid://chxrqlusupo5l" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_3.png" id="22_x5hwy"]
+[ext_resource type="Texture2D" uid="uid://b0p1nkrec2axc" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_6.png" id="23_hf65h"]
+[ext_resource type="Texture2D" uid="uid://bjv0liuxiw4bv" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_8.png" id="24_ia7p8"]
+[ext_resource type="Texture2D" uid="uid://b7wnlaig7da6d" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_5.png" id="25_kjdj3"]
+[ext_resource type="Texture2D" uid="uid://cjkiob1e5ca8o" path="res://Assets/Themes/Supernatural/HandThrow/hand_throw_4.png" id="26_e47wt"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gn3pb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_efm3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x0st0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7nfl8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8884p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0m2wh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_q1t4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4i1j5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_e63mj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mj2n1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_jp6vf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7y8b5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_821j1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4sv38")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5krcj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_iy6cs")
+}],
+"loop": false,
+"name": &"emerge",
+"speed": 48.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_urrhy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_n1iif")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_a532a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_fw3yp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_8fghk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_x5hwy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_hf65h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ia7p8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_kjdj3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_e47wt")
+}],
+"loop": true,
+"name": &"throw",
+"speed": 5.0
+}]

@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cce6fwm3ntsir"]
+[gd_scene load_steps=9 format=3 uid="uid://cce6fwm3ntsir"]
 
-[ext_resource type="Script" path="res://Levels/ContinuousSupernatural/c_projectile_instance.gd" id="1_mf0n0"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/Projectiles/c_projectile_instance.gd" id="1_mf0n0"]
+[ext_resource type="Shader" path="res://Player/wrapping_outline.gdshader" id="2_aiadb"]
 [ext_resource type="Texture2D" uid="uid://dcih3mngutdov" path="res://Assets/Themes/Supernatural/Shoe/game_shoeasset1.png" id="2_gja21"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_51kr5"]
 radius = 4.12311
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xn3au"]
+shader = ExtResource("2_aiadb")
+shader_parameter/line_color = Color(1, 0, 0, 1)
+shader_parameter/width = 1.0
 
 [sub_resource type="Animation" id="Animation_qlmuf"]
 length = 0.001
@@ -53,6 +59,7 @@ script = ExtResource("1_mf0n0")
 shape = SubResource("CircleShape2D_51kr5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_xn3au")
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_gja21")
 
