@@ -142,10 +142,6 @@ func _ready() -> void:
 	
 	# Change sprite to Supernatural character
 	%Player.player_sprite.sprite_frames = load("res://Player/supernatural_sprite_frames.tres")
-	
-	#dash_telegraph_rect = ColorRect.new()
-	#dash_telegraph_rect.color = Color(68, 85, 120, 0.7)  # Semi-transparent light blue
-	#add_child(dash_telegraph_rect)
 
 func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
@@ -277,24 +273,44 @@ func _on_player_update_telegraph(player_pos: Vector2, charges: float, direction:
 	var telegraph_pos
 	if (floor(charges) == 1):
 		telegraph_pos = chosen_start_pos + direction * 3 * TILE_SIZE;
+		_update_zz_telegraph(-direction * 3 * TILE_SIZE, direction)
 	elif (floor(charges) == 2):
 		telegraph_pos = chosen_start_pos + direction * 6 * TILE_SIZE;
+		_update_zz_telegraph(-direction * 6 * TILE_SIZE, direction)
 	else:
 		telegraph_pos = chosen_start_pos
-	
-	# Code if Using Rectangle
-	#dash_telegraph_rect.position = telegraph_pos
-	#if (floor(charges) == 0):
-		#dash_telegraph_rect.size = Vector2(0, 0)
-	#else:
-		#dash_telegraph_rect.size = Vector2(dash_telegraph_rect_size, dash_telegraph_rect_size)
+		_update_zz_telegraph(Vector2(0,0), direction)
 	
 	# Code if Using Dash Telegraph Scene
 	telegraph.position = telegraph_pos
+	
 	if (floor(charges) == 0):
 		telegraph.visible = false
 	else:
 		telegraph.visible = true
+
+func _update_zz_telegraph(player_offset: Vector2, direction: Vector2):
+	#telegraph.get_node("Line2D").clear_points()
+	## Redraw zig zags every time
+	#var count = abs(max(player_offset.ax, player_offset.y)/TILE_SIZE)
+	#
+	#while (count > 0): # construct line backwards
+		#var end_position = player_offseaaaaaaaaaaaaat - Vector2(count * TILE_SIZE)
+		#telegraph.get_node("Line2D").add_point(end_position)
+		#telegraph.get_node("Line2D").add_point(end_position - Vector2(-8, 0))
+		#telegraph.get_node("Line2D").add_point(end_position - Vector2(-12, -16))
+		#telegraph.get_node("Line2D").add_point(end_position - Vector2(-16, 0))
+		#telegraph.get_node("Line2D").add_point(end_position - Vector2(-20, 16))
+		#telegraph.get_node("Line2D").add_point(end_position - Vector2(-24, 0))
+		#
+		#count -= 1
+		
+	#telegraph.get_node("Line2D").add_point(Vector2(0,0))
+	#telegraph.get_node("Line2D").set_point_position(1, player_offset)
+	telegraph.get_node("Line2D").player_offset = player_offset
+	telegraph.get_node("Line2D").direction = direction
+	
+	
 
 func _on_song_finished():
 	var victory = VictoryComponent.instantiate()
