@@ -62,6 +62,7 @@ step = 0.01
 texture_progress = ExtResource("3_mbv51")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = 2
 material = SubResource("ShaderMaterial_14ryd")
 animation = &""
 
