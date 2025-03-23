@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=27 format=3 uid="uid://cdnuhgahb7ct3"]
+[gd_resource type="SpriteFrames" load_steps=27 format=3 uid="uid://be6h8oe4dc0ij"]
 
 [ext_resource type="Texture2D" uid="uid://dsliqypbnxsx" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emerge_1.png" id="1_gn3pb"]
 [ext_resource type="Texture2D" uid="uid://dvkvd0negotgv" path="res://Assets/Themes/Supernatural/HandEmerge/hand_emergy_2.png" id="2_efm3o"]
@@ -80,7 +80,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"emerge",
-"speed": 12.0
+"speed": 36.0
 }, {
 "frames": [{
 "duration": 1.0,
