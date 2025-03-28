@@ -1,9 +1,17 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://dopkx05tnyenk"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://dopkx05tnyenk"]
 
 [ext_resource type="Texture2D" uid="uid://dcg7mms67mued" path="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter1.png" id="1_0egkt"]
 [ext_resource type="Texture2D" uid="uid://cyevulsswg6t8" path="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter2.png" id="2_1dcap"]
+[ext_resource type="Texture2D" uid="uid://vha2c2ynftgn" path="res://Assets/Themes/Supernatural/FemPlayer/dash_1_2.png" id="3_pspgc"]
 [ext_resource type="Texture2D" uid="uid://brmdi76iqs2wh" path="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter4.png" id="3_xeri2"]
+[ext_resource type="Texture2D" uid="uid://ds1euevgmik1" path="res://Assets/Themes/Supernatural/FemPlayer/dash_2_2.png" id="4_1nkta"]
 [ext_resource type="Texture2D" uid="uid://d2vp2j4huxbmu" path="res://Assets/Themes/Supernatural/FemPlayer/fem_playercharacter3.png" id="4_6m0sk"]
+[ext_resource type="Texture2D" uid="uid://boh6r7hh3u6tb" path="res://Assets/Themes/Supernatural/FemPlayer/dash_4_2.png" id="5_f4f6u"]
+[ext_resource type="Texture2D" uid="uid://bf5gm7x3ise4c" path="res://Assets/Themes/Supernatural/FemPlayer/dash_3_2.png" id="6_nyeu1"]
+[ext_resource type="Texture2D" uid="uid://dibftwm6gomdj" path="res://Assets/Themes/Supernatural/FemPlayer/dash_1_1.png" id="7_jjs2h"]
+[ext_resource type="Texture2D" uid="uid://bjnqyqvfm7ivg" path="res://Assets/Themes/Supernatural/FemPlayer/dash_2_1.png" id="8_goqri"]
+[ext_resource type="Texture2D" uid="uid://d4njqdxwlhkqx" path="res://Assets/Themes/Supernatural/FemPlayer/dash_4_1.png" id="9_y24nv"]
+[ext_resource type="Texture2D" uid="uid://bwk31jota06e1" path="res://Assets/Themes/Supernatural/FemPlayer/dash_3_1.png" id="10_54hu6"]
 
 [resource]
 animations = [{
@@ -21,6 +29,70 @@ animations = [{
 }],
 "loop": true,
 "name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pspgc")
+}],
+"loop": true,
+"name": &"post_dash_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1nkta")
+}],
+"loop": true,
+"name": &"post_dash_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_f4f6u")
+}],
+"loop": true,
+"name": &"post_dash_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_nyeu1")
+}],
+"loop": true,
+"name": &"post_dash_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_jjs2h")
+}],
+"loop": true,
+"name": &"pre_dash_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_goqri")
+}],
+"loop": true,
+"name": &"pre_dash_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_y24nv")
+}],
+"loop": true,
+"name": &"pre_dash_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_54hu6")
+}],
+"loop": true,
+"name": &"pre_dash_up",
 "speed": 5.0
 }, {
 "frames": [{
