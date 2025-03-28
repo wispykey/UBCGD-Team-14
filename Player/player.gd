@@ -25,6 +25,7 @@ const MAX_CHARGES: int = 3
 const TILES_PER_CHARGE: int = 3
 # Duration to distinguish the releases of short taps vs intentional sustained taps
 const MIN_HOLD_DURATION: float = 0.35
+const MIN_HOLD_DURATION_ANIM: float = 0.22
 # Allow inputs to be timed earlier/later than the beat by this amount
 const LEEWAY_IN_SECS: float = 0.15
 # The amount of HP recovered per well-timed input
@@ -134,7 +135,14 @@ func handle_movement(delta: float) -> String:
 func update_facing():
 	var facing = last_action.split("_")[1]
 	# NOTE: Only works due to coupled naming between inputs and animations
-	player_sprite.play(facing) 
+	if directions[last_action].held > MIN_HOLD_DURATION_ANIM:
+		# Set sprite to pre-dash
+		var prefix = "pre_dash_"
+		player_sprite.play(prefix + facing)
+	else:
+		player_sprite.play(facing) 
+	
+	
 	
 	
 ## BASIC MOVEMENT CODE:
