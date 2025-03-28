@@ -15,8 +15,9 @@ func _process(delta: float) -> void:
 	
 func set_image(sprite: AnimatedSprite2D):
 	$AnimatedSprite2D.sprite_frames = sprite.sprite_frames
-	$AnimatedSprite2D.animation = sprite.animation
-	print($AnimatedSprite2D.animation)
+	var animation_name = sprite.animation
+	if "dash" in animation_name:
+		$AnimatedSprite2D.play(animation_name.replace("pre", "post"))
 
 func _on_timer_timeout():
 	# Removes this node from the scene tree
