@@ -21,7 +21,7 @@ func _ready() -> void:
 	
 	$TelegraphTimer.wait_time = 4 * Conductor.seconds_per_quarter_note
 	# How long vines should persist, after all segments have reached wall
-	$FullyGrownDuration.wait_time = 10 * Conductor.seconds_per_quarter_note
+	$FullyGrownDuration.wait_time = 16 * Conductor.seconds_per_quarter_note
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,6 +62,8 @@ func compute_furthest_direction():
 
 	longest_distance = max(to_left_wall, to_right_wall, to_upper_wall, to_lower_wall)
 
+func set_fully_grown_duration(beats: int):
+	$FullyGrownDuration.wait_time = beats * Conductor.seconds_per_quarter_note
 
 func grow(delta: float):
 	for i in range(len(vines)):
