@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5phwx71g2ad"]
+[gd_scene load_steps=6 format=3 uid="uid://b5phwx71g2ad"]
 
-[ext_resource type="Texture2D" uid="uid://cok6ft5dn25st" path="res://Assets/Objects/star.png" id="1_p1ble"]
+[ext_resource type="Texture2D" uid="uid://jt3neaosaymy" path="res://Assets/BattleUI/blue_flame_player.png" id="1_3pw83"]
+[ext_resource type="Shader" path="res://Player/wrapping_outline.gdshader" id="1_i3fyi"]
+[ext_resource type="Script" path="res://Player/line_2d.gd" id="3_jr3mc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u1jfc"]
+shader = ExtResource("1_i3fyi")
+shader_parameter/line_color = Color(0.603922, 1, 0.572549, 1)
+shader_parameter/width = 1.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p08wq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_p1ble")
+"texture": ExtResource("1_3pw83")
 }],
 "loop": true,
 "name": &"default",
@@ -16,4 +23,15 @@ animations = [{
 [node name="Player Dash" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_u1jfc")
+scale = Vector2(0.8, 0.72)
 sprite_frames = SubResource("SpriteFrames_p08wq")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 32, 0)
+width = 3.0
+default_color = Color(0.392157, 0.815686, 0.890196, 0.898039)
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("3_jr3mc")
