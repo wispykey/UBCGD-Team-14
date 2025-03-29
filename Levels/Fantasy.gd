@@ -218,7 +218,7 @@ func spawn_vine_cage(args: Dictionary):
 	var center_y: int = 7
 	var center_x: int = 10
 	var offset_x: int = 6
-	var offset_y: int = 3
+	var offset_y: int = 4
 
 	for x in [center_x-offset_x, center_x, center_x+offset_x]:
 		for y in [center_y-offset_y, center_y, center_y+offset_y]:
