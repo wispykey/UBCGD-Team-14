@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwl4t2lp8ubh1"]
 
-[ext_resource type="SpriteFrames" uid="uid://cdnuhgahb7ct3" path="res://Enemies/EnemyAttacks/Projectiles/Telegraphs/hands.tres" id="1_41g3q"]
+[ext_resource type="SpriteFrames" uid="uid://be6h8oe4dc0ij" path="res://Enemies/EnemyAttacks/Projectiles/Telegraphs/hands.tres" id="1_41g3q"]
 
 [node name="Node2D" type="AnimatedSprite2D"]
 sprite_frames = ExtResource("1_41g3q")

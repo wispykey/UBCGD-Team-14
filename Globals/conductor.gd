@@ -58,6 +58,7 @@ var seconds_per_quarter_note: float = 1.0 # Prevent crashes when no music playin
 var signal_step_interval: float 
 # 1-indexed. A value of +1.0 means one quarter note has passed.
 var num_beats_passed: float
+var num_quarter_beats_passed: int = 0
 # 1-indexed. In a measure of 4/4, cycles between 1-2-3-4.
 var beat_number: int
 
@@ -86,20 +87,23 @@ func update_beat_info() -> void:
 		beat_number = int(num_beats_passed - 1) % 4 + 1
 		# Emit signal for game events that happen on the quarter-note pulse
 		quarter_beat.emit(beat_number)
+		num_quarter_beats_passed += 1
 		# Quarter note pulse, for debug
 		if metronome_on: 
 			sfx_test.play()
 		if debug_mode:
 		# Debug output.
 			var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
-			print("Beat ", beat_number)
-			print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
+			print(num_quarter_beats_passed)
+			#print("Beat ", beat_number)
+			#print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
 		
 
 # Sets the current music to a song with name, if available
 func set_music(song_name: String) -> void:
 	music.stop()
 	num_beats_passed = 0.0
+	num_quarter_beats_passed = 0
 	# Quarter notes only, for now.
 	signal_step_interval = QUARTER_NOTE
 	

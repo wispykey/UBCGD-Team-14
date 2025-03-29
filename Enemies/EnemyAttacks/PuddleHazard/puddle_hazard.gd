@@ -5,7 +5,8 @@ extends Node2D
 
 const TILE_SIZE = 32
 
-var telegraph_duration: int  = 4 # Measured in beats
+@export var fully_grown_duration: int = 12
+@export var telegraph_duration: int  = 4 # Measured in beats
 # Width x Height of the attack, measured in tiles
 @export var dimensions: Vector2i = Vector2i(5,5) # Measured in tiles
 var coords: Vector2 # Measured in tiles
@@ -21,7 +22,7 @@ func _ready() -> void:
 	$HitZone.monitorable = false
 	$HitZone.monitoring = false
 	
-	$DespawnTimer.wait_time = 6
+	$DespawnTimer.wait_time = fully_grown_duration * Conductor.seconds_per_quarter_note
 	
 	telegraph_dur_sec = $TelegraphTimer.wait_time
 
@@ -31,6 +32,7 @@ func start():
 	generate_collision_area()
 	
 	$TelegraphTimer.start()
+	print("Starting puddle with timer", $DespawnTimer.wait_time)
 	create_telegraph_puddle(telegraph_dur_sec)
 	await get_tree().create_timer(telegraph_dur_sec/3).timeout
 	create_telegraph_puddle(telegraph_dur_sec*2/3)
@@ -40,7 +42,7 @@ func set_dimensions(new_dimensions: Vector2i):
 	dimensions = new_dimensions
 
 func set_duration(beats: int):
-	$DespawnTimer.wait_time = beats
+	$DespawnTimer.wait_time = beats * Conductor.seconds_per_quarter_note
 	
 func set_coords(new_coords: Vector2):
 	coords = new_coords
@@ -138,6 +140,5 @@ func _on_despawn_timer_timeout():
 	call_deferred("queue_free")
 	
 func _on_quarter_beat_fade(beat_num: int):
-	if $DespawnTimer.time_left <= $DespawnTimer.wait_time / 2.0:
-		var progress = 1 - $DespawnTimer.time_left / $DespawnTimer.wait_time
-		modulate.a = lerp(1.0, 0.6, progress)
+	var progress = 1 - $DespawnTimer.time_left / $DespawnTimer.wait_time
+	modulate.a = lerp(1.0, 0.6, progress)

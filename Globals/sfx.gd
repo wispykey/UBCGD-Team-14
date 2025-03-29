@@ -58,7 +58,7 @@ func play_dash_release(charges: int):
 	$DashRelease.play()
 
 func play_lightning_strike():
-	var random_shift = randf_range(-0.3, 0.3)
+	var random_shift = randf_range(0.0, 0.3)
 	var random_version = randi_range(1, 2)
 	var sfx = get_node("Lightning/LightningStrike" + str(random_version))
 	sfx.pitch_scale = 1.0 + random_shift
