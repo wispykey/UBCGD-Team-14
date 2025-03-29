@@ -62,7 +62,16 @@ var timeline = [
 	{"time": 100, "function": "spawn_vine_cage", "args": {"duration": 12}},
 	{"time": 113, "function": "slow_cleave", "args": {}},
 	{"time": 121, "function": "slow_cleave", "args": {}},
-	{"time": 133, "function": "spawn_flame_border", "args": {}}
+	{"time": 133, "function": "spawn_flame_border", "args": {}},
+	{"time": 136, "function": "spawn_vine_cross_center", "args": {}},
+	{"time": 140, "function": "thunderstorm_telegraph", "args": {}},
+	{"time": 142, "function": "spawn_thunderstorm", "args": {}},
+	{"time": 148, "function": "cleave", "args": {"direction": "WEST", "telegraph_duration": 4}},
+	{"time": 152, "function": "cleave", "args": {"direction": "EAST", "telegraph_duration": 4}},
+	{"time": 156, "function": "cleave", "args": {"direction": "WEST", "telegraph_duration": 4}},
+	{"time": 160, "function": "cleave", "args": {"direction": "EAST", "telegraph_duration": 4}},
+	{"time": 167, "function": "cleave", "args": {"direction": "SOUTH", "telegraph_duration": 8}},
+	{"time": 169, "function": "cleave", "args": {"direction": "NORTH", "telegraph_duration": 8}},
 ]
 var next_event: int = 0
 
@@ -274,7 +283,9 @@ func spawn_flame_border(args: Dictionary):
 	for edge in border:
 		edge.set_duration(60)
 		edge.start()
-	
+
+func spawn_vine_cross_center(args: Dictionary):
+	spawn_vine_cross(Vector2(10, 7), 60)
 
 func _on_quarter_beat_spawn_puddle(beat_num: int):
 	var beats_passed = floori(Conductor.num_beats_passed)
