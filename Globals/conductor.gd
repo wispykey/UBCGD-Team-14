@@ -18,6 +18,7 @@ signal song_finished
 const QUARTER_NOTE: float = 1.0
 const EIGHTH_NOTE: float = 0.5 
 
+var current_song: String
 # Dictionary of music assets we are using in the game.
 # Could be dynamically loaded from files - but maybe not worth the effort.
 var songs: Dictionary = {
@@ -40,7 +41,15 @@ var songs: Dictionary = {
 	"Supernatural2": {
 		"bpm": 104,
 		"file_name": "supernatural_2.wav"
-	}  
+	},
+	"MainMenu": {
+		"bpm": 104,
+		"file_name": "main_menu.wav"
+	},
+	"MainMenuLoop": {
+		"bpm": 104,
+		"file_name": "main_menu_loop.wav"
+	}	 
 }
 
 # Duration of a quarter note, in seconds.
@@ -56,7 +65,7 @@ var beat_number: int
 var current_time_in_secs: float
 
 func _ready() -> void:
-	#set_music("Fantasy2")
+	set_music("MainMenu")
 	current_time_in_secs = 0.0
 	music.finished.connect(_on_music_finished)
 
@@ -88,23 +97,24 @@ func update_beat_info() -> void:
 		
 
 # Sets the current music to a song with name, if available
-func set_music(name: String) -> void:
+func set_music(song_name: String) -> void:
 	music.stop()
 	num_beats_passed = 0.0
 	# Quarter notes only, for now.
 	signal_step_interval = QUARTER_NOTE
 	
 	# Attempt to retrieve song
-	if !songs.has(name):
-		print("Error loading music. Could not find song called \'", name, "\'")
+	if !songs.has(song_name):
+		print("Error loading music. Could not find song called \'", song_name, "\'")
 		return
 	
-	var song_to_play = songs[name]
+	var song_to_play = songs[song_name]
 	var file_path: String = "res://Assets/Music/" + song_to_play.file_name
 	music.stream = load(file_path)
 	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
 	music.play()
-	print("Playing song: \"", name, "\"\n")
+	print("Playing song: \"", song_name, "\"\n")
+	current_song = song_name
 	
 
 func stop_music():
@@ -135,3 +145,5 @@ func convert_bpm_to_quarter_note_in_secs(bpm: int) -> float:
 
 func _on_music_finished():
 	song_finished.emit()
+	if current_song == "MainMenu":
+		set_music("MainMenuLoop")
