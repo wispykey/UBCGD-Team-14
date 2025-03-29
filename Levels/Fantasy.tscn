@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cvb1i0ttffw0f" path="res://Player/player_afterimage.tscn" id="8_aecmi"]
 [ext_resource type="PackedScene" uid="uid://dhp84nbs5osdm" path="res://Enemies/EnemyAttacks/PuddleHazard/puddle_hazard.tscn" id="10_t46jv"]
 [ext_resource type="PackedScene" uid="uid://biqni1sm5qhle" path="res://Enemies/EnemyAttacks/BossStaff.tscn" id="11_hxj16"]
-[ext_resource type="PackedScene" uid="uid://3p7va0o7hql7" path="res://Enemies/FantasyBoss.tscn" id="12_yf31r"]
+[ext_resource type="PackedScene" path="res://Enemies/FantasyBoss.tscn" id="12_yf31r"]
 [ext_resource type="PackedScene" uid="uid://bgm21f8w6825k" path="res://Enemies/EnemyAttacks/Projectiles/iterative_projectile.tscn" id="13_11hjv"]
 [ext_resource type="PackedScene" uid="uid://b11rmeh0136ep" path="res://Enemies/EnemyAttacks/VineCross/VineCross.tscn" id="14_gwcx7"]
 [ext_resource type="PackedScene" uid="uid://bnxo07bbnqblp" path="res://Interactables/HUD.tscn" id="14_rf60x"]

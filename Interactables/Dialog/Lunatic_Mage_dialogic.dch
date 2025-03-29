@@ -17,7 +17,7 @@
 "portraits": {
 "Main": {
 "export_overrides": {
-"image": "\"fantasy-boss.png\""
+"image": "\"res://Assets/Themes/Fantasy/fantasy-boss.png\""
 },
 "mirror": false,
 "offset": Vector2(0, 0),

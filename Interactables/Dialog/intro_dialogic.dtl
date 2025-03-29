@@ -1,7 +1,9 @@
 join side_character_flame center
-side_character_flame: Psst wakeup
+side_character_flame: Psst wake up
 join main_character_flame center
-main_character_flame: ...Huh... where am I?
+[signal arg="wakeup_character"]
+main_character_flame: ...Huh...
+main_character_flame: Where am I?
 side_character_flame: Phew I was beginning to think you weren’t gonna wake up. You’re back at head quarters, Agent. The first time coming back is always a bit of a doozy so I’m here to help you adjust.
 main_character_flame: Wait what do you mean first time coming back?
 side_character_flame: How do I put this… you died.
@@ -12,10 +14,11 @@ side_character_flame: According to our records, you were out on a mission to sol
 side_character_flame: When you lost consciousness you were sent back to headquarters.
 side_character_flame: No biggie about about your mission, we dispatched a couple other agents to help complete it. Oh, and we sent over some medics to resuscitate the body.
 main_character_flame: Uh…
-side_character_flame: Hmm you still look really confused, maybe you need a refresher. We are the [i]Seraphlame[/i], multiversal beings that exist to restore balance to destabilizing worlds.
+side_character_flame: Hmm you still look really confused, maybe you need a refresher. We are [i]Pacemakers[/i], multiversal beings that are summoned by those in need.
+side_character_flame: Often times, this involves restoring balance to their destabilizing worlds.
 side_character_flame: We possess the unique ability to inhabit other living creatures and control their bodies. Conveniently, this helps us to blend in as we carry out missions in their worlds.
 side_character_flame: Does any of that ring a bell?
-main_character_flame: Hold on... I'm starting to remember.
+main_character_flame: Hold on... I think I'm starting to remember.
 side_character_flame: I’m glad to hear that. Your amnesia should wear off eventually, this usually happens when its your first time coming back.
 [sound path="res://Assets/LevelSelect/alert_sound.mp3" volume="0.0"]
 join alert center
@@ -23,5 +26,7 @@ alert: [b]Alert![/b] Disturbances detected. Multiple worlds are destabilizing. I
 [signal arg="reveal_portals"]
 [sound path="res://Assets/SFX/Fire/Fire 3.wav" volume="0.0"]
 alert: Portals are now active. Proceed at once!
-side_character_flame: Dang that sounds pretty important, you should probably go. Try not the die in your next body. Good luck!
+side_character_flame: That's your queue, Agent. Step through one of the portals as soon as you can.
+side_character_flame: I'll be here when you get back. Try to be more careful in your next body.
+side_character_flame: Good luck!
 [signal arg="done_dialogic"]

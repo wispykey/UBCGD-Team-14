@@ -34,9 +34,11 @@ directories/dch_directory={
 "side_character_flame": "res://Interactables/Dialog/side_character_flame.dch"
 }
 directories/dtl_directory={
+"fantasy_closing_dialog": "res://Interactables/Dialog/fantasy_closing_dialog.dtl",
 "fantasy_dialogic": "res://Interactables/Dialog/fantasy_dialogic.dtl",
 "intro_dialogic": "res://Interactables/Dialog/intro_dialogic.dtl",
-"supernatural_dialogic": "res://Interactables/Dialog/supernatural_dialogic.dtl"
+"supernatural_dialogic": "res://Interactables/Dialog/supernatural_dialogic.dtl",
+"timeline": "res://Interactables/Dialog/timeline.dtl"
 }
 layout/style_list=["res://Interactables/Dialog/Side.tres"]
 layout/default_style="res://Interactables/Dialog/Side.tres"
