@@ -39,17 +39,10 @@ const WINNING_SCORE: int = 20
 #   'function' is the name of a function in this script; must be in quotation marks
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
+	{"time": 1, "function": "slow_cleave", "args": {}},
 	{"time": 2, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 4, "function": "spawn_thunderstorm", "args": {}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(4,4)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(10,4)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(16,4)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(4,7)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(16,7)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(4,10)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(10,10)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(16,10)}},
+	{"time": 18, "function": "spawn_vine_cage", "args": {}},
 	{"time": 22, "function": "spawn_puddles_periodically", "args": {}},
 	{"time": 38, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 40, "function": "spawn_thunderstorm", "args": {}},
@@ -60,6 +53,10 @@ var timeline = [
 	{"time": 64, "function": "cleave", "args": {"direction": "SOUTH"}},
 	{"time": 68, "function": "cleave", "args": {"direction": "NORTH"}},
 	{"time": 76, "function": "cleave", "args": {"direction": "EAST"}},
+	{"time": 84, "function": "spawn_vine_cage", "args": {}},
+	{"time": 88, "function": "slow_cleave", "args": {}},
+	{"time": 96, "function": "slow_cleave", "args": {}},
+	
 ]
 var next_event: int = 0
 
@@ -133,11 +130,15 @@ func get_random_position() -> Vector2:
 func cleave(args: Dictionary):
 	var cleave = half_room_cleave.instantiate()
 	var direction = args.direction if args.has("direction") else ""
+	
+	if args.has("telegraph_duration"):
+		cleave.set_telegraph_duration(args.telegraph_duration)
+	
+	# Add first, because start() depends on being added to tree 
 	add_child(cleave)
 	if debug_random_test:
 		cleave.position = GameState.control_port.get_center()
 		cleave.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
-	# start() depends on being added to tree beforehand
 	cleave.start(direction)
 	
 # telegraphs the thunderstorm by playing staff animation
@@ -206,11 +207,35 @@ func spawn_vines(args: Dictionary):
 	add_child(projectile)
 	projectile.start_one_coord(direction, type, coords, turn_count)
 
-func spawn_vine_cross(args: Dictionary):
-	var coords = args.coords if args.has("coords") else Vector2(10, 7)
+func spawn_vine_cross(coords: Vector2):
+	#var coords = args.coords if args.has("coords") else Vector2(10, 7)
 	var cross = vine_cross.instantiate()
 	cross.position = coords * 32
 	add_child(cross)
+	
+# Spawn 3x3 of vine crosses, centered on middle of arena.
+func spawn_vine_cage(args: Dictionary):
+	var center_y: int = 7
+	var center_x: int = 10
+	var offset_x: int = 6
+	var offset_y: int = 3
+
+	for x in [center_x-offset_x, center_x, center_x+offset_x]:
+		for y in [center_y-offset_y, center_y, center_y+offset_y]:
+			spawn_vine_cross(Vector2(x,y))
+			
+func slow_cleave(args: Dictionary):
+	# TODO: Always pick direction that includes player.
+	
+	# Must be ordered 90 degrees apart, so cleaves never occupy entire arena
+	const cardinals = ["NORTH", "EAST", "SOUTH", "WEST"]
+	
+	var random_index = randi_range(0, len(cardinals)-1)
+	var rotated_index = (random_index + 1) % len(cardinals)
+
+	cleave({"direction": cardinals[random_index], "telegraph_duration": 8})
+	cleave({"direction": cardinals[rotated_index], "telegraph_duration": 8})
+
 
 func _on_quarter_beat_spawn_puddle(beat_num: int):
 	var beats_passed = floori(Conductor.num_beats_passed)

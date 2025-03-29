@@ -60,6 +60,8 @@ func set_direction(cardinal: String):
 	else:
 		direction = cardinal
 
+func set_telegraph_duration(duration: float):
+	telegraph_duration = duration
 
 func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
 	var x_offset: float = 0
