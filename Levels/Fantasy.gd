@@ -108,6 +108,8 @@ func _on_quarter_beat(beat_num: int):
 func _on_song_finished():
 	# Player wins automatically if they make it to the end. Score is a bonus.
 	var victory = VictoryComponent.instantiate()
+	Dialogic.start("fantasy_closing_dialog")
+	await Dialogic.timeline_ended
 	add_child(victory)
 
 func _on_player_died():

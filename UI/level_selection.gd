@@ -21,6 +21,9 @@ var level_map = {
 @onready var back_button = $VBoxContainer/ButtonContainer/HBoxContainer/Back
 @onready var forward_button = $VBoxContainer/ButtonContainer/HBoxContainer/Forward
 @onready var level_select_vbox = $VBoxContainer
+@onready var animations = $AnimationPlayer
+@onready var main_char = $Sprite2D
+@onready var side_char = $Sprite2D2
 
 @onready var info_box = $InfoBox
 @onready var enable_controls = false
@@ -28,6 +31,7 @@ var level_map = {
 func _ready():
 	Dialogic.signal_event.connect(_process_dialogic_signal)
 	Dialogic.start("intro_dialogic")
+	animations.play("idle_animation")
 	level_select_vbox.modulate.a = 0
 	info_box.hide()
 	update_label()
@@ -38,7 +42,7 @@ func update_label():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("skip_dialog"):
+	if Input.is_action_just_pressed("skip_dialog") or Input.is_action_just_pressed("ui_cancel"):
 		Dialogic.end_timeline()
 		_process_dialogic_signal("done_dialogic")
 		
@@ -85,9 +89,16 @@ func showInfo():
 func _process_dialogic_signal(sig: String):
 	if sig == "reveal_portals":
 		fade_in(level_select_vbox)
-	
+		
+	if sig == "wakeup_character":
+		animations.play("character_wakeup")
+		await animations.animation_finished
+		animations.play("idle_animation")
+		
 	if sig == "done_dialogic":
 		level_select_vbox.modulate.a = 1
+		main_char.hide()
+		side_char.hide()
 		enable_controls = true
 
 func _dialogic_complete(String):

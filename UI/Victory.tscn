@@ -47,6 +47,10 @@ offset_right = 468.0
 offset_bottom = 341.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_x3sma")
 
+[node name="Home" type="Sprite2D" parent="Panel2"]
+position = Vector2(26, 22)
+texture = ExtResource("4_lg5o1")
+
 [node name="HomeText" type="RichTextLabel" parent="Panel2"]
 layout_mode = 0
 offset_left = 47.0
@@ -57,16 +61,11 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_rbat8")
 text = "Home"
 
-[node name="Home" type="Sprite2D" parent="Panel2"]
-position = Vector2(26, 22)
-texture = ExtResource("4_lg5o1")
-
 [node name="Button" type="Button" parent="Panel2"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = -200.0
-offset_top = -295.0
-offset_right = -192.0
-offset_bottom = -287.0
+offset_right = 268.0
+offset_bottom = 46.0
 
 [node name="Panel4" type="Panel" parent="."]
 offset_left = 201.0
