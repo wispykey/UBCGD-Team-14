@@ -1,11 +1,11 @@
 extends AnimatedSprite2D
 
-var speed = 1
+var speed = 60
 var direction: Vector2
 var window_dimensions
 var y_offset = 0
 var bob_direction = 0
-var bob_speed = 0.5
+var bob_speed = 30
 var can_move = false
 
 # Called when the node enters the scene tree for the first time.
@@ -20,9 +20,9 @@ func _process(delta: float) -> void:
 			random_start()
 		else:
 			random_stop()
-		move()
+		move(delta)
 		check_bounds()
-		bob()
+		bob(delta)
 
 func check_bounds():
 	if position.x > window_dimensions.x - 64 or position.y > window_dimensions.y -64 or position.x < 64 or position.y < 64:
@@ -33,9 +33,9 @@ func generate_new_direction():
 	direction.x = randf_range(-1, 1)
 	direction.y = randf_range(-1, 1)
 
-func move():
-	position.x += direction.x * speed
-	position.y += direction.y * speed
+func move(delta: float):
+	position.x += direction.x * speed * delta
+	position.y += direction.y * speed * delta
 
 func random_stop():
 	var rng = randi_range(0, 29)
@@ -47,14 +47,14 @@ func random_start():
 	if rng == 9:
 		generate_new_direction()
 
-func bob():
+func bob(delta: float):
 	if y_offset >= 5:
 		bob_direction = 0
 	if y_offset <= -5:
 		bob_direction = 1
-	if !bob_direction:
-		position.y -= bob_speed
+	if !bob_direction: 
+		position.y -= bob_speed * delta
 		y_offset -= 1
 	else:
-		position.y += bob_speed
+		position.y += bob_speed * delta
 		y_offset += 1
