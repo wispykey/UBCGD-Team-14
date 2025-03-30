@@ -203,6 +203,7 @@ func _on_telegraph_timer_timeout():
 	$Telegraph.visible = false
 	add_scene_on_every_tile(self, attack_image)
 	$DespawnTimer.start()
+	SFX.play_cleave()   
 			
 			
 func _on_despawn_timer_timeout():
