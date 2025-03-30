@@ -3,6 +3,7 @@ extends Node2D
 @onready var player := $Player
 @onready var hud := $HUD
 @onready var staff := %BossStaff
+@onready var boss := $FantasyBoss
 
 @export var half_room_cleave: PackedScene
 @export var spawn_ghost: PackedScene
@@ -96,6 +97,7 @@ func _ready_post_dialog(arg: String):
 	%Player.spawn_afterimage.connect(_on_player_spawn_afterimage)
 	Conductor.set_music("Fantasy2")
 	$HUD.start_beat_indicator()
+	$FantasyBoss.can_move = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -125,6 +127,7 @@ func _on_song_finished():
 	add_child(victory)
 
 func _on_player_died():
+	$FantasyBoss.can_move = false
 	timeline = []
 	var game_over = GameOverComponent.instantiate()
 	add_child(game_over)
