@@ -18,5 +18,6 @@ animations = [{
 }]
 
 [node name="GreenFlame" type="AnimatedSprite2D"]
+scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_k00q2")
 autoplay = "default"
