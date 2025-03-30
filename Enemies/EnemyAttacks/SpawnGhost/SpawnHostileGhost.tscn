@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh6yvl70hls56"]
+
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/SpawnGhost/spawn_hostile_ghost.gd" id="1_s10l4"]
+[ext_resource type="PackedScene" uid="uid://dc33tdapalicn" path="res://Enemies/EnemyAttacks/SpawnGhost/GreenFlame.tscn" id="2_bu6xv"]
+[ext_resource type="PackedScene" uid="uid://d4anfnfg7lr4f" path="res://Enemies/EnemyAttacks/SpawnGhost/HostileGhost.tscn" id="2_juctj"]
+
+[node name="SpawnHostileGhost" type="Node2D"]
+script = ExtResource("1_s10l4")
+ghost = ExtResource("2_juctj")
+green_flame = ExtResource("2_bu6xv")
+
+[node name="TelegraphTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Telegraph" type="Node2D" parent="."]
+
+[node name="DespawnTimer" type="Timer" parent="."]
+one_shot = true

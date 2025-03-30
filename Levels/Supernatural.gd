@@ -46,7 +46,12 @@ var dash_telegraph_rect_size = TILE_SIZE * 0.8
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
 	# Intro
-	{"time": 1, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 5), "coord2": Vector2i(14, 5)}},
+		## Bongos enter 65
+	{"time": 1, "function": "spawn_ghost_on_player", "args": {}}, # Bells attack
+	#{"time": 67, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 69, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 71, "function": "spawn_ghost_on_player", "args": {}},
+	#{"time": 1, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 5), "coord2": Vector2i(14, 5)}},
 	{"time": 5, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(6, 5), "coord2": Vector2i(6, 9)}},
 	{"time": 9, "function": "spawn_pr_cont", "args": {"direction": "LEFT", "coord1": Vector2i(14, 5), "coord2": Vector2i(14, 9)}},
 	{"time": 13, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(6, 9), "coord2": Vector2i(14, 9), "coord3": Vector2i(10, 9)}},
