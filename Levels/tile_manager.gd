@@ -25,9 +25,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene_to_file("res://Prototyping/Joshua/Scenes/level_selection.tscn")
-	#pass
+	#if Input.is_action_just_pressed("ui_cancel"):
+		#get_tree().change_scene_to_file("res://UI/level_selection.tscn")
+	pass
 
 # IDEA: Light-up tiles can make the tiles increase in brightness
 func _on_player_light_up_tile(cell_pos: Vector2) -> void:

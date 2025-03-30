@@ -42,25 +42,37 @@ const WINNING_SCORE: int = 20
 var timeline = [
 	{"time": 2, "function": "thunderstorm_telegraph", "args": {}},
 	{"time": 4, "function": "spawn_thunderstorm", "args": {}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(4,4)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(10,4)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(16,4)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(4,7)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(16,7)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(4,10)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(10,10)}},
-	{"time": 18, "function": "spawn_vine_cross", "args": {"coords": Vector2(16,10)}},
+	{"time": 18, "function": "spawn_vine_cage", "args": {}},
 	{"time": 22, "function": "spawn_puddles_periodically", "args": {}},
-	{"time": 38, "function": "thunderstorm_telegraph", "args": {}},
-	{"time": 40, "function": "spawn_thunderstorm", "args": {}},
-	{"time": 54, "function": "spawn_flame_wall", "args": {"position": Vector2(112,272)}},
-	{"time": 56, "function": "spawn_flame_wall", "args": {"position": Vector2(240,272)}},
-	{"time": 58, "function": "spawn_flame_wall", "args": {"position": Vector2(368,272)}},
-	{"time": 60, "function": "spawn_flame_wall", "args": {"position": Vector2(496,272)}},
-	{"time": 64, "function": "cleave", "args": {"direction": "SOUTH"}},
-	{"time": 68, "function": "cleave", "args": {"direction": "NORTH"}},
-	{"time": 76, "function": "cleave", "args": {"direction": "EAST"}},
+	{"time": 46, "function": "thunderstorm_telegraph", "args": {}},
+	{"time": 48, "function": "spawn_thunderstorm", "args": {}},
+	{"time": 53, "function": "spawn_flame_wall", "args": {"position": Vector2(112,272), "duration": 16}},
+	{"time": 55, "function": "spawn_flame_wall", "args": {"position": Vector2(240,272), "duration": 16}},
+	{"time": 57, "function": "spawn_flame_wall", "args": {"position": Vector2(368,272), "duration": 16}},
+	{"time": 59, "function": "spawn_flame_wall", "args": {"position": Vector2(496,272), "duration": 16}},
+	{"time": 64, "function": "cleave", "args": {"direction": "SOUTH", "telegraph_duration": 4}},
+	{"time": 68, "function": "cleave", "args": {"direction": "NORTH", "telegraph_duration": 4}},
+	{"time": 72, "function": "cleave", "args": {"direction": "EAST", "telegraph_duration": 8}},
+	{"time": 77, "function": "spawn_flame_wall", "args": {"position": Vector2(588,272)}},
+	{"time": 79, "function": "spawn_flame_wall", "args": {"position": Vector2(464,272)}},
+	{"time": 81, "function": "spawn_flame_wall", "args": {"position": Vector2(334,272)}},
+	{"time": 83, "function": "spawn_flame_wall", "args": {"position": Vector2(208,272)}},
+	{"time": 88, "function": "cleave", "args": {"direction": "WEST", "telegraph_duration": 8}},
+	{"time": 92, "function": "thunderstorm_telegraph", "args": {}},
+	{"time": 94, "function": "spawn_thunderstorm", "args": {}},
+	{"time": 100, "function": "spawn_vine_cage", "args": {"duration": 12}},
+	{"time": 113, "function": "slow_cleave", "args": {}},
+	{"time": 121, "function": "slow_cleave", "args": {}},
+	{"time": 133, "function": "spawn_flame_border", "args": {}},
+	{"time": 136, "function": "spawn_vine_cross_center", "args": {}},
+	{"time": 140, "function": "thunderstorm_telegraph", "args": {}},
+	{"time": 142, "function": "spawn_thunderstorm", "args": {}},
+	{"time": 148, "function": "cleave", "args": {"direction": "WEST", "telegraph_duration": 4}},
+	{"time": 152, "function": "cleave", "args": {"direction": "EAST", "telegraph_duration": 4}},
+	{"time": 156, "function": "cleave", "args": {"direction": "WEST", "telegraph_duration": 4}},
+	{"time": 160, "function": "cleave", "args": {"direction": "EAST", "telegraph_duration": 4}},
+	{"time": 167, "function": "cleave", "args": {"direction": "SOUTH", "telegraph_duration": 8}},
+	{"time": 169, "function": "cleave", "args": {"direction": "NORTH", "telegraph_duration": 8}},
 ]
 var next_event: int = 0
 
@@ -115,7 +127,6 @@ func _on_song_finished():
 	add_child(victory)
 
 func _on_player_died():
-	# TODO: Despawn player, stop processing input
 	$FantasyBoss.can_move = false
 	timeline = []
 	var game_over = GameOverComponent.instantiate()
@@ -136,11 +147,15 @@ func get_random_position() -> Vector2:
 func cleave(args: Dictionary):
 	var cleave = half_room_cleave.instantiate()
 	var direction = args.direction if args.has("direction") else ""
+	
+	if args.has("telegraph_duration"):
+		cleave.set_telegraph_duration(args.telegraph_duration)
+	
+	# Add first, because start() depends on being added to tree 
 	add_child(cleave)
 	if debug_random_test:
 		cleave.position = GameState.control_port.get_center()
 		cleave.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
-	# start() depends on being added to tree beforehand
 	cleave.start(direction)
 	
 # telegraphs the thunderstorm by playing staff animation
@@ -168,6 +183,8 @@ func spawn_flame_wall(args: Dictionary):
 	puddle.position = pos
 	puddle.set_dimensions(Vector2(4, 14))
 	add_child(puddle)
+	if args.has("duration"):
+		puddle.set_duration(args.duration)
 	puddle.start()
 
 func spawn_vines_in_cross_pattern(args: Dictionary):
@@ -209,11 +226,69 @@ func spawn_vines(args: Dictionary):
 	add_child(projectile)
 	projectile.start_one_coord(direction, type, coords, turn_count)
 
-func spawn_vine_cross(args: Dictionary):
-	var coords = args.coords if args.has("coords") else Vector2(10, 7)
+func spawn_vine_cross(coords: Vector2, beats: int):
+	#var coords = args.coords if args.has("coords") else Vector2(10, 7)
 	var cross = vine_cross.instantiate()
 	cross.position = coords * 32
 	add_child(cross)
+	cross.set_fully_grown_duration(beats)
+	
+# Spawn 3x3 of vine crosses, centered on middle of arena.
+func spawn_vine_cage(args: Dictionary):
+	var center_y: int = 7
+	var center_x: int = 10
+	var offset_x: int = 6
+	var offset_y: int = 4
+	
+	var beats: int = args.duration if args.has("duration") else 16
+
+	for x in [center_x-offset_x, center_x, center_x+offset_x]:
+		for y in [center_y-offset_y, center_y, center_y+offset_y]:
+			spawn_vine_cross(Vector2(x,y), beats)
+			
+func slow_cleave(args: Dictionary):
+	# TODO: Always pick direction that includes player.
+	
+	# Must be ordered 90 degrees apart, so cleaves never occupy entire arena
+	const cardinals = ["NORTH", "EAST", "SOUTH", "WEST"]
+	
+	var random_index = randi_range(0, len(cardinals)-1)
+	var rotated_index = (random_index + 1) % len(cardinals)
+
+	cleave({"direction": cardinals[random_index], "telegraph_duration": 8})
+	cleave({"direction": cardinals[rotated_index], "telegraph_duration": 8})
+
+func spawn_flame_border(args: Dictionary):
+	var pos = args.position if args.has("position") else Vector2(112, 272)
+	
+	const dist_from_edge = 48
+	
+	var left_vertical = puddle_hazard.instantiate()
+	left_vertical.position = Vector2(48, 272)
+	left_vertical.set_dimensions(Vector2(3, 15))
+	add_child(left_vertical)
+	
+	var right_vertical = left_vertical.duplicate()
+	right_vertical.position = Vector2(GameState.control_port.end.x - dist_from_edge, 272)
+	add_child(right_vertical)
+	
+	var top_horizontal = puddle_hazard.instantiate()
+	top_horizontal.position = Vector2(GameState.control_port.end.x / 2, dist_from_edge)
+	top_horizontal.set_dimensions(Vector2(15, 3))
+	add_child(top_horizontal)
+	
+	var bottom_horizontal = top_horizontal.duplicate()
+	bottom_horizontal.position = Vector2(GameState.control_port.end.x / 2, GameState.control_port.end.y - dist_from_edge)
+	add_child(bottom_horizontal)
+	
+	var border = [left_vertical, right_vertical, top_horizontal, bottom_horizontal]
+	
+	for edge in border:
+		edge.set_duration(60)
+		edge.start()
+
+func spawn_vine_cross_center(args: Dictionary):
+	spawn_vine_cross(Vector2(10, 7), 60)
 
 func _on_quarter_beat_spawn_puddle(beat_num: int):
 	var beats_passed = floori(Conductor.num_beats_passed)
