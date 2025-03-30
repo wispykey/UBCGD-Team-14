@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	progress = clamp(progress + proportion_at_max_val, 0.0, 1.0)
 	
 	if not spawned:
-		$Telegraph.modulate.a = lerp(0.4, 1.0, 1 - progress)
+		$Telegraph.modulate.a = lerp(0.4, 1.0, progress)
 
 func _on_telegraph_timer_timeout():
 	$Telegraph.queue_free()
