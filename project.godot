@@ -69,7 +69,7 @@ variables={}
 
 window/size/viewport_width=672
 window/size/viewport_height=550
-window/size/mode=3
+window/size/mode=4
 window/size/resizable=false
 window/stretch/mode="viewport"
 
