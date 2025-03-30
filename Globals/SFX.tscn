@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpqw0icl8bj32"]
+[gd_scene load_steps=10 format=3 uid="uid://cpqw0icl8bj32"]
 
 [ext_resource type="Script" path="res://Globals/sfx.gd" id="1_h3ton"]
 [ext_resource type="AudioStream" uid="uid://btp2hxbntuwtc" path="res://Assets/SFX/Fire/Fire 6.wav" id="2_qnywp"]
@@ -8,19 +8,23 @@
 [ext_resource type="AudioStream" uid="uid://bpq4sca0f4sxd" path="res://Assets/SFX/dash_release.wav" id="6_ysuk5"]
 [ext_resource type="AudioStream" uid="uid://dfx8xc0gmso0g" path="res://Assets/SFX/Lightning/Lightning 3.wav" id="7_p5005"]
 [ext_resource type="AudioStream" uid="uid://6imja2ehxus7" path="res://Assets/SFX/Lightning/Lightning 2.wav" id="8_gct66"]
+[ext_resource type="AudioStream" uid="uid://cco86xt0wd4ko" path="res://Assets/SFX/Fire/Fire_Cleave_1.wav" id="9_ebaoc"]
 
 [node name="SFX" type="Node2D"]
 script = ExtResource("1_h3ton")
 
 [node name="FireSpawn" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_qnywp")
+volume_db = -2.0
 max_polyphony = 3
 
 [node name="FireCrackling" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_cl0pn")
+volume_db = -2.0
 pitch_scale = 1.25
 
 [node name="DamageTaken" type="AudioStreamPlayer2D" parent="."]
+volume_db = 3.0
 
 [node name="UIAccept" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_gpwf3")
@@ -35,10 +39,15 @@ stream = ExtResource("6_ysuk5")
 
 [node name="LightningStrike1" type="AudioStreamPlayer2D" parent="Lightning"]
 stream = ExtResource("7_p5005")
-volume_db = -6.0
+volume_db = -8.0
 max_polyphony = 2
 
 [node name="LightningStrike2" type="AudioStreamPlayer2D" parent="Lightning"]
 stream = ExtResource("8_gct66")
-volume_db = -6.0
+volume_db = -8.0
 max_polyphony = 3
+
+[node name="Cleave" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ebaoc")
+volume_db = 2.0
+pitch_scale = 0.6

@@ -63,3 +63,13 @@ func play_lightning_strike():
 	var sfx = get_node("Lightning/LightningStrike" + str(random_version))
 	sfx.pitch_scale = 1.0 + random_shift
 	sfx.play()
+
+func play_cleave():
+	var random_shift = randf_range(-0.1, 0.1)
+	$Cleave.pitch_scale = 1.0 + random_shift
+	$Cleave.play()
+	
+func stop_continuous_sounds():
+	$FireCrackling.stop()
+	
+	

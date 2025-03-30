@@ -149,7 +149,7 @@ func cleave(args: Dictionary):
 	var cleave = half_room_cleave.instantiate()
 	var direction = args.direction if args.has("direction") else ""
 	
-	if args.has("telegraph_duration"):
+	if args.has("telegraph_duration"):  
 		cleave.set_telegraph_duration(args.telegraph_duration)
 	
 	# Add first, because start() depends on being added to tree 
@@ -157,7 +157,7 @@ func cleave(args: Dictionary):
 	if debug_random_test:
 		cleave.position = GameState.control_port.get_center()
 		cleave.position += randi_range(-5,5) * Vector2(TILE_SIZE, TILE_SIZE)
-	cleave.start(direction)
+	cleave.start(direction) 
 	
 # telegraphs the thunderstorm by playing staff animation
 func thunderstorm_telegraph(args: Dictionary):
