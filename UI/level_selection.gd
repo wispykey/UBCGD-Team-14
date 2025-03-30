@@ -95,6 +95,11 @@ func _process_dialogic_signal(sig: String):
 		await animations.animation_finished
 		animations.play("idle_animation")
 		
+	if sig == "look_left_to_right":
+		animations.play("look_left_to_right")
+		await animations.animation_finished
+		animations.play("idle_animation")
+		
 	if sig == "done_dialogic":
 		level_select_vbox.modulate.a = 1
 		main_char.hide()

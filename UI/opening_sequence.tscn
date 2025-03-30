@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b6oqw0ek3ywfo" path="res://Assets/LevelSelect/ubc_gamedev_logo.png" id="2_s1tcu"]
 [ext_resource type="Texture2D" uid="uid://d0msqka8lpqd1" path="res://Assets/LevelSelect/team_studio_credit.png" id="3_2lgiq"]
 [ext_resource type="Texture2D" uid="uid://bo3b7a4l3r7dh" path="res://Assets/LevelSelect/game_logo.png" id="4_lteph"]
-[ext_resource type="Texture2D" uid="uid://b412ptkl2eb8x" path="res://Assets/LevelSelect/game_title.png" id="5_mof7h"]
+[ext_resource type="Texture2D" uid="uid://b8kvai0dg22h3" path="res://Assets/LevelSelect/pacemaker_title1.png" id="6_ytea2"]
 [ext_resource type="Script" path="res://UI/continue_label.gd" id="7_oyh51"]
 [ext_resource type="Texture2D" uid="uid://df33wwjpavxsq" path="res://Assets/LevelSelect/main_menu_background.png" id="7_yossd"]
 
@@ -278,7 +278,8 @@ texture = ExtResource("4_lteph")
 
 [node name="title" type="Sprite2D" parent="."]
 position = Vector2(397, 253)
-texture = ExtResource("5_mof7h")
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("6_ytea2")
 
 [node name="ContinueText" type="AnimationPlayer" parent="."]
 libraries = {
