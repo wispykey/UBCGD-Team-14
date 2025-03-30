@@ -41,6 +41,7 @@ const PLAYER_SIZE: int = 32
 var has_key: bool = false
 var can_light_up: bool = false
 var last_action: String = "move_down"
+@export var invincible: bool = false # Debug
 
 var directions: Dictionary = { # Directions the player can go in
 		"move_right": {"dir": Vector2(1, 0), "held": 0.0},
@@ -338,12 +339,13 @@ func pick_up_key():
 
 
 func _on_hitbox_area_entered(area: Area2D):
+	if area is Projectile or area is SpinningContinuousProjectile:
+		area.queue_free()
+	if invincible:	
+		return
 	GameState.update_life(-area.damage)
 	# Reset combo on taking damage (design decision)
 	GameState.update_combo(-1)
-	
-	if area is Projectile or area is SpinningContinuousProjectile:
-		area.queue_free()
 
 func _on_game_start():
 	gameRunning = true

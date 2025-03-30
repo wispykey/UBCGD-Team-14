@@ -35,8 +35,8 @@ func _ready() -> void:
 	telegraph_dur_sec = $TelegraphTimer.wait_time
 	
 	telegraph_rect = ColorRect.new()
-	size_tween = create_tween()
-	pos_tween = create_tween()
+	#size_tween = create_tween()
+	#pos_tween = create_tween()
 
 
 func start(direction: String):
@@ -60,6 +60,8 @@ func set_direction(cardinal: String):
 	else:
 		direction = cardinal
 
+func set_telegraph_duration(duration: float):
+	telegraph_duration = duration
 
 func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
 	var x_offset: float = 0
@@ -92,7 +94,6 @@ func create_telegraph_rectangle():
 	add_child(telegraph_rect)
 
 	size_tween = create_tween() # between; interpolated object
-	pos_tween = create_tween() 
 	
 	# Calculate final size based on direction
 	match direction:
@@ -104,7 +105,7 @@ func create_telegraph_rectangle():
 		"WEST":  # Right to Left
 			telegraph_rect.position = Vector2(TILE_SIZE/2, -half_height) # Top center
 			telegraph_rect.size = Vector2(0, window_dimensions.y)
-			pos_tween.tween_property(telegraph_rect, "position:x", -half_width, telegraph_dur_sec)
+			create_tween().tween_property(telegraph_rect, "position:x", -half_width, telegraph_dur_sec)
 			size_tween.tween_property(telegraph_rect, "size:x", dimensions.x * TILE_SIZE + TILE_SIZE,telegraph_dur_sec)
 		
 		"SOUTH": # Top to Bottom
@@ -115,7 +116,7 @@ func create_telegraph_rectangle():
 		"NORTH": # Bottom to Top
 			telegraph_rect.position = Vector2(-half_width, TILE_SIZE/2)
 			telegraph_rect.size = Vector2(window_dimensions.x, 0)
-			pos_tween.tween_property(telegraph_rect, "position:y", -half_height, telegraph_dur_sec)
+			create_tween().tween_property(telegraph_rect, "position:y", -half_height, telegraph_dur_sec)
 			size_tween.tween_property(telegraph_rect, "size:y", dimensions.y * TILE_SIZE + TILE_SIZE, telegraph_dur_sec)
 
 	# Ensure telegraph disappears before the attack starts

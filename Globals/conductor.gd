@@ -18,6 +18,7 @@ signal song_finished
 const QUARTER_NOTE: float = 1.0
 const EIGHTH_NOTE: float = 0.5 
 
+var current_song: String
 # Dictionary of music assets we are using in the game.
 # Could be dynamically loaded from files - but maybe not worth the effort.
 var songs: Dictionary = {
@@ -40,7 +41,15 @@ var songs: Dictionary = {
 	"Supernatural2": {
 		"bpm": 104,
 		"file_name": "supernatural_2.wav"
-	}  
+	},
+	"MainMenu": {
+		"bpm": 104,
+		"file_name": "main_menu.wav"
+	},
+	"MainMenuLoop": {
+		"bpm": 104,
+		"file_name": "main_menu_loop.wav"
+	}	 
 }
 
 # Duration of a quarter note, in seconds.
@@ -49,6 +58,7 @@ var seconds_per_quarter_note: float = 1.0 # Prevent crashes when no music playin
 var signal_step_interval: float 
 # 1-indexed. A value of +1.0 means one quarter note has passed.
 var num_beats_passed: float
+var num_quarter_beats_passed: int = 0
 # 1-indexed. In a measure of 4/4, cycles between 1-2-3-4.
 var beat_number: int
 
@@ -56,7 +66,7 @@ var beat_number: int
 var current_time_in_secs: float
 
 func _ready() -> void:
-	#set_music("Fantasy2")
+	set_music("MainMenu")
 	current_time_in_secs = 0.0
 	music.finished.connect(_on_music_finished)
 
@@ -77,34 +87,38 @@ func update_beat_info() -> void:
 		beat_number = int(num_beats_passed - 1) % 4 + 1
 		# Emit signal for game events that happen on the quarter-note pulse
 		quarter_beat.emit(beat_number)
+		num_quarter_beats_passed += 1
 		# Quarter note pulse, for debug
 		if metronome_on: 
 			sfx_test.play()
 		if debug_mode:
 		# Debug output.
 			var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
-			print("Beat ", beat_number)
-			print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
+			print(num_quarter_beats_passed)
+			#print("Beat ", beat_number)
+			#print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
 		
 
 # Sets the current music to a song with name, if available
-func set_music(name: String) -> void:
+func set_music(song_name: String) -> void:
 	music.stop()
 	num_beats_passed = 0.0
+	num_quarter_beats_passed = 0
 	# Quarter notes only, for now.
 	signal_step_interval = QUARTER_NOTE
 	
 	# Attempt to retrieve song
-	if !songs.has(name):
-		print("Error loading music. Could not find song called \'", name, "\'")
+	if !songs.has(song_name):
+		print("Error loading music. Could not find song called \'", song_name, "\'")
 		return
 	
-	var song_to_play = songs[name]
+	var song_to_play = songs[song_name]
 	var file_path: String = "res://Assets/Music/" + song_to_play.file_name
 	music.stream = load(file_path)
 	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
 	music.play()
-	print("Playing song: \"", name, "\"\n")
+	print("Playing song: \"", song_name, "\"\n")
+	current_song = song_name
 	
 
 func stop_music():
@@ -135,3 +149,5 @@ func convert_bpm_to_quarter_note_in_secs(bpm: int) -> float:
 
 func _on_music_finished():
 	song_finished.emit()
+	if current_song == "MainMenu":
+		set_music("MainMenuLoop")
