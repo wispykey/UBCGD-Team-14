@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc33tdapalicn"]
+
+[ext_resource type="Texture2D" uid="uid://es04srj0p2ew" path="res://Assets/Themes/Supernatural/enemy_attack1.png" id="1_ncy5x"]
+[ext_resource type="Texture2D" uid="uid://g5ggcwkcu6db" path="res://Assets/Themes/Supernatural/enemy_attack2.png" id="2_fgpls"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k00q2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ncy5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fgpls")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="GreenFlame" type="AnimatedSprite2D"]
+scale = Vector2(1.25, 1.25)
+sprite_frames = SubResource("SpriteFrames_k00q2")
+autoplay = "default"

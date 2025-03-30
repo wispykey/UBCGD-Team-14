@@ -32,7 +32,6 @@ func start():
 	generate_collision_area()
 	
 	$TelegraphTimer.start()
-	print("Starting puddle with timer", $DespawnTimer.wait_time)
 	create_telegraph_puddle(telegraph_dur_sec)
 	await get_tree().create_timer(telegraph_dur_sec/3).timeout
 	create_telegraph_puddle(telegraph_dur_sec*2/3)

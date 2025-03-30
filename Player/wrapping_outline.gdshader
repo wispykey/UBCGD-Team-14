@@ -28,7 +28,7 @@ void fragment() {
         vec2 scaled_shifted_uv = shifted_uv * ratio;
 
         vec4 original_color = texture(TEXTURE, scaled_shifted_uv);
-		
+
         if (scaled_shifted_uv.x < 0.0 || scaled_shifted_uv.x > 1.0 || scaled_shifted_uv.y < 0.0 || scaled_shifted_uv.y > 1.0) {
             original_color.a = 0.0; // Set alpha to 0 to remove artifacts outside the sprite boundary
         }

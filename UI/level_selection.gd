@@ -27,6 +27,7 @@ var level_map = {
 
 @onready var info_box = $InfoBox
 @onready var enable_controls = false
+var tutorial_complete = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Dialogic.signal_event.connect(_process_dialogic_signal)
@@ -48,6 +49,12 @@ func _process(delta: float) -> void:
 		
 func _unhandled_input(event):
 	if enable_controls == true and not TransitionScreen.animation_player.is_playing():
+		if not tutorial_complete:
+			if Input.is_anything_pressed():
+				$MovementTutorial.visible = false
+				tutorial_complete = true
+				return
+			
 		if event.is_action_pressed("ui_left"):
 			_on_back_pressed()
 		elif event.is_action_pressed("ui_right"):
@@ -68,7 +75,7 @@ func _unhandled_input(event):
 		
 func selectLevel() -> void:
 	SFX.play_UI_accept()
-	print("Level selected: ", levels[current_index])
+	#print("Level selected: ", levels[current_index])
 	showInfo()
 
 func _on_back_pressed() -> void:
@@ -105,6 +112,8 @@ func _process_dialogic_signal(sig: String):
 		main_char.hide()
 		side_char.hide()
 		enable_controls = true
+		if not tutorial_complete:
+			$MovementTutorial.visible = true
 
 func _dialogic_complete(String):
 	await get_tree().create_timer(1.0).timeout

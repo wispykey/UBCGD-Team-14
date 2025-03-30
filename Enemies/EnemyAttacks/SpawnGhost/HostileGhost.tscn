@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4anfnfg7lr4f"]
+
+[ext_resource type="Shader" path="res://Player/wrapping_outline.gdshader" id="1_jonen"]
+[ext_resource type="Texture2D" uid="uid://ccu2p3b527yhm" path="res://Assets/Themes/Supernatural/enemy_ghosts1.png" id="2_xb46l"]
+[ext_resource type="Texture2D" uid="uid://dx2q7ub1ud5x0" path="res://Assets/Themes/Supernatural/enemy_ghosts2.png" id="3_284ee"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ef7kl"]
+shader = ExtResource("1_jonen")
+shader_parameter/line_color = Color(1, 0, 0, 1)
+shader_parameter/width = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ukax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xb46l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_284ee")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HostileGhost" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_ef7kl")
+sprite_frames = SubResource("SpriteFrames_1ukax")
+autoplay = "default"

@@ -2,4 +2,4 @@
 .godot/
 /android/
 Globals/conductor.gd
-.DS_Store
+*.DS_Store

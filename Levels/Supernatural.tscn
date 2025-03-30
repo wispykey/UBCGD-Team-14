@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Levels/Supernatural.gd" id="1_xqloe"]
 [ext_resource type="PackedScene" uid="uid://clu4w56s8h1yo" path="res://Enemies/EnemyAttacks/HalfRoomCleave/HalfRoomCleave.tscn" id="2_gcs8v"]
 [ext_resource type="PackedScene" uid="uid://bgm21f8w6825k" path="res://Enemies/EnemyAttacks/Projectiles/iterative_projectile.tscn" id="3_8h3mh"]
-[ext_resource type="PackedScene" uid="uid://dwhhs4cspt0f" path="res://Enemies/EnemyAttacks/SpawnGhost/SpawnGhost.tscn" id="3_pkwar"]
+[ext_resource type="PackedScene" uid="uid://bh6yvl70hls56" path="res://Enemies/EnemyAttacks/SpawnGhost/SpawnHostileGhost.tscn" id="3_pus71"]
 [ext_resource type="PackedScene" uid="uid://bomiqmq23yxw5" path="res://Enemies/EnemyAttacks/Projectiles/projectile_spawner.tscn" id="4_rmsie"]
 [ext_resource type="PackedScene" uid="uid://cvb1i0ttffw0f" path="res://Player/player_afterimage.tscn" id="5_c0isn"]
 [ext_resource type="PackedScene" uid="uid://b0yyqdkpueu2n" path="res://Levels/TileManager.tscn" id="5_tcjr5"]
@@ -17,7 +17,7 @@
 [node name="Supernatural" type="Node2D"]
 script = ExtResource("1_xqloe")
 half_room_cleave = ExtResource("2_gcs8v")
-spawn_ghost = ExtResource("3_pkwar")
+spawn_ghost = ExtResource("3_pus71")
 spawn_projectile = ExtResource("3_8h3mh")
 spawn_afterimage = ExtResource("5_c0isn")
 dash_telegraph = ExtResource("6_5iqgo")

@@ -67,7 +67,7 @@ func _spawn_path_projectile():
 	var projectile = projectile_scene.instantiate()
 	projectile.position = Vector2(-screen_size.x, randf_range(-110, 110)) # Bottom
 	projectile.follow_type = 1
-	print("Path projectile created at ", projectile.position)
+	#print("Path projectile created at ", projectile.position)
 	get_parent().add_child(projectile)
 	
 

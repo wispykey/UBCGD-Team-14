@@ -4,7 +4,7 @@ func _ready() -> void:
 	$ScoreLabel.text = "Score: " + str(GameState.score)
 
 func _on_home_button_pressed() -> void:
-	print("pressed")
+	#print("pressed")
 	get_tree().change_scene_to_file("res://UI/main_menu.tscn")
 
 
