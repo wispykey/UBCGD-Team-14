@@ -8,7 +8,7 @@ func _ready() -> void:
 	GameEvents.life_changed.connect(_on_life_changed)
 	GameState.reset_life()
 	
-	$ScoreLabel.text = str(GameState.score)
+	#$ScoreLabel.text = str(GameState.score)
 	$LifeProgress.value = GameState.life;
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,7 +22,7 @@ func _on_score_changed():
 	$ScoreLabel.text = str(GameState.score)
 	
 func _on_combo_changed():
-	$Combo.text = str(GameState.combo)
+	$ComboLabel/Combo.text = str(GameState.combo)
 
 func _on_life_changed():
 	$LifeProgress.value = GameState.life;

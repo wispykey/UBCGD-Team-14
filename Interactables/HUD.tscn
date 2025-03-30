@@ -68,11 +68,26 @@ position = Vector2(332.6, 466.2)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("5_5cat8")
 
-[node name="Combo" type="Label" parent="."]
+[node name="ComboLabel" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Combo" type="Label" parent="ComboLabel"]
 layout_mode = 0
-offset_left = 608.0
-offset_top = 23.0
-offset_right = 648.0
-offset_bottom = 65.0
-theme_override_font_sizes/font_size = 30
+offset_left = 352.0
+offset_top = 524.0
+offset_right = 392.0
+offset_bottom = 566.0
+theme_override_font_sizes/font_size = 20
 text = "0"
+horizontal_alignment = 2
+
+[node name="x" type="Label" parent="ComboLabel"]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 533.0
+offset_right = 433.0
+offset_bottom = 556.0
+theme_override_font_sizes/font_size = 12
+text = "x"
