@@ -27,31 +27,13 @@ var telegraph # An instance of the dash_telegraph
 var dash_telegraph_rect # A basic rectangle for the telegraph
 var dash_telegraph_rect_size = TILE_SIZE * 0.8
 
-# TODO: The following code is a tile dictionary for if we wanted to "Light up" the map
-#       beyond solid blue tiles, ie. the tiles look like "cleaner" FLOOR_DARK tiles
-#       by using alternate versions. Can probably be removed.
-#const TILES = {
-	#"RED": {"src": 2, "atlas": Vector2(0,0), "alt": 3},
-	#"DANGER": {"src": 3, "atlas": Vector2(0, 0), "alt": 0},
-	#"FLOOR_DARK": {"src": 1, "atlas": Vector2(0,0), "alt": 3},
-	#"FLOOR_MED": {"src": 1, "atlas": Vector2(0,0), "alt": 1},
-	#"FLOOR_LIGHT": {"src": 1, "atlas": Vector2(0,0), "alt": 0},
-	#"GHOST": {"src": 0, "atlas": Vector2(0, 0), "alt": 0},
-#}
-#const DEFAULT_FLOOR = TILES.FLOOR_DARK
-
 # A queue of scheduled function calls.
 # 	'time' is measured in beats; must be strictly non-decreasing
 #   'function' is the name of a function in this script; must be in quotation marks
 # 	'args' is a dictionary of additional parameters to 'function'
 var timeline = [
 	# Intro
-		## Bongos enter 65
-	{"time": 1, "function": "spawn_ghost_on_player", "args": {}}, # Bells attack
-	#{"time": 67, "function": "spawn_ghost_on_player", "args": {}},
-	#{"time": 69, "function": "spawn_ghost_on_player", "args": {}},
-	#{"time": 71, "function": "spawn_ghost_on_player", "args": {}},
-	#{"time": 1, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 5), "coord2": Vector2i(14, 5)}},
+	{"time": 1, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 5), "coord2": Vector2i(14, 5)}},
 	{"time": 5, "function": "spawn_pr_cont", "args": {"direction": "RIGHT", "coord1": Vector2i(6, 5), "coord2": Vector2i(6, 9)}},
 	{"time": 9, "function": "spawn_pr_cont", "args": {"direction": "LEFT", "coord1": Vector2i(14, 5), "coord2": Vector2i(14, 9)}},
 	{"time": 13, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(6, 9), "coord2": Vector2i(14, 9), "coord3": Vector2i(10, 9)}},
@@ -79,14 +61,6 @@ var timeline = [
 	{"time": 43, "function": "spawn_pr_cont", "args": {"direction": "DOWN", "coord1": Vector2i(6, 1), "coord2": Vector2i(8, 1), "coord3": Vector2i(10, 1), "coord4": Vector2i(12, 1), "coord5": Vector2i(14, 1)}},
 	{"time": 45, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(1, 13), "coord2": Vector2i(2, 13), "coord3": Vector2i(3, 13), "coord4": Vector2i(4, 13), "coord5": Vector2i(5, 13)}},
 	{"time": 46, "function": "spawn_pr_cont", "args": {"direction": "UP", "coord1": Vector2i(15, 13), "coord2": Vector2i(16, 13), "coord3": Vector2i(17, 13), "coord4": Vector2i(18, 13), "coord5": Vector2i(19, 13)}},
-	#{"time": 49, "function": "spawn_pr", "args": {"direction": "RIGHT", "type": "SPINNING", "turn": "5", "coord_x": 1, "coord_y": 1}}, # Spirals start
-	#{"time": 52, "function": "spawn_pr", "args": {"direction": "LEFT", "type": "SPINNING", "turn": "5", "coord_x": 5, "coord_y": 5}}, # TODO: spinning projectiles dont work
-	#{"time": 53, "function": "spawn_pr", "args": {"direction": "DOWN", "type": "SPINNING", "turn": "5", "coord_x": 19, "coord_y": 1}},
-	#{"time": 56, "function": "spawn_pr", "args": {"direction": "UP", "type": "SPINNING", "turn": "5", "coord_x": 15, "coord_y": 5}},
-	#{"time": 57, "function": "spawn_pr", "args": {"direction": "LEFT", "type": "SPINNING", "turn": "5", "coord_x": 19, "coord_y": 13}},
-	#{"time": 60, "function": "spawn_pr", "args": {"direction": "RIGHT", "type": "SPINNING", "turn": "5", "coord_x": 15, "coord_y": 9}},
-	#{"time": 61, "function": "spawn_pr", "args": {"direction": "UP", "type": "SPINNING", "turn": "5", "coord_x": 1, "coord_y": 13}},
-	#{"time": 64, "function": "spawn_pr", "args": {"direction": "DOWN", "type": "SPINNING", "turn": "5", "coord_x": 5, "coord_y": 9}},
 	{"time": 50, "function": "spawn_pr", "args": {"type": "EXPANDING", "coord1": Vector2i(10, 7)}},
 	## Bongos enter 65
 	{"time": 65, "function": "spawn_ghost_on_player", "args": {}}, # Bells attack
