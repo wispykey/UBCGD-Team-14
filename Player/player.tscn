@@ -17,7 +17,6 @@ shader_parameter/width = 1.0
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 0
 script = ExtResource("1_mdkiw")
-invincible = true
 
 [node name="TerrainCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
