@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 		
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
+		continue_label.call_deferred("queue_free")
 		get_tree().change_scene_to_file("res://UI/main_menu.tscn")
 
 

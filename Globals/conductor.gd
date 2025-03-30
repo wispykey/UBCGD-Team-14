@@ -95,8 +95,8 @@ func update_beat_info() -> void:
 		# Debug output.
 			var inaccuracy_in_ms = (playback_time_in_secs - beats_passed_in_secs) * 1000
 			print(num_quarter_beats_passed)
-			#print("Beat ", beat_number)
-			#print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
+			print("Beat ", beat_number)
+			print("Inaccuracy: %1.2f" % inaccuracy_in_ms, " ms\n")
 		
 
 # Sets the current music to a song with name, if available
