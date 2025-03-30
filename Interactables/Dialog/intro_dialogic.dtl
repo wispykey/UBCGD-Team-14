@@ -3,6 +3,7 @@ side_character_flame: Psst wake up
 join main_character_flame center
 [signal arg="wakeup_character"]
 main_character_flame: ...Huh...
+[signal arg="look_left_to_right"]
 main_character_flame: Where am I?
 side_character_flame: Phew I was beginning to think you weren’t gonna wake up. You’re back at head quarters, Agent. The first time coming back is always a bit of a doozy so I’m here to help you adjust.
 main_character_flame: Wait what do you mean first time coming back?
