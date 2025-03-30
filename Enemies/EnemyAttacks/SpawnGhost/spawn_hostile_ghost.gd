@@ -19,7 +19,9 @@ func _ready() -> void:
 	$Telegraph.add_child(telegraph)
 
 func _process(delta: float) -> void:
-	var progress = $TelegraphTimer.time_left / $TelegraphTimer.wait_time
+	var progress = 1 - $TelegraphTimer.time_left / $TelegraphTimer.wait_time
+	var proportion_at_max_val = 0.3 # Reach max value sooner for better readability
+	progress = clamp(progress + proportion_at_max_val, 0.0, 1.0)
 	
 	if not spawned:
 		$Telegraph.modulate.a = lerp(0.4, 1.0, 1 - progress)
