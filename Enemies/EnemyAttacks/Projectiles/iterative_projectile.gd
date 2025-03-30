@@ -148,8 +148,6 @@ func update(beat_num: int) -> void:
 			count += 1
 		"TRACKING":
 			player_coords = get_node("../Player").position
-			print(floor(player_coords.x / TILE_SIZE))
-			print(floor(player_coords.y / TILE_SIZE))
 			for projectile in projectiles:
 				if floor(player_coords.y / TILE_SIZE) < projectile.coord.y:
 					if floor(player_coords.x / TILE_SIZE) < projectile.coord.x:

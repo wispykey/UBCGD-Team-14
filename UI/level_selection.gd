@@ -75,7 +75,7 @@ func _unhandled_input(event):
 		
 func selectLevel() -> void:
 	SFX.play_UI_accept()
-	print("Level selected: ", levels[current_index])
+	#print("Level selected: ", levels[current_index])
 	showInfo()
 
 func _on_back_pressed() -> void:
@@ -118,7 +118,7 @@ func _process_dialogic_signal(sig: String):
 func _dialogic_complete(String):
 	await get_tree().create_timer(1.0).timeout
 	enable_controls = true
-	print("DIALOGUE COMPLETE")
+	#print("DIALOGUE COMPLETE")
 
 func getCurrentLevel():
 	return levels[current_index]

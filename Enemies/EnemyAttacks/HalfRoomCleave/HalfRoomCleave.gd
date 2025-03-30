@@ -69,7 +69,6 @@ func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
 	var x_invert: int = 1
 	var y_invert: int = 1
 	
-	print(direction)
 	match direction:
 		"WEST":
 			x_invert = -1
@@ -173,8 +172,8 @@ func compute_dimensions():
 			dimensions.x = max_x - 2
 			dimensions.y = max_y - coords.y - 1
 			
-	print("Cleaving ", direction, " from tile ", coords,
-		  ", in a ", dimensions.x, "x", dimensions.y, " area")
+	#print("Cleaving ", direction, " from tile ", coords,
+		  #", in a ", dimensions.x, "x", dimensions.y, " area")
 
 
 # HitZone is intentionally missing CollisionShape. Added here.

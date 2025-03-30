@@ -117,7 +117,7 @@ func set_music(song_name: String) -> void:
 	music.stream = load(file_path)
 	seconds_per_quarter_note = convert_bpm_to_quarter_note_in_secs(song_to_play.bpm)
 	music.play()
-	print("Playing song: \"", song_name, "\"\n")
+	#print("Playing song: \"", song_name, "\"\n")
 	current_song = song_name
 	
 
