@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 func _unhandled_input(event):
 	if enable_controls == true and not TransitionScreen.animation_player.is_playing():
 		if not tutorial_complete:
-			if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_cancel"):
+			if Input.is_anything_pressed():
 				$MovementTutorial.visible = false
 				tutorial_complete = true
 				return
