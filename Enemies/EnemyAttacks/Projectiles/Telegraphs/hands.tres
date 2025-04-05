@@ -80,7 +80,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"emerge",
-"speed": 20.0
+"speed": 36.0
 }, {
 "frames": [{
 "duration": 1.0,
