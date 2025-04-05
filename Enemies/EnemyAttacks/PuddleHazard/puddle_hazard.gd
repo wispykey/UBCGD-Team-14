@@ -56,6 +56,7 @@ func add_scene_on_every_tile(parent: Node2D, scene: PackedScene):
 			var telegraph = scene.instantiate()
 			telegraph.position.x = TILE_SIZE*(i + offset_in_tiles.x)
 			telegraph.position.y = TILE_SIZE*(j + offset_in_tiles.y)
+			telegraph.set_duration(fully_grown_duration)
 			parent.add_child(telegraph)	
 
 
@@ -131,13 +132,8 @@ func _on_telegraph_timer_timeout():
 	# Play SFX
 	SFX.play_fire_spawn()
 	SFX.play_fire_crackling()
-	Conductor.quarter_beat.connect(_on_quarter_beat_fade)
 			
 			
 func _on_despawn_timer_timeout():
 	SFX.stop_fire_crackling()
 	call_deferred("queue_free")
-	
-func _on_quarter_beat_fade(beat_num: int):
-	var progress = 1 - $DespawnTimer.time_left / $DespawnTimer.wait_time
-	modulate.a = lerp(1.0, 0.6, progress)
