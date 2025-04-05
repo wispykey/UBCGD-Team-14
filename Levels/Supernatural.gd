@@ -132,6 +132,9 @@ func _ready_post_dialog(arg: String):
 	window_dimensions =  GameState.control_port.size
 	GameEvents.game_start.emit()
 	
+	$Ghost.queue_free()
+	$SupernaturalRadio.queue_free()
+	
 	%Player.set_process(true)
 	Conductor.set_music("Supernatural1")
 	$HUD.start_beat_indicator()
