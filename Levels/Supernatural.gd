@@ -117,6 +117,7 @@ func _ready() -> void:
 	telegraph = dash_telegraph.instantiate()
 	add_child(telegraph)
 	Conductor.set_music("Supernatural2")
+	GameEvents.game_start.emit()
 	
 	# Change sprite to Supernatural character
 	%Player.player_sprite.sprite_frames = load("res://Player/supernatural_sprite_frames.tres")

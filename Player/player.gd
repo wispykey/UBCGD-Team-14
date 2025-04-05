@@ -77,6 +77,7 @@ func _ready() -> void:
 	$Hitbox.area_entered.connect(_on_hitbox_area_entered)
 	GameEvents.player_died.connect(_on_player_died)
 	GameEvents.game_start.connect(_on_game_start)
+	$Pacemaker/AnimationPlayer.animation_finished.connect(_on_pacemaker_animation_finished)
 
 
 # Get the input direction and handle the movement/deceleration.
@@ -373,7 +374,12 @@ func _on_game_start():
 
 func _on_player_died():
 	gameRunning = false
-	queue_free()
+	$Sprite.queue_free()
+	$Pacemaker/AnimationPlayer.play("float_upwards")
+	
+func _on_pacemaker_animation_finished(anim_name):
+	if anim_name == "float_upwards":
+		queue_free()
 
 func _kill():
 	queue_free()
