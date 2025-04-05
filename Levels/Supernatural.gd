@@ -129,6 +129,7 @@ func _ready_post_dialog(arg: String):
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	Conductor.song_finished.connect(_on_song_finished)
 	GameEvents.player_died.connect(_on_player_died)
+	%Player.death_animation_finished.connect(_on_player_death_animation_finished)
 	window_dimensions =  GameState.control_port.size
 	GameEvents.game_start.emit()
 	
@@ -302,8 +303,9 @@ func _on_song_finished():
 	add_child(victory)
 
 func _on_player_died():
-	# TODO: Despawn player, stop processing input
 	timeline = []
+	Conductor.stop_music()
+	
+func _on_player_death_animation_finished():
 	var game_over = GameOverComponent.instantiate()
 	add_child(game_over)
-	Conductor.stop_music()

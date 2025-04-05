@@ -27,6 +27,8 @@ TransitionScreen="*res://UI/transition_screen.tscn"
 [dialogic]
 
 directories/dch_directory={
+"Fem_Player_dialogic": "res://Interactables/Dialog/Fem_Player_dialogic.dch",
+"Ghost_dialogic": "res://Interactables/Dialog/Ghost_dialogic.dch",
 "Lunatic_Mage_dialogic": "res://Interactables/Dialog/Lunatic_Mage_dialogic.dch",
 "Viola_dialogic": "res://Interactables/Dialog/Viola_dialogic.dch",
 "alert": "res://Interactables/Dialog/alert.dch",

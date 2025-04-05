@@ -11,6 +11,7 @@ Player movement-related functionality should exist here.
 signal light_up_tile(cell_pos: Vector2) # Signal for tileManager to modify itself
 signal spawn_afterimage(player_pos: Vector2) # SIgnal for Scene Parent to spawn afterimage
 signal update_telegraph(player_pos: Vector2, charges: float, direction: Vector2) # Signal for Scene Parent to generate telegraph square
+signal death_animation_finished
 
 @export var debug_timing_info: bool = false
 
@@ -385,6 +386,7 @@ func _on_player_died():
 func _on_pacemaker_animation_finished(anim_name):
 	if anim_name == "float_upwards":
 		queue_free()
+		death_animation_finished.emit()
 
 func _kill():
 	queue_free()
