@@ -41,6 +41,7 @@ func set_dimensions(new_dimensions: Vector2i):
 	dimensions = new_dimensions
 
 func set_duration(beats: int):
+	fully_grown_duration = beats
 	$DespawnTimer.wait_time = beats * Conductor.seconds_per_quarter_note
 	
 func set_coords(new_coords: Vector2):

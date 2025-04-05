@@ -7,7 +7,6 @@ var time_left: float
 func _ready() -> void:
 	Conductor.quarter_beat.connect(_on_quarter_beat_fade)
 	material = material.duplicate()
-	print("Flame added")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,6 +23,6 @@ func set_duration(beats: int):
 func _on_quarter_beat_fade(beat_num: int):
 	var progress = 1 - time_left / duration
 	progress = clamp(progress, 0.0, 1.0)
-	var new_alpha = lerp(1.0, 0.0, progress)
+	var new_alpha = lerp(1.0, 0.4, progress)
 	material.set("shader_parameter/current_alpha", new_alpha)
 	
