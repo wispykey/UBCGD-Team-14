@@ -121,6 +121,7 @@ func _ready() -> void:
 	
 	# Change sprite to Supernatural character
 	%Player.player_sprite.sprite_frames = load("res://Player/supernatural_sprite_frames.tres")
+	%Player.set_process(false)
 
 func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
@@ -130,7 +131,7 @@ func _ready_post_dialog(arg: String):
 	window_dimensions =  GameState.control_port.size
 	GameEvents.game_start.emit()
 	
-	%Player.position = GameState.control_port.get_center()
+	%Player.set_process(true)
 	Conductor.set_music("Supernatural1")
 	$HUD.start_beat_indicator()
 	%Player/Pacemaker/AnimationPlayer.speed_scale = 2 / Conductor.seconds_per_quarter_note

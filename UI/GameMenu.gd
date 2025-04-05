@@ -6,6 +6,7 @@ func _ready() -> void:
 func _on_home_button_pressed() -> void:
 	#print("pressed")
 	get_tree().change_scene_to_file("res://UI/main_menu.tscn")
+	Conductor.set_music("MainMenu")
 
 
 func _on_restart_button_pressed() -> void:

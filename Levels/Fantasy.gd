@@ -85,6 +85,7 @@ func _ready() -> void:
 	
 	# Change sprite to Wizard
 	%Player.player_sprite.sprite_frames = load("res://Player/fantasy_sprite_frames.tres")
+	%Player.set_process(false)
 
 func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
@@ -94,7 +95,7 @@ func _ready_post_dialog(arg: String):
 	GameEvents.game_start.emit()
 	window_dimensions =  GameState.control_port.size
 	
-	%Player.position = GameState.control_port.get_center()
+	%Player.set_process(true)
 	%Player.spawn_afterimage.connect(_on_player_spawn_afterimage)
 	Conductor.set_music("Fantasy2")
 	$HUD.start_beat_indicator()

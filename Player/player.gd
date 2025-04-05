@@ -377,6 +377,7 @@ func _on_game_start():
 
 func _on_player_died():
 	gameRunning = false
+	$DashBar.queue_free()
 	$Sprite.queue_free()
 	$Pacemaker/AnimationPlayer.speed_scale = 1.0
 	$Pacemaker/AnimationPlayer.play("float_upwards")
