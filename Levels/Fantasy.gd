@@ -99,6 +99,7 @@ func _ready_post_dialog(arg: String):
 	Conductor.set_music("Fantasy2")
 	$HUD.start_beat_indicator()
 	boss.can_move = true
+	%Player/Pacemaker/AnimationPlayer.speed_scale = 2 / Conductor.seconds_per_quarter_note
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

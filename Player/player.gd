@@ -79,7 +79,6 @@ func _ready() -> void:
 	GameEvents.game_start.connect(_on_game_start)
 	$Pacemaker/AnimationPlayer.animation_finished.connect(_on_pacemaker_animation_finished)
 
-
 # Get the input direction and handle the movement/deceleration.
 func _process(delta: float) -> void:
 	var shader_time = $Pacemaker.material.get("shader_parameter/time")
@@ -295,6 +294,7 @@ func handle_input_timing(combo_gain: int, held_duration: float):
 	elif close_enough:
 		GameState.update_life(HP_RECOVERY_PER_TICK) # Recover HP when inputs are timed well
 		GameState.update_combo(combo_gain)
+		$Pacemaker/AnimationPlayer.play("combo_success")
 	else:
 		print("Bad timing - reset combo")
 		GameState.update_combo(-1)
