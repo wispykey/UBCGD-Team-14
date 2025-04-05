@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b11rmeh0136ep"]
+[gd_scene load_steps=14 format=3 uid="uid://b11rmeh0136ep"]
 
 [ext_resource type="Script" path="res://Enemies/EnemyAttacks/VineCross/vine_cross.gd" id="1_wly15"]
 [ext_resource type="Texture2D" uid="uid://ctwf8gqvrn22h" path="res://Assets/Themes/Fantasy/vines.png" id="2_c6gdu"]
@@ -18,6 +18,42 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_osspe"]
 size = Vector2(32, 32)
 
+[sub_resource type="Animation" id="Animation_rv41u"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 0.574349),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ttouy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ahfcd"]
+_data = {
+"RESET": SubResource("Animation_ttouy"),
+"spawn": SubResource("Animation_rv41u")
+}
+
 [node name="VineCross" type="Node2D"]
 script = ExtResource("1_wly15")
 
@@ -35,6 +71,7 @@ script = ExtResource("2_mos62")
 collision_layer = 16
 collision_mask = 0
 monitoring = false
+monitorable = false
 script = ExtResource("5_milvm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="XAxis/XHitZone"]
@@ -74,6 +111,7 @@ script = ExtResource("7_1dfhp")
 collision_layer = 16
 collision_mask = 0
 monitoring = false
+monitorable = false
 script = ExtResource("5_milvm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YAxis/YHitZone"]
@@ -106,3 +144,9 @@ script = ExtResource("2_ce4ge")
 rotation = 1.5708
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_d1x3s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ahfcd")
+}
+autoplay = "spawn"

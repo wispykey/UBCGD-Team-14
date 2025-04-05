@@ -22,6 +22,7 @@ func _ready() -> void:
 	$TelegraphTimer.wait_time = 4 * Conductor.seconds_per_quarter_note
 	# How long vines should persist, after all segments have reached wall
 	$FullyGrownDuration.wait_time = 16 * Conductor.seconds_per_quarter_note
+	$AnimationPlayer.play("spawn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -86,13 +87,20 @@ func recede(delta: float):
 			var point_to_remove = vine.points[vine.points.size()-1]
 			vine.remove_point(vine.points.size()-1)
 		else:
-			# TODO: Replace with animation that invokes this as callback
-			_on_despawn_animation_finished()
+			$XAxis/XHitZone.monitorable = false
+			$YAxis/YHitZone.monitorable = false
+			$AnimationPlayer.animation_finished.connect(_on_animation_finished)
+			$AnimationPlayer.play_backwards("spawn")
+	
 
 func check_finished(point):
 	if point.x > longest_distance or point.y > longest_distance:
 		all_directions_finished = true
 		$FullyGrownDuration.start()
 		
-func _on_despawn_animation_finished():
+func _on_animation_finished(anim_name):
 	call_deferred("queue_free")
+
+func _on_telegraph_timer_timeout():
+	$XAxis/XHitZone.monitorable = true
+	$YAxis/YHitZone.monitorable = true
