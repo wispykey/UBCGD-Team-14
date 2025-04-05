@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpqw0icl8bj32"]
+[gd_scene load_steps=12 format=3 uid="uid://cpqw0icl8bj32"]
 
 [ext_resource type="Script" path="res://Globals/sfx.gd" id="1_h3ton"]
 [ext_resource type="AudioStream" uid="uid://btp2hxbntuwtc" path="res://Assets/SFX/Fire/Fire 6.wav" id="2_qnywp"]
@@ -9,6 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://dfx8xc0gmso0g" path="res://Assets/SFX/Lightning/Lightning 3.wav" id="7_p5005"]
 [ext_resource type="AudioStream" uid="uid://6imja2ehxus7" path="res://Assets/SFX/Lightning/Lightning 2.wav" id="8_gct66"]
 [ext_resource type="AudioStream" uid="uid://cco86xt0wd4ko" path="res://Assets/SFX/Fire/Fire_Cleave_1.wav" id="9_ebaoc"]
+[ext_resource type="AudioStream" uid="uid://dxy0iljq8641b" path="res://Assets/SFX/heartbeat_1.wav" id="10_1x8ro"]
+[ext_resource type="AudioStream" uid="uid://dj3beecbj6c7v" path="res://Assets/SFX/heartbeat_2.wav" id="11_tu1s1"]
 
 [node name="SFX" type="Node2D"]
 script = ExtResource("1_h3ton")
@@ -51,3 +53,13 @@ max_polyphony = 3
 stream = ExtResource("9_ebaoc")
 volume_db = 2.0
 pitch_scale = 0.6
+
+[node name="Heartbeat" type="Node2D" parent="."]
+
+[node name="Heartbeat1" type="AudioStreamPlayer2D" parent="Heartbeat"]
+stream = ExtResource("10_1x8ro")
+volume_db = 7.0
+
+[node name="Heartbeat2" type="AudioStreamPlayer2D" parent="Heartbeat"]
+stream = ExtResource("11_tu1s1")
+volume_db = 7.0

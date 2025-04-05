@@ -93,6 +93,7 @@ func _ready_post_dialog(arg: String):
 	Conductor.quarter_beat.connect(_on_quarter_beat)
 	Conductor.song_finished.connect(_on_song_finished)
 	GameEvents.player_died.connect(_on_player_died)
+	%Player.death_animation_finished.connect(_on_player_death_animation_finished)
 	GameEvents.game_start.emit()
 	window_dimensions =  GameState.control_port.size
 	
@@ -134,8 +135,6 @@ func _on_song_finished():
 func _on_player_died():
 	boss.can_move = false
 	timeline = []
-	var game_over = GameOverComponent.instantiate()
-	add_child(game_over)
 	Conductor.stop_music()
 
 func get_random_position() -> Vector2:
@@ -318,3 +317,7 @@ func _on_player_spawn_afterimage(player_pos: Vector2) -> void:
 	afterimage.set_image($Player.player_sprite)
 	afterimage.position = player_pos
 	add_child(afterimage)
+
+func _on_player_death_animation_finished():
+	var game_over = GameOverComponent.instantiate()
+	add_child(game_over)

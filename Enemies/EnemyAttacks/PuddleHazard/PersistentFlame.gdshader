@@ -33,7 +33,7 @@ void fragment() {
         if (scaled_shifted_uv.x < 0.0 || scaled_shifted_uv.x > 1.0 || scaled_shifted_uv.y < 0.0 || scaled_shifted_uv.y > 1.0) {
             original_color.a = 0.0; // Set alpha to 0 to remove artifacts outside the sprite boundary
         }
-		
+
 
         // Initialize the outline alpha value
         float outline = 0.0;
@@ -47,8 +47,8 @@ void fragment() {
         outline = min(outline, 1.0);
         // Mix the original color with the outline color based on the outline alpha value
         color = mix(original_color, line_color, outline - original_color.a);
-		
-		
+
+
         if (scaled_shifted_uv.x < 0.0 || scaled_shifted_uv.x > 1.0 || scaled_shifted_uv.y < 0.0 || scaled_shifted_uv.y > 1.0) {
             color.a = color.a; // Set alpha to 0 to remove artifacts outside the sprite boundary
         } else {
