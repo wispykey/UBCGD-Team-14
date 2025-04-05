@@ -37,6 +37,8 @@ const LEEWAY_IN_SECS: float = 0.30
 const CHARGE_LEEWAY_IN_SECS: float = 0.15
 # The amount of HP recovered per well-timed input
 const HP_RECOVERY_PER_TICK: float = 0.1
+# Prevent combo-pulse animation from double-triggering on first press of a held input
+const COMBO_PULSE_DELAY: float = 0.30
 
 # Allow player to shift timings to match their device/feel
 const TIMING_CALIBRATION_STEP: float = 0.02 # In seconds
@@ -78,6 +80,7 @@ func _ready() -> void:
 	GameEvents.player_died.connect(_on_player_died)
 	GameEvents.game_start.connect(_on_game_start)
 	$Pacemaker/AnimationPlayer.animation_finished.connect(_on_pacemaker_animation_finished)
+	Conductor.quarter_beat.connect(_on_quarter_beat)
 
 # Get the input direction and handle the movement/deceleration.
 func _process(delta: float) -> void:
@@ -375,6 +378,7 @@ func _on_game_start():
 func _on_player_died():
 	gameRunning = false
 	$Sprite.queue_free()
+	$Pacemaker/AnimationPlayer.speed_scale = 1.0
 	$Pacemaker/AnimationPlayer.play("float_upwards")
 	
 func _on_pacemaker_animation_finished(anim_name):
@@ -383,3 +387,7 @@ func _on_pacemaker_animation_finished(anim_name):
 
 func _kill():
 	queue_free()
+
+func _on_quarter_beat(beat: int):
+	if directions[last_action].held > COMBO_PULSE_DELAY:
+		$Pacemaker/AnimationPlayer.play("combo_success")
