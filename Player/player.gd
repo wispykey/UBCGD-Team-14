@@ -19,15 +19,22 @@ const TILE_SIZE: int = 32
 const WIDTH: int = 640
 const HEIGHT: int = 448
 
+# Consecutive inputs must occur no sooner than this many beats apart
+const INPUT_SPAM_INTOLERANCE: float = 0.50
+# Inputs must be this many beats apart at maximum
+const INPUT_ACTIVITY_REQUIREMENT: float = 1.25
 # The number of charges to activate dash-to-the-wall
 const MAX_CHARGES: int = 3
 # The number of tiles to move per beat of sustained input
 const TILES_PER_CHARGE: int = 3
 # Duration to distinguish the releases of short taps vs intentional sustained taps
-const MIN_HOLD_DURATION: float = 0.35
-const MIN_HOLD_DURATION_ANIM: float = 0.22
+const MIN_HOLD_DURATION_TO_DETECT_DASH: float = 0.25
+const MIN_HOLD_DURATION_TO_DISPLAY_DASH_BAR: float = 0.30
+const MIN_HOLD_DURATION_TO_UPDATE_ANIM: float = 0.22
 # Allow inputs to be timed earlier/later than the beat by this amount
-const LEEWAY_IN_SECS: float = 0.15
+const LEEWAY_IN_SECS: float = 0.30
+# Allow releasing a held input slightly earlier to achieve next charge tier
+const CHARGE_LEEWAY_IN_SECS: float = 0.15
 # The amount of HP recovered per well-timed input
 const HP_RECOVERY_PER_TICK: float = 0.1
 
@@ -70,10 +77,13 @@ func _ready() -> void:
 	$Hitbox.area_entered.connect(_on_hitbox_area_entered)
 	GameEvents.player_died.connect(_on_player_died)
 	GameEvents.game_start.connect(_on_game_start)
-	Conductor.quarter_beat.connect(_on_quarter_beat)
+
 
 # Get the input direction and handle the movement/deceleration.
 func _process(delta: float) -> void:
+	var shader_time = $Pacemaker.material.get("shader_parameter/time")
+	$Pacemaker.material.set("shader_parameter/time", shader_time + 5.0*delta)
+	
 	if !gameRunning:
 		return
 	# Toggle lighting up tiles
@@ -96,6 +106,10 @@ func _process(delta: float) -> void:
 	last_action = handle_movement(delta)
 	update_facing()
 	align_position_to_grid()
+	
+	# Reset combo if player has not been active enough
+	if $ComboTimer.is_stopped():
+		GameState.update_combo(-1)
 
 # Handles player grid-based movement and input
 func handle_movement(delta: float) -> String:
@@ -104,18 +118,16 @@ func handle_movement(delta: float) -> String:
 		if Input.is_action_just_pressed(action):
 			_move_one_cell(directions[action].dir)
 			directions[action].held += delta
-			handle_input_timing(1)
-			$ComboTimer.start(Conductor.seconds_per_quarter_note)
+			handle_input_timing(1, 0.0)
 			return action # Early returns prevent processing multiple directions
 	
 	for action in directions:	
 		if Input.is_action_just_released(action):
 			var duration = directions[action].held
-			if duration > MIN_HOLD_DURATION:
+			if duration > MIN_HOLD_DURATION_TO_DETECT_DASH:
 				var combo_gain = calculate_charge_count(duration)
-				handle_input_timing(combo_gain)
+				handle_input_timing(combo_gain, duration)
 			handle_release(action)
-			$ComboTimer.start(Conductor.seconds_per_quarter_note)
 			return action
 	
 	for action in directions:
@@ -123,7 +135,7 @@ func handle_movement(delta: float) -> String:
 			directions[action].held += delta
 			update_color(directions[action].held)
 			update_dash_telegraph(directions[action].held, directions[action].dir)
-			$ComboTimer.start(Conductor.seconds_per_quarter_note)
+			start_input_timers()
 			return action
 	
 		## COMMENTED OUT: Double Tap code
@@ -133,18 +145,19 @@ func handle_movement(delta: float) -> String:
 			
 	return last_action # No input was detected this frame
 
+func start_input_timers():
+	$ComboTimer.start(Conductor.seconds_per_quarter_note * INPUT_ACTIVITY_REQUIREMENT)
+	$SpamTimer.start(Conductor.seconds_per_quarter_note * INPUT_SPAM_INTOLERANCE)
+
 func update_facing():
 	var facing = last_action.split("_")[1]
 	# NOTE: Only works due to coupled naming between inputs and animations
-	if directions[last_action].held > MIN_HOLD_DURATION_ANIM:
+	if directions[last_action].held > MIN_HOLD_DURATION_TO_UPDATE_ANIM:
 		# Set sprite to pre-dash
 		var prefix = "pre_dash_"
 		player_sprite.play(prefix + facing)
 	else:
 		player_sprite.play(facing) 
-	
-	
-	
 	
 ## BASIC MOVEMENT CODE:
 # Aligns player position to the grid
@@ -174,7 +187,7 @@ func _spawn_afterimage():
 	spawn_afterimage.emit(position)
 
 func calculate_charge_count(duration: float):
-	var charge_count = floori((duration + LEEWAY_IN_SECS) / Conductor.seconds_per_quarter_note)
+	var charge_count = floori((duration + CHARGE_LEEWAY_IN_SECS) / Conductor.seconds_per_quarter_note)
 	charge_count = min(charge_count, MAX_CHARGES)
 	return charge_count
 	
@@ -246,7 +259,7 @@ func update_color(duration: float):
 	else:
 		dash_bar = $DashBar/Charge1
 			
-	if duration >= MIN_HOLD_DURATION/2.5 or dash_bar.value > 0.0:
+	if duration >= MIN_HOLD_DURATION_TO_DISPLAY_DASH_BAR/2.5 or dash_bar.value > 0.0:
 		var bar_intensity = ease(intensity, 0.82)
 		dash_bar.tint_progress = target_color
 		dash_bar.value = bar_intensity
@@ -259,14 +272,8 @@ func update_dash_telegraph(duration: float, direction: Vector2):
 	update_telegraph.emit(position, num_charges, direction)
 
 
-### TIMING/BEAT CODE:
-func _on_quarter_beat(_beat_num):
-	# Reset combo if player has not acted recently (tracked using timer)
-	if $ComboTimer.is_stopped():
-		GameState.update_combo(-1)
-
 # Evaluate how well player timed an input (presses and long releases)
-func handle_input_timing(combo_gain: int):
+func handle_input_timing(combo_gain: int, held_duration: float):
 	# Subtract one because beats are 1-indexed
 	var prev_beat_in_secs = (Conductor.num_beats_passed-1) * Conductor.seconds_per_quarter_note
 	var input_time = Conductor.current_time_in_secs
@@ -280,11 +287,25 @@ func handle_input_timing(combo_gain: int):
 	var after_prev = abs(calibrated_time - prev_beat_in_secs)
 	var close_enough = before_next <= LEEWAY_IN_SECS or after_prev <= LEEWAY_IN_SECS
 
-	if close_enough:
+	# Reset combo and do not restore health if player maliciously spams inputs
+	if $SpamTimer.time_left > 0 and held_duration <= 0.001:
+		print("Player spam - reset combo", $SpamTimer.time_left)
+		GameState.update_combo(-1)
+	elif close_enough:
 		GameState.update_life(HP_RECOVERY_PER_TICK) # Recover HP when inputs are timed well
 		GameState.update_combo(combo_gain)
 	else:
+		print("Bad timing - reset combo")
 		GameState.update_combo(-1)
+		
+	var combo_reset_time = Conductor.seconds_per_quarter_note * INPUT_ACTIVITY_REQUIREMENT
+	var spam_reset_time = Conductor.seconds_per_quarter_note * INPUT_SPAM_INTOLERANCE
+	
+	if before_next < after_prev:
+		combo_reset_time += abs(before_next)
+	
+	$ComboTimer.start(Conductor.seconds_per_quarter_note * INPUT_ACTIVITY_REQUIREMENT)
+	$SpamTimer.start(Conductor.seconds_per_quarter_note * INPUT_SPAM_INTOLERANCE)
 			
 	if debug_timing_info:
 		var result = "Good!" if close_enough else "BAD."
