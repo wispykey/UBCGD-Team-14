@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b11rmeh0136ep"]
+[gd_scene load_steps=15 format=3 uid="uid://b11rmeh0136ep"]
 
 [ext_resource type="Script" path="res://Enemies/EnemyAttacks/VineCross/vine_cross.gd" id="1_wly15"]
 [ext_resource type="Texture2D" uid="uid://ctwf8gqvrn22h" path="res://Assets/Themes/Fantasy/vines.png" id="2_c6gdu"]
@@ -48,9 +48,25 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_sp5r4"]
+resource_name = "despawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ahfcd"]
 _data = {
 "RESET": SubResource("Animation_ttouy"),
+"despawn": SubResource("Animation_sp5r4"),
 "spawn": SubResource("Animation_rv41u")
 }
 

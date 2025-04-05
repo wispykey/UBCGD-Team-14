@@ -12,6 +12,9 @@ var vines = []
 # Order is coupled with vines
 var directions = [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
 
+var inactive_modulate = Vector4(1.0, 1.0, 1.0, 1.0)
+var active_modulate = Vector4(1.0, 0.0, 0.0, 1.0)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	vines = [$XAxis/Right, $XAxis/Left, $YAxis/Up, $YAxis/Down]
@@ -22,7 +25,11 @@ func _ready() -> void:
 	$TelegraphTimer.wait_time = 4 * Conductor.seconds_per_quarter_note
 	# How long vines should persist, after all segments have reached wall
 	$FullyGrownDuration.wait_time = 16 * Conductor.seconds_per_quarter_note
+	
 	$AnimationPlayer.play("spawn")
+	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
+	$TelegraphTimer.timeout.connect(_on_telegraph_timer_timeout)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -67,6 +74,7 @@ func set_fully_grown_duration(beats: int):
 	$FullyGrownDuration.wait_time = beats * Conductor.seconds_per_quarter_note
 
 func grow(delta: float):
+	modulate += Color(0.0, -2*delta, -2*delta, 0.0)
 	for i in range(len(vines)):
 		var vine = vines[i]
 		var last_point = vine.points[vine.get_point_count()-1]
@@ -87,10 +95,9 @@ func recede(delta: float):
 			var point_to_remove = vine.points[vine.points.size()-1]
 			vine.remove_point(vine.points.size()-1)
 		else:
-			$XAxis/XHitZone.monitorable = false
-			$YAxis/YHitZone.monitorable = false
-			$AnimationPlayer.animation_finished.connect(_on_animation_finished)
-			$AnimationPlayer.play_backwards("spawn")
+			$XAxis/XHitZone.set_deferred("monitorable", false)
+			$YAxis/YHitZone.set_deferred("monitorable", false)
+			$AnimationPlayer.play("despawn")
 	
 
 func check_finished(point):
@@ -99,8 +106,9 @@ func check_finished(point):
 		$FullyGrownDuration.start()
 		
 func _on_animation_finished(anim_name):
-	call_deferred("queue_free")
+	if anim_name == "despawn":
+		call_deferred("queue_free")
 
 func _on_telegraph_timer_timeout():
-	$XAxis/XHitZone.monitorable = true
-	$YAxis/YHitZone.monitorable = true
+	$XAxis/XHitZone.set_deferred("monitorable", true)
+	$YAxis/YHitZone.set_deferred("monitorable", true)
