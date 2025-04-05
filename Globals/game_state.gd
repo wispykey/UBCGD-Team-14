@@ -12,6 +12,7 @@ var control_port : Rect2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	control_port = Rect2(0,0, 672, 480)
+	GameEvents.game_start.connect(_on_game_start)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,4 +42,9 @@ func update_life(amount: float):
 		GameEvents.player_died.emit()
 
 func reset_life():
+	life = MAX_VISIBLE_LIFE
+
+func _on_game_start():
+	score = 0
+	combo = 0
 	life = MAX_VISIBLE_LIFE

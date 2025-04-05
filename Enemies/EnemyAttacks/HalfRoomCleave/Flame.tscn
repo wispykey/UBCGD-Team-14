@@ -1,7 +1,76 @@
-[gd_scene load_steps=6 format=3 uid="uid://ceqhna2t88e55"]
+[gd_scene load_steps=16 format=3 uid="uid://ceqhna2t88e55"]
 
-[ext_resource type="Texture2D" uid="uid://bwke0uchycnoa" path="res://Assets/Objects/orange_circle.png" id="1_xsnen"]
-[ext_resource type="Script" path="res://Enemies/EnemyAttacks/HalfRoomCleave/flame.gd" id="2_8vwat"]
+[ext_resource type="Shader" path="res://Player/wrapping_outline.gdshader" id="1_0frei"]
+[ext_resource type="Texture2D" uid="uid://cxfv33bcf30uw" path="res://Assets/Themes/Fantasy/animated_fire_spritesheet.png" id="2_135e3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wucjk"]
+shader = ExtResource("1_0frei")
+shader_parameter/line_color = Color(0.227451, 0.0588235, 0.368627, 1)
+shader_parameter/width = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_418df"]
+atlas = ExtResource("2_135e3")
+region = Rect2(0, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldnyh"]
+atlas = ExtResource("2_135e3")
+region = Rect2(34, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7mrv"]
+atlas = ExtResource("2_135e3")
+region = Rect2(68, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_556vr"]
+atlas = ExtResource("2_135e3")
+region = Rect2(0, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrhh"]
+atlas = ExtResource("2_135e3")
+region = Rect2(34, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r0am"]
+atlas = ExtResource("2_135e3")
+region = Rect2(68, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hm7fy"]
+atlas = ExtResource("2_135e3")
+region = Rect2(0, 68, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nc13"]
+atlas = ExtResource("2_135e3")
+region = Rect2(34, 68, 34, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hv01y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_418df")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldnyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7mrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_556vr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r0am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hm7fy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nc13")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_o04ps"]
 length = 0.001
@@ -17,6 +86,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_ihgp4"]
 resource_name = "shrink"
@@ -27,10 +108,22 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.966667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.166667, 1),
+"transitions": PackedFloat32Array(0.287175, 0.307786, 0.500002),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.2, 0.2)]
+"values": [Vector2(0.5, 0.5), Vector2(0.85, 0.85), Vector2(0.05, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.133333, 0.566667),
+"transitions": PackedFloat32Array(2.82843, 1),
+"update": 0,
+"values": [0.0, 6.19592]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eelpe"]
@@ -39,13 +132,15 @@ _data = {
 "shrink": SubResource("Animation_ihgp4")
 }
 
-[node name="Flame" type="Sprite2D"]
+[node name="Flame" type="AnimatedSprite2D"]
 z_index = 1
+material = SubResource("ShaderMaterial_wucjk")
 position = Vector2(3.8147e-06, -4.76837e-07)
-texture = ExtResource("1_xsnen")
-script = ExtResource("2_8vwat")
+sprite_frames = SubResource("SpriteFrames_hv01y")
+autoplay = "default"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_eelpe")
 }
+autoplay = "shrink"

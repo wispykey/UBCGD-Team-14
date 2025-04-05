@@ -1,6 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://3p7va0o7hql7"]
+[gd_scene load_steps=5 format=3 uid="uid://3p7va0o7hql7"]
 
+[ext_resource type="Shader" path="res://Player/wrapping_outline.gdshader" id="1_033mn"]
 [ext_resource type="Texture2D" uid="uid://btphoslsnr5d6" path="res://Assets/Themes/Fantasy/fantasy-boss.png" id="1_qrxo2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_he5wp"]
+shader = ExtResource("1_033mn")
+shader_parameter/line_color = Color(0.431447, 0.0618319, 0.438332, 1)
+shader_parameter/width = 1.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6v857"]
 animations = [{
@@ -14,4 +20,5 @@ animations = [{
 }]
 
 [node name="FantasyBoss" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_he5wp")
 sprite_frames = SubResource("SpriteFrames_6v857")

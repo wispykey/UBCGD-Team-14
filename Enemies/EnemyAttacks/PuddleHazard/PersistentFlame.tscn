@@ -1,6 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://da85dffe03nhp"]
+[gd_scene load_steps=13 format=3 uid="uid://da85dffe03nhp"]
 
+[ext_resource type="Shader" path="res://Enemies/EnemyAttacks/PuddleHazard/PersistentFlame.gdshader" id="1_jnrbk"]
 [ext_resource type="Texture2D" uid="uid://cxfv33bcf30uw" path="res://Assets/Themes/Fantasy/animated_fire_spritesheet.png" id="1_mgqud"]
+[ext_resource type="Script" path="res://Enemies/EnemyAttacks/PuddleHazard/persistent_flame.gd" id="2_2tju1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u12hi"]
+shader = ExtResource("1_jnrbk")
+shader_parameter/line_color = Color(0.576471, 0, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/current_alpha = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r6b27"]
 atlas = ExtResource("1_mgqud")
@@ -60,5 +68,7 @@ animations = [{
 }]
 
 [node name="PersistentFlame" type="AnimatedSprite2D"]
+material = SubResource("ShaderMaterial_u12hi")
 sprite_frames = SubResource("SpriteFrames_e1nf6")
 autoplay = "default"
+script = ExtResource("2_2tju1")

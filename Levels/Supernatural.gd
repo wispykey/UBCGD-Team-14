@@ -117,9 +117,12 @@ func _ready() -> void:
 	telegraph = dash_telegraph.instantiate()
 	add_child(telegraph)
 	Conductor.set_music("Supernatural2")
+	GameEvents.game_start.emit()
 	
 	# Change sprite to Supernatural character
 	%Player.player_sprite.sprite_frames = load("res://Player/supernatural_sprite_frames.tres")
+	%Player.set_process(false)
+	%Player.player_sprite.play("up")
 
 func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
@@ -129,9 +132,13 @@ func _ready_post_dialog(arg: String):
 	window_dimensions =  GameState.control_port.size
 	GameEvents.game_start.emit()
 	
-	%Player.position = GameState.control_port.get_center()
+	$Ghost.queue_free()
+	$SupernaturalRadio.queue_free()
+	
+	%Player.set_process(true)
 	Conductor.set_music("Supernatural1")
 	$HUD.start_beat_indicator()
+	%Player/Pacemaker/AnimationPlayer.speed_scale = 2 / Conductor.seconds_per_quarter_note
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

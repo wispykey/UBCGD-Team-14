@@ -81,9 +81,12 @@ func _ready() -> void:
 	Dialogic.start("fantasy_dialogic")
 	Dialogic.signal_event.connect(_ready_post_dialog)
 	Conductor.set_music("Fantasy1")
+	GameEvents.game_start.emit()
 	
 	# Change sprite to Wizard
 	%Player.player_sprite.sprite_frames = load("res://Player/fantasy_sprite_frames.tres")
+	%Player.set_process(false)
+	%Player.player_sprite.play("up")
 
 func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
@@ -93,11 +96,12 @@ func _ready_post_dialog(arg: String):
 	GameEvents.game_start.emit()
 	window_dimensions =  GameState.control_port.size
 	
-	%Player.position = GameState.control_port.get_center()
+	%Player.set_process(true)
 	%Player.spawn_afterimage.connect(_on_player_spawn_afterimage)
 	Conductor.set_music("Fantasy2")
 	$HUD.start_beat_indicator()
 	boss.can_move = true
+	%Player/Pacemaker/AnimationPlayer.speed_scale = 2 / Conductor.seconds_per_quarter_note
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
