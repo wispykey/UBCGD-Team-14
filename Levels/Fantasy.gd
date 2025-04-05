@@ -86,6 +86,7 @@ func _ready() -> void:
 	# Change sprite to Wizard
 	%Player.player_sprite.sprite_frames = load("res://Player/fantasy_sprite_frames.tres")
 	%Player.set_process(false)
+	%Player.player_sprite.play("up")
 
 func _ready_post_dialog(arg: String):
 	# Declare a function to be executed whenever the quarter_beat signal is emitted
