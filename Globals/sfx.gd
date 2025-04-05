@@ -72,4 +72,9 @@ func play_cleave():
 func stop_continuous_sounds():
 	$FireCrackling.stop()
 	
-	
+func play_heartbeat():
+	var random_shift = randf_range(0.0, 0.05)
+	var random_version = randi_range(1, 2)
+	var sfx = get_node("Heartbeat/Heartbeat" + str(random_version))
+	sfx.pitch_scale = 1.2 + random_shift
+	sfx.play()

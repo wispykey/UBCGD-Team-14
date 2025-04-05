@@ -299,6 +299,7 @@ func handle_input_timing(combo_gain: int, held_duration: float):
 		GameState.update_life(HP_RECOVERY_PER_TICK) # Recover HP when inputs are timed well
 		GameState.update_combo(combo_gain)
 		$Pacemaker/AnimationPlayer.play("combo_success")
+		SFX.play_heartbeat()
 	else:
 		print("Bad timing - reset combo")
 		GameState.update_combo(-1)
@@ -394,3 +395,4 @@ func _kill():
 func _on_quarter_beat(beat: int):
 	if directions[last_action].held > COMBO_PULSE_DELAY:
 		$Pacemaker/AnimationPlayer.play("combo_success")
+		SFX.play_heartbeat()
