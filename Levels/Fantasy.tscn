@@ -63,7 +63,7 @@ tile_set = SubResource("TileSet_atj3u")
 [node name="Player" parent="." instance=ExtResource("7_pxnv2")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(339, 244)
+position = Vector2(336, 240)
 
 [node name="PuddleHazard" parent="." instance=ExtResource("10_t46jv")]
 

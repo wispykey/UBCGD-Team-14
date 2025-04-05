@@ -42,7 +42,7 @@ tile_set = ExtResource("7_tjjkr")
 [node name="Player" parent="." instance=ExtResource("7_yhfch")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(339, 244)
+position = Vector2(336, 240)
 
 [node name="HUD" parent="." instance=ExtResource("11_4g68x")]
 
